@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="自行车,产品经理,职场," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="百度指数，我们并不陌生，但是在大部分产品经理的日常工作中，使用频次并不多。原因可能是觉得它离我们实际工作太遥远，太宏观，没什么用，也不知道如何使用。在这篇文章中，将跟大家分享如何巧用百度指数这个免费的资源，帮助我们完成市场分析、竞品分析等产品经理必须的工作。  要知道如何利用百度指数，首先要知道百度指数到底是什么？有哪些特性？ 百度官方的定义：百度指数是以百度海量网民行为数据为基础的数据分享平台">
+<meta name="keywords" content="自行车,产品经理,职场">
+<meta property="og:type" content="article">
+<meta property="og:title" content="巧用百度指数进行市场和竞品分析">
+<meta property="og:url" content="http://blockshare.top/2018/5685d526/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="百度指数，我们并不陌生，但是在大部分产品经理的日常工作中，使用频次并不多。原因可能是觉得它离我们实际工作太遥远，太宏观，没什么用，也不知道如何使用。在这篇文章中，将跟大家分享如何巧用百度指数这个免费的资源，帮助我们完成市场分析、竞品分析等产品经理必须的工作。  要知道如何利用百度指数，首先要知道百度指数到底是什么？有哪些特性？ 百度官方的定义：百度指数是以百度海量网民行为数据为基础的数据分享平台">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/78b700063ea59c6519c8">
+<meta property="og:updated_time" content="2018-05-03T07:00:33.753Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="巧用百度指数进行市场和竞品分析">
+<meta name="twitter:description" content="百度指数，我们并不陌生，但是在大部分产品经理的日常工作中，使用频次并不多。原因可能是觉得它离我们实际工作太遥远，太宏观，没什么用，也不知道如何使用。在这篇文章中，将跟大家分享如何巧用百度指数这个免费的资源，帮助我们完成市场分析、竞品分析等产品经理必须的工作。  要知道如何利用百度指数，首先要知道百度指数到底是什么？有哪些特性？ 百度官方的定义：百度指数是以百度海量网民行为数据为基础的数据分享平台">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/78b700063ea59c6519c8">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/5685d526/"/>
+
+
+
+
+
+  <title>巧用百度指数进行市场和竞品分析 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/5685d526/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">巧用百度指数进行市场和竞品分析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">人人都是产品经理</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-24T11:37:16+08:00">
+                2018-04-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/职场/" itemprop="url" rel="index">
+                    <span itemprop="name">职场</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/5685d526/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/5685d526/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/78b700063ea59c6519c8" rel="gallery_cjgf0wkjc005mxmqdgdn514vb"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/78b700063ea59c6519c8" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>百度指数，我们并不陌生，但是在大部分产品经理的日常工作中，使用频次并不多。原因可能是觉得它离我们实际工作太遥远，太宏观，没什么用，也不知道如何使用。在这篇文章中，将跟大家分享如何巧用百度指数这个免费的资源，帮助我们完成市场分析、竞品分析等产品经理必须的工作。</p>
+</blockquote>
+<p>要知道如何利用百度指数，首先要知道百度指数到底是什么？有哪些特性？</p>
+<p><strong>百度官方的定义</strong>：百度指数是以百度海量网民行为数据为基础的数据分享平台。在这里，你可以研究关键词搜索趋势、洞察网民需求变化、监测媒体舆情趋势、定位数字消费者特征；还可以从行业的角度，分析市场特点。</p>
+<p><strong>剖析官方定义，得知百度指数的如下几个属性：</strong></p>
+<ul>
+<li>数据来源：网民搜索行为数据；- 数据基础：搜索关键词；- 数据主要应用场景：探索市场趋势、了解用户需求、监测舆情、用户特征分析。<br>针对几个典型的应用场景，结合具体案例，我们一起探索下究竟如何使用百度指数的趋势研究、需求图谱、舆情洞察、人群画像。</li>
+</ul>
+<h2 id="1-趋势研究"><a href="#1-趋势研究" class="headerlink" title="1. 趋势研究"></a>1. 趋势研究</h2><p>趋势研究可应用在研究市场趋势和竞品。以共享单车为例：</p>
+<h3 id="1-1-市场趋势研究"><a href="#1-1-市场趋势研究" class="headerlink" title="1.1 市场趋势研究"></a><strong>1.1 市场趋势研究</strong></h3><p>通过在百度指数中搜索“共享单车”关键词，可以查看到该关键词的搜索趋势如下：</p>
+<p>从以上趋势图可以看出，共享单车的搜索热度大概从2016年10月开始增长，在2017年2月左右出现爆发式增长，并从2017年7月开始逐步降低，趋于平缓。从关键词的热度趋势我们能大致估计出该行业的热度走势。</p>
+<p>此外，我们可以再看看在相同时段内，该关键词的媒体指数，并挖掘出每个时段内值得关注的信息点。如下图：</p>
+<p>通过上图可以看出，在2016年～2017年间，关键词“共享单车”的媒体指数与热度趋势基本趋同，说明媒体的报道与用户关注度是相互促进的。而且通过在同一时段最热的媒体报道可以总结出如下信息：</p>
+<ul>
+<li>共享单车行业在2016年11月的时候已经进入恶性竞争阶段；- 行业内最强的竞争对手是摩拜和ofo；- 2016年12月共享单车已经出现野蛮生长态势；- 共享单车的管理、回收、监管等问题亟待解决；- 共享单车押金问题存在安全隐患；- ……<br>如果我们要进入共享单车这个领域，以上问题和环境也将是自己面临的，可以帮助我们判断自己是否有足够的优势进入该领域。</li>
+</ul>
+<h3 id="1-2-竞品研究"><a href="#1-2-竞品研究" class="headerlink" title="1.2 竞品研究"></a><strong>1.2 竞品研究</strong></h3><p>除了通过行业核心关键词研究行业趋势外，我们还可以通过竞品关键词研究竞品的趋势及优劣势。</p>
+<p>我们以ofo为例做竞品分析。在百度指数中搜索关键词“ofo”，可得到如下趋势：</p>
+<p>从以上趋势图，我们可以看出，ofo的搜索热度从2016年8月左右开始逐渐上升，在2017年1月开始断崖式下滑，然后从2月左右开始出现触底反弹，在2017年3月左右达到进入新一轮峰值。</p>
+<p>在看到趋势及拐点之后，我们可以根据时间线索去搜索、寻找出现拐点的原因。通过查看ofo百科中的发展历程，以及每个时间段的媒体报道，我们可以发现：</p>
+<ul>
+<li>在2016年8月时，ofo完成A+轮融资；- 2017年1、2月是春节，春节之后ofo马上推出了智能锁（智能锁推出前，车锁一直ofo硬伤）；- 大概在2017年3月时，ofo完成了D轮融资；- ….<br>所以，我们可以通过分析每一个时间拐点上的：产品动作、运营动作、市场动作，去分析竞品的动向及结果。</li>
+</ul>
+<p>最后，趋势分析还可以支持同时多个关键词的对比分析。例如，我们如果要同时比较摩拜和ofo的趋势，可以添加两个关键词进行趋势比较（百度指数最多支持5个关键词的比较检索），如下图：</p>
+<p>从以上趋势可以简单看出，从2016年10月至2017年8月期间，ofo的搜索指数都是高于摩拜的，但是后续ofo下降明显，趋于平缓之后，只略微高于摩拜。</p>
+<p>搜索指数的热度与市场份额应该是正相关。由此我们可以猜测，ofo在全国的市场份额是多于摩拜的。如果要看各地区，还可以通过修改关键词地区指数进行查看，从而了解在每个省份的市场份额情况，如下图：</p>
+<h2 id="2-需求图谱"><a href="#2-需求图谱" class="headerlink" title="2. 需求图谱"></a>2. 需求图谱</h2><p>需求图谱又叫需求分布，提供关键词的相关词及相关程度的信息。</p>
+<p>其中，相关词距圆心的距离表示相关词相关性强度； 相关词自身大小表示相关词自身搜索指数大小，红色代表搜索指数上升，绿色代表搜索指数下降。相关词可以帮助我们了解，围绕关键词，用户的聚焦点，以及产品和服务的痛点。</p>
+<p>如上图，搜索共享单车，通过调整下方的时间轴，可以看到在不同时间段内，共享单车的相关词分布情况。</p>
+<p>以2018年4月2日至4月8日期间的相关词分布为例，“共享单车”的热门相关词包含：“摩拜单车”、“摩拜”、“哈罗”、“哈罗单车”、“ofo”、“共享单车盈利模式”等等。</p>
+<p>从这些相关词中我们可以了解到：</p>
+<ol>
+<li>共享单车领域几大主要市场玩家是摩拜、哈罗、ofo，而且这几大玩家的搜索热度都呈现上升趋势，与共享单车的相关性也很强，尤其是摩拜和哈罗。1. 针对共享单车这个行业，人们很关心的点是盈利模式是什么？单车怎么使用？有什么样的管理规则出台？<br>再比如，我们以“ofo”为关键词进行分析，可以看到在2017年7月31日至2017年8月6日时间段内，相关词的分布如下图所示，发现“ofo”的其中一个相关词是“淘宝”，相关性较高且还呈现搜索热度上升趋势。</li>
+</ol>
+<p>为了弄明白它们之间究竟是如何关联上的，于是在百度上搜索一组组合关键词：淘宝为了弄明白它们之间究竟是如何关联上的，于是在百度上搜索一组组合关键词：淘宝＋ofo，搜索结果如下：</p>
+<p>从上图可以了解到，ofo曾发生了红包被盗刷的事件。</p>
+<p>需求图谱除了可以看到相关词分布外，还可以查到top15的来源相关词和去向相关词（如下图所示）。</p>
+<p>来源相关词是指用户在搜索中心词之前搜索过哪些关键词；去向相关词是指用户在搜索中心词之后搜索过哪些关键词。</p>
+<p>例如，用户在搜索“共享单车”之前，经常搜索“哈罗”、“摩拜”、“共享单车盈利模式”等关键词，但是在搜索了“共享单车”之后，经常搜索“摩拜”、“共享单车新规”、“共享经济”等关键词。</p>
+<h2 id="3-舆情洞察"><a href="#3-舆情洞察" class="headerlink" title="3. 舆情洞察"></a>3. 舆情洞察</h2><p>当我们需要了解某行业或某竞品在某个时间段内的主要动向时，可以使用舆情洞察。</p>
+<p>例如，要了解ofo的动向，我们看到ofo的媒体报道热度是从2017年2月左右开始增长的，从热门报道看，这应该得益于4.5亿美元的D轮融资。此外，在2017年3月至2017年8月期间，ofo的主要动向：</p>
+<ul>
+<li>完成D轮融资；- 在共享单车行业排名第一，并牵头制定行业标准，奠定行业地位；- 通过一些绿色公益活动、明星代言等形式提升品牌影响力；- 存在商标侵权的公关危机。<br>除此以外，如上文中的案例所示，将舆情洞察与趋势研究中的拐点结合，也是分析趋势走势的一个得力工具。</li>
+</ul>
+<h2 id="4-人群画像"><a href="#4-人群画像" class="headerlink" title="4. 人群画像"></a>4. 人群画像</h2><p>人群画像比较简单，就是体现搜索关键词的用户基本属性，这些属性包括：年龄、性别、地域等。</p>
+<p>例如，我们可以通过，同时输入“摩拜”和“ofo”两个关键词，将对摩拜和ofo的用户进行对比，如下图所示，可得出如下结论：</p>
+<ul>
+<li>摩拜和ofo的用户年龄分布基本一致，30～39岁年龄段最多，占尽50%；- 摩拜和ofo的用户性别分布基本一致，男性占比约70%，远远超过女性；- 从地域分布看，ofo主攻的是北上广，而摩拜主攻北京、广东、浙江、江苏、山东、湖北等地。</li>
+</ul>
+<h2 id="5-检索技巧"><a href="#5-检索技巧" class="headerlink" title="5. 检索技巧"></a>5. 检索技巧</h2><p>百度指数除了对单个关键词进行分析之外，还支持多个关键词的分析。</p>
+<p><strong>（1）比较检索</strong></p>
+<p>在多个关键词当中，用逗号将不同的关键词隔开，可以实现关键词数据的比较查询。</p>
+<p>例如，如果要对几个竞品进行对比分析，可以检索“ofo,摩拜,哈罗”。百度指数最多支持5个关键词的比较检索。</p>
+<p><strong>（2）累加检索</strong></p>
+<p>在多个关键词当中，利用加号将不同的关键词相连接，可以实现不同关键词数据相加。相加后的汇总数据作为一个组合关键词展现出来。</p>
+<p>例如，要更全面覆盖摩拜相关关键词的数据，可以检索“摩拜＋摩拜单车”等，百度指数最多支持3个关键词的累加检索。</p>
+<p><strong>（3）组合检索</strong></p>
+<p>即可以将“比较检索”和“累加检索”组合使用，例如“ofo+ofo共享单车，摩拜＋摩拜单车，哈罗＋哈罗单车”</p>
+<p><strong>（4）地域检索</strong></p>
+<p>每一组关键词，都可以通过地区筛选不同省份的关键词搜索数据，百度指数最多支持5个地区对比检索。</p>
+<p>以上即为通过百度指数的免费资源获取一些宏观数据信息的小技巧。希望能给大家的实际工作带来一定帮助。</p>
+<p>作者：菜花，前阿里巴巴产品经理，微信公众号：菜花谈产品（ID：caihuatan2016）</p>
+<p>本文由 &#64;菜花 原创发布于人人都是产品经理。未经许可，禁止转载。</p>
+<p>题图来源于网络</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.net/group/6546375182955577860/?iid=29827425108&amp;app=news_article&amp;timestamp=1524541028&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">巧用百度指数进行市场和竞品分析</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/自行车/" rel="tag"># 自行车</a>
+          
+            <a href="/tags/产品经理/" rel="tag"># 产品经理</a>
+          
+            <a href="/tags/职场/" rel="tag"># 职场</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/e905ff27/" rel="next" title="Dlib 19.9的巨大进步，安装无须Boost.Python">
+                <i class="fa fa-chevron-left"></i> Dlib 19.9的巨大进步，安装无须Boost.Python
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/89af2990/" rel="prev" title="36氪专访丨马蜂窝首次回应黄轩广告争议：下一个时代属于00后？">
+                36氪专访丨马蜂窝首次回应黄轩广告争议：下一个时代属于00后？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-趋势研究"><span class="nav-number">1.</span> <span class="nav-text">1. 趋势研究</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-市场趋势研究"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 市场趋势研究</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-竞品研究"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 竞品研究</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-需求图谱"><span class="nav-number">2.</span> <span class="nav-text">2. 需求图谱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-舆情洞察"><span class="nav-number">3.</span> <span class="nav-text">3. 舆情洞察</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-人群画像"><span class="nav-number">4.</span> <span class="nav-text">4. 人群画像</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-检索技巧"><span class="nav-number">5.</span> <span class="nav-text">5. 检索技巧</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

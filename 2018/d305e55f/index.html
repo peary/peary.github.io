@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,人工智能,微软,塞尔维亚,正教会," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="人工智能的阅读能力在某些方面已经超越了人类，微软的 R-Net 就是达到了这一里程碑的人工智能之一。近日，谷歌工程师 Sachin Joglekar 在 Medium 上发文对 R-Net 进行了直观的介绍。  R-Net 论文：https&amp;#58;//www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf 今年">
+<meta name="keywords" content="机器学习,人工智能,微软,塞尔维亚,正教会">
+<meta property="og:type" content="article">
+<meta property="og:title" content="解读R-Net：微软“超越人类”的阅读理解人工智能">
+<meta property="og:url" content="http://blockshare.top/2018/d305e55f/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="人工智能的阅读能力在某些方面已经超越了人类，微软的 R-Net 就是达到了这一里程碑的人工智能之一。近日，谷歌工程师 Sachin Joglekar 在 Medium 上发文对 R-Net 进行了直观的介绍。  R-Net 论文：https&amp;#58;//www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf 今年">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/5e700000dae81338b817">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="解读R-Net：微软“超越人类”的阅读理解人工智能">
+<meta name="twitter:description" content="人工智能的阅读能力在某些方面已经超越了人类，微软的 R-Net 就是达到了这一里程碑的人工智能之一。近日，谷歌工程师 Sachin Joglekar 在 Medium 上发文对 R-Net 进行了直观的介绍。  R-Net 论文：https&amp;#58;//www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf 今年">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/5e700000dae81338b817">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/d305e55f/"/>
+
+
+
+
+
+  <title>解读R-Net：微软“超越人类”的阅读理解人工智能 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/d305e55f/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">解读R-Net：微软“超越人类”的阅读理解人工智能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">机器之心</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-29T13:56:56+08:00">
+                2018-01-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/d305e55f/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/d305e55f/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/5e700000dae81338b817" rel="gallery_cjgf0wkse00duxmqddvuc6ffj"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/5e700000dae81338b817" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>人工智能的阅读能力在某些方面已经超越了人类，微软的 R-Net 就是达到了这一里程碑的人工智能之一。近日，谷歌工程师 Sachin Joglekar 在 Medium 上发文对 R-Net 进行了直观的介绍。</p>
+</blockquote>
+<p>R-Net 论文：https&#58;//<a href="http://www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf" target="_blank" rel="noopener">www.microsoft.com/en-us/research/wp-content/uploads/2017/05/r-net.pdf</a></p>
+<p>今年 1 月 13 日，很多媒体的新闻报道称微软和阿里巴巴开发的人工智能在 SQuAD 数据集测试上，阅读能力上超越了人类。尽管这并不完全准确，但这些公司所开发的模型确实能在某些阅读任务的某些指标上超越人类水平。这篇文章为微软实现这一成果背后的人工智能 R-Net 提供了一个直观的介绍。</p>
+<p>首先，给出阅读问题……</p>
+<p>给定一个段落 P：</p>
+<blockquote>
+<p>「特斯拉于 1856 年 7 月 10 日（旧历法的 6 月 28 日）出生于奥地利帝国斯米连村（现属克罗地亚）的一个塞族家庭。他的父亲米卢廷·特斯拉是一位塞尔维亚东正教神父。特斯拉的母亲是久卡·特斯拉（娘家姓为 Mandić），她的父亲也是一位东正教神父；&#58;10 她非常擅长制作家庭手工工具、机械器具并且具有记忆塞尔维亚史诗的能力。久卡从没接受过正规教育。尼古拉将自己的记忆和创造能力归功于他母亲的遗传和影响。特斯拉的祖先来自塞尔维亚西部靠近黑山的地方。&#58;12」</p>
+</blockquote>
+<p>然后询问一个问题 Q：</p>
+<blockquote>
+<p>「特斯拉的母亲具有怎样的特殊能力？」</p>
+</blockquote>
+<p>然后提供一部分连续文本作为答案 A：</p>
+<blockquote>
+<p>「擅长制作家庭手工工具、机械器具并且具有记忆塞尔维亚史诗的能力」</p>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/5e700000dae81338b817" img_width="280" img_height="350" alt="解读R-Net：微软“超越人类”的阅读理解人工智能" inline="0"></p>
+<p>斯坦福问答数据集（SQuAD）包含大约 500 篇文章，涉及的问答对数量接近 10 万（上面给出的例子就取自其中）。</p>
+<p>在我们介绍微软的用于阅读理解的方法之前，我们先简要介绍一下他们论文中大量使用的两个概念：</p>
+<p><strong>1. 循环神经网络（RNN）</strong></p>
+<p>RNN 是一种特殊的神经网络，可用于分析时间（或序列）数据。标准的前馈神经网络没有记忆的概念，而 RNN 则通过使用「反馈的」语境向量（context vector）而将这一概念整合了进来：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/5b5b0002d5d612585116" img_width="758" img_height="180" alt="解读R-Net：微软“超越人类”的阅读理解人工智能" inline="0"></p>
+<p>图 1：一种典型的 RNN</p>
+<p>从本质上讲，其在任何时间步骤 t 的输出都是过去语境和当前输入的一个函数。</p>
+<p>双向 RNN（BiRNN）是一种特殊的 RNN。标准 RNN 是通过「记忆」过去的数据来记忆历史语境，而 BiRNN 还会从反方向进行遍历以理解未来的语境：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/5e700000daeafa720a29" img_width="764" img_height="270" alt="解读R-Net：微软“超越人类”的阅读理解人工智能" inline="0"></p>
+<p>图 2：BiRNN</p>
+<p>需要指出，尽管 RNN 理论上可以记住任何长度的历史，但通常来说整合短期语境比整合长期信息（相距 20-30 步以上）更好。</p>
+<p>注：R-Net 使用 RNN（更具体来说是门控循环单元）的主要目的是模拟「阅读」文本段落的动作。</p>
+<p><strong>2. 注意力（attention）</strong></p>
+<p>神经网络中的注意力是根据人类重点关注视觉输入中的特定部分并大略查看其余部分的观看方式而建模的。</p>
+<p>注意力可以用在这样的应用中：你的数据点集合中并非所有部分都与当前的任务有关。在这样的情况下，注意力是作为该集合中所有点的 softmax 加权平均而计算的。其权重本身则是作为 1）向量集和 2）某个语境的某个非线性函数而计算的。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/5e700000dae92e2647f7" img_width="425" img_height="248" alt="解读R-Net：微软“超越人类”的阅读理解人工智能" inline="0"></p>
+<p>图 3：在「飞盘」的语境下，网络会重点关注实际的飞盘和与之相关的对象，同时略过其余部分。</p>
+<p>注：R-Net 使用了注意力来在另一些文本的语境下突出文本的某些部分。</p>
+<p><strong>R-Net</strong></p>
+<p>从直观上讲，R-Net 执行阅读理解的方式与你我进行阅读理解的方式相似：通过多次（准确地说是 3 次）「阅读」（应用 RNN）文本以及在每次迭代中越来越好地「微调」（使用注意力）各词的向量表征。</p>
+<p>让我们分开解读其中的每一次过程……</p>
+<p><strong>第一次阅读：略览</strong></p>
+<p>我们从标准的 token（即词）向量开始，使用了来自 Glove 的词嵌入。但是，人类通常理解一个词在其周围词所构成的语境中的含义。</p>
+<p>比如这两个例子：「May happen」和「the fourth of May」，其中「May」的含义取决于周围的词。另外也要注意背景信息可以来自前向，也可以来自反向。因此，我们在标准词嵌入之上使用了 BiRNN，以得到更好的向量。</p>
+<p>问题和段落上都会应用这个过程。</p>
+<p><strong>第二次阅读：基于问题的分析</strong></p>
+<p>在第二次阅读中，该网络会使用文本本身的语境来调节来自段落的词表征。</p>
+<p>让我们假设你已经在该段落的重点位置了：</p>
+<blockquote>
+<p>「……她非常擅长<strong>制作</strong>家庭手工工具、机械器具并且具有记忆塞尔维亚史诗的能力。久卡从没接受过正规教育……」</p>
+</blockquote>
+<p>在有了「制作」的前提下，如果你在问题 token 上应用注意力，你可能会重点关注：</p>
+<blockquote>
+<p>「特斯拉的母亲具有怎样的特殊<strong>能力</strong>？」</p>
+</blockquote>
+<p>类似地，网络会调整「制作」的向量，使之与「能力」在语义上靠得更近。</p>
+<p>该段落中的所有 token 都会完成这样的操作——本质上讲，R-Net 会在问题的需求和文章的相关部分之间形成链接。原论文将这个部分称为门控式基于注意力的 RNN（Gated Attention-based RNN）。</p>
+<p><strong>第三次阅读：有自知的完整的段落理解</strong></p>
+<ul>
+<li>在第一次阅读过程中，我们在 token 临近周围词的语境中对这些 token 进行了理解。- 在第二次阅读过程中，我们根据当前问题改善了我们的理解。<br>在第二次阅读过程中，我们根据当前问题改善了我们的理解。</li>
+</ul>
+<p>现在我们要鸟瞰整个段落，以定位那些对回答问题真正有帮助的部分。要做到这一点，光是有周围词的短期语境视角是不够的。考虑以下部分中突出强调的词：</p>
+<blockquote>
+<p>特斯拉的母亲是久卡·特斯拉（娘家姓为 Mandić），她的父亲也是一位东正教神父；&#58;10 她非常擅长制作家庭手工工具、机械器具并且具有记忆塞尔维亚史诗的<strong>能力</strong>。久卡从没接受过正规教育。尼古拉将自己的记忆和创造<strong>能力</strong>归功于他母亲的遗传和影响。</p>
+</blockquote>
+<p>这都是指特斯拉的母亲所具有的能力。但是，尽管前者确实围绕描述该能力的文本（是我们想要的），但后面的能力则是将它们与特斯拉的才能关联了起来（不是我们想要的）。</p>
+<p>为了定位答案的正确起始和结束位置（我们会在下一步解决这个问题），我们需要比较段落中具有相似含义的不同词，以便找到它们的差异之处。使用单纯的 RNN 是很难完成这个任务的，因为这些突出强调的词相距较远。</p>
+<p>为了解决这个问题，R-Net 使用了所谓「自匹配注意力（Self-Matched Attention）」。</p>
+<p>为什么需要自匹配？</p>
+<p>在应用注意力时，我们通常会使用一些数据（比如一个段落词）来衡量一个向量（比如问题词）的集合。但在这个迭代过程中，我们会使用当前的段落词来衡量来自该段落本身的 token。这有助于我们将当前词与段落其余部分中具有相似含义的其它词区分开。为了增强这个过程，这个阅读阶段是使用一个 BiRNN 完成的。</p>
+<p>在我看来，使用自匹配注意力这个步骤是 R-Net 最「神奇」的地方：使用注意力来比较同一段落中相距较远的词。</p>
+<p><strong>最后一步：标记答案</strong></p>
+<p>在最后一步，R-Net 使用了一种指针网络（Pointer Networks）的变体来确定答案所处的起始和结束位置。简单来说：</p>
+<p>我们首先根据问题文本计算另一个注意力向量。这被用作这一次迭代的「起始语境（starting context）」。使用这个知识，再为该起始索引计算一组权重（为该段落中的每个词）。得到最高权重的词作为其答案的「起始位置」。</p>
+<p>除了权重之外，这个两步 RNN 还会返回一个新的语境——其中编码了有关该答案的起始的信息。</p>
+<p>再将上述步骤重复一次——这一次使用新的语境而不是基于问题的语境，用以计算该答案的结束位置。</p>
+<p>搞定！我们得到解答了！（实际上，我们上述例子中给出的答案就是 R-Net 实际得出的答案。）</p>
+<p>如果你对 R-Net 的详细细节感兴趣，请阅读他们的论文。如果代码能帮助你更好地理解（至少对我而言是如此），请参阅 YerevaNN 试图用 Keras 重建 R-Net 的精彩博文：http&#58;//yerevann.github.io/2017/08/25/challenges-of-reproducing-r-net-neural-network-using-keras/。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://www.toutiao.com/a6516274397622305293/" target="_blank" rel="noopener">解读R-Net：微软“超越人类”的阅读理解人工智能</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/微软/" rel="tag"># 微软</a>
+          
+            <a href="/tags/塞尔维亚/" rel="tag"># 塞尔维亚</a>
+          
+            <a href="/tags/正教会/" rel="tag"># 正教会</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/d0594453/" rel="next" title="阿里提出新神经网络算法，压缩掉最后一个比特">
+                <i class="fa fa-chevron-left"></i> 阿里提出新神经网络算法，压缩掉最后一个比特
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/2a3abcbb/" rel="prev" title="快速搭建一个Fabric 1.0的环境-博客-云栖社区-阿里云">
+                快速搭建一个Fabric 1.0的环境-博客-云栖社区-阿里云 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

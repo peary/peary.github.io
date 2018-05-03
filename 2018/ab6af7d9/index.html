@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#91;http&amp;#58;//antkillerfarm.github.io/&amp;#93;(http&amp;#58;//antkillerfarm.github.io/) Kendall秩相关系数（Kendall rank correlation coefficient）对于秩变量对(xi,yi),(xj,yj)(x_i,y_i),(x_j,y_j)： (xi−xj)(yi−yj)⎧⎩⎨&amp;gt;0,=0">
+<meta name="keywords" content="纸飞机,稍后阅读,微信分享,微信收藏,收藏夹,云收藏,博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习（十四）——协同过滤的ALS算法（2）、主成分分析 - CSDN博客">
+<meta property="og:url" content="http://blockshare.top/2018/ab6af7d9/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="&amp;#91;http&amp;#58;//antkillerfarm.github.io/&amp;#93;(http&amp;#58;//antkillerfarm.github.io/) Kendall秩相关系数（Kendall rank correlation coefficient）对于秩变量对(xi,yi),(xj,yj)(x_i,y_i),(x_j,y_j)： (xi−xj)(yi−yj)⎧⎩⎨&amp;gt;0,=0">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219092707502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219092732597?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219092757488?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219092824082?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219092905208?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdn.net/20161219093122508?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-05-03T07:00:36.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习（十四）——协同过滤的ALS算法（2）、主成分分析 - CSDN博客">
+<meta name="twitter:description" content="&amp;#91;http&amp;#58;//antkillerfarm.github.io/&amp;#93;(http&amp;#58;//antkillerfarm.github.io/) Kendall秩相关系数（Kendall rank correlation coefficient）对于秩变量对(xi,yi),(xj,yj)(x_i,y_i),(x_j,y_j)： (xi−xj)(yi−yj)⎧⎩⎨&amp;gt;0,=0">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20161219092707502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/ab6af7d9/"/>
+
+
+
+
+
+  <title>机器学习（十四）——协同过滤的ALS算法（2）、主成分分析 - CSDN博客 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/ab6af7d9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习（十四）——协同过滤的ALS算法（2）、主成分分析 - CSDN博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text"></span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T20:22:38+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/ab6af7d9/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/ab6af7d9/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#91;http&#58;//antkillerfarm.github.io/&#93;(http&#58;//antkillerfarm.github.io/)</p>
+<h3 id="Kendall秩相关系数（Kendall-rank-correlation-coefficient）"><a href="#Kendall秩相关系数（Kendall-rank-correlation-coefficient）" class="headerlink" title="Kendall秩相关系数（Kendall rank correlation coefficient）"></a>Kendall秩相关系数（Kendall rank correlation coefficient）</h3><p>对于秩变量对<nobr>(xi,yi),(xj,yj)</nobr><script id="MathJax-Element-125" type="math/tex">(x_i,y_i),(x_j,y_j)</script>：</p>
+<p><nobr>(xi−xj)(yi−yj)⎧⎩⎨&gt;0,=0,&lt;0,concordantneither concordant nor discordantdiscordant</nobr><script id="MathJax-Element-2" type="math/tex; mode=display">(x_i-x_j)(y_i-y_j)\begin&amp;#123cases&amp;#125</p>
+<blockquote>
+<p>0, &amp; \text&amp;#123concordant&amp;#125 \<br>=0, &amp; \text&amp;#123neither concordant nor discordant&amp;#125 \</p>
+</blockquote>
+<p>&lt;0, &amp; \text&amp;#123discordant&amp;#125 \<br>\end&amp;#123cases&amp;#125</script></p>
+<p><nobr>τ=(number of concordant pairs)−(number of discordant pairs)n(n−1)/2</nobr><script id="MathJax-Element-3" type="math/tex; mode=display">\tau = \frac&amp;#123(\text&amp;#123number of concordant pairs&amp;#125) - (\text&amp;#123number of discordant pairs&amp;#125)&amp;#125&amp;#123n (n-1) /2&amp;#125</script></p>
+<blockquote>
+</blockquote>
+<p>  注：Sir Maurice George Kendall，1907~1983，英国统计学家。这个人职业生涯的大部分时间都是一个公务员，二战期间出任英国船运协会副总经理。1949年以后担任伦敦大学教授。</p>
+<p>参见：</p>
+<p>&#91;https&#58;//en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient&#93;(https&#58;//en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient)</p>
+<h3 id="Tanimoto系数"><a href="#Tanimoto系数" class="headerlink" title="Tanimoto系数"></a>Tanimoto系数</h3><p><nobr>T(x,y)=|X∩Y||X∪Y|=|X∩Y||X|+|Y|−|X∩Y|=∑xiyi∑x2i−−−−√+∑y2i−−−−√−∑xiyi</nobr><script id="MathJax-Element-4" type="math/tex; mode=display">T(x,y)=\frac&amp;#123|X\cap Y|&amp;#125&amp;#123|X\cup Y|&amp;#125=\frac&amp;#123|X\cap Y|&amp;#125&amp;#123|X|+|Y|-|X\cap Y|&amp;#125=\frac&amp;#123\sum x_iy_i&amp;#125&amp;#123\sqrt&amp;#123\sum x_i^2&amp;#125+\sqrt&amp;#123\sum y_i^2&amp;#125-\sum x_iy_i&amp;#125</script></p>
+<p>该系数由Taffee T. Tanimoto于1960年提出。Tanimoto生平不详，从名字来看，应该是个日本人。在其他领域，它还有另一个名字Jaccard similarity coefficient。（两者的系数公式一致，但距离公式略有差异。）</p>
+<blockquote>
+</blockquote>
+<p>  注：Paul Jaccard，1868～1944，苏黎世联邦理工学院（ETH Zurich）博士，苏黎世联邦理工学院植物学教授。ETH Zurich可是出了24个诺贝尔奖得主的。</p>
+<p>参见：</p>
+<p>&#91;https&#58;//en.wikipedia.org/wiki/Jaccard_index&#93;(https&#58;//en.wikipedia.org/wiki/Jaccard_index)</p>
+<h2 id="ALS算法原理"><a href="#ALS算法原理" class="headerlink" title="ALS算法原理"></a>ALS算法原理</h2><p>&#91;http&#58;//<a href="http://www.cnblogs.com/luchen927/archive/2012/02/01/2325360.html&#93;(http&#58;//www.cnblogs.com/luchen927/archive/2012/02/01/2325360.html)" target="_blank" rel="noopener">www.cnblogs.com/luchen927/archive/2012/02/01/2325360.html&#93;(http&#58;//www.cnblogs.com/luchen927/archive/2012/02/01/2325360.html)</a></p>
+<p>上面的网页概括了ALS算法出现之前的协同过滤算法的概况。</p>
+<p>ALS算法是2008年以来，用的比较多的协同过滤算法。它已经集成到Spark的Mllib库中，使用起来比较方便。</p>
+<p>从协同过滤的分类来说，ALS算法属于User-Item CF，也叫做混合CF。它同时考虑了User和Item两个方面。</p>
+<p>用户和商品的关系，可以抽象为如下的三元组：<code>&lt;User,Item,Rating&gt;</code>。其中，Rating是用户对商品的评分，表征用户对该商品的喜好程度。</p>
+<p>假设我们有一批用户数据，其中包含m个User和n个Item，则我们定义Rating矩阵<nobr>Rm×n</nobr><script id="MathJax-Element-132" type="math/tex">R_&amp;#123m\times n&amp;#125</script>，其中的元素<nobr>rui</nobr><script id="MathJax-Element-133" type="math/tex">r_&amp;#123ui&amp;#125</script>表示第u个User对第i个Item的评分。</p>
+<p>在实际使用中，由于n和m的数量都十分巨大，因此R矩阵的规模很容易就会突破1亿项。这时候，传统的矩阵分解方法对于这么大的数据量已经是很难处理了。</p>
+<p>另一方面，一个用户也不可能给所有商品评分，因此，R矩阵注定是个稀疏矩阵。矩阵中所缺失的评分，又叫做missing item。</p>
+<p><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219092707502?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>针对这样的特点，我们可以假设用户和商品之间存在若干关联维度（比如用户年龄、性别、受教育程度和商品的外观、价格等），我们只需要将R矩阵投射到这些维度上即可。这个投射的数学表示是：</p>
+<p><nobr>Rm×n≈Xm×kYTn×k(1)</nobr><script id="MathJax-Element-138" type="math/tex; mode=display">R_&amp;#123m\times n&amp;#125\approx X_&amp;#123m\times k&amp;#125Y_&amp;#123n\times k&amp;#125^T\tag&amp;#1231&amp;#125</script></p>
+<p>这里的<nobr>≈</nobr><script id="MathJax-Element-139" type="math/tex">\approx</script>表明这个投射只是一个近似的空间变换。</p>
+<p>不懂这个空间变换的同学，可参见《机器学习（十二）》中的“奇异值分解”的内容，或是本节中的“主成分分析”的内容。</p>
+<p>一般情况下，k的值远小于n和m的值，从而达到了数据降维的目的。</p>
+<p><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219092732597?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>幸运的是，我们并不需要显式的定义这些关联维度，而只需要假定它们存在即可，因此这里的关联维度又被称为Latent factor。k的典型取值一般是20～200。</p>
+<p>这种方法被称为概率矩阵分解算法(probabilistic matrix factorization，PMF)。ALS算法是PMF在数值计算方面的应用。</p>
+<p>为了使低秩矩阵X和Y尽可能地逼近R，需要最小化下面的平方误差损失函数：</p>
+<p><nobr>minx∗,y∗∑u,i is known(rui−xTuyi)2</nobr><script id="MathJax-Element-7" type="math/tex; mode=display">\min_&amp;#123x_<em>,y_</em>&amp;#125\sum_&amp;#123u,i\text&amp;#123 is known&amp;#125&amp;#125(r_&amp;#123ui&amp;#125-x_u^Ty_i)^2</script></p>
+<p>考虑到矩阵的稳定性问题，使用Tikhonov regularization，则上式变为：</p>
+<p><nobr>minx∗,y∗L(X,Y)=minx∗,y∗∑u,i is known(rui−xTuyi)2+λ(|xu|2+|yi|2)(2)</nobr><script id="MathJax-Element-152" type="math/tex; mode=display">\min_&amp;#123x_<em>,y_</em>&amp;#125L(X,Y)=\min_&amp;#123x_<em>,y_</em>&amp;#125\sum_&amp;#123u,i\text&amp;#123 is known&amp;#125&amp;#125(r_&amp;#123ui&amp;#125-x_u^Ty_i)^2+\lambda(|x_u|^2+|y_i|^2)\tag&amp;#1232&amp;#125</script></p>
+<p>优化上式，得到训练结果矩阵<nobr>Xm×k,Yn×k</nobr><script id="MathJax-Element-153" type="math/tex">X_&amp;#123m\times k&amp;#125,Y_&amp;#123n\times k&amp;#125</script>。预测时，将User和Item代入<nobr>rui=xTuyi</nobr><script id="MathJax-Element-154" type="math/tex">r_&amp;#123ui&amp;#125=x_u^Ty_i</script>，即可得到相应的评分预测值。</p>
+<p><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219092757488?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>同时，矩阵X和Y，还可以用于比较不同的User（或Item）之间的相似度，如下图所示：</p>
+<p><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219092824082?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"> <br><br>ALS算法的缺点在于：</p>
+<p>1.它是一个离线算法。</p>
+<p>2.无法准确评估新加入的用户或商品。这个问题也被称为Cold Start问题。</p>
+<h2 id="ALS算法优化过程的推导"><a href="#ALS算法优化过程的推导" class="headerlink" title="ALS算法优化过程的推导"></a>ALS算法优化过程的推导</h2><p>公式2的直接优化是很困难的，因为X和Y的二元导数并不容易计算，这时可以使用类似坐标下降法的算法，固定其他维度，而只优化其中一个维度。</p>
+<p>对<nobr>xu</nobr><script id="MathJax-Element-109" type="math/tex">x_u</script>求导，可得：</p>
+<p><nobr>∂L∂xu=−2∑i(rui−xTuyi)yi+2λxu=−2∑i(rui−yTixu)yi+2λxu=−2YTru+2YTYxu+2λxu</nobr><script id="MathJax-Element-12" type="math/tex; mode=display">\begin&amp;#123align&amp;#125<br>\frac&amp;#123\partial L&amp;#125&amp;#123\partial x_u&amp;#125&amp;=-2\sum_i(r_&amp;#123ui&amp;#125-x_u^Ty_i)y_i+2\lambda x_u<br>\&amp;=-2\sum_i(r_&amp;#123ui&amp;#125-y_i^Tx_u)y_i+2\lambda x_u<br>\&amp;=-2Y^Tr_u+2Y^TYx_u+2\lambda x_u<br>\end&amp;#123align&amp;#125</script></p>
+<p>令导数为0，可得：</p>
+<p><nobr>YTYxu+λIxu=YTru⇒xu=(YTY+λI)−1YTru(3)</nobr><script id="MathJax-Element-107" type="math/tex; mode=display">Y^TYx_u+\lambda Ix_u=Y^Tr_u\Rightarrow x_u=(Y^TY+\lambda I)^&amp;#123-1&amp;#125Y^Tr_u\tag&amp;#1233&amp;#125</script></p>
+<p>同理，对<nobr>yi</nobr><script id="MathJax-Element-108" type="math/tex">y_i</script>求导，由于X和Y是对称的，因此可得类似的结论：</p>
+<p><nobr>yi=(XTX+λI)−1XTri(4)</nobr><script id="MathJax-Element-103" type="math/tex; mode=display">y_i=(X^TX+\lambda I)^&amp;#123-1&amp;#125X^Tr_i\tag&amp;#1234&amp;#125</script></p>
+<p>因此整个优化迭代的过程为：</p>
+<blockquote>
+</blockquote>
+  <p>1.随机生成X、Y。（相当于对迭代算法给出一个初始解。） <br><br>  Repeat until convergence &amp;#123 <br><br>      2.固定Y，使用公式3更新<nobr>xu</nobr><script id="MathJax-Element-104" type="math/tex">x_u</script>。 <br><br>      3.固定X，使用公式4更新<nobr>yi</nobr><script id="MathJax-Element-105" type="math/tex">y_i</script>。 <br><br>  &amp;#125</p>
+
+<p>一般使用RMSE（root-mean-square error）评估误差是否收敛，具体到这里就是：</p>
+<p><nobr>RMSE=∑(R−XYT)2N−−−−−−−−−−−−−√</nobr><script id="MathJax-Element-90" type="math/tex; mode=display">RMSE=\sqrt&amp;#123\frac&amp;#123\sum(R-XY^T)^2&amp;#125&amp;#123N&amp;#125&amp;#125</script></p>
+<p>其中，N为三元组<code>&lt;User,Item,Rating&gt;</code>的个数。当RMSE值变化很小时，就可以认为结果已经收敛。</p>
+<p>算法复杂度：</p>
+<p>1.求<nobr>xu</nobr><script id="MathJax-Element-91" type="math/tex">x_u</script>：<nobr>O(k2N+k3m)</nobr><script id="MathJax-Element-92" type="math/tex">O(k^2N+k^3m)</script></p>
+<p>2.求<nobr>yi</nobr><script id="MathJax-Element-93" type="math/tex">y_i</script>：<nobr>O(k2N+k3n)</nobr><script id="MathJax-Element-94" type="math/tex">O(k^2N+k^3n)</script></p>
+<p>可以看出当k一定的时候，这个算法的复杂度是<strong>线性</strong>的。</p>
+<p>因为这个迭代过程，交替优化X和Y，因此又被称作交替最小二乘算法（Alternating Least Squares，ALS）。</p>
+<h2 id="隐式反馈"><a href="#隐式反馈" class="headerlink" title="隐式反馈"></a>隐式反馈</h2><p>用户给商品评分是个非常简单粗暴的用户行为。在实际的电商网站中，还有大量的用户行为，同样能够间接反映用户的喜好，比如用户的购买记录、搜索关键字，甚至是鼠标的移动。我们将这些间接用户行为称之为隐式反馈（implicit feedback），以区别于评分这样的显式反馈（explicit feedback）。</p>
+<p>隐式反馈有以下几个特点：</p>
+<p>1.没有负面反馈（negative feedback）。用户一般会直接忽略不喜欢的商品，而不是给予负面评价。</p>
+<p>2.隐式反馈包含大量噪声。比如，电视机在某一时间播放某一节目，然而用户已经睡着了，或者忘了换台。</p>
+<p>3.显式反馈表现的是用户的<strong>喜好（preference）</strong>，而隐式反馈表现的是用户的<strong>信任（confidence）</strong>。比如用户最喜欢的一般是电影，但观看时间最长的却是连续剧。大米购买的比较频繁，量也大，但未必是用户最想吃的食物。</p>
+<p>4.隐式反馈非常难以量化。</p>
+<h2 id="ALS-WR"><a href="#ALS-WR" class="headerlink" title="ALS-WR"></a>ALS-WR</h2><p>针对隐式反馈，有ALS-WR算法（ALS with Weighted-<nobr>λ</nobr><script id="MathJax-Element-80" type="math/tex">\lambda</script>-Regularization）。</p>
+<p>首先将用户反馈分类：</p>
+<p><nobr>pui=&amp;#1231,0,preferenceno preference</nobr><script id="MathJax-Element-20" type="math/tex; mode=display">p_&amp;#123ui&amp;#125=\begin&amp;#123cases&amp;#125<br>1, &amp; \text&amp;#123preference&amp;#125 \<br>0, &amp; \text&amp;#123no preference&amp;#125 \<br>\end&amp;#123cases&amp;#125</script></p>
+<p>但是喜好是有程度差异的，因此需要定义程度系数：</p>
+<p><nobr>cui=1+αrui</nobr><script id="MathJax-Element-77" type="math/tex; mode=display">c_&amp;#123ui&amp;#125=1+\alpha r_&amp;#123ui&amp;#125</script></p>
+<p>这里的<nobr>rui</nobr><script id="MathJax-Element-78" type="math/tex">r_&amp;#123ui&amp;#125</script>表示原始量化值，比如观看电影的时间；</p>
+<p>这个公式里的1表示最低信任度，<nobr>α</nobr><script id="MathJax-Element-79" type="math/tex">\alpha</script>表示根据用户行为所增加的信任度。</p>
+<p>最终，损失函数变为：</p>
+<p><nobr>minx∗,y∗L(X,Y)=minx∗,y∗∑u,icui(pui−xTuyi)2+λ(∑u|xu|2+∑i|yi|2)</nobr><script id="MathJax-Element-68" type="math/tex; mode=display">\min_&amp;#123x_<em>,y_</em>&amp;#125L(X,Y)=\min_&amp;#123x_<em>,y_</em>&amp;#125\sum_&amp;#123u,i&amp;#125c_&amp;#123ui&amp;#125(p_&amp;#123ui&amp;#125-x_u^Ty_i)^2+\lambda(\sum_u|x_u|^2+\sum_i|y_i|^2)</script></p>
+<p>除此之外，我们还可以使用指数函数来定义<nobr>cui</nobr><script id="MathJax-Element-69" type="math/tex">c_&amp;#123ui&amp;#125</script>：</p>
+<p><nobr>cui=1+αlog(1+rui/ϵ)</nobr><script id="MathJax-Element-26" type="math/tex; mode=display">c_&amp;#123ui&amp;#125=1+\alpha \log(1+r_&amp;#123ui&amp;#125/\epsilon)</script></p>
+<p>ALS-WR没有考虑到时序行为的影响，时序行为相关的内容，可参见：</p>
+<p>&#91;http&#58;//<a href="http://www.jos.org.cn/1000-9825/4478.htm&#93;(http&#58;//www.jos.org.cn/1000-9825/4478.htm)" target="_blank" rel="noopener">www.jos.org.cn/1000-9825/4478.htm&#93;(http&#58;//www.jos.org.cn/1000-9825/4478.htm)</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>参考论文：</p>
+<p>《Large-scale Parallel Collaborative Filtering forthe Netflix Prize》</p>
+<p>《Collaborative Filtering for Implicit Feedback Datasets》</p>
+<p>《Matrix Factorization Techniques for Recommender Systems》</p>
+<p>其他参考：</p>
+<p>&#91;http&#58;//<a href="http://www.jos.org.cn/html/2014/9/4648.htm&#93;(http&#58;//www.jos.org.cn/html/2014/9/4648.htm)" target="_blank" rel="noopener">www.jos.org.cn/html/2014/9/4648.htm&#93;(http&#58;//www.jos.org.cn/html/2014/9/4648.htm)</a></p>
+<p>&#91;http&#58;//<a href="http://www.fuqingchuan.com/2015/03/812.html&#93;(http&#58;//www.fuqingchuan.com/2015/03/812.html)" target="_blank" rel="noopener">www.fuqingchuan.com/2015/03/812.html&#93;(http&#58;//www.fuqingchuan.com/2015/03/812.html)</a></p>
+<p>&#91;http&#58;//<a href="http://www.docin.com/p-714582034.html&#93;(http&#58;//www.docin.com/p-714582034.html)" target="_blank" rel="noopener">www.docin.com/p-714582034.html&#93;(http&#58;//www.docin.com/p-714582034.html)</a></p>
+<p>&#91;http&#58;//<a href="http://www.tuicool.com/articles/fANvieZ&#93;(http&#58;//www.tuicool.com/articles/fANvieZ)" target="_blank" rel="noopener">www.tuicool.com/articles/fANvieZ&#93;(http&#58;//www.tuicool.com/articles/fANvieZ)</a></p>
+<p>&#91;http&#58;//<a href="http://www.68idc.cn/help/buildlang/ask/20150727462819.html&#93;(http&#58;//www.68idc.cn/help/buildlang/ask/20150727462819.html)" target="_blank" rel="noopener">www.68idc.cn/help/buildlang/ask/20150727462819.html&#93;(http&#58;//www.68idc.cn/help/buildlang/ask/20150727462819.html)</a></p>
+<h1 id="主成分分析"><a href="#主成分分析" class="headerlink" title="主成分分析"></a>主成分分析</h1><p>真实的训练数据总是存在各种各样的问题。</p>
+<p>比如拿到一个汽车的样本，里面既有以“千米/每小时”度量的最大速度特征，也有“英里/小时”的最大速度特征。显然这两个特征有一个是多余的，我们需要找到，并去除这个冗余。</p>
+<p>再比如，针对飞行员的调查，包含两个特征：飞行的技能水平和对飞行的爱好程度。由于飞行员是很难培训的，因此如果没有对飞行的热爱，也就很难学好飞行。所以这两个特征实际上是强相关的（strongly correlated）。如下图所示：</p>
+<p><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219092905208?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></p>
+<p>我们的目标就是找出上图中所示的向量<nobr>u1</nobr><script id="MathJax-Element-157" type="math/tex">u_1</script>。</p>
+<p>为了实现这两个目标，我们可以采用PCA（Principal components analysis）算法。</p>
+<h2 id="数据的规则化处理"><a href="#数据的规则化处理" class="headerlink" title="数据的规则化处理"></a>数据的规则化处理</h2><p>在进行PCA算法之前，我们首先要对数据进行预处理，使之规则化。其方法如下：</p>
+<blockquote>
+</blockquote>
+  <p>1.<nobr>μ=1m∑mi=1x(i)</nobr><script id="MathJax-Element-62" type="math/tex">\mu=\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_&amp;#123i=1&amp;#125^mx^&amp;#123(i)&amp;#125</script> <br><br>  2.<nobr>x(i)&#58;=x(i)−μ</nobr><script id="MathJax-Element-63" type="math/tex">x^&amp;#123(i)&amp;#125&#58;=x^&amp;#123(i)&amp;#125-\mu</script> <br><br>  3.<nobr>σ2j=1m∑i(x(i))2</nobr><script id="MathJax-Element-64" type="math/tex">\sigma_j^2=\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_i(x^&amp;#123(i)&amp;#125)^2</script> <br><br>  4.<nobr>x(i)j&#58;=x(i)j/σj</nobr><script id="MathJax-Element-65" type="math/tex">x_j^&amp;#123(i)&amp;#125&#58;=x_j^&amp;#123(i)&amp;#125/\sigma_j</script>   </p>
+
+<p>多数情况下，特征空间中，不同特征向量所代表的维度之间，并不能直接比较。</p>
+<p>比如，摄氏度和华氏度，虽然都是温度的单位，但两种温标的原点和尺度都不相同，因此需要规范化之后才能比较。</p>
+<p>步骤1和2，用于消除原点偏差（常数项偏差）。步骤3和4，用于统一尺度（一次项偏差）。</p>
+<p>虽然上面的办法，对于二次以上的偏差无能为力，然而多数情况下，这种处理，已经比原始状态好多了。</p>
+<h2 id="PCA算法推导"><a href="#PCA算法推导" class="headerlink" title="PCA算法推导"></a>PCA算法推导</h2><p>回到之前的话题，为了找到主要的方向u，我们首先观察一下，样本点在u上的投影应该是什么样子的。</p>
+<p>  <th align="center"></th><br>|——<br>  <td align="center"><img title="" alt="这里写图片描述" src="https&#58;//img-blog.csdn.net/20161219093122508?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvYW50a2lsbGVyZmFybQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast"></td></p>
+<p>上图所示是5个样本在不同向量上的投影情况。其中，X表示样本点，而黑点表示样本在u上的投影。</p>
+<p>很显然，左图中的u就是我们需要求解的主成分的方向。和右图相比，左图中各样本点x在u上的投影点比较分散，也就是投影点之间的方差较大。</p>
+<p>由《机器学习（十一）》一节的公式4，可知样本点x在单位向量u上的投影为：<nobr>xTu</nobr><script id="MathJax-Element-181" type="math/tex">x^Tu</script>。</p>
+<p>因此，这个问题的代价函数为：</p>
+<p><nobr>1m∑i=1m(x(i)Tu)2=1m∑i=1m(x(i)Tu)T(x(i)Tu)=1m∑i=1muTx(i)x(i)Tu=uT(1m∑i=1mx(i)x(i)T)u=uTΣu</nobr><script id="MathJax-Element-33" type="math/tex; mode=display">\begin&amp;#123align&amp;#125<br>&amp;\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_&amp;#123i=1&amp;#125^m\left(x^&amp;#123(i)^T&amp;#125u\right)^2=\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_&amp;#123i=1&amp;#125^m\left(x^&amp;#123(i)^T&amp;#125u\right)^T\left(x^&amp;#123(i)^T&amp;#125u\right)<br>\&amp;=\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_&amp;#123i=1&amp;#125^mu^Tx^&amp;#123(i)&amp;#125x^&amp;#123(i)^T&amp;#125u=u^T\left(\frac&amp;#1231&amp;#125&amp;#123m&amp;#125\sum_&amp;#123i=1&amp;#125^mx^&amp;#123(i)&amp;#125x^&amp;#123(i)^T&amp;#125\right)u=u^T\Sigma u<br>\end&amp;#123align&amp;#125</script></p>
+<p>即：</p>
+<p><nobr>maxus.t.uTΣuuTu=1</nobr><script id="MathJax-Element-34" type="math/tex; mode=display">\begin&amp;#123align&amp;#125<br>&amp;\operatorname&amp;#123max&amp;#125_&amp;#123u&amp;#125&amp; &amp; u^T\Sigma u\<br>&amp;\operatorname&amp;#123s.t.&amp;#125&amp; &amp; u^Tu=1<br>\end&amp;#123align&amp;#125</script></p>
+<p>其拉格朗日函数为：</p>
+<p><nobr>L(u)=uTΣu−λ(uTu−1)</nobr><script id="MathJax-Element-35" type="math/tex; mode=display">\mathcal&amp;#123L&amp;#125(u)=u^T\Sigma u-\lambda(u^Tu-1)</script></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://blog.csdn.net/antkillerfarm/article/details/53734658" target="_blank" rel="noopener">机器学习（十四）——协同过滤的ALS算法（2）、主成分分析 - CSDN博客</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/8b3a85eb/" rel="next" title="在Github惨遭404后，那位不能提名字的大学生又选择了区块链">
+                <i class="fa fa-chevron-left"></i> 在Github惨遭404后，那位不能提名字的大学生又选择了区块链
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/a75be634/" rel="prev" title="腾讯视频开卖搜索广告，又一种付费也躲不开的广告">
+                腾讯视频开卖搜索广告，又一种付费也躲不开的广告 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kendall秩相关系数（Kendall-rank-correlation-coefficient）"><span class="nav-number">1.</span> <span class="nav-text">Kendall秩相关系数（Kendall rank correlation coefficient）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tanimoto系数"><span class="nav-number">2.</span> <span class="nav-text">Tanimoto系数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALS算法原理"><span class="nav-number"></span> <span class="nav-text">ALS算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALS算法优化过程的推导"><span class="nav-number"></span> <span class="nav-text">ALS算法优化过程的推导</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐式反馈"><span class="nav-number"></span> <span class="nav-text">隐式反馈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ALS-WR"><span class="nav-number"></span> <span class="nav-text">ALS-WR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number"></span> <span class="nav-text">参考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主成分分析"><span class="nav-number"></span> <span class="nav-text">主成分分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据的规则化处理"><span class="nav-number"></span> <span class="nav-text">数据的规则化处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PCA算法推导"><span class="nav-number"></span> <span class="nav-text">PCA算法推导</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

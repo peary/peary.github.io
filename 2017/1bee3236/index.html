@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,Google翻译,英语,语音识别,TED," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="1 新智元编译  机器翻译——自动在两种语言之间进行翻译的任务——是机器学习中最活跃的研究领域之一。在多种机器翻译方法中，序列到序列（“seq2seq”）模型最近取得了巨大的成功，并已经成为大多数商业翻译系统的事实上的标准，例如谷歌翻译。这是由于 seq2seq 模型能够利用深度神经网络捕捉句子意义。但是，虽然 seq2seq 模型（例如 OpenNMT 或 tf-seq2seq）有大量的资料，但">
+<meta name="keywords" content="机器学习,Google翻译,英语,语音识别,TED">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「TensorFlow 谷歌神经机器翻译」从零开始打造属于你的翻译系统">
+<meta property="og:url" content="http://blockshare.top/2017/1bee3236/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="1 新智元编译  机器翻译——自动在两种语言之间进行翻译的任务——是机器学习中最活跃的研究领域之一。在多种机器翻译方法中，序列到序列（“seq2seq”）模型最近取得了巨大的成功，并已经成为大多数商业翻译系统的事实上的标准，例如谷歌翻译。这是由于 seq2seq 模型能够利用深度神经网络捕捉句子意义。但是，虽然 seq2seq 模型（例如 OpenNMT 或 tf-seq2seq）有大量的资料，但">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/2f830008de452edb0d2e">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.761Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「TensorFlow 谷歌神经机器翻译」从零开始打造属于你的翻译系统">
+<meta name="twitter:description" content="1 新智元编译  机器翻译——自动在两种语言之间进行翻译的任务——是机器学习中最活跃的研究领域之一。在多种机器翻译方法中，序列到序列（“seq2seq”）模型最近取得了巨大的成功，并已经成为大多数商业翻译系统的事实上的标准，例如谷歌翻译。这是由于 seq2seq 模型能够利用深度神经网络捕捉句子意义。但是，虽然 seq2seq 模型（例如 OpenNMT 或 tf-seq2seq）有大量的资料，但">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/2f830008de452edb0d2e">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/1bee3236/"/>
+
+
+
+
+
+  <title>「TensorFlow 谷歌神经机器翻译」从零开始打造属于你的翻译系统 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/1bee3236/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「TensorFlow 谷歌神经机器翻译」从零开始打造属于你的翻译系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">新智元</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-26T23:56:14+08:00">
+                2017-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/1bee3236/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/1bee3236/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/2f830008de452edb0d2e" rel="gallery_cjgf0wke6001pxmqddo437rjx"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/2f830008de452edb0d2e" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p><strong>1 新智元编译 </strong></p>
+<p>机器翻译——自动在两种语言之间进行翻译的任务——是机器学习中最活跃的研究领域之一。在多种机器翻译方法中，序列到序列（“seq2seq”）模型最近取得了巨大的成功，并已经成为大多数商业翻译系统的事实上的标准，例如谷歌翻译。这是由于 seq2seq 模型能够利用深度神经网络捕捉句子意义。但是，虽然 seq2seq 模型（例如 OpenNMT 或 tf-seq2seq）有大量的资料，但是缺少可以同时教知识和构建高质量翻译系统的技能的教程。</p>
+<p>谷歌今天公布了一个用 TensorFlow 构建神经机器翻译（NMT）系统的教程，全面解释 seq2seq 模型，并演示如何从零开始构建 NMT 翻译模型。这个教程从 NMT 的背景知识讲起，并提供构建一个 NMT 系统的代码细节。接着，教程讲解注意力机制（attention mechanism），这是让 NMT 能够处理长句子的关键。最后，教程提供如何复制谷歌的 NMT 系统（GNMT）中的关键功能，在多个 GPU 上进行训练的详细信息。</p>
+<p>这一教程还包括详细的基准测试结果，使用者可以自行复制。谷歌的模型提供了强大的开源基准，性能与 GNMT 的结果相当，在流行的 WMT’14 英语 - 德语翻译任务上实现了 BLEU 得分 24.4 的性能。</p>
+<p>教程还包括其他基准测试结果（英语 - 越南语，德语 - 英语）。</p>
+<p>此外，这个教程还提供了完全动态的 seq2seq API（与 TensorFlow 1.2 一起发布），旨在使构建 seq2seq 模型更加简洁：</p>
+<ul>
+<li>使用tf.contrib.data中新的输入管道轻松读取和预处理动态大小的输入序列。- 使用padded batching和sequence length bucketing来提高训练和推理速度。- 使用流行的架构和训练schedule训练seq2seq模型，包括几种类型的attention和scheduled sampling。- 使用in-graph beam search在seq2seq模型中执行推理。- 为多GPU设置优化seq2seq模型。<br>使用padded batching和sequence length bucketing来提高训练和推理速度。</li>
+</ul>
+<p>使用in-graph beam search在seq2seq模型中执行推理。</p>
+<p>希望这一教程有助于研究界创造更多新的NMT模型并进行实验。完整教程的GitHub地址：https&#58;//github.com/tensorflow/nmt，本文提供主要内容的翻译介绍。</p>
+<p>神经机器翻译（seq2seq）教程</p>
+<p><strong>作者：Thang Luong, Eugene Brevdo, Rui Zhao</strong></p>
+<p><strong>目录</strong></p>
+<ul>
+<li>导言- 基础神经机器翻译背景知识<br>基础</li>
+</ul>
+<p>安装教程</p>
+<p>训练——如何构建你的第一个NMT系统</p>
+<p>嵌入</p>
+<p>编码器</p>
+<p>解码器</p>
+<p>损失</p>
+<p>梯度计算和优化</p>
+<p>实践——让我们开始训练一个NMT模型</p>
+<p>推理——如何生成翻译</p>
+<ul>
+<li>中级教程<br>注意力机制的背景知识</li>
+</ul>
+<p>Attention Wrapper API</p>
+<p>实践——构建一个以注意力为基础的NMT模型</p>
+<ul>
+<li>提示与技巧<br>构建训练，评估和推理图</li>
+</ul>
+<p>数据输入管道</p>
+<p>更好的NMT模型的其他细节</p>
+<p>双向RNN</p>
+<p>束搜索（Beam Search）</p>
+<p>超参数</p>
+<p>多GPU训练</p>
+<ul>
+<li>基准<br>IWSLT英语 - 越南语</li>
+</ul>
+<p>WMT德语 - 英语</p>
+<p>WMT英语 - 德语（完全比较）</p>
+<ul>
+<li>其他资源- 致谢- 参考文献<br>致谢</li>
+</ul>
+<p>导言</p>
+<p>序列到序列（seq2seq）模型（Sutskever et al.，2014，Cho et al.，2014）在机器翻译、语音识别、文本概况等各种任务中取得了巨大的成功。本教程提供了对 seq2seq 模型的全面解释，并演示了如何从头开始构建一个具有竞争力的 seq2seq 模型。我们专注于神经机器翻译（NMT）任务，这是第一个大获成功的 seq2seq 模型的测试平台。教程中包含的代码是轻便，高质量，生产就绪，并结合了最新的研究观点的。我们通过以下方式实现这一目标：</p>
+<ul>
+<li>使用最新的解码器/注意力包装 API，TensorFlow 1.2 数据迭代器- 结合我们在构建循环模型和 seq2seq 模型方面的专长- 提供构建最好的 NMT 模型以及复制谷歌的 NMT（GNMT）系统的提示和技巧。<br>结合我们在构建循环模型和 seq2seq 模型方面的专长</li>
+</ul>
+<p>我们认为，最重要的是提供可以让人轻松复制的基准。因此，我们提供了完整的实验结果，并在以下公开数据集对模型进行了预训练：</p>
+<ul>
+<li>小规模：IWSLT Evaluation Campaign 提供的 TED 演讲（133K句子对）的英语 - 越南语平行语料库。<br>- 大规模：WMT Evaluation Campaign 提供的德语 - 英语平行语料库（4.5M句子对）。<br>大规模：WMT Evaluation Campaign 提供的德语 - 英语平行语料库（4.5M句子对）。</li>
+</ul>
+<p>我们首先提供构建 NMT 的 seq2seq 模型的一些基本知识，说明如何构建和训练一个 NMT 模型。第二部分将详细介绍构建一个有竞争力的 NMT 模式的注意力机制。最后，我们将提供一些提示和技巧，以构建最佳性能的 NMT 模型（包括训练速度和翻译质量），例如 TensorFlow 的最佳实践（batching, bucketing），bidirectional RNN 和 beam search。</p>
+<p>基础</p>
+<p><strong>神经机器翻译的背景知识</strong></p>
+<p>回到过去，传统的基于短语的翻译系统是通过将源语言的句子分解成多个部分，然后逐个短语地进行翻译。这导致机器翻译的结果与人类翻译的结果很不同。人类是通读整个源句子，理解它的含义，然后进行翻译。神经机器翻译（NMT）模拟了这样的过程！</p>
+<p>图1：编码器-解码器架构，NMT的一个通用方法的示例。编码器将源句子转换成一个“meaning”向量，这个向量通过解码器传递，产生翻译结果。</p>
+<p>具体来说，NMT 系统首先使用编码器读取源语句来构建“meaning”向量，即表示句子意义的一个数字序列; 然后，解码器处理句子向量以输出翻译结果，如图1所示。这一架构同城被称为编码器-解码器架构（encoder-decoder architecture）。以这种方式，NMT 解决了传统的基于短语的方法中翻译局部性的问题：它可以捕获语言的远距离依赖性，例如性一致， 句法结构，等等，并产生更流畅的翻译，如谷歌的神经机器翻译系统所演示的。</p>
+<p>NMT 模型的具体结构有所不同。序列数据的一般选择是大多数NMT模型使用的循环神经网络（RNN）。通常，RNN用于编码器和解码器。但是，RNN模型在以下方面不同：（a）方向性——单向或双向; （b）深度——单层或多层; 和（c）类型——通常是普通RNN，长短期记忆（LSTM）或循环门单位（Gated Recurrent Unit, GRU）。有兴趣的读者可以在这篇博客文章了解有关RNN和LSTM的更多信息：http&#58;//colah.github.io/posts/2015-08-Understanding-LSTMs/</p>
+<p>在本教程中，我们将一个单向的深度多层RNN作为示例，并将LSTM作为一个循环单元。图2是这样一个模型的例子。在这个示例中，我们构建一个模型来将源句子“I am a student”翻译成一个目标句子“Je suisétudiant”。在高层水平上，NMT模型由两个循环神经网络组成：编码器RNN简单地处理输入的源词汇，不进行任何预测; 另一方面，解码器RNN在预测下一个单词的同时处理目标句子。</p>
+<p>更多信息请参阅Luong（2016）的教程（https&#58;//github.com/lmthang/thesis），本教程正是基于这个教程的扩充。</p>
+<p>图2：神经机器翻译——将源句子“I am a student”翻译成目标句子“Je suisétudiant”，这是一个深度循环架构的例子。这里，“<s>”表示解码处理的开始，“&lt;/ s&gt;”提示解码器停止。</s></p>
+<p><strong>安装教程</strong></p>
+<p>要安装本教程，你需要在系统上安装TensorFlow。本教程要求最新版本的TensorFlow（version 1.2.1）。要安装TensorFlow，请按照官方的安装说明进行操作（https&#58;//<a href="http://www.tensorflow.org/install）。" target="_blank" rel="noopener">www.tensorflow.org/install）。</a></p>
+<p>安装好TensorFlow之后，您可以通过运行下面的代码下载本教程的源代码：</p>
+<p>git clone https&#58;//github.com/tensorflow/nmt/</p>
+<p><strong>训练——如何构建你的第一个NMT系统</strong></p>
+<p>我们先用一些具体的代码片段看看构建一个NMT模型的核心，详细解释一下图2。我们后面会提供数据准备和完整代码。这部分涉及model.py文件。</p>
+<p>在底层，编码器RNN和解码器RNN作为输入接收以下内容：首先是源句子（source sentence），然后是一个边界标记“<s>”，提示从编码模式到解码模式的切换，最后是目标句子（target sentence）。对于训练过程，我们将为系统提供以下张量，它们是time-major的格式，包含单词索引：</s></p>
+<p>encoder_inputs &#91;max_encoder_time, batch_size&#93;&#58; 源输入单词</p>
+<p>decoder_inputs &#91;max_decoder_time, batch_size&#93;&#58; 目标输入单词</p>
+<p>decoder_outputs &#91;max_decoder_time, batch_size&#93;&#58; 目标输出单词，即 decoder_inputs左移动一个时间步长，同时在右边附一个句末标记。</p>
+<p>为了提高效率，我们一次训练多个句子（batch_size）。测试过程略有不同，我们会在后面讨论。</p>
+<p><strong>嵌入</strong></p>
+<p>给定词类属性，模型必须先查找源和目标嵌入以检索相应的词汇表示。为了使嵌入层工作，首先要为每种语言选择一个词汇表。通常，选择词汇大小V，并且只有最常用的V词汇被视为唯一的。其他所有词汇都转换成一个“unknown”字符（token），并且都得到相同的嵌入。通常在训练期间学习嵌入的权重，每种语言一套。</p>
+<p>同样，我们可以构建 embedding_decoder 和 decode_emb_inp。请注意，可以选择使用预训练的单词表示（例如 word2vec 或 Glove vector）来初始化嵌入权重。一般来说，给定大量训练数据，我们可以从头开始学习这些嵌入。</p>
+<p><strong>编码器</strong></p>
+<p>一旦被检索到，那么嵌入词汇就作为输入被喂入主网络中，该主网络由两个多层RNN组成——用于源语言的编码器和用于目标语言的解码器。这两个RNN原则上可以共享相同的权重; 但是，在实践中，我们经常使用两种不同的RNN参数（这些模型在拟合大型训练数据集时做得更好）。编码器RNN使用零向量作为起始状态，构建如下：</p>
+<p>请注意，句子具有不同的长度以避免计算上的浪费，我们通过source_seqence_length 告诉 dynamic_rnn 确切的源句子长度。由于我们的输入是 time major 的，因此设置 time_major = True。 在这里，我们只构建一个单层LSTM，encoder_cell。在后面的部分将介绍如何构建多层 LSTM，添加 dropout，以及使用 attention。</p>
+<p><strong>解码器</strong></p>
+<p>解码器也需要访问源信息，一个简单的方法就是用编码器的最后一个隐藏状态（encode_state）来初始化解码器。 在图2中，我们将源代码“student”的隐藏状态传递到解码器端。</p>
+<p>这里，代码的核心部分是 BasicDecoder ，接收 decode_cell（类似于encoder_cell）的 decoder，一个 helper，以及作为输出的前一个 encoder_state。通过分开 decoders 和 helpers，我们可以重复利用不同的代码库，例如，可以用 reedyEmbeddingHelper 替代 TrainingHelper 进行 greedy decoding。更多信息请查看 helper.py。</p>
+<p>最后，我们还没提到 projection_layer，它是一个密集矩阵（dense matrix），用于将顶部的隐藏状态转换为维度V的对数向量（logit vectors）。这个过程在图2的顶部说明了。</p>
+<p><strong>损失</strong></p>
+<p>有了上面的 logits，现在可以计算训练损失：</p>
+<p>这里，target_weights 是与 decode_outputs 大小相同的0-1矩阵，它将目标序列长度之外的位置填充为值为0。</p>
+<p>重要注意事项：我们用 batch_size 来分割损失，所以我们的超参数对 batch_size是“不变的”。有的人将损失以 batch_size * num_time_steps 进行分割，这可以减少短句子的翻译错误。更巧妙的是，我们的超参数（应用于前面的方法）不能用于后面的方法。例如，如果两种方法都使用学习律为1.0的SGD，那么后一种方法有效利用更小的学习率，即1 / num_time_steps。</p>
+<p><strong>梯度计算和优化</strong></p>
+<p>我们现在已经定义NMT模型的前向传播。计算反向传播只需要几行代码：</p>
+<p>训练RNN的重要步骤之一是梯度剪切（gradient clipping）。这里，我们按照global norm警醒剪切。最大值max_gradient_norm通常设置为5或1。最后一步是选择优化器。Adam优化器是常见的选择。也需要选择学习率（learning rate）。learning_rate的值通常在0.0001到0.001之间; 也可以设置为随着训练的进行，学习率降低。</p>
+<p>在我们自己的实验中，我们使用标准SGD（tf.train.GradientDescentOptimizer）以及可降低的学习率设置，从而产生更好的性能。具体见benchmark部分。</p>
+<p><strong>实践——训练一个NMT模型</strong></p>
+<p>让我们开始训练第一个NMT模型，将越南语翻译成英语！代码的入口点是 nmt.py</p>
+<p>我们将使用一个小型的TED 演讲（133K训练样本）的平行语料库来进行这个实践。我们在这里使用的所有数据可以在下面网址找到：https：//nlp.stanford.edu/projects/nmt/。我们将使用tst2012作为dev数据集，tst2013作为测试数据集。</p>
+<p>运行以下命令下载训练NMT模型的数据：nmt/scripts/download_iwslt15.sh /tmp/nmt_data</p>
+<p>运行以下命令开始训练：</p>
+<p>上面的命令训练一个具有128-dim的隐藏单元和12个epoch的嵌入的2层LSTM seq2seq模型。我们使用的dropout值为0.2（保持或然率为0.8）。如果不出现error，随着训练的困惑度值（perplexity value）降低，应该可以看到类似下面的logs：</p>
+<p>详细信息请参阅train.py。</p>
+<p>我们可以在训练期间启动Tensorboard来查看模型的概要：</p>
+<p>tensorboard –port 22222 –logdir /tmp/nmt_model/</p>
+<p>以上是从英语翻译成越南语的训练，通过下面的代码可以简单地变成从越南语翻译成英语：</p>
+<p>–src=en –tgt=vi</p>
+<p><strong>推理——如何生成翻译</strong></p>
+<p>在训练NMT模型时（以及已经训练完时），你可以得到之前模型没见过的源句子的翻译。这个过程称为推理（inference）。训练和推理（测试）之间有明确的区别：在推理时，我们只能访问源句子，即encoder_inputs。执行解码有很多种方法。解码方法包括greedy解码，采样解码和束搜索（beam-search）解码。这里，我们将讨论贪心解码策略。</p>
+<p>它的想法是很简单的，如图3：</p>
+<ul>
+<li>我们仍然以与训练期间相同的方式对源句子进行编码，以获得encoder_state，并使用该encoder_state来初始化解码器。<br>- 一旦解码器接收到开始符号“&lt;s”（参见代码中的tgt_sos_id），就开始进行解码（转换）处理。<br>- 对于解码器侧的每个时间步长，我们将RNN的输出视为一组logits。我们选择最有可能的单词，即与最大logit值相关联的id作为输出的单词（这就是“greedy”行为）。例如在图3中，在第一个解码步骤中，单词“moi”具有最高的翻译概率。然后，我们将这个词作为输入提供给下一个时间步长。<br>- 这个过程继续进行，直到生成句尾标记“&lt;/ s&gt;”作为输出符号（在我们的代码中是tgt_eos_id）。<br>一旦解码器接收到开始符号“&lt;s”（参见代码中的tgt_sos_id），就开始进行解码（转换）处理。</li>
+</ul>
+<p>这个过程继续进行，直到生成句尾标记“&lt;/ s&gt;”作为输出符号（在我们的代码中是tgt_eos_id）。</p>
+<p>图3：Greedy解码——训练好的NMT模型使用greedy搜索生成源句子“Je suisétudiant”的翻译。</p>
+<p>令推理与训练不同的是步骤3。推理使用模型预测的单词，而不是总是正确的目标单词作为输入。以下是实现greedy解码的代码。它与解码器的训练代码非常相似。</p>
+<p>在这里，我们使用GreedyEmbeddingHelper而不是TrainingHelper。由于我们预先不知道目标序列长度，所以使用maximum_iterations来限制翻译长度。 一个启发是解码最多两倍的源句子长度。</p>
+<p>训练好一个模型后，现在可以创建一个推理文件并翻译一些句子：</p>
+<p>注意，上述命令也可以在模型正在训练时运行，只要存在一个训练的检查点。 详细请参阅inference.py。</p>
+<p>进阶版：注意力机制</p>
+<p>说完了最基本的 seq2seq 模型后，下面是进阶版！</p>
+<p><strong>注意力机制：背景</strong></p>
+<p>为了建立最先进的神经机器翻译系统，我们将需要更多的“特殊材料”：注意力机制，这是 Bahdanau 等人于 2015 年首次引入，然后由 Luong 等人在同年完善的。注意力机制的关键在于通过在翻译过程中，对相关来源内容进行“注意”，建立目标与来源之间的直接连接。注意力机制的一个很好的副产品，是源和目标句子之间的对齐矩阵（如图 4 所示）。</p>
+<p><strong>图4：注意力机制可视化：</strong>源和目标句子之间的比对的例子。图像来自论文 Bahdanau et al.，2015。</p>
+<p>在简单的 seq2seq 模型中，开始解码时，我们将最后的源状态从编码器传递到解码器。这对比较短和中等长度的句子效果很好；然而，对于长句子，单个固定大小的隐藏状态就成了信息瓶颈。注意力机制并不是丢掉在源 RNN 中计算的所有隐藏状态，而是让解码器将它们视为源信息的动态存储器。通过这样做，注意力机制改善了较长句子的翻译质量。如今，注意力机制成为神经机器翻译的首选，而且也成功应用于许多其他任务（包括图说生成，语音识别和文本摘要）。</p>
+<p>我们现在介绍注意力机制的一个实例，这个实例是 Luong 等人在 2015 年论文中提出的，已被用于 OpenNMT 开放源码工具包等多个最先进的系统，TF seq2seq API 教程中也使用了这个例子。</p>
+<p><strong>图5：注意力机制</strong>：Luong 等人 2015 年所述的基于注意力的 NMT 系统的例子。这里详细介绍了注意力计算的第一步。为了清楚起见，没有将图 2 中的嵌入和投射层绘制出来。</p>
+<p>如图 5 所示，注意力计算在每个解码器时间步长都有发生，包括以下阶段：</p>
+<ol>
+<li>比较当前目标隐藏状态与所有源状态，获得注意力权重“attention weight”（可以如图 4 所示）；1. 基于注意力权重，计算上下文矢量（context vector），作为源状态的加权平均值；1. 将上下文矢量与当前目标隐藏状态相结合，产生最终的注意力向量“attention vector”；1. 注意力向量作为输入，被传递到下一个时间步。<br>基于注意力权重，计算上下文矢量（context vector），作为源状态的加权平均值；</li>
+</ol>
+<p>注意力向量作为输入，被传递到下一个时间步。</p>
+<p><strong>注意力机制中最关键的是什么？</strong></p>
+<p>根据 score 函数和 loss 函数的不同，存在很多不同的注意力变体。但在实践中，我们发现只有特定的一些选择很重要。首先是注意力的基本形式，也即目标和源之间的直接关系。 其次是将注意力向下馈送到下一个时间步长，这是告知网络过去的注意力做了什么决定（Luong 等人，2015）。最后，score 函数的选择往往会导致性能表现不同。</p>
+<p>AttentionWrapper API</p>
+<p>在部署 AttentionWrapper 时，我们借鉴了 Weston 等人 2015 年在 memory network 方面的一些术语。与可读写的 memory 不同，本教程中介绍的注意力机制是只读存储器。具体来说，源的一组隐藏状态被作为“记忆”（memory）。在每个时间步长中，使用当前目标隐藏状态作为“query”来决定要读取 memory 的哪个部分。通常，query 需要与对应于各个内存插槽的 key 进行比较。在我们的介绍中，恰好将源隐藏状态作为“key”。你可以受到记忆网络术语的启发，得出其他形式的注意力！</p>
+<p>由于有了 attention wrapper，用 attention 扩展普通 seq2seq 代码就十分简单了。这部分参考文件 attention_model.py</p>
+<p>首先，我们需要定义注意机制，例如（Luong等人，2015）：</p>
+<p>在以前的 Encoder 部分中，encoder_outputs 是顶层所有源隐藏状态的集合，其形状为 &#91;max_time，batch_size，num_units&#93;（因为我们将 dynamic_rnn 与 time_major 设置为 True）。对于注意力机制，我们需要确保传递的“记忆”是批处理的，所以需要转置 attention_states。 将 source_sequence_length 传递给注意力机制，以确保注意力权重正确归一化（仅在 non-padding 位置上发生）。</p>
+<p>定义了注意力机制后，使用 AttentionWrapper 解码单元格：</p>
+<p>代码的其余部分与 Decoder 那节是一样的！</p>
+<p><strong>实践：构建基于注意力的 NMT 模型</strong></p>
+<p>为了实现注意力，我们需要使用 luong，scaled_luong，bahdanau 或 normed_bahdanau 中的一个，作为训练期间的注意力 flag 的值。这个 flag 指定了我们将要使用的注意力机制。 我们还需要为注意力模型创建一个新的目录，这样才不会重复使用以前训练过的基本 NMT 模型。</p>
+<p>运行以下指令开始训练：</p>
+<p>在训练完成后，使用同样的推理指令 model_dir 做推理：</p>
+<p>玩转 NMT：窍门和技巧</p>
+<p><strong>构建训练图、评估图和推理图</strong></p>
+<p>在 TensorFlow 中构建机器学习模型时，最好建立 3 个独立的图：</p>
+<ul>
+<li>首先是训练图，其中：1. 批次、bucket 和可能的子样本从一组文件/外部输入输入；1. 包括前向和后向 op；1. 构建优化器，并添加训练 op。<br>包括前向和后向 op；</li>
+<li>其次是评估图，其中：1. 批次和 bucket 从一组文件/外部输入数据；1. 包括 1 个训练前向 op 和不用于训练的其他评估 op<br>包括 1 个训练前向 op 和不用于训练的其他评估 op</li>
+<li>最后是推理图，其中：1. 可能不批量输入数据；1. 不会对输入数据进行子采样；1. 从占位符读取输入数据1. 包括模型前向 op 的一个子集，也可能含有用于存储 session.run 调用之间状态的其他特殊输入/输出。<br>不会对输入数据进行子采样；</li>
+</ul>
+<p>包括模型前向 op 的一个子集，也可能含有用于存储 session.run 调用之间状态的其他特殊输入/输出。</p>
+<p>构建单独的图有几个好处：</p>
+<ul>
+<li>推理图通常与其他两个不同，因此需要分开构建；- 这样评估图也更简单，因为没有了额外的反向 op；- 可以为每个图分别实现数据馈送；- 各种重用都更加简单。例如，在评估图中，不需要用 reuse = True 重新打开可变范围，因为训练模型已经创建了这些变量。不需要到处使用 reuse=；- 在分布式训练中，训练、评估和推断分开用不同的机器做很正常。反正都需要各自建图。因此，分开建图也有助于你构建分布式训练系统。<br>这样评估图也更简单，因为没有了额外的反向 op；</li>
+</ul>
+<p>各种重用都更加简单。例如，在评估图中，不需要用 reuse = True 重新打开可变范围，因为训练模型已经创建了这些变量。不需要到处使用 reuse=；</p>
+<p>主要的问题是，在只有单机的情况下，如何在 3 个图中共享变量 Variables。这可以通过为每个图使用单独的 session 来解决。训练 session 定期保存检查点，评估和推理 session 定期从检查点恢复参数。</p>
+<p>下面的例子显示了两种方法的主要区别。</p>
+<ol>
+<li><p>统一建图：一个图里 3 个模型</p>
+</li>
+<li><p>分别建图：3 个 session 共享变量 </p>
+</li>
+</ol>
+<p>注意，后一种方法很容易就能转换为分布式版本。</p>
+<p>另一个区别在于，我们使用了有状态的迭代器对象，而不是使用 feed_dicts 来在每个 session.run 调用中提供数据。这些迭代器使输入管道在单机和分布式设置中都容易得多。</p>
+<p><strong>其他技巧：双向 RNN</strong></p>
+<p>编码器的双向性通常会带来更好的性能（但由于使用了更多层，速度会有一些降低）。在这里，我们给出一个简单的例子，说明如何用单个双向层构建编码器：</p>
+<p><strong>其他技巧：Beam Search</strong></p>
+<p>虽然贪婪解码得出的翻译质量不错，但是 beam search 解码器可以进一步提高性能。Beam search 在翻译时总是将一小部分顶级候选词留在身边，从而在搜索空间更好地探索所有可能的翻译。 Beam 的大小称为“宽度”width；大小为 10 的宽度基本就够了。以下是 Beam search 的示例：</p>
+<p><strong>其他技巧：超参数</strong></p>
+<p>有些超参数能带来性能的进一步提升。以下是根据我们的经验列出的一些超参数：</p>
+<ul>
+<li>优化函数：虽然在“不太熟悉”的架构里，Adam 能带来不错的结果，但如果你能训练 SGD，SGD 通常会更好；- 注意力：Bahadnau 风格的注意力需要解码器双向性才好用；Luong 风格的注意力在不同设置下都挺好。在这份教程中，我们推荐两个变体： scaled_luong &amp; normed bahdanau<br><strong>其他技巧：多 GPU 训练</strong></li>
+</ul>
+<p>训练一个 NMT 模型需要好几天。将不同的 RNN 层放在不用的 GPU 上能提升训练速度。以下为一个例子：</p>
+<p>你可能会发现，随着 GPU 数量的增长，基于注意力的 NMT 模型训练速度提升非常有限。这是因为标准注意力架构在每个时间步长使用顶层（最后一层）的输出做为 query 注意力。这意味着每一次解码都需要等前面的步骤完全结束了才行。因此，无法在多台 GPU 上并行解码 RNN。</p>
+<p>谷歌提出的 GNMT 注意力架构使用底层（第一层）输出作为 query 注意力。因此，前一步刚刚结束就能实行注意力计算。我们实现了 GNMTAttentionMultiCell 中的架构，这是 tf.contrib.rnn.MultiRNNCell 的一个子类。 以下是使用 GNMTAttentionMultiCell 创建解码器单元的示例：</p>
+<p>最后的基准部分请参考原文。</p>
+<p>原文：https&#58;//github.com/tensorflow/nmt</p>
+<p>点击阅读原文查看新智元招聘信息</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6442150699135992065/" target="_blank" rel="noopener">「TensorFlow 谷歌神经机器翻译」从零开始打造属于你的翻译系统</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Google翻译/" rel="tag"># Google翻译</a>
+          
+            <a href="/tags/英语/" rel="tag"># 英语</a>
+          
+            <a href="/tags/语音识别/" rel="tag"># 语音识别</a>
+          
+            <a href="/tags/TED/" rel="tag"># TED</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/19726d11/" rel="next" title="深度 | 理解深度学习中的卷积">
+                <i class="fa fa-chevron-left"></i> 深度 | 理解深度学习中的卷积
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/6f1463fd/" rel="prev" title="月入五千的国贸人，教你如何活的像年薪百万">
+                月入五千的国贸人，教你如何活的像年薪百万 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

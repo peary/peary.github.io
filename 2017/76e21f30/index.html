@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTML,JavaScript,Git,科技,文章," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="目录一个简单vue应用的创建 选择什么方式创建vue应用- 创建- 项目结构分析- 运行创建  运行 vue.js知识点的学习 vue.js是怎么构成一个spa应用- 组件- vue实例- 响应式- 模板语法组件  响应式 vue.js细化学习 过滤器——后台得到的数据格式不是你想要的？过滤器帮你！- 指令——还想用DOM操作节点？指令帮你实现！- 混合——个个组件重复写方法很麻烦？混合帮你解决！">
+<meta name="keywords" content="HTML,JavaScript,Git,科技,文章">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue.js应用从创建到运行，从入门到精通">
+<meta property="og:url" content="http://blockshare.top/2017/76e21f30/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="目录一个简单vue应用的创建 选择什么方式创建vue应用- 创建- 项目结构分析- 运行创建  运行 vue.js知识点的学习 vue.js是怎么构成一个spa应用- 组件- vue实例- 响应式- 模板语法组件  响应式 vue.js细化学习 过滤器——后台得到的数据格式不是你想要的？过滤器帮你！- 指令——还想用DOM操作节点？指令帮你实现！- 混合——个个组件重复写方法很麻烦？混合帮你解决！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/1c5c0001a1a50c74788c">
+<meta property="og:updated_time" content="2018-04-24T15:15:17.795Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue.js应用从创建到运行，从入门到精通">
+<meta name="twitter:description" content="目录一个简单vue应用的创建 选择什么方式创建vue应用- 创建- 项目结构分析- 运行创建  运行 vue.js知识点的学习 vue.js是怎么构成一个spa应用- 组件- vue实例- 响应式- 模板语法组件  响应式 vue.js细化学习 过滤器——后台得到的数据格式不是你想要的？过滤器帮你！- 指令——还想用DOM操作节点？指令帮你实现！- 混合——个个组件重复写方法很麻烦？混合帮你解决！">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/1c5c0001a1a50c74788c">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/76e21f30/"/>
+
+
+
+
+
+  <title>vue.js应用从创建到运行，从入门到精通 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/76e21f30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">vue.js应用从创建到运行，从入门到精通</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">通往全栈之路</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T16:05:25+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/76e21f30/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/76e21f30/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/1c5c0001a1a50c74788c" rel="gallery_cjgf0wkm9007nxmqdo1iegdyn"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/1c5c0001a1a50c74788c" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录<br></h1><h1 id="一个简单vue应用的创建"><a href="#一个简单vue应用的创建" class="headerlink" title="一个简单vue应用的创建"></a>一个简单vue应用的创建<br></h1><ul>
+<li>选择什么方式创建vue应用- 创建- 项目结构分析- 运行<br>创建</li>
+</ul>
+<p>运行</p>
+<h1 id="vue-js知识点的学习"><a href="#vue-js知识点的学习" class="headerlink" title="vue.js知识点的学习"></a>vue.js知识点的学习<br></h1><ul>
+<li>vue.js是怎么构成一个spa应用- 组件- vue实例- 响应式- 模板语法<br>组件</li>
+</ul>
+<p>响应式</p>
+<h1 id="vue-js细化学习"><a href="#vue-js细化学习" class="headerlink" title="vue.js细化学习"></a>vue.js细化学习<br></h1><ul>
+<li>过滤器——后台得到的数据格式不是你想要的？过滤器帮你！- 指令——还想用DOM操作节点？指令帮你实现！- 混合——个个组件重复写方法很麻烦？混合帮你解决！- 组件——如何开发出灵活的组件- 过渡——页面没动画？过渡可以做的很完美!<br>指令——还想用DOM操作节点？指令帮你实现！</li>
+</ul>
+<p>组件——如何开发出灵活的组件</p>
+<h1 id="正篇"><a href="#正篇" class="headerlink" title="正篇"></a>正篇</h1><blockquote>
+<p>昨天写了一篇webpack+vue.js+element打造大型项目，看到网友们反应不错，于是小编一大早编起来编写接下来未完成的章节，今天完成的是Vue.js知识点的学习，它涵盖了开发中需要的知识，也涉及了一些大家开发中没主要的知识点和细节，希望的、能够帮助到广大网友们，如果大家有什么疑问和要求，大家可以在下方留言或者加我的微信&#58;Neho_Developer</p>
+</blockquote>
+<h1 id="一个简单vue应用的创建-1"><a href="#一个简单vue应用的创建-1" class="headerlink" title="一个简单vue应用的创建"></a>一个简单vue应用的创建</h1><ul>
+<li>选择什么方式创建vue应用<br>写完了上一篇文章，我一直考虑有什么方式创建一个vue应用而纠结，用CDN引入的方式，从传统开发转过来的人很好理解，但事实上我们用vue.js开发都是比较大型的应用，这种方式学到最后是不需要的，最后还是选择了webpack开发vue应用，在创建之前，我们要确认电脑上安装了运行环境node.js和npm管理包。</li>
+<li>创建一个vue应用<br>在这里我们使用vue.js官方提供的vue脚手架vue-cli创建一个应用，所谓的脚手架，通俗来讲，就是通过人家定义好的一个应用文件模板，通过脚手架，我们可以下载下来供开发者自己使用。我们先安装vue-cli</li>
+</ul>
+<blockquote>
+<p>npm install -g vue-cli</p>
+</blockquote>
+<p>使用vue-cli初始化项目,这个过程中，大家可以选择一直enter就好了，当要选择y/n时，选择n</p>
+<p>进到目录</p>
+<blockquote>
+<p>cd my-project-name</p>
+</blockquote>
+<p>安装依赖</p>
+<blockquote>
+<p>cnpm install</p>
+</blockquote>
+<p>运行vue应用<br></p>
+<p>以上步骤都必须正确执行，我们在浏览器上输入localhost&#58;8080便可以看到运行的结果。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5c0001a1a50c74788c" img_width="1920" img_height="1039" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<h1 id="项目文件分析"><a href="#项目文件分析" class="headerlink" title="项目文件分析"></a>项目文件分析<br></h1><p>安装好了之后我们打开项目的文件</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f00008596ce1056d9" img_width="593" img_height="275" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>创建好的项目文件<br></p>
+<ul>
+<li>node_modules<br>这个文件夹是在npm install后，将npm包放在此文件夹内，我们不需要修改</li>
+<li>src<br>我们开发修改的目录</li>
+<li>babelrc<br>使用bable转化文件，一般我们不需要修改</li>
+<li>gitignore<br>当我们协同开发项目时，我们往往需要通过版本控制工具协同开发，比如git，关于git后续会讲解git的使用技巧教程，这个文件就是配置git版本时，忽略不需要上传文件的目录清单</li>
+<li>index<br>vue应用为spa（单页面应用），这个为打包之后在浏览器运行的html文件，一般不需要修改</li>
+<li>package.json<br>npm包安装的目录清单，一般不需要修改</li>
+<li>README.MD<br>markdown格式的文件，可以在里面写一些这个项目的操作记录和介绍，一般不需要修改</li>
+<li>webpack.config.js<br>webpack模块开发工具的配置文件，我们在这里主要修改加载器的配置信息</li>
+</ul>
+<h1 id="vue-js知识点的学习-1"><a href="#vue-js知识点的学习-1" class="headerlink" title="vue.js知识点的学习"></a>vue.js知识点的学习</h1><h1 id="vue-js是怎么样构建一个spa应用的"><a href="#vue-js是怎么样构建一个spa应用的" class="headerlink" title="vue.js是怎么样构建一个spa应用的"></a>vue.js是怎么样构建一个spa应用的</h1><ul>
+<li>理解<br>学过html的人都知道，一个html文件是如何将超文本信息展示给用户的，是通过一个个元素，更加普遍的是通过DIV元素，像建屋子一样叠一个美丽的网页。类似的，vue也是通过一个个类似DIV一样的东西，我们称其为组件，他也想DIV一样，可以嵌套，叠加，还有DIV不能实现的其他功能，通过vnode渲染在index这个文件上，从而得到了我们常见的div组成的html文件。而我们开发的经理，则是去实现一个个组件的功能。</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/1c5b000319d7b9bac303" img_width="760" img_height="301" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>一个页面可以看作由组件树组成的</p>
+<h1 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件<br></h1><ul>
+<li>webpack中vue组件的文件体现形式及实现页面的现实<br>在webpack中组件以文件.vue格式体现。一个vue文件则为一个组件，我们来看看一个vue文件包含什么。</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c6000007dce2f7f4c22" img_width="894" img_height="829" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>根组件app.vue文件<br></p>
+<p>我们可以看到，一个vue文件包含三部分<template><style><script>,这三个部分正好是网页的上个基本元素HTML CSS JAVASCRIPT,一个spa页面，通过一个或多个以vue文件格式体现的组件便可以构成一个页面，我们看看他是怎么实现通过组件展示一个网页</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c60000080f6f7d60971" img_width="845" img_height="787" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>vue文件的实现方式</p>
+<ul>
+<li>组件的作用域<br>在组件中，变量是独立的，也就是说在<script>中定义的变量，在其他的vue文件中是不可以访问的，当组件间需要交互数据，怎么办呢，下面就全面的介绍了</li>
+<li>父子组件的通信<br>子组件获取负组件的变量：在子组件中this.$parent,返回父组件的实例，便可以访问父组件的变量，也可以通过props向子组件注入变量。</li>
+</ul>
+<p>子组件获取父组件的html：可以通过slot分发父组件的html。</p>
+<p>当组件之间的关系并不是父子关系，那怎么办呢，这时我推荐大家使用vue的插件vuex，接下来的文章会专门介绍vuex</p>
+<h1 id="vue实例"><a href="#vue实例" class="headerlink" title="vue实例"></a>vue实例<br></h1><ul>
+<li>理解<br>如果一个应用只有一个vue组件构成的话，从MVC框架来看的话，template标签定义的就是应用的视图层VIEW，script标签中的定义的就是model层了，这样说其实不是很准确，更加确切的说应该的实例中的data对象</li>
+</ul>
+<p><script> data对象：model层</p>
+<blockquote>
+<p>export default &amp;#123data()&amp;#123return&amp;#123//这里是一个应用的model层text&#58;’你好，Neho’&amp;#125&amp;#125&amp;#125</p>
+</blockquote>
+<p><template> 视图层</p>
+<blockquote>
+<p><template>&amp;#123&amp;#123text&amp;#125&amp;#125</tempalte></p>
+</blockquote>
+<p>页面</p>
+<blockquote>
+<p>你好，Neho</p>
+<ul>
+<li>vue实例<br>一个vue组件对应一个vue实例，在script标签中，我们通过new Vue()方式创建一个vue实例，通常来说，不通过的组件vue实例是不一样的，我们可以通过向这个方法传入一个对象来实例化不同的vue实例。对象中常用的属性有data属性——定义数据，methods属性——定义操作data数据的函数，created属性——实力在一个vue实例中，不同的生命周期会调用不同的函数钩子，我们来看看一个简单的代码</li>
+</ul>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f0000ad032e71722d" img_width="671" img_height="665" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>根组件<br></p>
+<p>效果<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5b00032998cd082fa7" img_width="1916" img_height="565" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面效果</p>
+<h1 id="响应式"><a href="#响应式" class="headerlink" title="响应式"></a>响应式<br></h1><p>vue的一个很出色的特点是视图层view（template标签）和数据层model（data中定义的数据）是时时同步的，我们来看看简单的例子<br></p>
+<ul>
+<li>写好代码我们看看效果<br>代码</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5c0001cf551f9ab395" img_width="642" img_height="820" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<p>页面<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f0000b34e560d2a66" img_width="1891" img_height="313" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<p>这是一个很简单的页面，但我们试图去修改input标签的内容时，发现页面显示的内容也跟着改了</p>
+<p>页面</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f0000b4a721fc0b3b" img_width="1906" img_height="375" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>修改后页面</p>
+<p>敢于v-model的使用，下面会介绍到，这里我们只需要知道它可以同步input的内容到它绑定的data属性edit上。<br></p>
+<h1 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h1><ul>
+<li>理解，写过后台的人对模板这个概念估计不会陌生，通常来说，在一个html文件中，我们不能直接将js代码写在html标签中，这样是会报错了，为了解决这个问题，模板诞生了，使用模板，通常来说，不同模板有不同后缀名，比如ejs模板，他的后缀名为ejs。在vue文件中，模板的文件后缀名就是vue，使用vue的模板，我们可以直接在temlate标签中使用js代码如上面的&amp;#123&amp;#123&amp;#125&amp;#125，他可以是我们在里面写js表达式。我们来看看vue模板有什么语法- &amp;#123&amp;#123&amp;#125&amp;#125——将里面的变量（script标签中data定义的变量）输出在页面上<br>&amp;#123&amp;#123&amp;#125&amp;#125——将里面的变量（script标签中data定义的变量）输出在页面上</li>
+</ul>
+<p>通过&amp;#123&amp;#123&amp;#125&amp;#125，我们可以在里面写入data定义好的变量，从而显示在页面上。</p>
+<ul>
+<li>v-html——将传入的变量（script标签中data定义的变量）输出在页面上（不包括节点）<br>使用&amp;#123&amp;#123&amp;#125&amp;#125很方便，但有时我们需要拼接节点的时候，他会把div这类节点字符串也输出出来，这是我们不愿看到的，我们可以使用v-html来解决这个问题，我们来看下代码</li>
+</ul>
+<p>代码</p>
+<p><img src="http&#58;//p1.pstatp.com/large/1b8300033aff891b493e" img_width="551" img_height="863" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<p>页面效果<br></p>
+<p><img src="http&#58;//p1.pstatp.com/large/1b8600009bdbb0eb1d83" img_width="1915" img_height="653" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<ul>
+<li>v-if——控制节点元素的显示，传入的变量为false时，该指令绑定的元素不显示<br>代码</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f0000d0616795333a" img_width="834" img_height="837" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码<br></p>
+<ul>
+<li>页面——我们可以看到，页面并没有出现我们在div中写的文本<br><br><img src="http&#58;//p3.pstatp.com/large/1c5f0000d12455d16af3" img_width="1920" img_height="585" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+<li>v-for——循环输出文本，这对于我们创建一些重复的节点非常有用<br>代码，我们需要输出5行li列表，以前我们需要重复写5个li，现在只要写一个就好了</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/1c600000b7bfa237d6f4" img_width="841" img_height="800" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<p>页面效果<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1b860000b04de7c62604" img_width="1917" img_height="475" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<ul>
+<li>v-bind——每种标签都有自己的属性，当我们需要将实例定义好的变量传入属性中，怎么办呢，v-bind可以帮我们解决这个问题，这个例子中，input有一个value属性，我们需要要将data中定义好的变量输出到页面上<br>代码</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5b000357e10c78502d" img_width="590" img_height="749" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<p>页面<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5b0003581034a0e09b" img_width="1911" img_height="185" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<ul>
+<li>v-on——我们知道，web是事件驱动的应用，当我们需要在模板中添加事件监听怎么办呢，这里我们使用v-on，在这里我们在节点中添加点击事件，事件会调用实例中定义的函数clickMe,然后弹出警告框<br>代码</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5c0001fccd40b09600" img_width="531" img_height="554" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码<br></p>
+<p>页面点击前<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1b8300035ce6b0bc5e62" img_width="1920" img_height="200" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<p>页面点击按钮后</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5f0000e1bbf68ba1e2" img_width="1920" img_height="276" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>页面</p>
+<ul>
+<li>v-model——在处理表单的时候，开发者最感到头疼的是如何获取表单的信息，在vue.js中，我们可以通过v-model时时将绑定的input元素内的文本同步到传入v-model的值，而且这个过程是双向的，用户修改input内的文本，data中的变量会跟随改变，通过方法改变data中的变量，页面input的文本也会随着改变。- 结语<br>结语</li>
+</ul>
+<blockquote>
+<p>vue.js知识点就将这么多了，这已经可以满足打开日常开发的需求，如果有什么不足或者不明白之处，大家可以下方留言或者加我的微信^_^,接下来讲讲大家不怎么注意，但在开发中合理运用会大大简化我们的开发</p>
+</blockquote>
+<h1 id="vue-js细化学习-1"><a href="#vue-js细化学习-1" class="headerlink" title="vue.js细化学习"></a>vue.js细化学习</h1><h1 id="过滤器——后台得到的数据格式不是你想要的？过滤器帮你！"><a href="#过滤器——后台得到的数据格式不是你想要的？过滤器帮你！" class="headerlink" title="过滤器——后台得到的数据格式不是你想要的？过滤器帮你！"></a>过滤器——后台得到的数据格式不是你想要的？过滤器帮你！</h1><ul>
+<li>为什么使用过滤器<br>在开发当中，常常遇到一些后台返回的数据并不是我们想展示在页面上的，比如后台对于时间的处理，往往返回给前段的是时间戳，然而我们不可以能将时间戳展示在页面上，这样的话过滤器就排上用场了</li>
+<li>怎么使用过滤器<br>vue2.0后，过滤器只在模板语法&amp;#123&amp;#123&amp;#125&amp;#125中使用，对于时间戳处理我们可以这样</li>
+</ul>
+<blockquote>
+<p>&amp;#123&amp;#123时间戳|时间戳过滤器&amp;#125&amp;#125</p>
+</blockquote>
+<h1 id="过滤器实战——金额过滤器"><a href="#过滤器实战——金额过滤器" class="headerlink" title="过滤器实战——金额过滤器"></a>过滤器实战——金额过滤器</h1><ul>
+<li>解决问题<br>后台返回的金额往往只是一个number数据类型，但我们在页面显示时候，往往需要在金额前面加上金额符号￥，之时候我们可以使用过滤器解决这个问题</li>
+<li>首先创建一个全局的过滤器priceFormat<br>代码</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/1b83000374a511d8825b" img_width="537" img_height="231" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码<br></p>
+<ul>
+<li>将过滤器引入入口文件main.js- 在组件中使用<br><img src="http&#58;//p3.pstatp.com/large/1b83000376175a9f7db2" img_width="688" img_height="706" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+<li>页面<br><img src="http&#58;//p3.pstatp.com/large/1b860000d7a5e7eb28f0" img_width="1920" img_height="250" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+</ul>
+<h1 id="指令——还想用DOM操作节点？指令帮你实现！"><a href="#指令——还想用DOM操作节点？指令帮你实现！" class="headerlink" title="指令——还想用DOM操作节点？指令帮你实现！"></a>指令——还想用DOM操作节点？指令帮你实现！</h1><ul>
+<li>指令的定义<blockquote>
+<p>指令（Directives）是带有 v- 前缀的特殊属性。指令属性的值预期是单一 JavaScript 表达式（除了 v-for，之后再讨论）。指令的职责就是当其表达式的值改变时相应地将某些行为应用到 DOM 上</p>
+</blockquote>
+</li>
+<li>有哪些指令<br>上面我们学到了模板语法，其中v-if,v-model等等都是官方封装好的指令，但有时候我们需要自己定义属于自己的指令</li>
+<li>指令解决的问题<br>vue.js开发应用的时候，大多时候，vue是不支持我们用DOM去看开发的，但有时候我们必须使用DOM的方式去解决一些问题，比如在用户点击购买按钮的时候会弹出一个信息输入组件，我们往往需要弹出的信息输入框会自动聚焦，方便用户的输入。这时候我们就需要写一个自动对焦的指令</li>
+<li>首先我们先创建一个指令<br>代码</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/1c600001035a7b6ecdb9" img_width="846" img_height="549" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<ul>
+<li>将指令引入入口文件main.js- 在需要绑定的元素上绑定自定义指令v-focus<br>代码<br></li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5c00023c4e7c89fa08" img_width="511" img_height="843" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<p>页面——我们在页面添加一个购买按钮，当用户点击按钮，会弹出一个蒙版输入框，这时候输入框会自动获得焦点。<br></p>
+<p>点击前</p>
+<p><img src="http&#58;//p9.pstatp.com/large/1c5c00023dde9e6a77f2" img_width="1920" img_height="284" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>点击前的页面</p>
+<p>点击购买后——可以看到，这时候输入框已经自动获得焦点了<br></p>
+<p><img src="http&#58;//p3.pstatp.com/large/1c5c00023e7b8e451cce" img_width="1920" img_height="517" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>点击后的页面</p>
+<h1 id="混合——个个组件重复写方法很麻烦？混合帮你解决！"><a href="#混合——个个组件重复写方法很麻烦？混合帮你解决！" class="headerlink" title="混合——个个组件重复写方法很麻烦？混合帮你解决！"></a>混合——个个组件重复写方法很麻烦？混合帮你解决！</h1><ul>
+<li>解决的问题<br>在开发的过程中，有些方法似乎并不是单独一个组件使用，很多的组件都会使用到这种方法，比较典型的就是在大型的单页面开发中，往往会涉及到路由的转跳，在使用编程路由的时候，由于组件的作用域是独立的，methods中定义的方法并不能在所有组件中使用，为此我们必须在每个组件中重复的编写this.$router.push()这一简单方法，这时候我们可以通过定义一个全局的混合methods，便可以在所有的组件中使用路由转跳的方法</li>
+<li>在这里，由于没有涉及路由的概念，我们通过一个简单的全局methods方法，来演示一下怎么使用混合- 定义一个全局混合<br>定义一个全局混合</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/1c5f0001340d5d8e6d5c" img_width="622" img_height="511" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></p>
+<p>代码</p>
+<ul>
+<li>在webpack入口文件main.js引入mixin- 在组件中使用全局混合方法<br><img src="http&#58;//p3.pstatp.com/large/1c5b0003b0b1fd55ed5c" img_width="564" img_height="636" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+</ul>
+<p>代码</p>
+<ul>
+<li>点击前<br><img src="http&#58;//p9.pstatp.com/large/1c5f000136a29358fd03" img_width="1920" img_height="300" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+</ul>
+<p>页面</p>
+<ul>
+<li>点击后<br><img src="http&#58;//p3.pstatp.com/large/1c6000011a7cf835b397" img_width="1916" img_height="342" alt="vue.js应用从创建到运行，从入门到精通" inline="0"></li>
+</ul>
+<p>页面</p>
+<ul>
+<li>结语<br>Vue的知识点介绍就在这里了，在开发过程中常用的的知识都有所讲解，如果大家有什么不懂得，意见或者想重点介绍的，可以留言下方或者加我们<strong>QQ564648147,</strong>我们一起探讨进步吧^<em>^,新手期，觉得小编写的不错的点个赞或者转发分享给周围的朋友吧(ง •̀</em>•́)ง</li>
+</ul>
+<h1 id="下期vue-router从入门到精通——开发一个CMS登陆界面-有兴趣的关注我吧，定期更新"><a href="#下期vue-router从入门到精通——开发一个CMS登陆界面-有兴趣的关注我吧，定期更新" class="headerlink" title="下期vue-router从入门到精通——开发一个CMS登陆界面,有兴趣的关注我吧，定期更新"></a>下期vue-router从入门到精通——开发一个CMS登陆界面,有兴趣的关注我吧，定期更新</h1><blockquote>
+<p><strong>转载来源</strong>：<a href="https://www.toutiao.com/i6409855868145238529/">vue.js应用从创建到运行，从入门到精通</a></p>
+</blockquote>
+</style></template></p>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML/" rel="tag"># HTML</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/科技/" rel="tag"># 科技</a>
+          
+            <a href="/tags/文章/" rel="tag"># 文章</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/1b323c24/" rel="next" title="基于snowflake算法实现发号器 - CSDN博客">
+                <i class="fa fa-chevron-left"></i> 基于snowflake算法实现发号器 - CSDN博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/079a1dbc/" rel="prev" title="中科院计算所开源深度文本匹配开源工具 MatchZoo">
+                中科院计算所开源深度文本匹配开源工具 MatchZoo <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单vue应用的创建"><span class="nav-number">2.</span> <span class="nav-text">一个简单vue应用的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-js知识点的学习"><span class="nav-number">3.</span> <span class="nav-text">vue.js知识点的学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-js细化学习"><span class="nav-number">4.</span> <span class="nav-text">vue.js细化学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#正篇"><span class="nav-number">5.</span> <span class="nav-text">正篇</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一个简单vue应用的创建-1"><span class="nav-number">6.</span> <span class="nav-text">一个简单vue应用的创建</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#项目文件分析"><span class="nav-number">7.</span> <span class="nav-text">项目文件分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-js知识点的学习-1"><span class="nav-number">8.</span> <span class="nav-text">vue.js知识点的学习</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vue-js是怎么样构建一个spa应用的"><span class="nav-number">9.</span> <span class="nav-text">vue.js是怎么样构建一个spa应用的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#组件"><span class="nav-number">10.</span> <span class="nav-text">组件</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

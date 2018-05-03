@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,Google,人工智能,云计算,Azure," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="导读：本文为大家介绍了在机器学习、预测、文本分析和分类、人脸识别、语言翻译等方面，非常有用的50多个API的更新列表。 随着基于人工智能和机器学习的应用程序的发展，我们看到大量应用程序接口（API）的混搭应用。 API是一套用于构建软件应用程序的例程、协议和工具。在这篇文章中，我们删除了列表中从2015年就停止使用的API，还添加了新的API，比如最近来自IBM、谷歌和微软等巨型提供商。 所有的A">
+<meta name="keywords" content="机器学习,Google,人工智能,云计算,Azure">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你的选择是？盘点50多种有用的机器学习和预测API">
+<meta property="og:url" content="http://blockshare.top/2017/fdf582dd/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="导读：本文为大家介绍了在机器学习、预测、文本分析和分类、人脸识别、语言翻译等方面，非常有用的50多个API的更新列表。 随着基于人工智能和机器学习的应用程序的发展，我们看到大量应用程序接口（API）的混搭应用。 API是一套用于构建软件应用程序的例程、协议和工具。在这篇文章中，我们删除了列表中从2015年就停止使用的API，还添加了新的API，比如最近来自IBM、谷歌和微软等巨型提供商。 所有的A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/470f0001b3e02ee37082">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="你的选择是？盘点50多种有用的机器学习和预测API">
+<meta name="twitter:description" content="导读：本文为大家介绍了在机器学习、预测、文本分析和分类、人脸识别、语言翻译等方面，非常有用的50多个API的更新列表。 随着基于人工智能和机器学习的应用程序的发展，我们看到大量应用程序接口（API）的混搭应用。 API是一套用于构建软件应用程序的例程、协议和工具。在这篇文章中，我们删除了列表中从2015年就停止使用的API，还添加了新的API，比如最近来自IBM、谷歌和微软等巨型提供商。 所有的A">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/470f0001b3e02ee37082">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/fdf582dd/"/>
+
+
+
+
+
+  <title>你的选择是？盘点50多种有用的机器学习和预测API | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/fdf582dd/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">你的选择是？盘点50多种有用的机器学习和预测API</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">AI中国</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T07:51:07+08:00">
+                2017-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/fdf582dd/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/fdf582dd/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/470f0001b3e02ee37082" rel="gallery_cjgf0wkvn00gwxmqdgbbo7kw4"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/470f0001b3e02ee37082" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>导读：本文为大家介绍了在机器学习、预测、文本分析和分类、人脸识别、语言翻译等方面，非常有用的50多个API的更新列表。</p>
+<p>随着基于人工智能和机器学习的应用程序的发展，我们看到大量应用程序接口（API）的混搭应用。 API是一套用于构建软件应用程序的例程、协议和工具。在这篇文章中，我们删除了列表中从2015年就停止使用的API，还添加了新的API，比如最近来自IBM、谷歌和微软等巨型提供商。</p>
+<p>所有的API被分类到新兴的应用程序组中：</p>
+<ul>
+<li>人脸和图像识别- 文本分析、NLP、情感分析- 语言翻译- 预测和其他机器学习<br>文本分析、NLP、情感分析</li>
+</ul>
+<p>预测和其他机器学习</p>
+<p>在每组申请中，我们按字母顺序列出。 API概述基于截至2017年2月3日在其网址上显示的信息。看看这些API投入使用，如果我们错过了一些流行的API，请在下面的评论中提出。</p>
+<h1 id="人脸和图像识别"><a href="#人脸和图像识别" class="headerlink" title="人脸和图像识别"></a>人脸和图像识别</h1><p><img src="http&#58;//p3.pstatp.com/large/470f0001b3e02ee37082" img_width="1200" img_height="563" alt="你的选择是？盘点50多种有用的机器学习和预测API" inline="0"></p>
+<p>1.Animetrics人脸识别：这个API可以用来检测图片中的人脸，并将其与一组已知的人脸进行匹配。 API还可以添加或删除可搜索的图库中的主题，并添加或删除主题中的一个面部。</p>
+<p>2.Betaface：是一个面部识别和检测Web服务。其特点包括多个人脸检测、人脸裁剪、123个面部点检测（22个基本，101个高级），面临非常大的数据库中的验证、识别、相似性搜索。</p>
+<p>3.视觉识别：专注于高端计算机视觉解决方案，主要针对物体检测和物体识别软件。一个识别服务，提供眼睛、脸部、车辆、版权和车牌检测的识别服务。 API的主要价值在于可以即时了解对象、用户和行为。</p>
+<p>4.Face ++：面部识别和检测服务，提供应用程序中的检测、识别和分析功能。用户可以打电话来训练程序、检测面孔、识别面孔、分组面孔、操作人员、创建人脸集合、创建组和获取信息。</p>
+<p>5.FaceMark：是一种能够检测正面照片上68个点的API，以及35个用于配置文件脸部照片的API。</p>
+<p>6.FaceRect：是一个功能强大且完全免费的面部检测API。该API在单张照片上查找人脸（正面和侧面）或多张人脸，为找到的每张人脸生成JSON输出。另外，FaceRect可以为每个检测到的脸部（眼睛，鼻子和嘴巴）找到脸部特征。</p>
+<p>7.谷歌云视觉API：由像TensorFlow这样的平台提供支持，已经启用了可以学习和预测图像内容的模型。它可以帮助你找到自己喜欢的图像，并快速大规模地获取丰富的注释。它将图像分成数千个类别（例如，“船”，“狮子”，“艾菲尔铁塔”），以相关的情绪检测脸部，并识别出多种语言印刷的文字。</p>
+<p>8.新的IBM Watson视觉识别：了解图像的内容 - 视觉概念标记图像，查找人脸，估计年龄和性别，并在集合中查找类似的图像。您也可以通过创建自己的自定义概念来训练服务。</p>
+<p>9.Kairos：是一个平台，可让你快速将情绪分析和人脸识别添加到你的应用程序和服务中。</p>
+<p>10.微软认知服务 - 计算机视觉：基于云的API可以基于输入和用户选择以不同方式分析视觉内容。例如，基于内容的标签图像、图像分类、检测人脸并返回其坐标、识别特定域的内容、生成内容的描述、识别图像中的文字、标志成人内容。</p>
+<p>11.Rekognition：为社交照片应用程序提供面部和场景图像识别优化。 API利用眼睛、嘴巴、脸部和鼻子以及情绪识别和性依赖特征，可以预测性别，年龄和情绪。</p>
+<p>12.Skybiometry人脸检测和识别：提供人脸检测和识别服务。新版本的API包括将黑眼镜与清晰镜片区分开来。</p>
+<h1 id="文本分析、NLP、情感分析"><a href="#文本分析、NLP、情感分析" class="headerlink" title="文本分析、NLP、情感分析"></a><strong>文本分析、NLP、情感分析</strong></h1><p><img src="http&#58;//p3.pstatp.com/large/470e0002356dc9e25dde" img_width="604" img_height="385" alt="你的选择是？盘点50多种有用的机器学习和预测API" inline="0"></p>
+<p>1．Bitext提供市场上最准确的多语言话题。目前提供了四种语义服务：实体和概念提取、情感分析和文本分类。该API可以使用8种语言。</p>
+<p>2.Diffbot分析：为开发人员提供可以识别、分析和提取任何网页上的主要内容和部分的工具。</p>
+<p>3.免费自然语言处理服务：是一种免费服务，包括情绪分析、内容提取和语言检测。这是一个流行的API市场。</p>
+<p>4.新的谷歌云自然语言API：分析文本的结构和含义，包括情感分析、实体识别和文本注释。</p>
+<p>5.IBM Watson Alchemy语言：教导计算机学习如何阅读和进行文本分析（例如，用于将非结构化数据转化为结构化，特别是在社交媒体监控、商业智能、内容推荐、金融交易和有针对性的广告中）。</p>
+<p>6.云文本分类：API执行预分类任务，如提取文本，标记化，停止删除和引理。</p>
+<p>7.新的微软 Azure文本分析API是一套使用Azure机器学习构建的文本分析Web服务。该API可用于分析非结构化文本，如情感分析，关键短语提取、语言检测和主题检测。不需要训练数据。</p>
+<p>8.微软认知服务 - 文本分析：从文本中检测情感、关键短语、主题和语言。与此API相同的其他API（语言的认知服务）包括必应拼写检查、语言理解、语言分析、网络语言模型。</p>
+<p>9.nlpTools：是一个简单的JSON over HTTP RESTful Web服务，用于自然语言处理。它对在线新闻媒体的情绪分析和文本分类进行了解码。</p>
+<p>10.新的Geneea：可以对所提供的原始文本，从给定的URL中提取的文本或直接提供的文档执行分析（自然语言处理）。</p>
+<p>11.来自谷歌 Research的新成员使用机器学习模型来评估评论对于对话可能产生的影响，并标出令人反感的评论。</p>
+<p>12.语义生物医学标记：具有内置的能力，使用文本分析识别133种生物医学实体类型，并将其语义链接到知识库系统中。</p>
+<p>13．汤森路透Open Calais：使用自然语言处理、机器学习和其他方法，分类与链接文档与实体（人员，地点，组织等）、实体（人“x”为公司“y”工作）和事件（“z”人在x日被任命为公司董事长）。</p>
+<p>14.Yactraq Speech2Topics是一项云端服务，通过语音识别和自然语言处理，将音频视频内容转换为主题元数据。</p>
+<h1 id="语言翻译"><a href="#语言翻译" class="headerlink" title="语言翻译"></a><strong>语言翻译</strong></h1><p><img src="http&#58;//p3.pstatp.com/large/470b0003e8e7b01f093c" img_width="500" img_height="299" alt="你的选择是？盘点50多种有用的机器学习和预测API" inline="0"></p>
+<p>1.谷歌云翻译：可以动态翻译成千上万的语言对之间的文本。 API让网站和程序以编程方式与翻译服务集成。</p>
+<p>2.新的IBM Watson语言翻译器：将文本从一种语言翻译成另一种语言。该服务提供了多个领域特定的模型，你可以根据你独特的术语和语言进行自定义。例如，客户可以用他们自己的语言进行沟通。</p>
+<p>3.LangId：一种快速检索任何语言信息的方法，不需要指定语言（即可以识别需要分析的文本以哪种语言编写）。</p>
+<p>4.新的微软认知服务 - 翻译：自动检测在翻译之前发送的文本的语言。它为所支持的9种语言中的任何一种语言进行语音翻译，并对60种支持的语言中的任何一种进行文本翻译。</p>
+<ol start="5">
+<li><p>MotaWord：是一个快速的人工翻译平台。它提供超过70种语言的翻译。 API还可以让开发人员获得每个翻译的引用，提交翻译项目以及文档和样式的指南，跟踪翻译项目的进度并实时获取活动提要。</p>
+</li>
+<li><p>WritePath翻译：API允许开发人员访问和集成WritePath与其他应用程序的功能。操作可以通过这个API来完成：检索单词数量，发布翻译文档以及检索已翻译的文档和文本。</p>
+</li>
+</ol>
+<h1 id="预测和其他机器学习"><a href="#预测和其他机器学习" class="headerlink" title="预测和其他机器学习"></a><strong>预测和其他机器学习</strong></h1><p><img src="http&#58;//p3.pstatp.com/large/47060004214f124faf53" img_width="900" img_height="589" alt="你的选择是？盘点50多种有用的机器学习和预测API" inline="0"></p>
+<p>1.亚马逊机器学习：查找数据模式。此API的示例用途是用于欺诈检测、预测需求、定向营销和点击预测。</p>
+<p>2.BigML：为云托管的机器学习和数据分析提供服务。用户可以建立一个数据源，并创建一个模型，通过标准的HTTP来预测使用基本的监督和无监督的机器学习任务进行预测。</p>
+<p>3.Ersatz：一个使用GPU支持的深度神经网络即服务的基于网络的预测程序。在Ersatz中，训练了一组不同的神经网络模型（集成方法），有时多达20种。</p>
+<p>4.谷歌云预测：提供了一个RESTful API来构建机器学习模型。这些工具可以帮助分析数据，为你的应用程序添加各种功能，如客户情绪分析、垃圾邮件检测、推荐系统等。</p>
+<p>5.全新的Google云语音API：使用快速而准确的语音识别功能，将音频从麦克风或文件转换为超过80种语言和变体的文本</p>
+<p>6.Guesswork.co：为电子商务网站提供产品推荐引擎。猜测使用在谷歌预测 API之上运行的语义规则引擎准确地预测客户意图。</p>
+<ol start="7">
+<li>Hu&#58;toma：帮助世界各地的开发人员构建并通过提供免费访问专有平台提供工具和渠道来创建和分享会话AI的深度学习。</li>
+</ol>
+<p>8.新的IBM Watson对话：构建了解自然语言的聊天机器人，并将其部署在任何设备上的消息传递平台和网站上。与此API相同的其他API（语言的认知服务）包括对话框、自然语言分类器、个性的见解和音调分析仪。</p>
+<p>9.新的IBM Watson演讲：将语音转换为文本和文本转换为语音（例如，在联络中心转录通话或创建语音控制应用程序）。</p>
+<p>10.新的IBM Watson 数据透视：这个集合包括三个API：AlchemyData新闻、发现和权衡分析。 AlchemyData提供充满自然语言处理的新闻和博客内容，以便进行高度针对性的搜索和趋势分析。权衡分析有助于人们在平衡多个目标时作出决定。</p>
+<p>11.IBM Watson检索和排名：开发人员可以将其数据加载到服务中，使用已知的相关结果来训练机器学习模型（Rank）。服务输出包括相关文档和元数据的列表。例如，联络中心代理也可以快速找到答案，以改善平均呼叫处理时间。</p>
+<p>12.Imagga：提供API自动分配标签到你的图像使你的图像可发现。它基于图像识别平台即服务。</p>
+<p>13.indico：提供文本分析（例如，情绪分析、推特参与、情绪）和图像分析（例如，面部情绪、面部定位）。指示API可以自由使用，不需要训练数据。</p>
+<p>14．Microsoft Azure认知服务API：正在取代Azure机器学习推荐服务，该服务基于预测分析提供解决方案。它为客户提供个性化的产品推荐，并改善销售。新版本具有新的功能，如批处理支持、更好的API浏览器、更清洁的API表面、更一致的注册/计费体验等。</p>
+<p>15.新的微软Azure异常检测API：使用数值检测时间序列数据中的异常。</p>
+<p>16.新的微软认知服务 - QnA Maker：将信息提炼成对话，易于浏览的答案。同一组中的其他API（知识认知服务）包括学术知识、实体链接、知识探索、建议。</p>
+<p>17.新的微软认知服务 - 说话人识别：让你的应用程序能够知道谁在说话。与此API相同的其他API（语音认知服务）包括Bing Speech（将语音转换为文本并再次转换并理解其意图）和Custom Recognition（自定义识别）。</p>
+<p>18.新的MLJAR提供原型、开发和部署模式识别算法的服务。</p>
+<p>19.NuPIC：是一个用Python / C ++编写的开源项目，实现Numenta的皮质学习算法，由NuPIC社区维护。 API允许开发人员使用原始算法，将多个区域（包括层次结构）串联起来，并利用其他平台功能。</p>
+<p>20.PredicSis：为大数据提供强大的洞察力，并通过预测分析提高营销绩效。</p>
+<p>21.PredictionIO：是一个基于Apache 2.0许可证发布的Apache Spark，HBase和Spray上构建的开源的机器学习服务器。示例API方法包括创建和管理用户和用户记录、检索项目和内容以及基于用户创建和管理建议。</p>
+<p>22.RxNLP - 集群句子和简短文本：文本挖掘和自然语言处理服务。其中一个API，群集句子API可以将句子（例如来自多个新闻文章的句子）或短文本（例如来自Twitter或Facebook状态更新的文章）分组为逻辑组。</p>
+<p>23.新的Recombee：通过RESTful API提供使用数据挖掘、查询语言和机器学习算法（例如协同过滤和基于内容的推荐）的服务。</p>
+<p>24.Sightcorp F.A.C.E .&#58;一个web服务，允许第三方应用程序更好地了解用户的行为，并检索相关的面部分析，如年龄、性别、面部表情、头部姿势或种族。</p>
+<p>其他API集合：Mashape Blog＆Programmable Web</p>
+<p><strong>错过了你最喜欢的API吗？可以在评论中留下你喜欢的一种分享给更多的人！</strong></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6492563890105221645/" target="_blank" rel="noopener">你的选择是？盘点50多种有用的机器学习和预测API</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Google/" rel="tag"># Google</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/云计算/" rel="tag"># 云计算</a>
+          
+            <a href="/tags/Azure/" rel="tag"># Azure</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/932c2179/" rel="next" title="最全深度学习资源集合（Github：Awesome Deep Learning）">
+                <i class="fa fa-chevron-left"></i> 最全深度学习资源集合（Github：Awesome Deep Learning）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/1b323c24/" rel="prev" title="基于snowflake算法实现发号器 - CSDN博客">
+                基于snowflake算法实现发号器 - CSDN博客 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#人脸和图像识别"><span class="nav-number">1.</span> <span class="nav-text">人脸和图像识别</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文本分析、NLP、情感分析"><span class="nav-number">2.</span> <span class="nav-text">文本分析、NLP、情感分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语言翻译"><span class="nav-number">3.</span> <span class="nav-text">语言翻译</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#预测和其他机器学习"><span class="nav-number">4.</span> <span class="nav-text">预测和其他机器学习</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

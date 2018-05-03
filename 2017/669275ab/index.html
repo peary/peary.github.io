@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,随机森林,F1赛车,飞镖,欢聚时代," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="对于那些认为随机森林是黑匣子算法的人来说，这篇帖子会提供一个不同的观点。接下来，我将从4个方面去理解随机森林模型。 1.我们的特征有多重要？在sklearn随机森林中使用model.feature_importance来研究其重要特征是很常见的。重要特征是指与因变量密切相关的特征，并且对因变量的变化影响较大。我们通常将尽可能多的特征提供给随机森林模型，并让算法反馈对预测最有用的特征列表。但仔细选">
+<meta name="keywords" content="机器学习,随机森林,F1赛车,飞镖,欢聚时代">
+<meta property="og:type" content="article">
+<meta property="og:title" content="随机森林的直观理解">
+<meta property="og:url" content="http://blockshare.top/2017/669275ab/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="对于那些认为随机森林是黑匣子算法的人来说，这篇帖子会提供一个不同的观点。接下来，我将从4个方面去理解随机森林模型。 1.我们的特征有多重要？在sklearn随机森林中使用model.feature_importance来研究其重要特征是很常见的。重要特征是指与因变量密切相关的特征，并且对因变量的变化影响较大。我们通常将尽可能多的特征提供给随机森林模型，并让算法反馈对预测最有用的特征列表。但仔细选">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/4ae50000a9b225b0515d">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="随机森林的直观理解">
+<meta name="twitter:description" content="对于那些认为随机森林是黑匣子算法的人来说，这篇帖子会提供一个不同的观点。接下来，我将从4个方面去理解随机森林模型。 1.我们的特征有多重要？在sklearn随机森林中使用model.feature_importance来研究其重要特征是很常见的。重要特征是指与因变量密切相关的特征，并且对因变量的变化影响较大。我们通常将尽可能多的特征提供给随机森林模型，并让算法反馈对预测最有用的特征列表。但仔细选">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/4ae50000a9b225b0515d">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/669275ab/"/>
+
+
+
+
+
+  <title>随机森林的直观理解 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/669275ab/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">随机森林的直观理解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">BigQuant</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-06T10:29:46+08:00">
+                2017-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/669275ab/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/669275ab/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/4ae50000a9b225b0515d" rel="gallery_cjgf0wkl8006wxmqdash63zr9"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/4ae50000a9b225b0515d" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p><img src="http&#58;//p3.pstatp.com/large/4ae50000a9b225b0515d" img_width="960" img_height="522" alt="随机森林的直观理解" inline="0"></p>
+<p>对于那些认为随机森林是黑匣子算法的人来说，这篇帖子会提供一个不同的观点。接下来，我将从4个方面去理解随机森林模型。</p>
+<h1 id="1-我们的特征有多重要？"><a href="#1-我们的特征有多重要？" class="headerlink" title="1.我们的特征有多重要？"></a>1.我们的特征有多重要？</h1><p>在sklearn随机森林中使用<strong>model.feature_importance</strong>来研究其重要特征是很常见的。重要特征是指与因变量密切相关的特征，并且对因变量的变化影响较大。我们通常将尽可能多的特征提供给随机森林模型，并让算法反馈对预测最有用的特征列表。但仔细选择正确的特征可以使我们的目标预测更加准确。</p>
+<p>计算<strong>feature_importances</strong>的想法很简单，但却很有效。</p>
+<p><strong>把想法分解成简单的几步：</strong></p>
+<ol>
+<li>训练随机森林模型（假定有正确的超参数）1. 找到模型的预测分数（称之为基准分数）1. 多次（p次，p为特征个数）计算预测分数，每次打乱某个特征的顺序，可见下图1. 将每次预测分数与基准分数进行比较。如果随机调整特征顺序后预测分数小于基准分数，这意味着我们的模型如果没有这个特征会变得很糟糕。1. 删除那些不会降低基准分数的特征，并用减少后的特征子集重新训练模型。<br>找到模型的预测分数（称之为基准分数）</li>
+</ol>
+<p>将每次预测分数与基准分数进行比较。如果随机调整特征顺序后预测分数小于基准分数，这意味着我们的模型如果没有这个特征会变得很糟糕。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae10003051d115c02da" img_width="660" img_height="426" alt="随机森林的直观理解" inline="0"></p>
+<p> 图1：计算特征重要性</p>
+<p>注：将F4列打乱重新进行预测来判断特征F4的重要性 </p>
+<p><strong>计算特征重要性的代码： </strong></p>
+<p>下面的代码将为所有特征提供一个结构为&amp;#123特征，重要性&amp;#125的字典。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae50000a26682e33e1e" img_width="700" img_height="608" alt="随机森林的直观理解" inline="0"></p>
+<p> 图2：随机森林中的重要特征</p>
+<p><strong>输出：</strong></p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae60002c20ec25a75cd" img_width="697" img_height="242" alt="随机森林的直观理解" inline="0"></p>
+<h1 id="2-我们对我们的预测有多大信心？"><a href="#2-我们对我们的预测有多大信心？" class="headerlink" title="2.我们对我们的预测有多大信心？"></a>2.我们对我们的预测有多大信心？</h1><p>一般来说，当企业想要有所预测时，他们的最终目的不是降低成本就是提高利润。在做出重大商业决策之前，企业十分热衷于去评估做出这个决定的风险的大小。但是，当预测结果并没有被展现在置信区间时，我们可能会无意中将企业至于更多的风险中，而不是降低风险。</p>
+<p>当我们使用线性模型（基于分布假设的一般模型）时，比较容易找到我们预测的置信水平。但是当谈到随机森林的置信区间时，找起来并不是那么容易。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/4ae10003093141098b8b" img_width="495" img_height="500" alt="随机森林的直观理解" inline="0"></p>
+<p>图3：偏差与方差的说明图</p>
+<p>我想，任何上过线性回归课程的人都肯定看过这张图3。为了找到一个最佳线性模型，我们要去寻找偏差—方差最为折衷的模型。这张图片很好地说明了预测中偏差和方差的定义。（我们理解为这4张图分别是由四个不同的人掷飞镖所得）。</p>
+<p>如果我们有高偏差和低方差值时（第三个人），我们投掷的飞镖会固定的远离红心。相反，如果我们有高的方差和低的偏差（第二个人），那么他投掷飞镖的结果就很不一样。如果有人去猜测他下一个飞镖击中的位置，那么它既有可能打到靶心也有可能远离靶心。现在我们来假设在现实生活中识别一起信用欺诈等同于上面例子击中靶心。如果信用公司拥有的的预测模型与上面第二人的掷飞镖行为很相似，那么该公司在大多数时候都不会抓住这个诈骗犯，尽管模型预测的是正确的。</p>
+<p>因此，不仅仅是意味着预测的准确程度，我们还应该检查我们的预测的置信水平。</p>
+<p>在随机森林中如何做到这一点？</p>
+<p>随机森林是由许多决策树组成。每棵树分别预测新的数据，随机森林从这些树中提取出平均预测值。预测置信水平的想法只是为了去看来自不同树木的预测有多少因为新的观测而产生变化，然后进一步分析。</p>
+<p>基于方差树预测置信度的源代码：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae70001124d4a7576fd" img_width="701" img_height="634" alt="随机森林的直观理解" inline="0"></p>
+<p>注：偏差 = (up-down)/Yhat</p>
+<p> 以上代码的输出如下所示：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae40002aff1b75fb8b5" img_width="600" img_height="116" alt="随机森林的直观理解" inline="0"></p>
+<p>图4：基于方差树的置信树</p>
+<p>从这个输出数据可以读出，我们可以说我们对于验证集上索引为14的观测的预测最没有信心。</p>
+<h1 id="3-什么是预测路径？"><a href="#3-什么是预测路径？" class="headerlink" title="3.什么是预测路径？"></a>3.什么是预测路径？</h1><p>如果我们想要分析哪些特征对于整体随机森林模型是重要的，则 <strong>特征重要性</strong>（如在第一部分中）是有用的。但是如果我们对某个特定的观察感兴趣，那么 <strong>Tree interpreter</strong>的角色就会发挥作用。</p>
+<p>举个例子，现在有一个RF模型，这种模型会预测—<strong>一位来医院的患者X是否具有很高的概率再入院?</strong>，为了简单起见，我们考虑只有3个特征—患者的血压值，患者的年龄以及患者的性别。现在，如果我们的模型认为患者A有80％的可能会再次入院，我们怎么能知道这个被模型预测为<strong>他（她）将重新入院的患者A有什么特殊之处</strong>?在这种情况下，<strong>Tree interpreter</strong>会指示<strong>预测路径</strong>紧随那个特殊的患者。就像是，因为<strong>患者A</strong>是65岁的男性，这就是为什么我们的模型会预测他将再次入院。另一个被模型预测将再次入院的<strong>患者B</strong> ，可能时因为他有高血压（而不是因为年龄或性别）。</p>
+<p>基本上，<strong>Tree interpreter</strong>给出了偏差的排序列表（在起始节点的平均值）以及单个节点对给定预测的贡献。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/4ae60002c43028cecb05" img_width="600" img_height="476" alt="随机森林的直观理解" inline="0"></p>
+<p>图5&#58;决策树路径（来源：http&#58;//blog.datadive.net/interpreting&amp;</p>
+<p>图5的这棵决策树（深度：3层）基于波士顿房价数据集。根据中间节点的<strong>预测值</strong>以及导致数值发生变化的<strong>特征</strong>，它显示了决策路径的分解。单节点的贡献是该节点的值与前一个节点值的差值。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae1000309b1a96d2672" img_width="600" img_height="236" alt="随机森林的直观理解" inline="0"></p>
+<p>图6&#58;Tree interpreter（最终再次入院的概率=0.6)</p>
+<p>图6 给出了对于<strong>患者A</strong>使用Tree interpreter的输出示例。图片显示年龄为65岁是模型预测再入院概率高于均值的最高贡献者。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae50000a54f90529b5d" img_width="600" img_height="361" alt="随机森林的直观理解" inline="0"></p>
+<p>图7&#58;将特征贡献通过瀑布图可视化展示图</p>
+<p>图6同样也可以使用瀑布图7来表示。我从“ <strong>瀑布图包</strong> ”中选材做的这个快速简单的瀑布图。</p>
+<p>上面的瀑布图可视化代码：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae1000309af2c9238ba" img_width="703" img_height="192" alt="随机森林的直观理解" inline="0"></p>
+<p>相关变量的阐释：</p>
+<p>• <strong>值</strong>（图片B)是指通过节点预测目标值。（就是在该节点中落下的观测目标的平均值）。</p>
+<p>• <strong>贡献</strong>是当前节点的值减去上一节点的值（这是为一个路径提供的贡献特征）。</p>
+<p>• <strong>路径</strong>是为了到达叶节点而通过某些观察所获得的所有特征分割的组合。</p>
+<p>tree interpreter包直接用来计算每个节点的贡献，链接：treeinterpreter</p>
+<h1 id="4-目标变量如何与重要特征相关？-Partial-Dependence-Plots"><a href="#4-目标变量如何与重要特征相关？-Partial-Dependence-Plots" class="headerlink" title="4.目标变量如何与重要特征相关？ Partial Dependence Plots"></a>4.目标变量如何与重要特征相关？ Partial Dependence Plots</h1><p>找到最重要的特征后，下一步我们可能会感兴趣的是研究目标变量与兴趣特征之间的直接关系。从线性回归中得到的与其相类似的是模型系数。对于线性回归，系数以这种方式被计算，即我们可以通过说：“在XjXj中有1个单位变化，保持所有其他XiXi不变，YY会发生什么变化？”这样的方式来解释。</p>
+<p>虽然我们有来自随机森林的特征重要性，但是它们只是给出YY的变化是由于XiXi的改变之间的相关性。我们不能直接地解释他们就像保持所有其他特征不变，YY该变量取决于XjXj中的单位的变化。</p>
+<p>幸运的是，我们有看一被看作线性模型系数图表的局部依赖图，但同样也可被扩展为看起来像黑箱模型。这个想法是将预测中所做的改变孤立于一个特定的功能。它不同于XX对YY的散点图，因为散点图不能隔离XX对YY的直接关系，并且可能受XX和YY所依赖的其他变量的间接关系所影响。</p>
+<p><strong>PDP分析步骤如下：</strong></p>
+<ol>
+<li>训练一个随机森林模型（假设F1 … F4是我们的特征，Y是目标变量，假设F1是最重要的特征）。1. 我们有兴趣探索Y和F1的直接关系。1. 用F1（A）代替F1列，并为所有的观察找到新的预测值。采取预测的平均值。（称之为基准值）1. 对F1（B）… F1（E）重复步骤3，即针对特征F1的所有不同值。1. PDP的X轴具有不同的F1值，而Y轴是虽该基准值F1值的平均预测而变化。<br>我们有兴趣探索Y和F1的直接关系。</li>
+</ol>
+<p>对F1（B）… F1（E）重复步骤3，即针对特征F1的所有不同值。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/4ae1000309b2c0925d0a" img_width="690" img_height="274" alt="随机森林的直观理解" inline="0"></p>
+<p>图8&#58;PDP分析逻辑图8&#58;PDP分析逻辑</p>
+<p>图 9 是partial dependence plot的一个例子。数据来自 kaggle bulldozer competition data，它显示了生产年份（YearMade）和（销售价格）SalesPrice的关系</p>
+<p><img src="http&#58;//p1.pstatp.com/large/4ae30002ff81d6158595" img_width="690" img_height="365" alt="随机森林的直观理解" inline="0"></p>
+<p>图9&#58;partial dependence plot（YearMade与SalePrice的变化)</p>
+<p>而图10是SalePrice与YearMade的线状图。我们可以看到，散点图/折线图可能无法像PDP那样捕获YearMade对SalesPrice的直接影响。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/4ae50000a55161c45203" img_width="690" img_height="476" alt="随机森林的直观理解" inline="0"></p>
+<p>图10&#58;上述两个图片均来自(来源https&#58;//github.com/fastai/fastai/t</p>
+<p>写在最后：</p>
+<p>在大多数情况下，随机森林在预测中可以击败线性模型预测。针对随机森林经常提出的反对意见是：对它的理解没有线性模型那样直观，但是本文的讨论希望帮助你回答这样的反对意见。</p>
+<p>作者个人简历：目前在旧金山大学学习数据科学（分析），在Manifold.ai做实习生。此前，曾在凯捷咨询公司担任数据科学家，在Altisource担任高级业务分析师。</p>
+<p><strong>更多精彩文章您可前往BigQuant社区查看并参与讨论：BigQuant社区</strong></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6495986454756327949/" target="_blank" rel="noopener">随机森林的直观理解</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/随机森林/" rel="tag"># 随机森林</a>
+          
+            <a href="/tags/F1赛车/" rel="tag"># F1赛车</a>
+          
+            <a href="/tags/飞镖/" rel="tag"># 飞镖</a>
+          
+            <a href="/tags/欢聚时代/" rel="tag"># 欢聚时代</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/c2560231/" rel="next" title="阿里云Redis读写分离典型场景：如何轻松搭建电商秒杀系统">
+                <i class="fa fa-chevron-left"></i> 阿里云Redis读写分离典型场景：如何轻松搭建电商秒杀系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/eb6a4100/" rel="prev" title="“每天AI资讯这么多！该看哪些？”推荐一份优质资料清单">
+                “每天AI资讯这么多！该看哪些？”推荐一份优质资料清单 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-我们的特征有多重要？"><span class="nav-number">1.</span> <span class="nav-text">1.我们的特征有多重要？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-我们对我们的预测有多大信心？"><span class="nav-number">2.</span> <span class="nav-text">2.我们对我们的预测有多大信心？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-什么是预测路径？"><span class="nav-number">3.</span> <span class="nav-text">3.什么是预测路径？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-目标变量如何与重要特征相关？-Partial-Dependence-Plots"><span class="nav-number">4.</span> <span class="nav-text">4.目标变量如何与重要特征相关？ Partial Dependence Plots</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

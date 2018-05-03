@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="人工智能,艺术,Facebook,蒙娜丽莎的微笑,蒙德里安," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="雷锋网 AI 科技评论按：能够迭代进化、模仿指定数据特征的GAN（生成式对抗性网络）已经是公认的处理图像生成问题的好方法，自从提出以来相关的研究成果不少，在图像增强、超分辨率、风格转换任务中的效果可谓是惊人的。 （具体可以参见 Valse 2017 | 生成对抗网络（GAN）研究年度进展评述 - 雷锋网） 利用GAN达到图像超分辨率和风格转换示例今年也有利用GAN做的简笔画到图像转换模型pix2p">
+<meta name="keywords" content="人工智能,艺术,Facebook,蒙娜丽莎的微笑,蒙德里安">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Facebook AI研究院提出了创造性对抗网络CAN，AI的艺术造诣也要超过人类了">
+<meta property="og:url" content="http://blockshare.top/2017/718d2bae/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="雷锋网 AI 科技评论按：能够迭代进化、模仿指定数据特征的GAN（生成式对抗性网络）已经是公认的处理图像生成问题的好方法，自从提出以来相关的研究成果不少，在图像增强、超分辨率、风格转换任务中的效果可谓是惊人的。 （具体可以参见 Valse 2017 | 生成对抗网络（GAN）研究年度进展评述 - 雷锋网） 利用GAN达到图像超分辨率和风格转换示例今年也有利用GAN做的简笔画到图像转换模型pix2p">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/31ae000a4b38df56f15f">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.766Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Facebook AI研究院提出了创造性对抗网络CAN，AI的艺术造诣也要超过人类了">
+<meta name="twitter:description" content="雷锋网 AI 科技评论按：能够迭代进化、模仿指定数据特征的GAN（生成式对抗性网络）已经是公认的处理图像生成问题的好方法，自从提出以来相关的研究成果不少，在图像增强、超分辨率、风格转换任务中的效果可谓是惊人的。 （具体可以参见 Valse 2017 | 生成对抗网络（GAN）研究年度进展评述 - 雷锋网） 利用GAN达到图像超分辨率和风格转换示例今年也有利用GAN做的简笔画到图像转换模型pix2p">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/31ae000a4b38df56f15f">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/718d2bae/"/>
+
+
+
+
+
+  <title>Facebook AI研究院提出了创造性对抗网络CAN，AI的艺术造诣也要超过人类了 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/718d2bae/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Facebook AI研究院提出了创造性对抗网络CAN，AI的艺术造诣也要超过人类了</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">雷锋网</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-30T00:57:13+08:00">
+                2017-06-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/文化/" itemprop="url" rel="index">
+                    <span itemprop="name">文化</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/718d2bae/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/718d2bae/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/31ae000a4b38df56f15f" rel="gallery_cjgf0wklz007hxmqdumglq8pa"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/31ae000a4b38df56f15f" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>雷锋网 AI 科技评论按：能够迭代进化、模仿指定数据特征的GAN（生成式对抗性网络）已经是公认的处理图像生成问题的好方法，自从提出以来相关的研究成果不少，在图像增强、超分辨率、风格转换任务中的效果可谓是惊人的。 （具体可以参见 Valse 2017 | 生成对抗网络（GAN）研究年度进展评述 - 雷锋网）</p>
+<h5 id="利用GAN达到图像超分辨率和风格转换示例"><a href="#利用GAN达到图像超分辨率和风格转换示例" class="headerlink" title="利用GAN达到图像超分辨率和风格转换示例"></a>利用GAN达到图像超分辨率和风格转换示例</h5><p>今年也有利用GAN做的简笔画到图像转换模型pix2pix（代码地址 https&#58;//github.com/phillipi/pix2pix，demo地址https&#58;//affinelayer.com/pixsrv/）。除了下图转换猫的，还有建筑物的、鞋子的、包包的，模型非常有想象力，随便画也没关系，感兴趣的读者可以自己到demo地址里画画看。</p>
+<h5 id="demo中用把线条转换成猫的示例"><a href="#demo中用把线条转换成猫的示例" class="headerlink" title="demo中用把线条转换成猫的示例"></a>demo中用把线条转换成猫的示例</h5><h3 id="GAN能生成艺术作品吗？"><a href="#GAN能生成艺术作品吗？" class="headerlink" title="GAN能生成艺术作品吗？"></a>GAN能生成艺术作品吗？</h3><p>GAN既然已经有如此的图像生成能力了，我们能不能用GAN生成艺术作品呢，毕竟许多现代艺术作品看照片好像也并不怎么复杂，比如下面这幅；超写实主义的就更不用说了。</p>
+<h5 id="蒙德里安《红黄蓝的构成》"><a href="#蒙德里安《红黄蓝的构成》" class="headerlink" title="蒙德里安《红黄蓝的构成》"></a>蒙德里安《红黄蓝的构成》</h5><p>然而，要创造出一副人类觉得有艺术价值的作品并没有那么简单。人类喜欢创新性的作品，人类不喜欢完全模仿的作品；《蒙娜丽莎》和《兰亭集序》只有原作者的原版才被认可是世界艺术瑰宝，后世的人就算基于它们创作，也要有自己的创新，才能带来新的艺术价值，才能被观赏者认可。</p>
+<p>根据GAN的基本结构，鉴别器D要判断生成器G生成的图像是否和其它已经提供给鉴别器D的图像是同一个类别（特征相符），这就决定了最好的情况下输出的图像也只能是对现有作品的模仿，如果有创新，就会被鉴别器D识别出来，就达不成目标了。上面几个GAN的例子就能体现出鉴别器D带来的这个特点，用GAN生成的艺术作品也就注定缺乏实质性的创新，艺术价值有限。</p>
+<p>那么，能不能让GAN具有一些创新的能力，让这些创新有艺术价值、带有这些创新的作品还能够被人类认可呢？罗格斯大学艺术与人工智能实验室、Facebook人工智能研究院（FAIR）、查尔斯顿学院艺术史系三方合作的这篇论文就通过<strong>CAN（Creative Adversarial Network，创造性对抗网络）</strong>给出了一种答案。神经网络库Keras的作者François Chollet也在Twitter上推荐了这篇文章。</p>
+<h3 id="先看看作品如何"><a href="#先看看作品如何" class="headerlink" title="先看看作品如何"></a>先看看作品如何</h3><h5 id="CAN模型生成的一些艺术作品"><a href="#CAN模型生成的一些艺术作品" class="headerlink" title="CAN模型生成的一些艺术作品"></a>CAN模型生成的一些艺术作品</h5><p>可以看到，生成的艺术作品风格非常多样，从简单的抽象画到复杂的线条组合都有，内容层次也有区分。论文中也有对比测试结果，CAN生成的作品不仅比GAN生成的更讨人喜欢，甚至来自巴塞尔艺术展的人类艺术作品都比不上CAN。（具体数据看后文）</p>
+<h3 id="如何认识艺术创新"><a href="#如何认识艺术创新" class="headerlink" title="如何认识艺术创新"></a>如何认识艺术创新</h3><p>刚才说到，艺术作品需要有创新性，CAN中的C就是Creative，创新性的意思。那么创新性要如何衡量呢、如何达到呢？</p>
+<p>以往基于GAN的图像生成方法研究中，人类可以把训练好的网络生成的图像和客观事实相对比（超分辨率、图像补全问题中）或者根据经验判断（风格转换问题中），用来衡量网络的效果；也有过一些更早期的算法，让人类作为训练反馈的一环，引导网络的训练过程。但是对于这次的课题需要设计一个能自动训练和生成、还要衡量作品的创新性的系统而言，以往的方法就起不到什么帮助。</p>
+<p>同时，在作者们看来，为了能模仿人类艺术创作的过程，算法中很重要的一部分就是要把算法的创意过程和人类艺术家以往的艺术作品联系起来，像人类一样把对以往艺术的理解和创造新艺术形态的能力整合在一起。 为了能够想办法找到一个能够衡量创新性、参与迭代训练的创新性指标，作者们找来了一组艺术理论。</p>
+<blockquote>
+<ul>
+<li>D.E.Berlyne认为，从生理心理学的角度讲，人类的状态中有一种叫做“唤醒水平”的指标，它可以衡量一个人有多警醒、多兴奋；唤醒水平可以从最低的睡觉、休息，一直到暴怒、激动。而一副作品具有“唤醒潜力”的总体特质，它可以提升或者降低观者的唤醒水平；它是作品新颖性、意外性、复杂性、多义性和疑惑性高低的综合体现，这几个属性越高，作品的唤醒潜力就越高。- Colin Martindale（1943-2008）提出过一个假说，他认为在任一时刻，创意艺术家们都会尝试增加他们作品的“唤醒潜力”，这就是一种拓宽创作习惯边界的方法。但是，这种增加动作必须使得观察者的负面反应尽可能小（尽量使观察者不付出额外的努力），否则过于激进的产品就会受到负面的评价。- Colin Martindale还提出过一个假说，他认为当艺术家探索艺术风格的更多作用的时候，转换艺术风格就会有提高“唤醒潜力”的作用。</li>
+</ul>
+</blockquote>
+<p>这组理论只是解释艺术创新的理论中的寥寥几个，但是它们综合起来给出了两个具有计算性的、可以用于迭代训练的指标：</p>
+<ol>
+<li><strong>创新作品的创新程度不能过高，观者不认为作品是艺术作品的可能性应当尽可能小；</strong>1. <strong>新的艺术风格就是创新的体现。</strong><br><strong>新的艺术风格就是创新的体现。</strong></li>
+</ol>
+<h3 id="CAN网络的构建"><a href="#CAN网络的构建" class="headerlink" title="CAN网络的构建"></a>CAN网络的构建</h3><p>根据提炼出的这两个指标，论文中基于GAN的原型构建了这样一种新型的对抗性网络CAN。</p>
+<h5 id="CAN模型的系统框图"><a href="#CAN模型的系统框图" class="headerlink" title="CAN模型的系统框图"></a>CAN模型的系统框图</h5><p>首先，对于“指标1：创新作品的创新程度不能过高，观者不认为作品是艺术作品的可能性应当尽可能小”，就可以转换为经典的对抗性网络，G生成图像，经过艺术作品训练过的D判断G生成图像的是不是艺术作品。这样的对抗性网络生成的图像就已经可以被人类看作是艺术作品。</p>
+<p>然后，论文中的模型还根据“指标2：新的艺术风格就是创新的体现”增加了一部分新结构用来处理艺术风格。</p>
+<p>论文中使用了25类不同的带标签艺术作品用于D的训练，包含了抽象印象派、立体派、现代派、巴洛克、文艺复兴早期等等风格的共7万5千多幅。然后经过训练的D除了要反馈一幅图像“是否是艺术作品”外，还要反馈“能否分辨图像是哪种艺术风格”。G然后就会利用D的反馈生成尽量<strong>难以分辨</strong>艺术风格的图像——难以归类到现有分类中的，就是创新了。</p>
+<p>“是否是艺术作品”、“是否难以分辨艺术风格”是两种对立的信号，前一种信号会迫使生成器G生成能够被看作的艺术的图像，但是假如它在现有的艺术风格范畴中就达到了这个目标，鉴别器D就能够分辨出图像的艺术风格了，然后生成器就会受到惩罚。这样后一种信号就会让生成器生成难以分辨风格的作品。所以两种信号就可以共同作用，让生成器能够尽可能探索整个创意空间中艺术作品的范围边界，同时最大化生成的作品尽可能游离于现有的标准艺术风格之外。</p>
+<p>这也就是论文标题「CAN&#58; Creative Adversarial Networks Generating “Art” by Learning About Styles and Deviating from Style Norms」的含义，创造性对抗网络可以学习艺术风格，然后背离这些现有的风格进行艺术创作。</p>
+<h3 id="还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？"><a href="#还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？" class="headerlink" title="还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？"></a>还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？</h3><p>相比GAN，CAN增加的反馈是“是否难以分辨艺术风格”，追求的是生成的图像艺术风格<strong>难以分辨</strong>。虽然根据艺术理论的推导，新的艺术风格是一种创新，但既然是多加了一个反馈，追求“生成的图像艺术风格<strong>容易分辨</strong>”可以吗？会不会也能生成不错的作品呢？</p>
+<p>从另一个角度看，假如追求“难以分辨”的CAN确实比追求“容易分辨”的CAN生成的图像更好，那这就是模型选取了合理的反馈的最佳体现。</p>
+<p>说做就做。除了CAN之外，论文中还建立了三种模型用来对比。</p>
+<ul>
+<li>DCGAN 64x64：经过艺术作品训练的DCGAN（深度卷积生成式对抗网络），输出分辨率为64x64- DCGAN 256x256：相比DCGAN 64x64，生成器多加了两层网络，输出分辨率为256x256- scCAN：style-classification-CAN，追求“生成的图像艺术风格容易分辨”的CAN<br>DCGAN 256x256：相比DCGAN 64x64，生成器多加了两层网络，输出分辨率为256x256</li>
+</ul>
+<p>这三种模型生成的画面像下面这样</p>
+<h5 id="两种DCGAN和scCAN生成的画面"><a href="#两种DCGAN和scCAN生成的画面" class="headerlink" title="两种DCGAN和scCAN生成的画面"></a>两种DCGAN和scCAN生成的画面</h5><p>scCAN生成的画面中确实有了可辨认的风格，比如人物特写、风景或者群像。但是直观看上去并不怎么讨人喜欢。</p>
+<p>让我们再来看一组CAN生成的图像，上方是人类评价最高的、下方是人类评价最低的。应该说都比scCAN生成的图像精彩得多。</p>
+<h5 id="人类评价最高和最低的CAN生成的图像"><a href="#人类评价最高和最低的CAN生成的图像" class="headerlink" title="人类评价最高和最低的CAN生成的图像"></a>人类评价最高和最低的CAN生成的图像</h5><h3 id="人类能给CAN的图像打几分？"><a href="#人类能给CAN的图像打几分？" class="headerlink" title="人类能给CAN的图像打几分？"></a>人类能给CAN的图像打几分？</h3><p>根据刚才的图像可以看到，CAN的效果当然不错，DCGAN 256x256的图像其实也挺好。那么CAN的图像对观画的人来说是不是真的已经难以分辨创作者了呢？跟真的艺术家创作的作品相比高下又如何呢？</p>
+<p>为了具体比较，论文中做了几个实验，让人类给不同组的作品打分。</p>
+<p><strong>实验1、2：</strong>来自抽象印象派艺术家的作品、选自巴塞尔艺术展的作品、CAN生成的图像、DCGAN生成的图像，一共4组作品，由普通人判断这些作品来自人还是电脑，并给作品打分。</p>
+<p>结果：实验1里有53%的人认为CAN的图像是来自人类的，认为DCGAN 64x64的图像来自人的有35%； 实验2里认为CAN的图像来自人类的比例是75%，DCGAN 256x256则是65%。来自抽象印象派艺术家的作品无疑是比例最高的，但有意思的是，两个实验里认为巴塞尔艺术展的作品来自人的比例都还不如CAN高（实验1中41%，实验2中48%）。</p>
+<h5 id="实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6"><a href="#实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6" class="headerlink" title="实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6"></a>实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6</h5><p><strong>实验3</strong>：让人类评价者从用心程度、视觉结构、互动性、启发性几个角度给作品评分，结果<strong>CAN全部得分最高</strong>。这个结果可谓出人意料。</p>
+<h5 id="实验3结果数据"><a href="#实验3结果数据" class="headerlink" title="实验3结果数据"></a>实验3结果数据</h5><p><strong>实验4</strong>：为了确认CAN和scCAN之间新颖性和美学表现的高低，请了一群艺术史学生对随机选出的CAN和scCAN图像进行评价。认为CAN的图像更新颖的比例为59.47%，认为CAN的图像更加有美学吸引力的比例为60%，确实有显著区别。</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>论文中表示，虽然这样的模型还是不能对艺术风格概念有任何语义方面的理解，不过它确实展现出了从以往的艺术作品中学习的能力。至于为什么人类会在多个方面给CAN打出高分，作者们也希望和大家进行开放性的探讨。</p>
+<p>论文原文地址： https&#58;//arxiv.org/abs/1706.07068，雷锋网 AI 科技评论编译</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiao.org/group/6436346951578763521/?iid=11674273940&amp;app=news_article&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">Facebook AI研究院提出了创造性对抗网络CAN，AI的艺术造诣也要超过人类了</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/艺术/" rel="tag"># 艺术</a>
+          
+            <a href="/tags/Facebook/" rel="tag"># Facebook</a>
+          
+            <a href="/tags/蒙娜丽莎的微笑/" rel="tag"># 蒙娜丽莎的微笑</a>
+          
+            <a href="/tags/蒙德里安/" rel="tag"># 蒙德里安</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/4bb57de0/" rel="next" title="无人机消费者报告">
+                <i class="fa fa-chevron-left"></i> 无人机消费者报告
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/a87e959c/" rel="prev" title="万字「全文」详解谷歌神经网络机器翻译NMT，人人可利用TensorFlow快速建立翻译模型">
+                万字「全文」详解谷歌神经网络机器翻译NMT，人人可利用TensorFlow快速建立翻译模型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#利用GAN达到图像超分辨率和风格转换示例"><span class="nav-number">1.</span> <span class="nav-text">利用GAN达到图像超分辨率和风格转换示例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#demo中用把线条转换成猫的示例"><span class="nav-number">2.</span> <span class="nav-text">demo中用把线条转换成猫的示例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GAN能生成艺术作品吗？"><span class="nav-number"></span> <span class="nav-text">GAN能生成艺术作品吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#蒙德里安《红黄蓝的构成》"><span class="nav-number">1.</span> <span class="nav-text">蒙德里安《红黄蓝的构成》</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#先看看作品如何"><span class="nav-number"></span> <span class="nav-text">先看看作品如何</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CAN模型生成的一些艺术作品"><span class="nav-number">1.</span> <span class="nav-text">CAN模型生成的一些艺术作品</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何认识艺术创新"><span class="nav-number"></span> <span class="nav-text">如何认识艺术创新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CAN网络的构建"><span class="nav-number"></span> <span class="nav-text">CAN网络的构建</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CAN模型的系统框图"><span class="nav-number">1.</span> <span class="nav-text">CAN模型的系统框图</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？"><span class="nav-number"></span> <span class="nav-text">还说艺术风格，现在是“不好分辨”，“好分辨”不行吗？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两种DCGAN和scCAN生成的画面"><span class="nav-number">1.</span> <span class="nav-text">两种DCGAN和scCAN生成的画面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#人类评价最高和最低的CAN生成的图像"><span class="nav-number">2.</span> <span class="nav-text">人类评价最高和最低的CAN生成的图像</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#人类能给CAN的图像打几分？"><span class="nav-number"></span> <span class="nav-text">人类能给CAN的图像打几分？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6"><span class="nav-number">1.</span> <span class="nav-text">实验2的结果数据，先让人类评价者从几个角度评价作品，再判断是否是人类创作的。认为图像是人类创作的评价者比例为Q6</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实验3结果数据"><span class="nav-number">2.</span> <span class="nav-text">实验3结果数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结论"><span class="nav-number"></span> <span class="nav-text">结论</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

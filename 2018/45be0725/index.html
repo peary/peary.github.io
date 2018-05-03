@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="软件,编程语言,JavaScript,Git,JSON," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="本节将开始详细分析如何搭建一个React应用架构。 一. 前言现在已经有很多脚手架工具，如create-react-app，支持一键创建一个React应用项目结构，很方便，但是享受方便的同时，也失去了对项目架构及技术栈完整学习的机会，而且通常脚手架创建的应用技术架构并不能完全满足我们的业务需求，需要我们自己修改，完善，所以如果希望对项目架构有更深掌控，最好还是从0到1理解一个项目。 二. 项目结构">
+<meta name="keywords" content="软件,编程语言,JavaScript,Git,JSON">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React应用架构设计">
+<meta property="og:url" content="http://blockshare.top/2018/45be0725/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="本节将开始详细分析如何搭建一个React应用架构。 一. 前言现在已经有很多脚手架工具，如create-react-app，支持一键创建一个React应用项目结构，很方便，但是享受方便的同时，也失去了对项目架构及技术栈完整学习的机会，而且通常脚手架创建的应用技术架构并不能完全满足我们的业务需求，需要我们自己修改，完善，所以如果希望对项目架构有更深掌控，最好还是从0到1理解一个项目。 二. 项目结构">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/152082939358941871f79b6">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React应用架构设计">
+<meta name="twitter:description" content="本节将开始详细分析如何搭建一个React应用架构。 一. 前言现在已经有很多脚手架工具，如create-react-app，支持一键创建一个React应用项目结构，很方便，但是享受方便的同时，也失去了对项目架构及技术栈完整学习的机会，而且通常脚手架创建的应用技术架构并不能完全满足我们的业务需求，需要我们自己修改，完善，所以如果希望对项目架构有更深掌控，最好还是从0到1理解一个项目。 二. 项目结构">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/152082939358941871f79b6">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/45be0725/"/>
+
+
+
+
+
+  <title>React应用架构设计 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/45be0725/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React应用架构设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">今日头条技术团队</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-12T20:46:40+08:00">
+                2018-03-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/45be0725/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/45be0725/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/152082939358941871f79b6" rel="gallery_cjgf0wki3004rxmqdho7kksv8"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/152082939358941871f79b6" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>本节将开始详细分析如何搭建一个React应用架构。</p>
+<h1 id="一-前言"><a href="#一-前言" class="headerlink" title="一. 前言"></a>一. 前言</h1><p>现在已经有很多脚手架工具，如create-react-app，支持一键创建一个React应用项目结构，很方便，但是享受方便的同时，也失去了对项目架构及技术栈完整学习的机会，而且通常脚手架创建的应用技术架构并不能完全满足我们的业务需求，需要我们自己修改，完善，所以如果希望对项目架构有更深掌控，最好还是从0到1理解一个项目。</p>
+<h1 id="二-项目结构与技术栈"><a href="#二-项目结构与技术栈" class="headerlink" title="二. 项目结构与技术栈"></a>二. 项目结构与技术栈</h1><p>我们这次的实践不准备使用任何脚手架，所以我们需要自己创建每一个文件，引入每一个技术和三方库，最终形成完整的应用，包括我们选择的完整技术栈。</p>
+<p>第一步，当然是创建目录，如果你还没有代码，可以从Github获取：</p>
+<p>生成项目结构如下图：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152082939358941871f79b6" img_width="720" img_height="387" alt="React应用架构设计" inline="0"></p>
+<p>1、 src为应用源代码目录；</p>
+<p>2、 webpack为webpack配置目录；</p>
+<p>3、 webpack.config.js为webpack配置入口文件；</p>
+<p>4、 package.json为项目依赖管理文件；</p>
+<p>5、 yarn.lock为项目依赖版本锁文件；</p>
+<p>6、 .babelrc文件，babel的配置文件，使用babel编译React和JavaScript代码；</p>
+<p>7、 eslintrc 和 eslintignore 分别为eslint语法检测配置及需要忽略检查的内容或文件；</p>
+<p>8、 postcss.config.js 为CSS后编译器postcss的配置文件；</p>
+<p>9、 API.md为API文档入口；</p>
+<p>10、 docs为文档目录；</p>
+<p>11、 README.md为项目说明文档；</p>
+<p>接下来的工作主要就是丰富src目录，包括搭建项目架构，开发应用功能，还有自动化，单元测试等，本篇主要关注项目架构的搭建，然后使用技术栈实践开发几个模块。</p>
+<p><strong>2.1 技术栈</strong></p>
+<p>项目架构搭建很大部分依赖于项目的技术栈，所以先对整个技术栈进行分析，总结：</p>
+<p>1、 react和react-dom库是项目前提；</p>
+<p>2、 react路由；</p>
+<p>3、 应用状态管理容器；</p>
+<p>4、 是否需要Immutable数据；</p>
+<p>5、 应用状态的持久化；</p>
+<p>6、 异步任务管理；</p>
+<p>7、 测试及辅助工具或函数；</p>
+<p>8、 开发调试工具；</p>
+<p>根据以上划分决定选用以下第三方库和工具构成项目的完整技术栈：</p>
+<p>1、react，react-dom；</p>
+<p>2、react-router管理应用路由；</p>
+<p>3、redux作为JavaScript状态容器，react-redux将React应用与redux连接；</p>
+<p>4、Immutable.js支持Immutable化状态，redux-immutable使整个redux store状态树Immutable化；</p>
+<p>5、使用redux-persist支持redux状态树的持久化，并添加redux-persist-immutable拓展以支持Immutable化状态树的持久化；</p>
+<p>6、使用redux-saga管理应用内的异步任务，如网络请求，异步读取本地数据等；</p>
+<p>7、使用jest集成应用测试，使用lodash，ramda等可选辅助类，工具类库；</p>
+<p>8、可选使用reactotron调试工具</p>
+<p>针对以上分析，完善后的项目结构如图：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15208294193220c50834cb3" img_width="608" img_height="292" alt="React应用架构设计" inline="0"></p>
+<h1 id="三-开发调试工具"><a href="#三-开发调试工具" class="headerlink" title="三. 开发调试工具"></a>三. 开发调试工具</h1><p>React应用开发目前已经有诸多调试工具，常用的如redux-devtools，Reactron等。</p>
+<p><strong>3.1 redux-devtool</strong></p>
+<p>redux-devtools是支持热重载，回放action，自定义UI的一款Redux开发工具。</p>
+<p>首先需要按照对应的浏览器插件，然后再Redux应用中添加相关配置，就能在浏览器控制台中查看到redux工具栏了。</p>
+<p>然后安装项目依赖库：</p>
+<p>然后在创建redux store时将其作为redux强化器传入createStore方法：</p>
+<ol>
+<li>在开发环境下获取redux-devtools提供的拓展组合函数；1. 创建store时使用拓展组合函数组合redux中间件和增强器，redux-dev-tools便获得了应用redux的相关信息；<br>创建store时使用拓展组合函数组合redux中间件和增强器，redux-dev-tools便获得了应用redux的相关信息；</li>
+</ol>
+<p><strong>3.2 Reactotron</strong></p>
+<p>Reactotron是一款跨平台调试React及React Native应用的桌面应用，能动态实时监测并输出React应用等redux，action，saga异步请求等信息，如图：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1520848359041607e15ef7c" img_width="981" img_height="695" alt="React应用架构设计" inline="0"></p>
+<p>首先安装：</p>
+<p>然后初始化Reactotron相关配置：</p>
+<p>然后启使用console.tron.overlay方法拓展入口组件：</p>
+<p>至此就可以使用Reactotron客户端捕获应用中发起的所有的redux和action了。</p>
+<h1 id="四-组件划分"><a href="#四-组件划分" class="headerlink" title="四. 组件划分"></a>四. 组件划分</h1><p>React组件化开发原则是组件负责渲染UI，组件不同状态对应不同UI，通常遵循以下组件设计思路：</p>
+<p>1、 布局组件：仅仅涉及应用UI界面结构的组件，不涉及任何业务逻辑，数据请求及操作；</p>
+<p>2、 容器组件：负责获取数据，处理业务逻辑，通常在render()函数内返回展示型组件；</p>
+<p>3、 展示型组件：负责应用的界面UI展示；</p>
+<p>4、 UI组件：指抽象出的可重用的UI独立组件，通常是无状态组件；</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/1520849248241f8e8a4af2f" img_width="1166" img_height="390" alt="React应用架构设计" inline="0"></p>
+<h1 id="五-Redux"><a href="#五-Redux" class="headerlink" title="五. Redux"></a>五. Redux</h1><p>现在的任何大型web应用如果少了状态管理容器，那这个应用就缺少了时代特征，可选的库诸如mobx，redux等，实际上大同小异，各取所需，以redux为例，redux是最常用的React应用状态容器库，对于React Native应用也适用。</p>
+<blockquote>
+<p>Redux是一个JavaScript应用的可预测状态管理容器，它不依赖于具体框架或类库，所以它在多平台的应用开发中有着一致的开发方式和效率，另外它还能帮我们轻松的实现时间旅行，即action的回放。</p>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15208294644299f9c0469a2" img_width="720" img_height="437" alt="React应用架构设计" inline="0"></p>
+<p>1、 数据单一来源原则：使用Redux作为应用状态管理容器，统一管理应用的状态树，它推从数据单一可信来源原则，所有数据都来自redux store，所有的数据更新也都由redux处理；</p>
+<p>2、 redux store状态树：redux集中管理应用状态，组织管理形式就好比DOM树和React组件树一样，以树的形式组织，简单高效；</p>
+<p>3、 redux和store：redux是一种Flux的实现方案，所以创建了store一词，它类似于商店，集中管理应用状态，支持将每一个发布的action分发至所有reducer；</p>
+<p>4、 action：以对象数据格式存在，通常至少有type和payload属性，它是对redux中定义的任务的描述；</p>
+<p>5、 reducer：通常是以函数形式存在，接收state（应用局部状态）和action对象两个参数，根据action.type(action类型)执行不同的任务，遵循函数式编程思想；</p>
+<p>6、dispatch：store提供的分发action的功能方法，传递一个action对象参数；</p>
+<p>7、 createStore：创建store的方法，接收reducer，初始应用状态，redux中间件和增强器，初始化store，开始监听action；</p>
+<p><strong>5.1 中间件（Redux Middleware）</strong></p>
+<p>Redux中间件，和Node中间件一样，它可以在action分发至任务处理reducer之前做一些额外工作，dispatch发布的action将依次传递给所有中间件，最终到达reducer，所以我们使用中间件可以拓展诸如记录日志，添加监控，切换路由等功能，所以中间件本质上只是拓展了store.dispatch方法。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1520829464641df96acd4a3" img_width="720" img_height="314" alt="React应用架构设计" inline="0"></p>
+<p><strong>5.2 增强器（Store Enhancer）</strong></p>
+<p>有些时候我们可能并不满足于拓展dispatch方法，还希望能增强store，redux提供以增强器形式增强store的各个方面，甚至可以完全定制一个store对象上的所有接口，而不仅仅是store.dispatch方法</p>
+<p>最简单的例子代码如上，新函数接收redux的createStore方法和创建store需要的参数，然后在函数内部保存store对象上某方法的引用，重新实现该方法，在里面处理完增强逻辑后调用原始方法，保证原始功能正常执行，这样就增强了store的dispatch方法。</p>
+<p>可以看到，增强器完全能实现中间件的功能，其实，中间件就是以增强器方式实现的，它提供的compose方法就可以组合将我们传入的增强器拓展到store，而如果我们传入中间件，则需要先调用applyMiddleware方法包装，内部以增强器形式将中间件功能拓展到store.dispatch方法</p>
+<p><strong>5.3 react-redux</strong></p>
+<p>Redux是一个独立的JavaScript应用状态管理容器库，它可以与React、Angular、Ember、jQuery甚至原生JavaScript应用配合使用，所以开发React应用时，需要将Redux和React应用连接起来，才能统一使用Redux管理应用状态，使用官方提供的react-redux库。</p>
+<blockquote>
+<p>react-redux库提供Provider组件通过context方式向应用注入store，然后可以使用connect高阶方法，获取并监听store，然后根据store state和组件自身props计算得到新props，注入该组件，并且可以通过监听store，比较计算出的新props判断是否需要更新组件。</p>
+</blockquote>
+<p><strong>5.4 createStore</strong></p>
+<p>使用redux提供的createStore方法创建redux store，但是在实际项目中我们常常需要拓展redux添加某些自定义功能或服务，如添加redux中间件，添加异步任务管理saga，增强redux等：</p>
+<p><strong>5.5 redux与Immutable</strong></p>
+<p>redux默认提供了combineReducers方法整合reduers至redux，然而该默认方法期望接受原生JavaScript对象并且它把state作为原生对象处理，所以当我们使用createStore方法并且接受一个Immutable对象作应用初始状态时，reducer将会返回一个错误，源代码如下：</p>
+<p>如上表明，原始类型reducer接受的state参数应该是一个原生JavaScript对象，我们需要对combineReducers其进行增强，以使其能处理Immutable对象，redux-immutable即提供创建一个可以和Immutable.js协作的Redux combineReducers。</p>
+<p>如上代码，可以看见我们传入的initialState是一个Immutable.Map类型数据，我们将redux整个state树丛根源开始Immutable化，另外传入了可以处理Immutable state的reducers和sagas。另外每一个state树节点数据都是Immutable结构，如AppReducer：</p>
+<p>这里默认使用Immutable.fromJS()方法状态树节点对象转化为Immutable结构，并且更新state时使用Immutable方法state.merge()，保证状态统一可预测。</p>
+<h1 id="六-React路由"><a href="#六-React路由" class="headerlink" title="六. React路由"></a>六. React路由</h1><p>在React web单页面应用中，页面级UI组件的展示和切换完全由路由控制，每一个路由都有对应的URL及路由信息，我们可以通过路由统一高效的管理我们的组件切换，保持UI与URL同步，保证应用的稳定性及友好体验。</p>
+<p><strong>6.1 react-router</strong></p>
+<p>React Router是完整的React 路由解决方案，也是开发React应用最常使用的路由管理库，只要用过它，绝对会喜欢上它的设计，它提供简单的API，以声明式方式实现强大的路由功能，诸如按需加载，动态路由等。</p>
+<p>1、声明式：语法简洁，清晰；</p>
+<p>2、按需加载：延迟加载，根据使用需要判断是否需要加载；</p>
+<p>3、动态路由：动态组合应用路由结构，更灵活，更符合组件化开发模式；</p>
+<p><strong>6.2 动态路由与静态路由</strong></p>
+<p>使用react-router v4版本可以定义跨平台的应用动态路由结构，所谓的动态路由（Dynamic Routing）即在渲染过程中发生路由的切换，而不需要在创建应用前就配置好，这也正是其区别于静态路由（Static Routing）所在，动态路由提高更灵活的路由组织方式，而且更方便编码实现路由按需加载组件。</p>
+<p>在react-router v2和v3版本中，开发React应用需要在开始渲染前就定义好完整的应用路由结构，所有的路由都需要同时初始化，才能在应用渲染后生效，会产生很多嵌套化路由，丧失了动态路由的灵活性和简洁的按需加载编码方式。</p>
+<p><strong>6.3 react-router v4.x</strong></p>
+<p>在react-router 2.x和3.x版本中，定义一个应用路由结构通常如下：</p>
+<p>很简单，但是所有的路由结构都需要在渲染应用前，统一定义，层层嵌套；而且如果要实现异步按需加载还需要在这里对路由配置对象进行修改，使用getComponentAPI，并侵入改造该组件，配合webpack的异步打包加载API，实现按需加载：</p>
+<p>1、 路由层层嵌套，必须在渲染应用前统一声明；</p>
+<p>2、 API不同，需要使用getComponent，增加路由配置对象的复杂性；</p>
+<p>3、 <route>只是一个声明路由的辅助标签，本身无意义；</route></p>
+<p>而使用react-router v4.x则如下：</p>
+<p>相比之前版本，减少了配置化的痕迹，更凸显了组件化的组织方式，而且在渲染组件时才实现该部分路由，而如果期望按需加载该组件，则可以通过封装实现一个支持异步加载组件的高阶组件，将经过高阶组件处理后返回的组件传入<route>即可，依然遵循组件化形式：</route></p>
+<p>1、 灵活性：路由可以在渲染组件中声明，不需依赖于其他路由，不需要集中配置；</p>
+<p>2、 简洁：统一传入component，保证路由声明的简洁性；</p>
+<p>3、 组件化：<route>作为一个真实组件创建路由，可以渲染；</route></p>
+<p>6.3.1 路由钩子方</p>
+<p>另外需要注意的是，相对于之前版本提供 onEnter, onUpdate, onLeave 等钩子方法API在一定程度上提高了对路由的可控性，但是实质只是覆盖了渲染组件的生命周期方法，现在我们可以通过路由渲染组件的生命周期方法直接控制路由，如使用 componentDidMount 或 componentWillMount 代替 onEnter。</p>
+<p><strong>6.4 路由与Redux</strong></p>
+<p>同时使用React-Router和Redux时，大多数情况是正常的，但是也可能出现路由变更组件未更新的情况，如：</p>
+<p>1、 我们使用redux的 connect 方法将组件连接至redux：connect(Home);</p>
+<p>2、 组件不是一个路由渲染组件，即不是使用 Route&gt; 组件形式：<route component="&#123Home&#125"> 声明渲染的；</route></p>
+<p>这是为什么呢？，因为Redux会实现组件的 shouldComponentUpdate 方法，当路由变化时，该组件并没有接收到props表明发生了变更，需要更新组件。</p>
+<p>那么如何解决问题呢？，要解决这个问题只需要简单的使用react-router-dom 提供的 withRouter方法包裹组件：</p>
+<p><strong>6.5 Redux整合</strong></p>
+<p>在使用Redux以后，需要遵循redux的原则：单一可信数据来源，即所有数据来源都只能是reudx store，react路由状态也不应例外，所以需要将路由state与store state连接。</p>
+<p>6.5.1 react-router-redux</p>
+<p>连接React Router与Redux，需要使用 react-router-redux 库，而且react-router v4版本需要指定安装 &#64;next 版本和 hsitory 库：</p>
+<p>然后，在创建store时，需要实现如下配置：</p>
+<p>1、 创建一个history对象，对于web应用，我们选择browserHisotry，对应需要从 history/createBrowserHistory 模块引入 createHistory 方法以创建history对象；</p>
+<p>2、 添加 routerReducer 和 routerMiddleware 中间件“，其中 routerMiddleware 中间件接收history对象参数，连接store和history，等同于旧版本的 syncHistoryWithStore ；</p>
+<p>在渲染根组件时，我们抽象出两个组件：</p>
+<p>1、 初始化渲染根组件，挂载至DOM的根组件，由 <provider> 组件包裹，注入store；</provider></p>
+<p>2、 路由配置组件，在根组件中，声明路由配置组件，初始化必要的应用路由定义及路由对象；</p>
+<p>上面的 <routes> 组件是项目的路由组件：</routes></p>
+<p>首先使用 react-router-redux 提供的 ConnectedRouter 组件包裹路由配置，该组件将自动使用 <provider> 组件注入的 store，我们需要做的是手动传入 history 属性，在组件内会调用 history.listen 方法监听浏览器 LOCATION_CHANGE 事件，最后返回 react-router 的 <router> 组件，处理作为 this.props.children 传入的路由配置。</router></provider></p>
+<p>6.5.2 dispatch切换路由</p>
+<p>配置上面代码后，就能够以dispatch action的方式触发路由切换和组件更新了：</p>
+<p>这个reducer所做的只是将App导航路由状态合并入store。</p>
+<h1 id="七-redux持久化"><a href="#七-redux持久化" class="headerlink" title="七. redux持久化"></a>七. redux持久化</h1><p>我们知道浏览器默认有资源的缓存功能并且提供本地持久化存储方式如localStorage，indexDb，webSQL等，通常可以将某些数据存储在本地，在一定周期内，当用户再次访问时，直接从本地恢复数据，可以极大提高应用启动速度，用户体验更有优势，我们可以使用localStorage存储一些数据，如果是较大量数据存储可以使用webSQL。</p>
+<p>另外不同于以往的直接存储数据，启动应用时本地读取然后恢复数据，对于redux应用而言，如果只是存储数据，那么我们就得为每一个reducer拓展，当再次启动应用时去读取持久化的数据，这是比较繁琐而且低效的方式，是否可以尝试存储reducer key，然后根据key恢复对应的持久化数据，首先注册Rehydrate reducer，当触发action时根据其reducer key恢复数据，然后只需要在应用启动时分发action，这也很容易抽象成可配置的拓展服务，实际上三方库redux-persist已经为我们做好了这一切。</p>
+<p><strong>7.1 redux-persist</strong></p>
+<p>要实现redux的持久化，包括redux store的本地持久化存储及恢复启动两个过程，如果完全自己编写实现，代码量比较复杂，可以使用开源库 redux-persist，它提供 persistStore 和 autoRehydrate 方法分别持久化本地存储store及恢复启动store，另外还支持自定义传入持久化及恢复store时对store state的转换拓展。</p>
+<p>7.1.1 持久化store</p>
+<p>如下在创建store时会调用persistStore相关服务-</p>
+<p>RehydrationServices.updateReducers()：</p>
+<p>该方法内实现了store的持久化存储：</p>
+<p>会在localStorage存储一个reducer版本号，这个是在应用配置文件中可以配置，首次执行持久化时存储该版本号及store，若reducer版本号变更则清空原来存储的store，否则传入store给持久化方法 persistStore 即可。</p>
+<p>该方法主要实现store的持久化以及分发rehydration action &#58;</p>
+<p>1、 订阅 redux store，当其发生变化时触发store存储操作；</p>
+<p>2、 从指定的StorageEngine（如localStorage）中获取数据，进行转换，然后通过分发 REHYDRATE action，触发 REHYDRATE 过程；</p>
+<p>接收参数主要如下：</p>
+<p>1、<strong> store&#58; 持久化的store；</strong></p>
+<p>2、<strong> config：配置对象</strong></p>
+<p>1）storage：一个 持久化引擎，例如 LocalStorage 和 AsyncStorage；</p>
+<p>2）transforms： 在 rehydration 和 storage 阶段被调用的转换器；</p>
+<p>3） blacklist： 黑名单数组，指定持久化忽略的 reducers 的 key；</p>
+<p>3、 <strong>callback：ehydration 操作结束后的回调；</strong></p>
+<p>7.1.2 恢复启动</p>
+<p>和persisStore一样，依然是在创建redux store时初始化注册rehydrate拓展：</p>
+<p>该方法实现的功能很简单，即使用 持久化的数据恢复(rehydrate) store 中数据，它其实是注册了一个autoRehydarte reducer，会接收前文persistStore方法分发的rehydrate action，然后合并state。</p>
+<p>当然，autoRehydrate不是必须的，我们可以自定义恢复store方式：</p>
+<p>7.1.3 版本更新</p>
+<p>需要注意的是redux-persist库已经发布到v5.x，而本文介绍的以v5.x为例，v4.x参考此处，新版本有一些更新，可以选择性决定使用哪个版本。</p>
+<p><strong>7.2 持久化与Immutable</strong></p>
+<p>前面已经提到Redux与Immutable的整合，上文使用的redux -persist默认也只能处理原生JavaScript对象的redux store state，所以需要拓展以兼容Immutable。</p>
+<p>7.2.1 redux-persist-immutable</p>
+<p>使用redux-persist-immutable库可以很容易实现兼容，所做的仅仅是使用其提供的 persistStore 方法替换redux-persist所提供的方法：</p>
+<p>7.2.2 transform</p>
+<p>我们知道持久化store时，针对的最好是原生JavaScript对象，因为通常Immutable结构数据有很多辅助信息，不易于存储，所以需要定义持久化及恢复数据时的转换操作：</p>
+<p>如上，输出对象中的in和out分别对应持久化及恢复数据时的转换操作，实现的只是使用 fromJS() 和 toJS() 转换Js和Immutable数据结构，使用方式如下：</p>
+<h1 id="八-Immutable"><a href="#八-Immutable" class="headerlink" title="八. Immutable"></a>八. Immutable</h1><p>在项目中引入Immutable以后，需要尽量保证以下几点：</p>
+<p>1、 redux store整个state树的统一Immutable化；</p>
+<p>2、 redux持久化对Immutable数据的兼容；</p>
+<p>3、 React路由兼容Immutable；</p>
+<p><strong>8.1 Immutable与React路由</strong></p>
+<p>前面两点已经在前面两节阐述过，第三点react-router兼容Immutable，其实就是使应用路由状态兼容Immutable，在React路由一节已经介绍如何将React路由状态连接至Redux store，但是如果应用使用了Immutable库，则还需要额外处理，将react-router state转换为Immutable格式，routeReducer不能处理Immutable，我们需要自定义一个新的RouterReducer：</p>
+<p>将默认初始路由状态转换为Immutable，并且路由变更时使用Immutable API操作state。</p>
+<p><strong>8.2 seamless-Immutable</strong></p>
+<p>当引入Immutable.js后，对应用状态数据结构的使用API就得遵循Immutable API，而不能再使用原生JavaScript对象，数组等的操作API了，诸如，数组解构（&#91;a, b&#93; = &#91;b, c&#93;），对象拓展符（…）等，存在一些问题：</p>
+<p>1、Immutable数据辅助节点较多，数据较大：</p>
+<p>2、必须使用Immutable语法，和JavaScript语法有差异，不能很好的兼容；</p>
+<p>3、和Redux，react-router等JavaScript库写协作时，需要引入额外的兼容处理库；</p>
+<p>针对这些问题，社区有了 seamless-immutable 可供替换选择：</p>
+<p>1、更轻：相对于Immutable.js seamless-immutable 库更轻小；</p>
+<p>2、语法：对象和数组的操作语法更贴近原生JavaScript；</p>
+<p>3、和其他JavaScript库协作更方便；</p>
+<h1 id="九-异步任务流管理"><a href="#九-异步任务流管理" class="headerlink" title="九. 异步任务流管理"></a>九. 异步任务流管理</h1><p>最后要介绍的模块是异步任务管理，在应用开发过程中，最主要的异步任务就是数据HTTP请求，所以我们讲异步任务管理，主要关注在数据HTTP请求的流程管理。</p>
+<p><strong>9.1 axios</strong></p>
+<p>本项目中使用axios作为HTTP请求库，axios是一个Promise格式的HTTP客户端，选择此库的原因主要有以下几点：</p>
+<ol>
+<li>能在浏览器发起XMLHttpRequest，也能在node.js端发起HTTP请求；1. 支持Promise；1. 能拦截请求和响应；1. 能取消请求；1. 自动转换JSON数据；<br>支持Promise；</li>
+</ol>
+<p>能取消请求；</p>
+<p><strong>9.2 redux-saga</strong></p>
+<p>redux-saga是一个致力于使应用中如数据获取，本地缓存访问等异步任务易于管理，高效运行，便于测试，能更好的处理异常的三方库。</p>
+<p>Redux-saga是一个redux中间件，它就像应用中一个单独的进程，只负责管理异步任务，它可以接受应用主进程的redux action以决定启动，暂停或者是取消进程任务，它也可以访问redux应用store state，然后分发action。</p>
+<p>9.2.1 初始化saga</p>
+<p>redux-saga是一个中间件，所以首先调用 createSagaMiddleware 方法创建中间件，然后使用redux的 applyMiddleware 方法启用中间件，之后使用compose辅助方法传给 createStore 创建store，最后调用 run 方法启动根saga：</p>
+<p>9.2.2 saga分流</p>
+<p>在项目中通常会有很多并列模块，每个模块的saga流也应该是并列的，需要以多分支形式并列，redux-saga提供的 fork 方法就是以新开分支的形式启动当前saga流：</p>
+<p>如上，首先收集所有模块根saga，然后遍历数组，启动每一个saga流根saga。</p>
+<p>9.2.3 saga实例</p>
+<p>以AppSaga为例，我们期望在应用启动时就发起一些异步请求，如获取文章列表数据将其填充至redux store，而不等待使用数据的组件渲染完才开始请求数据，提高响应速度：</p>
+<ol>
+<li><p>takeLatest：在AppSaga 内使用 takeLatest 方法监听 REQUEST_POST_LIST action，若短时间内连续发起多次action 则会取消前面未响应的action，只发起最后一次action；</p>
+</li>
+<li><p>getPostListSaga子Saga：当接收到该action时，调用getPostListSaga并将payload传递给它，getPostListSaga 是AppSaga的子级Saga，在里面处理具体异步任务；</p>
+</li>
+<li><p>getPostList &#58; getPostListSaga 会调用getPostList 方法，发起异步请求, 拿到响应数据后，调用 receivePostList<br>ActionCreator，创建并分发action，然后由reducer处理相应逻辑；</p>
+</li>
+</ol>
+<p>getPostList 方法内容如下：</p>
+<p>put 是redux-saga提供的可分发action方法，take，call等都是 redux-saga 提供的API。</p>
+<p>之后便可以在项目路由根组件注入ActionCreator，创建action，然后saga就会接收进行处理了。</p>
+<p><strong>9.3 saga与Reactotron</strong></p>
+<p>前面已经配置好可以使用Reactotron捕获应用所有redux和action，而redux-saga是一类redux中间件，所以捕获sagas需要额外配置，创建store时，在saga中间件内添加sagaMonitor服务，监听saga&#58;</p>
+<h1 id="十-总结"><a href="#十-总结" class="headerlink" title="十. 总结"></a>十. 总结</h1><p>本文较详细的总结了个人从0到1搭建一个项目架构的过程，对React， Redux应用和项目工程实践都有了更深的理解及思考，在大前端成长之路继续砥砺前行。</p>
+<p>注：文中列出的所有技术栈，博主计划一步一步推进，目前源码中使用的技术有React，React Router，Redux，react-redux，react-router-redux，Redux-saga，axios。后期计划推进Immutable，Reactotron，Redux Persist。</p>
+<p>完整项目代码见github</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>1、 React</p>
+<p>2、 Redux</p>
+<p>3、 React Router v4</p>
+<p>4、 redux-saga</p>
+<p>5、 Redux Persist</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://www.toutiao.com/group/6531967145759212045/" target="_blank" rel="noopener">React应用架构设计</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件/" rel="tag"># 软件</a>
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+            <a href="/tags/JSON/" rel="tag"># JSON</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/85a49d22/" rel="next" title="Python爬虫框架scrapy抓取旅行家网所有游记！从此出游不发愁！ - CSDN博客">
+                <i class="fa fa-chevron-left"></i> Python爬虫框架scrapy抓取旅行家网所有游记！从此出游不发愁！ - CSDN博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/8cdbcd6f/" rel="prev" title="GIF界的谷歌，凭什么靠 6 秒钟广告进账几十亿？">
+                GIF界的谷歌，凭什么靠 6 秒钟广告进账几十亿？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一-前言"><span class="nav-number">1.</span> <span class="nav-text">一. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二-项目结构与技术栈"><span class="nav-number">2.</span> <span class="nav-text">二. 项目结构与技术栈</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三-开发调试工具"><span class="nav-number">3.</span> <span class="nav-text">三. 开发调试工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四-组件划分"><span class="nav-number">4.</span> <span class="nav-text">四. 组件划分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-Redux"><span class="nav-number">5.</span> <span class="nav-text">五. Redux</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#六-React路由"><span class="nav-number">6.</span> <span class="nav-text">六. React路由</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#七-redux持久化"><span class="nav-number">7.</span> <span class="nav-text">七. redux持久化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#八-Immutable"><span class="nav-number">8.</span> <span class="nav-text">八. Immutable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#九-异步任务流管理"><span class="nav-number">9.</span> <span class="nav-text">九. 异步任务流管理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#十-总结"><span class="nav-number">10.</span> <span class="nav-text">十. 总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">11.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,Hadoop,CPU,Spark,加州理工学院," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="更多深度文章，请关注：https://yq.aliyun.com/cloud 2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件">
+<meta name="keywords" content="机器学习,Hadoop,CPU,Spark,加州理工学院">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例">
+<meta property="og:url" content="http://blockshare.top/2018/ce524a22/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="更多深度文章，请关注：https://yq.aliyun.com/cloud 2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/2c2800036df7bdaf3c03">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.773Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例">
+<meta name="twitter:description" content="更多深度文章，请关注：https://yq.aliyun.com/cloud 2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/2c2800036df7bdaf3c03">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/ce524a22/"/>
+
+
+
+
+
+  <title>大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/ce524a22/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">云栖社区</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T18:28:30+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/ce524a22/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/ce524a22/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/2c2800036df7bdaf3c03" rel="gallery_cjgf0wkrz00ddxmqdncs4g4vj"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/2c2800036df7bdaf3c03" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>更多深度文章，请关注：<a href="https://yq.aliyun.com/cloud" target="_blank" rel="noopener">https://yq.aliyun.com/cloud</a></p>
+<h1 id="2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。"><a href="#2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。" class="headerlink" title="2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。"></a>2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。</h1><p>本文将详细介绍如何使用开源工具——Apache Spark、Apache Hadoop和Deeplearning4j（DL4J），再加上商用硬件（Commodity Hardware，便宜、被广泛使用、容易被买到），能够使用有限的训练集在图像识别任务上获得最先进的结果。</p>
+<p>Deeplearning4j：JVM的深度学习工具集</p>
+<h1 id="Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J-API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。"><a href="#Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J-API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。" class="headerlink" title="Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。"></a>Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。</h1><p>基于Caltech-256图像数据集的对象分类</p>
+<p> 本文介绍如何使用Apache Spark、Apache Hadoop和deeplearning4j来解决图像分类问题。简单来说，就是通过构建一个卷积神经网络来对Caltech-256数据集中的图像进行分类。在Caltech-256数据集中，实际上有257个对象类别，每类数量大概是80到800个图像，该数据集总共30,607个图像。值得注意的是，该数据集上目前最先进的分类精度在72 - 75％范围内。下面我将带领大家使用DL4J和Spark轻松超越这个结果。</p>
+<p>小数据上的有效深度学习</p>
+<p> 目前，卷积网络可以有几亿个参数，比如在大型视觉识别挑战“ImageNet”中表现最佳的神经网络之一，有1.4亿个参数需要训练！这些网络不仅需要大量的计算和存储资源（即使是使用一组GPU，也可能需要几周时间才能完成计算），而且还需要大量数据。而Caltech-256只有30000多张图像，在这个数据集上训练这样一个复杂的模型是不现实的，因为没有足够的样本来充分学习这么多参数。相反，可以采用一种迁移学习的方法来实现。简单来说，就是将已学到的知识应用到其它领域，使其能够更好地完成新领域的学习。这是因为卷积神经网络在对图像数据集进行训练时往往会学习非常普遍的特征，因此这种类型的特征学习通常对其他图像数据集也是通用的。例如，在ImageNet上训练的网络可能已经学会了如何识别形状、面部特征、图案、文本等，这无疑对于Caltech-256数据集是有用的。</p>
+<p>加载预训练的模型</p>
+<p> 下面讲解如何使用训练好的模型来完成自己的任务，以下示例使用VGG16 模型，该模型夺得了2014 ImageNet竞赛中的亚军（网络结构及训练好的参数已公开）。由于使用了不同的图像数据集，所以需要对VGG16模型进行微小修改以适用于Caltech-256数据集预测任务。该模型具有约1.4亿个参数，大约占用500 MB空间。</p>
+<p>首先，获取DL4J可以理解和使用的VGG16型号的版本。事实证明，这种东西是建立在DL4J的API中的，它可以通过几行Scala代码完成。</p>
+<p>该模型采用的格式易于DL4J使用，使用内置的模型进行检查。</p>
+<p>上面代码显示VGG16网络的结构及参数，ConvolutionLayer表示卷积层、SubsamplingLayer表示采样层、DenseLayer表示全连接层。下图简明扼要的展示了该网络结构：</p>
+<p><img src="http://p1.pstatp.com/large/2c2800036df7bdaf3c03" img_width="858" img_height="564" alt="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例" inline="0"></p>
+<p> VGG16具有13个卷积层，中间间隔放置最大池化层以收缩图像，降低计算复杂度。卷积层中的权重实际上是过滤器，可以学习从图像中挑选出视觉特征，当使用最大池化层时，它们会“收缩”图像，这意味着后来的卷积层中的滤波器实际上提取更加抽象的特征。这样，卷积层的输出是输入图像的抽象的视觉特征，如“这个图像中有脸吗？”还是“有日落？”卷积层的输出被馈送到连续的三个全连接层，全连接层能够学习这些视觉特征与输出之间的非线性关系。</p>
+<p>另外卷积网络的关键性质之一是允许我们进行迁移学习——可以通过已经训练好的VGG16网络传递新的图像数据，并获取每个图像的特征。一旦提取了这些特征，就只需要送人最后的预测网络就可以完成相应的任务，这在计算和复杂度上都是非常容易解决的问题。</p>
+<p>使用VGG16进行图像特征化</p>
+<p> 数据集可以从Caltech-256 网站下载，拆分为三个数据集，分别为训练/验证/测试数据集，并存储在HDFS中。一旦完成该步骤，下一步就是将整个图像数据集传递到网络的所有卷积层和第一个全连接层，并将该输出保存到HDFS。</p>
+<p> 样做的原因是是因为卷积网络中的大多数内存占用和耗时计算都是发生在卷积层中，VGG16中的大多数参数（权重）调用发生在全连接层。迁移学习利用预先训练的卷积层来获取关于新输入图像的特征，这意味着只有原始模型的一小部分——全连接层被重新训练。其余的参数是静态不变的。通过这种操作，迁移学习可以节省大量的训练时间和计算量。</p>
+<p>首先提取用于特征化步骤的网络部分，Deeplearning4j具有内置的迁移学习API可用于此任务。即拆分VGG16模型，在拆分之前和之后获取整个图层列表，代码如下。</p>
+<p>现在使用org.deeplearning4j.nn迁移学习包来提取全连接“fc2”层之前（包括“fc2”层）的网络模型，如下图所示：垂线左边部分。</p>
+<p><img src="http://p9.pstatp.com/large/2c2d0003aa82d8760411" img_width="856" img_height="676" alt="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例" inline="0"></p>
+<p> 接下来是读取数据库中的图像文件。在这种情况下，这些文件被单独保存到HDFS作为JPEG文件。图像被组织成子目录，其中每个子目录包含属于特定类的一组图像。首先通过使用sc.binaryFiles 加载存储在HDFS中的图像，并使用DataVec库（DL4J的ETL库）中的图像处理工具将它们转换为INDArrays，这是DL4J处理的本机张量表示（此处为完整代码）。最后，使用上图中的冻结网络部分对输入图像进行特征提取，本质上是将它们传递到VGG16模型中的预测层前。</p>
+<p> 经过上述操作后，得到一个保存到HDFS中新的数据集。接下来可以开始构建使用这种特征化数据的传输学习模型，从而大大减少训练时间和计算复杂度。在上述示例中，得到的新数据集由30607个长度为4096的向量组成（这是由于VGG16模型中的全连接层“f2”维度为4096）。</p>
+<p>替换VGG16的预测层</p>
+<p> VGG16模型是在ImageNet数据集上进行训练的，而ImageNet数据集具有1000种不同对象类别。在典型的图像分类神经网络中，输出层的最后一层使用其输入来为数据集中的每个对象生成概率（哪一类的概率大就判断为哪一类）。因此，该输入可以被认为是关于图像的抽象视觉特征，提供关于其包含的对象的有用信息。直观地说，上述步骤生成的新数据集于Caltech-256数据集中识别对象应该是有用的。因此，定义一个新的模型，“f2”层前的模型不变，只是替换VGG16模型的最后一层预测层，将维度从原先的1000变成257，正好对应Caltech256数据集的257个类别。</p>
+<p>直观图如下，可以看到只是改变了预测层的维度：</p>
+<p><img src="http://p3.pstatp.com/large/2c3300046462fbe1e495" img_width="1150" img_height="604" alt="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例" inline="0"></p>
+<p> 该模型现在已准备好使用DL4J进行大量计算，而且还使用Spark进行规模化。简单来说是切分大规模的数据集，然后将分片交给spark群集中的每个工作核心上运行SGD，最后使用Spark RDD聚合操作对每个核心上学习的不同模型进行平均，实现分布式训练。</p>
+<p>现在针对具体的迭代次数训练SparkComputationGraph，并监控一些训练统计数据以跟踪进度。</p>
+<p>最后，通过spark提交训练工作，然后使用DL4J webui监控进度并诊断问题。下图绘制的是模型得分与迭代次数的关系，注意到分数是minibatch的负对数似然率，分数越小，效果越好。</p>
+<p><img src="http://p1.pstatp.com/large/2c2d0003aa83bb4c0eee" img_width="1366" img_height="794" alt="大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例" inline="0"></p>
+<p>这次将学习率调低后，该模型似乎能比Imagenet模型能更快地学习，因为这次使用的特征比ImageNet概率更具预测性。</p>
+<p>由于训练准确率为88.8％，但验证准确率仅为76.3％，从结果上看该模型似乎已经过拟合了。为了确保模型不会过拟合到验证集，在测试集上评估该模型。</p>
+<p>虽然准确率有所降低，但是使用基于现有Hadoop集群和商用CPU的简单深度学习架构仍然打破了该数据集的最好结果！虽然这可能不是一个突破性的成就，但这仍然是一个令人兴奋的结果。</p>
+<p>结论</p>
+<p> 虽然deeplearning4j只是许多深度学习可用的工具之一，但它具有本机ApacheSpark集成，并且采用Java编写，使其特别适合整个Hadoop生态系统。由于现有的企业数据已经通过Hadoop进行了大量访问，而且在Spark上进行处理，所以deeplearning4j的定位是花费更少的时间部署和减少开销，从而企业公司可以立即开始从深度学习中提取数据。它利用ND4J进行大量计算，这是一种高度优化的库，可与商用CPU配合使用，但在需要性能提升时也支持GPU。Deeplearning4j提供了一个全功能的深度学习库，具有从采集到部署的工具，可</p>
+<p>用于各种任务，如图像/视频识别，音频处理等。</p>
+<p>作者信息</p>
+<p>Nisha Muktewar，数据科学家，目前就职于Cloudera的数据科学团队，专注于专业服务、售前工作。</p>
+<p>Seth Hendrickson，以前是电气工程师，现在是数据科学家和软件工程师，研究方向是分布式机器学习。</p>
+<p>本文由北邮@爱可可-爱生活老师推荐，阿里云云栖社区组织翻译。</p>
+<p>文章原标题《Deep learning on Apache Spark and Apache Hadoop withDeeplearning4j | Cloudera Engineering Blog》，作者：Nisha Muktewar、Seth Hendrickson，译者：海棠，审阅：</p>
+<p>附件为原文的pdf</p>
+<p>文章为简译，更为详细的内容，请查看原文</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6438349318084837633/?iid=11823126865&amp;app=news_article&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">大神带你分分钟超越最好结果——基于分布式CPU计算的Deeplearning4j迁移学习应用实例</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Hadoop/" rel="tag"># Hadoop</a>
+          
+            <a href="/tags/CPU/" rel="tag"># CPU</a>
+          
+            <a href="/tags/Spark/" rel="tag"># Spark</a>
+          
+            <a href="/tags/加州理工学院/" rel="tag"># 加州理工学院</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/4d745c83/" rel="next" title="一文简述ResNet及其多种变体">
+                <i class="fa fa-chevron-left"></i> 一文简述ResNet及其多种变体
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/b961fd4b/" rel="prev" title="张一鸣：为什么BAT挖不走我们的人才？">
+                张一鸣：为什么BAT挖不走我们的人才？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。"><span class="nav-number">1.</span> <span class="nav-text">2016年，欧莱礼媒体公司首席数据科学家罗瑞卡宣称：“2017年将是数据科学和大数据圈参与AI技术合作的一年。”在2017年之前，对基于GPU的深度学习已经渗透到大学和研究机构，但基于CPU分散式深度学习开始在不同的公司和领域得到广泛采用。虽然GPU提供了顶级的数字计算性能，但CPU也在变得更加高效，并且现有的大部分硬件已经有大量可用的CPU计算能力。另外GPU的价格比CPU的价格要相对而言贵好多，相信大家最近一阵也发现显卡的价格暴涨，这源于数字货币比特币的暴涨，而比特币是通过电脑计算得到，计算能力越强，其每天的计算量也就越多，相当于每天“挖矿”的量。涉及深度学习的研究员都应该了解一个事实，基于GPU跑一个网络和基于CPU跑同一个网络，二者的仿真速度可以达到20倍左右的差距。因此，基于CPU的分散式深度学习也会成为后续研究的一个方向。而开源工具Deeplearning4j的出现将快速深度学习扩展到Hadoop堆栈，这将是未来几年影响深度学习的主要催化剂。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J-API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。"><span class="nav-number">2.</span> <span class="nav-text">Deeplearning4j是许多开源深度学习工具包之一，创建于2014年。DL4J集成了Hadoop和Spark，设计用于运行在分布式GPU和CPU上的商用环境。它由总部位于旧金山的商用智能和企业软件公司Skymind牵头开发。团队成员包括数据专家、深度学习专家、Java系统工程师和具有一定感知力的机器人。虽然deeplearning4j是为JVM构建的，但它使用高性能原生线性代数库Nd4j，可以对CPU或GPU进行大量优化的计算。另外使用Java编写的DL4J API对于熟悉Java虚拟机（JVM）的Java和Scala开发人员特别有吸引力。此外，Spark模型的并行训练能力使得我们轻松利用现有的群集资源来加快训练时间，而不会牺牲精度。</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

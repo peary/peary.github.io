@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="路由器,CSS,HTML,DIALOG,腾讯TM," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="一、为什么要有一个好的架构 首先明确一点，架构是为需求服务的。前端架构存在的目的，就我个人理解来说，有以下几点： 1. 提高代码的可读性 一个好的架构，代码的可读性一定是很强的。 简单来说，假如有一个新人加入团队，那么他接手这个项目，一定是容易上手的，能简单轻松的了解整个前端部分的相互关系，从而找到自己需要重点关注的点。而不是需要花很多时间去熟悉这个项目的很多细节，才能开始上手做东西。 就文件来说">
+<meta name="keywords" content="路由器,CSS,HTML,DIALOG,腾讯TM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="个人的中小型项目前端架构浅谈">
+<meta property="og:url" content="http://blockshare.top/2017/cbf020a5/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="一、为什么要有一个好的架构 首先明确一点，架构是为需求服务的。前端架构存在的目的，就我个人理解来说，有以下几点： 1. 提高代码的可读性 一个好的架构，代码的可读性一定是很强的。 简单来说，假如有一个新人加入团队，那么他接手这个项目，一定是容易上手的，能简单轻松的了解整个前端部分的相互关系，从而找到自己需要重点关注的点。而不是需要花很多时间去熟悉这个项目的很多细节，才能开始上手做东西。 就文件来说">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/1e220009835c2d7cfaf8">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.772Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="个人的中小型项目前端架构浅谈">
+<meta name="twitter:description" content="一、为什么要有一个好的架构 首先明确一点，架构是为需求服务的。前端架构存在的目的，就我个人理解来说，有以下几点： 1. 提高代码的可读性 一个好的架构，代码的可读性一定是很强的。 简单来说，假如有一个新人加入团队，那么他接手这个项目，一定是容易上手的，能简单轻松的了解整个前端部分的相互关系，从而找到自己需要重点关注的点。而不是需要花很多时间去熟悉这个项目的很多细节，才能开始上手做东西。 就文件来说">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/1e220009835c2d7cfaf8">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/cbf020a5/"/>
+
+
+
+
+
+  <title>个人的中小型项目前端架构浅谈 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/cbf020a5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">个人的中小型项目前端架构浅谈</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">CSDN</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-26T21:15:42+08:00">
+                2017-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/cbf020a5/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/cbf020a5/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/1e220009835c2d7cfaf8" rel="gallery_cjgf0wkrv00daxmqdzidi4u8d"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/1e220009835c2d7cfaf8" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p><strong>一、为什么要有一个好的架构</strong></p>
+<p>首先明确一点，<strong>架构</strong>是为需求服务的。前端架构存在的目的，就我个人理解来说，有以下几点：</p>
+<p><strong>1. 提高代码的可读性</strong></p>
+<p>一个好的架构，代码的可读性一定是很强的。</p>
+<p>简单来说，假如有一个新人加入团队，那么他接手这个项目，一定是容易上手的，能简单轻松的了解整个前端部分的相互关系，从而找到自己需要重点关注的点。而不是需要花很多时间去熟悉这个项目的很多细节，才能开始上手做东西。</p>
+<p>就文件来说，可以从文件名上，分清哪些是页面、哪些是逻辑、哪些是样式、哪些是可以复用的组件、哪些是图标组、又有哪些是移动端或是PC端专享的样式/逻辑等。</p>
+<p>就代码来说，包括统一的命名风格，封装在同一个文件里的代码的相关性足够强等。</p>
+<p><strong>2. 提高代码的可维护性</strong></p>
+<p>一个好的架构，一定是易于维护的，例如在新增需求、更改需求、修正bug，都不会造成意料之外的变化，比如说修改了一个页面组件的内容，却导致另外一个页面组件发生变化（这也太坑了）。因此，要低耦合，高内聚，以及输入和输出是可预期的。</p>
+<p><strong>3. 提高代码的可扩展性</strong></p>
+<p>一个好的架构，一定扩展性要强，不能写死。</p>
+<p>需求变更太TM正常了，新增需求也太TM正常了。因此好的架构，必须要考虑到这些情况的发生，因为这些是一定会发生的。所以，一定要避免把代码写死。</p>
+<p>比如页面组件A里需要有一个日历组件，而这个日历组件引用的是别人的（比如从github上找的）。那么尽量不要直接在页面组件A里面直接引用这个日历组件，而是将写一个日历组件B，在这个日历组件B里封装你引用的日历组件C，然后通过这个日历组件B来进行操作。</p>
+<p>原因很简单，假如某天产品经理说，这个日历组件太丑了，我们换一个吧。如果你直接在页面组件A里内嵌这个引用的日历组件C，你很可能就要改很多代码（因为不同日历组件的使用方法和暴露的接口可能不同）。假如你还在其他多个地方引用了这个日历组件，那就更糟糕了！每个地方都要改。</p>
+<p>而若是将引用的日历组件C封装到自己写的日历组件B之中，那么你只需要改日历组件B里的相应代码即可，而因为日历组件B暴露的接口是不变的，那么自然不用修改页面中的代码了。</p>
+<p>附图，以日历组件为例，是否考虑到扩展性的结果</p>
+<ul>
+<li><strong>未考虑到扩展性：</strong><br><br><strong>考虑到扩展性： </strong></li>
+</ul>
+<p><strong>4. 便于协同</strong></p>
+<p>包括前端和后端的协同，前端和前端之间的协同。</p>
+<p>具体来说，前后端的协同通常是以ajax为交互，那么应至少有一个用于专门封装了所有ajax请求的文件，所有ajax请求都封装在这里。在开发时，这里封装的方法应该可以模拟发送和接收约定好的交互内容，方便开发联调。</p>
+<p>而前端和前端的协同，主要体现在同时在更改代码时，不会影响对方代码的正常运行。因此要求封装、解耦以及低干扰度是必须的。</p>
+<p><strong>5. 自动化</strong></p>
+<p>自动打包，压缩，混淆，如果有必要，再加上自动单元测试。</p>
+<blockquote>
+<p><strong>总结：</strong>总结来说，一个好的架构的目的是，让前端写代码写的舒服，让后端联调的舒服，让产品经理改需求改的舒服。</p>
+</blockquote>
+<p><strong>二、我如何设计架构</strong></p>
+<p>我不敢说自己的架构是好的架构（显然不是啦），只能分享自己最近做的一个项目，它的架构的如何做的。</p>
+<h4 id="首先，确定需求："><a href="#首先，确定需求：" class="headerlink" title="首先，确定需求："></a><strong>首先，确定需求：</strong></h4><p>1、一个中小型网站，同时面向移动端和PC端（单端大概15个页面，算上弹窗大约20个）；</p>
+<p>2、预算有限（给的钱少），开发时间有限（一个月）；</p>
+<p>3、可能存在一定程度上的需求变更（比如增加页面或修改某些页面内容）；</p>
+<p>4、客户可能不太在乎优化（但是我自己在乎啊）；</p>
+<p>5、要求兼容IE9以上。</p>
+<h4 id="其次开始决定："><a href="#其次开始决定：" class="headerlink" title="其次开始决定："></a><strong>其次开始决定：</strong></h4><p>1、兼容IE9以上说明可以使用主流框架，而无需必须使用jQuery。因此我采用了vue，版本是2.0；</p>
+<p>2、预算有限，时间有限，因此PC端和移动端共html和js，独立css；</p>
+<p>3、页面有限，因此无需将架构层级划分的比较细，只需要按其类型划分即可；</p>
+<p>4、根据原型图来看，页面复杂程度有限，复用部分不是很多，因此可以确定哪些东西需要封装复用，哪些比较复杂需要独立封装，哪些比较简单为了简化开发难度可以直接耦合；</p>
+<p>5、自己比较熟练单页面网站，因此采用以单页面为主，异步加载其他页面的形式。</p>
+<p>于是使用相关配套的东西，比如webpack，vue-router等，另外为了开发和生产的方便性，采用以下模式进行开发。 </p>
+<h4 id="第三，划分功能："><a href="#第三，划分功能：" class="headerlink" title="第三，划分功能："></a><strong>第三，划分功能：</strong></h4><p>首先有一个根html，用户需要通过访问它来加载我们的js逻辑，因此js逻辑的代码被写在main.js之中。</p>
+<p>在main.js之下，我们的前端代码可以被划分为三部分：</p>
+<ul>
+<li>组件树- 功能模块- 各种资源<br>功能模块</li>
+</ul>
+<p>如下图： </p>
+<p>功能划分好之后，相同功能的放在同一个文件夹下，命名风格应该类似。</p>
+<p>具体来说，组件树相关的东西，通常是以.vue结尾，放置在components文件夹下；资源，有图片或者国际化资源等，以.png或者.js或.json结尾，放置在resources文件夹下；而功能插件、服务等，因为可能被多处引用，因此为了方便引用，放在src文件夹下，并且该文件夹是components文件夹和resources文件夹的上级文件夹。</p>
+<h4 id="第四，细化功能模块："><a href="#第四，细化功能模块：" class="headerlink" title="第四，细化功能模块："></a><strong>第四，细化功能模块：</strong></h4><p>功能、组件树以及资源，我们已经明确了有哪些东西，那么接下来，我们要明确这些东西该如何以文件的形式来划分。</p>
+<p>如下图：</p>
+<h5 id="1-项目构建相关"><a href="#1-项目构建相关" class="headerlink" title="1. 项目构建相关"></a><strong>1. 项目构建相关</strong></h5><ul>
+<li>因为要使用vue.js，也要使用es6语法，因此<strong>babel</strong>是必须的；- 又因为要自动化混淆打包，因此<strong>webpack</strong>也是必须的；- 最后因为要方便多人协同，因此npm的<strong>package.json</strong>的配置，方便不同人可以快速自动化通过npm install来安装依赖，也是必须的。<br>又因为要自动化混淆打包，因此<strong>webpack</strong>也是必须的；</li>
+</ul>
+<h5 id="2-CDN相关"><a href="#2-CDN相关" class="headerlink" title="2. CDN相关"></a><strong>2. CDN相关</strong></h5><p>而又因为我们要采用外部字体（需求要求引入非常见字体），因此<strong>CDN加速</strong>是必须的，该字体文件放在html中来配置引用即可。</p>
+<h5 id="3-配置和插件"><a href="#3-配置和插件" class="headerlink" title="3. 配置和插件"></a><strong>3. 配置和插件</strong></h5><ul>
+<li>我们需要直接引入一些插件和配置文件；- 为了使用vue，我们需要一个根组件，那么就是<strong>App.vue</strong>；- 使用vue-router，我们需要配置路由文件，因此<strong>router-config.js</strong>这个路由配置也是必须的；- 然后我们还需要以插件形式引入一些功能和服务，因此有了<strong>Plugin-开头的若干个vue插件</strong>，这些都是根据需要封装好的低耦合高内聚方法；<br>为了使用vue，我们需要一个根组件，那么就是<strong>App.vue</strong>；</li>
+</ul>
+<p>然后我们还需要以插件形式引入一些功能和服务，因此有了<strong>Plugin-开头的若干个vue插件</strong>，这些都是根据需要封装好的低耦合高内聚方法；</p>
+<h5 id="4-需要的npm依赖"><a href="#4-需要的npm依赖" class="headerlink" title="4. 需要的npm依赖"></a><strong>4. 需要的npm依赖</strong></h5><p>当然，要使用vue肯定要引入vue.js，类似的还有vue-router.js和各种兼容性polyfill和全局插件。</p>
+<h5 id="5-抽离出的功能模块"><a href="#5-抽离出的功能模块" class="headerlink" title="5. 抽离出的功能模块"></a><strong>5. 抽离出的功能模块</strong></h5><ul>
+<li>除了直接引用的这些插件，我们还有一些和项目高度耦合的功能服务，我认为不能作为插件，但依然需要抽离出来封装好，方便使用和修改；- 如封装ajax请求的ajax.js，所有的ajax请求都放置其中，只对外暴露接口，方便管理和使用；- 又如实时国际化功能的组件LanguageManager.js，他需要引入国际化资源和管理国际化资源的加载；- 又例如实现跨组件通信的event-bus.js；- 又比如管理用户信息的user.js。<br>如封装ajax请求的ajax.js，所有的ajax请求都放置其中，只对外暴露接口，方便管理和使用；</li>
+</ul>
+<p>又例如实现跨组件通信的event-bus.js；</p>
+<blockquote>
+<h5><strong>总结：</strong>而这些划分，都体现在上图之中。这就是src目录下的功能模块文件，我们需要的绝大多数功能都可以包括在其中，我们只需要按照实际开发中的需要，将对应的功能写入在这些文件中并引用即可。</h5>
+</blockquote>
+<h4 id="第五，组件树："><a href="#第五，组件树：" class="headerlink" title="第五，组件树："></a><strong>第五，组件树：</strong></h4><p>之前谈了功能模块的划分，接下来是组件树。</p>
+<p>因为是中小型页面，因此组件树的层级无需太深，但该抽离出来的依然还是要抽离，尽量保证抽离出来的组件解耦以及一个页面组件的逻辑不要太多。如下图：</p>
+<h5 id="0-根组件"><a href="#0-根组件" class="headerlink" title="0. 根组件"></a><strong>0. 根组件</strong></h5><p>所有组件最终往上找，都会找到共同的根组件App.vue，根组件只负责管理他的直接子组件。</p>
+<p>每个组件都只负责管理自己的直接子组件，不跨级管理，并且不依赖于自己的子组件（否则可能因为子组件的未加载或错误而导致父组件错误），做到解耦和内聚。</p>
+<h5 id="1-弹窗dialog和弹窗tips"><a href="#1-弹窗dialog和弹窗tips" class="headerlink" title="1. 弹窗dialog和弹窗tips"></a><strong>1. 弹窗dialog和弹窗tips</strong></h5><p>因为弹窗dialog和弹窗提示tips可能同时存在，因此将其划分为2个组件，方便管理。</p>
+<h5 id="2-未登录页面和登录页面"><a href="#2-未登录页面和登录页面" class="headerlink" title="2. 未登录页面和登录页面"></a><strong>2. 未登录页面和登录页面</strong></h5><p>因为页面存在登录和未登录状态，而为了加载速度考虑，当未登录时，不加载已登录页面，因此需要划分出来，并进行异步加载处理。</p>
+<h5 id="3-未登录页面"><a href="#3-未登录页面" class="headerlink" title="3. 未登录页面"></a><strong>3. 未登录页面</strong></h5><p>未登录页面又分为三种情况： </p>
+<ul>
+<li>初始页面：毫无疑问要直接加载- 登录弹窗：点击登录时加载（异步）- 注册弹窗：点击注册时加载（异步）<br>登录弹窗：点击登录时加载（异步）</li>
+</ul>
+<p>之所以分拆开，是因为根据需求，已登录用户刷新页面，可以直接进入登录后页面，因此无需登录和注册，这种处理可以减少流量消耗，提升加载页面加载速度（特别是注册弹窗需要加载的内容还比较多）。</p>
+<h5 id="4-已登录页面"><a href="#4-已登录页面" class="headerlink" title="4. 已登录页面"></a><strong>4. 已登录页面</strong></h5><p>已登录页面有较多页面，采用默认加载初始页，然后异步加载其他页面（访问时）。</p>
+<h5 id="5-弹窗dialog"><a href="#5-弹窗dialog" class="headerlink" title="5. 弹窗dialog"></a><strong>5. 弹窗dialog</strong></h5><p>由于逻辑较少，代码量不多，因此为了方便管理，统一将其合并在一个vue文件中，共同相同的打开逻辑，根据传递的key决定打开哪一个。这样在新增弹窗时，无需再去写弹窗的打开、关闭逻辑。</p>
+<p>假如有较复杂的弹窗，可以以子组件的形式引入到当前vue文件中，如此也方便管理；</p>
+<h5 id="6-国际化管理"><a href="#6-国际化管理" class="headerlink" title="6. 国际化管理"></a><strong>6. 国际化管理</strong></h5><p>和页面高耦合，负责加载对应的国际化资源，并进行切换管理。</p>
+<h5 id="7-页面组件"><a href="#7-页面组件" class="headerlink" title="7. 页面组件"></a><strong>7. 页面组件</strong></h5><p>可能有子页面和复用的组件，按照正常方式引用即可。</p>
+<h5 id="8-样式文件"><a href="#8-样式文件" class="headerlink" title="8. 样式文件"></a><strong>8. 样式文件</strong></h5><p>可以独立写为.css文件，但因为我的公共样式文件比较少，因此我还是将其放在一个.vue文件中，并在App.vue里来引用。</p>
+<h5 id="9-页面组件起名"><a href="#9-页面组件起名" class="headerlink" title="9. 页面组件起名"></a><strong>9. 页面组件起名</strong></h5><ul>
+<li>通常以.vue为结尾，除了国际化LanguageManager.js因为高耦合度，因此以.js结尾并是一个单独的vue实例，表示他更像是一个功能模块，而不是一个vue的页面组件；- 基础页面，如登录和未登录页面，公共组件（并且是header和footer这种），以base-开头；- 弹窗统一以box-为开头；- 可复用的组件以extend-开头；- 引入的外部组件以import-开头；- 普通页面组件以page-开头（这些页面往往是一个独立的页面，并且挂靠在登录或未登录页面下）；- 注册弹窗因为逻辑比较复杂，并且同类较多，因此以register-为开头。<br>基础页面，如登录和未登录页面，公共组件（并且是header和footer这种），以base-开头；</li>
+</ul>
+<p>可复用的组件以extend-开头；</p>
+<p>普通页面组件以page-开头（这些页面往往是一个独立的页面，并且挂靠在登录或未登录页面下）；</p>
+<p>通过以文件名来划分，不同的页面组件之间的区分可以说是一目了然，同时也方便管理。</p>
+<blockquote>
+<p><strong>本文来自CSDN博客：</strong>http&#58;//blog.csdn.net/qq20004604/article/details/70480932</p>
+</blockquote>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6412408309047394561/?iid=9666557238&amp;app=news_article&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">个人的中小型项目前端架构浅谈</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/路由器/" rel="tag"># 路由器</a>
+          
+            <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+            <a href="/tags/HTML/" rel="tag"># HTML</a>
+          
+            <a href="/tags/DIALOG/" rel="tag"># DIALOG</a>
+          
+            <a href="/tags/腾讯TM/" rel="tag"># 腾讯TM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/3900e45f/" rel="next" title="webpack+vuejs+element打造大型web项目">
+                <i class="fa fa-chevron-left"></i> webpack+vuejs+element打造大型web项目
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/61a03c30/" rel="prev" title="中国金融圈里的 9 大派系（史上最全，推荐收藏）">
+                中国金融圈里的 9 大派系（史上最全，推荐收藏） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先，确定需求："><span class="nav-number">1.</span> <span class="nav-text">首先，确定需求：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其次开始决定："><span class="nav-number">2.</span> <span class="nav-text">其次开始决定：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第三，划分功能："><span class="nav-number">3.</span> <span class="nav-text">第三，划分功能：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第四，细化功能模块："><span class="nav-number">4.</span> <span class="nav-text">第四，细化功能模块：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-项目构建相关"><span class="nav-number">4.1.</span> <span class="nav-text">1. 项目构建相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-CDN相关"><span class="nav-number">4.2.</span> <span class="nav-text">2. CDN相关</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-配置和插件"><span class="nav-number">4.3.</span> <span class="nav-text">3. 配置和插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-需要的npm依赖"><span class="nav-number">4.4.</span> <span class="nav-text">4. 需要的npm依赖</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-抽离出的功能模块"><span class="nav-number">4.5.</span> <span class="nav-text">5. 抽离出的功能模块</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#undefined"><span class="nav-number">4.6.</span> <span class="nav-text">总结：而这些划分，都体现在上图之中。这就是src目录下的功能模块文件，我们需要的绝大多数功能都可以包括在其中，我们只需要按照实际开发中的需要，将对应的功能写入在这些文件中并引用即可。</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#第五，组件树："><span class="nav-number">5.</span> <span class="nav-text">第五，组件树：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#0-根组件"><span class="nav-number">5.1.</span> <span class="nav-text">0. 根组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-弹窗dialog和弹窗tips"><span class="nav-number">5.2.</span> <span class="nav-text">1. 弹窗dialog和弹窗tips</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-未登录页面和登录页面"><span class="nav-number">5.3.</span> <span class="nav-text">2. 未登录页面和登录页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-未登录页面"><span class="nav-number">5.4.</span> <span class="nav-text">3. 未登录页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-已登录页面"><span class="nav-number">5.5.</span> <span class="nav-text">4. 已登录页面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-弹窗dialog"><span class="nav-number">5.6.</span> <span class="nav-text">5. 弹窗dialog</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-国际化管理"><span class="nav-number">5.7.</span> <span class="nav-text">6. 国际化管理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#7-页面组件"><span class="nav-number">5.8.</span> <span class="nav-text">7. 页面组件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#8-样式文件"><span class="nav-number">5.9.</span> <span class="nav-text">8. 样式文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#9-页面组件起名"><span class="nav-number">5.10.</span> <span class="nav-text">9. 页面组件起名</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

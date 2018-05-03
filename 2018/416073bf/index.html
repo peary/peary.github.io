@@ -1,0 +1,1532 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSDN," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="ERC20 Token 合约开发现在我们的项目目录大概是这个样子：  contracts/- Migrations.solMigrations.sol  migrations/  1_initial_migration.jstest/  package.json truffle-config.js 或 truffle.js 我们在编写智能合约时，需要在 contracts 目录下新建相应的智能合约">
+<meta name="keywords" content="CSDN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一夜身价暴涨千倍，程序员如何发布自己的 ICO？">
+<meta property="og:url" content="http://blockshare.top/2018/416073bf/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="ERC20 Token 合约开发现在我们的项目目录大概是这个样子：  contracts/- Migrations.solMigrations.sol  migrations/  1_initial_migration.jstest/  package.json truffle-config.js 或 truffle.js 我们在编写智能合约时，需要在 contracts 目录下新建相应的智能合约">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc32rOO49iaIMAjoTJRGfBSg3hOKXWzOrOSMoUib2d9spriblfS2b5wTYUHg/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc32OQnCMCzlCj1nqZ7TTgDCG7q0ibOfBaPIxGTNoiapI0zXHwHwTb6avYQ/640?wx_fmt=jpeg">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3cciafOibQ9TVrIgPQjrZBCANfQ3jxb3nnp3Oqkg1Do79UxR4kv9GLhgw/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3xolOJx7oDwhpQXbBibzxufs2UwgL48eR0spqQmVictmZVn0CVSLZBubQ/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_jpg/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc39U9jlbpL83FEMpibLlnNv9RqLmadR02IkUutNibJ6uxhwpTREPzHicOzA/640?wx_fmt=jpeg">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3bzzibvNKJZqmVFNTCiaj74fAwXffIryiazR6djoy2fJSM4yMcOSkD1g2A/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3f0hj9VokCqZBbImR0YkprhNDOZqKDyB12edThtiaL8BDcYNcEMO9fhQ/640?wx_fmt=png">
+<meta property="og:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3j1GR3jvIUWY2TicicSD4DRETvzIJIk2PPG1Q2XBfbMYvBDSq4VibEfhAg/640?wx_fmt=png">
+<meta property="og:image" content="http://mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuhjy3ca4Zqcv1iaBIiaicaJANGWW4rmAicwXDViap40ia2ZrXjjz82MZmC92E79qvoPoYymXB4TiboeCAnwg/640?wx_fmt=jpeg">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一夜身价暴涨千倍，程序员如何发布自己的 ICO？">
+<meta name="twitter:description" content="ERC20 Token 合约开发现在我们的项目目录大概是这个样子：  contracts/- Migrations.solMigrations.sol  migrations/  1_initial_migration.jstest/  package.json truffle-config.js 或 truffle.js 我们在编写智能合约时，需要在 contracts 目录下新建相应的智能合约">
+<meta name="twitter:image" content="https://mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc32rOO49iaIMAjoTJRGfBSg3hOKXWzOrOSMoUib2d9spriblfS2b5wTYUHg/640?wx_fmt=png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/416073bf/"/>
+
+
+
+
+
+  <title>一夜身价暴涨千倍，程序员如何发布自己的 ICO？ | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/416073bf/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一夜身价暴涨千倍，程序员如何发布自己的 ICO？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">CSDN</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-17T10:08:10+08:00">
+                2018-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/416073bf/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/416073bf/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="ERC20-Token-合约开发"><a href="#ERC20-Token-合约开发" class="headerlink" title="ERC20 Token 合约开发"></a>ERC20 Token 合约开发</h4><p>现在我们的项目目录大概是这个样子：</p>
+<ul>
+<li>contracts/<ul class=" list-paddingleft-2">- Migrations.sol<br>Migrations.sol</ul></li>
+</ul>
+<p>migrations/</p>
+<ul>
+<li>1_initial_migration.js<br>test/</li>
+</ul>
+<p>package.json</p>
+<p>truffle-config.js 或 truffle.js</p>
+<p>我们在编写智能合约时，需要在 <code>contracts</code> 目录下新建相应的智能合约文件。</p>
+<p>在以太坊开发智能合约的编程语言叫做 Solidity (https&#58;//goo.gl/hCHh3w)。它是一种在语法上非常类似 JavaScript 的语言，其后缀名为 <code>.sol</code> 。</p>
+<p>例如在这里我们可以创建一个名为 <code>GitCoin.sol</code> 的文件，命令如下。</p>
+<p>// *nix<br>touch GitCoin.sol<br>// win<br>copy NUL &gt; GitCoin.sol</p>
+<p>ERC20（Ethereum Request for Comments NO.20）(https&#58;//goo.gl/aX4x5F) 是官方发行的 token 标准。</p>
+<p>如果你希望你发布的 token 能够在以太坊网络上流通、上市交易所、支持以太坊钱包，在开发 token 的合约时就必须遵从这一规范。</p>
+<p>ERC20 规定了合约中的一系列变量、方法、事件，你可以参考官网教程 Create your own CRYPTO-CURRENCY with Ethereum (https&#58;//<a href="http://www.ethereum.org/token" target="_blank" rel="noopener">www.ethereum.org/token</a>) 当中的示例代码：</p>
+<p>pragma solidity ^0.4.16;</p>
+<p>interface tokenRecipient &amp;#123 function receiveApproval(address _from, uint256 _value, address _token, bytes _extraData) public; &amp;#125contract TokenERC20 &amp;#123    // Public variables of the token<br>   string public name;<br>   string public symbol;<br>   uint8 public decimals = 18;    // 18 decimals is the strongly suggested default, avoid changing it<br>   uint256 public totalSupply;    // This creates an array with all balances<br>   mapping (address =&gt; uint256) public balanceOf;<br>   mapping (address =&gt; mapping (address =&gt; uint256)) public allowance;    // This generates a public event on the blockchain that will notify clients<br>   event Transfer(address indexed from, address indexed to, uint256 value);    // This notifies clients about the amount burnt<br>   event Burn(address indexed from, uint256 value);    /**</p>
+<pre><code>* Constrctor function
+*
+* Initializes contract with initial supply tokens to the creator of the contract
+*/
+</code></pre><p>   function TokenERC20(<br>       uint256 initialSupply,<br>       string tokenName,<br>       string tokenSymbol<br>   ) public &amp;#123<br>       totalSupply = initialSupply * 10 <strong> uint256(decimals);  // Update total supply with the decimal amount<br>       balanceOf&#91;msg.sender&#93; = totalSupply;                // Give the creator all initial tokens<br>       name = tokenName;                                   // Set the name for display purposes<br>       symbol = tokenSymbol;                               // Set the symbol for display purposes<br>   &amp;#125    /</strong></p>
+<pre><code>* Internal transfer, only can be called by this contract
+*/
+</code></pre><p>   function _transfer(address _from, address _to, uint _value) internal &amp;#123        // Prevent transfer to 0x0 address. Use burn() instead<br>       require(_to != 0x0);        // Check if the sender has enough<br>       require(balanceOf&#91;_from&#93; &gt;= _value);        // Check for overflows<br>       require(balanceOf&#91;_to&#93; + _value &gt; balanceOf&#91;_to&#93;);        // Save this for an assertion in the future<br>       uint previousBalances = balanceOf&#91;_from&#93; + balanceOf&#91;_to&#93;;        // Subtract from the sender<br>       balanceOf&#91;_from&#93; -= _value;        // Add the same to the recipient<br>       balanceOf&#91;_to&#93; += _value;<br>       Transfer(_from, _to, _value);        // Asserts are used to use static analysis to find bugs in your code. They should never fail<br>       assert(balanceOf&#91;_from&#93; + balanceOf&#91;_to&#93; == previousBalances);<br>   &amp;#125    /**</p>
+<pre><code>* Transfer tokens
+*
+* Send `_value` tokens to `_to` from your account
+*
+* &amp;#64;param _to The address of the recipient
+* &amp;#64;param _value the amount to send
+*/
+</code></pre><p>   function transfer(address _to, uint256 _value) public &amp;#123<br>       _transfer(msg.sender, _to, _value);<br>   &amp;#125    /**</p>
+<pre><code>* Transfer tokens from other address
+*
+* Send `_value` tokens to `_to` on behalf of `_from`
+*
+* &amp;#64;param _from The address of the sender
+* &amp;#64;param _to The address of the recipient
+* &amp;#64;param _value the amount to send
+*/
+</code></pre><p>   function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) &amp;#123        require(_value &lt;= allowance&#91;_from&#93;&#91;msg.sender&#93;);     // Check allowance<br>       allowance&#91;_from&#93;&#91;msg.sender&#93; -= _value;<br>       _transfer(_from, _to, _value);        return true;<br>   &amp;#125    /**</p>
+<pre><code>* Set allowance for other address
+*
+* Allows `_spender` to spend no more than `_value` tokens on your behalf
+*
+* &amp;#64;param _spender The address authorized to spend
+* &amp;#64;param _value the max amount they can spend
+*/
+</code></pre><p>   function approve(address _spender, uint256 _value) public<br>       returns (bool success) &amp;#123<br>       allowance&#91;msg.sender&#93;&#91;_spender&#93; = _value;        return true;<br>   &amp;#125    /**</p>
+<pre><code>* Set allowance for other address and notify
+*
+* Allows `_spender` to spend no more than `_value` tokens on your behalf, and then ping the contract about it
+*
+* &amp;#64;param _spender The address authorized to spend
+* &amp;#64;param _value the max amount they can spend
+* &amp;#64;param _extraData some extra information to send to the approved contract
+*/
+</code></pre><p>   function approveAndCall(address _spender, uint256 _value, bytes _extraData)<br>       public<br>       returns (bool success) &amp;#123<br>       tokenRecipient spender = tokenRecipient(_spender);        if (approve(_spender, _value)) &amp;#123<br>           spender.receiveApproval(msg.sender, _value, this, _extraData);            return true;<br>       &amp;#125<br>   &amp;#125    /**</p>
+<pre><code>* Destroy tokens
+*
+* Remove `_value` tokens from the system irreversibly
+*
+* &amp;#64;param _value the amount of money to burn
+*/
+</code></pre><p>   function burn(uint256 _value) public returns (bool success) &amp;#123        require(balanceOf&#91;msg.sender&#93; &gt;= _value);   // Check if the sender has enough<br>       balanceOf&#91;msg.sender&#93; -= _value;            // Subtract from the sender<br>       totalSupply -= _value;                      // Updates totalSupply<br>       Burn(msg.sender, _value);        return true;<br>   &amp;#125    /**</p>
+<pre><code>* Destroy tokens from other account
+*
+* Remove `_value` tokens from the system irreversibly on behalf of `_from`.
+*
+* &amp;#64;param _from the address of the sender
+* &amp;#64;param _value the amount of money to burn
+*/
+</code></pre><p>   function burnFrom(address _from, uint256 _value) public returns (bool success) &amp;#123        require(balanceOf&#91;_from&#93; &gt;= _value);                // Check if the targeted balance is enough<br>       require(_value &lt;= allowance&#91;_from&#93;&#91;msg.sender&#93;);    // Check allowance<br>       balanceOf&#91;_from&#93; -= _value;                         // Subtract from the targeted balance<br>       allowance&#91;_from&#93;&#91;msg.sender&#93; -= _value;             // Subtract from the sender’s allowance<br>       totalSupply -= _value;                              // Update totalSupply<br>       Burn(_from, _value);        return true;<br>   &amp;#125<br>&amp;#125</p>
+<blockquote>
+<p>我只是想割韭菜而已，用得着写几百行代码吗？</p>
+</blockquote>
+<p>当然不必，这时我们就需要使用到智能合约开发框架 OpenZeppelin (https&#58;//openzeppelin.org)，安装命令如下。</p>
+<p>npm install zeppelin-solidity –save</p>
+<p><strong>GitCoin.sol</strong></p>
+<p>引入 OpenZeppelin，代码如下。</p>
+<p>// 声明 solidity 编译版本pragma solidity ^0.4.18;// 引入框架为我们提供的编写好的 ERC20 Token 的代码import “zeppelin-solidity/contracts/token/StandardToken.sol”;// 通过 is 关键字继承 StandardTokencontract GitToken is StandardToken &amp;#123</p>
+<p> string public name = “GitToken”; // Token 名称<br> string public symbol = “EGT”; // Token 标识 例如：ETH/EOS<br> uint public decimals = 18; // 计量单位，和 ETH 保持一样就设置为 18<br> uint public INITIAL_SUPPLY = 10000 * (10 ** decimals); // 初始供应量</p>
+<p> // 与 contract 同名的函数为本 contract 的构造方法，类似于 JavaScript 当中的 constructor<br> function GitToken() &amp;#123<br>   totalSupply = INITIAL_SUPPLY; // 设置初始供应量<br>   balances&#91;msg.sender&#93; = INITIAL_SUPPLY; // 将所有初始 token 都存入 contract 创建者的余额<br> &amp;#125<br>&amp;#125</p>
+<p>好了，至此一个可以用来交易的符合 ERC20 标准的 token 就编写完毕了。</p>
+<p>就这么简单？就这么简单！当然智能合约的功能不止如此，token 中可以玩转设计的地方也不止这些。</p>
+<p>不过我们要稍微放在后面一些来讨论，接下来还是赶快着手 ICO 合约开发，为我们的项目募集资金吧。</p>
+<h4 id="ICO-Crowdsale-合约开发"><a href="#ICO-Crowdsale-合约开发" class="headerlink" title="ICO Crowdsale 合约开发"></a>ICO Crowdsale 合约开发</h4><p>同样，以太坊官网文档在教程 CROWDSALE Raising funds from friends without a third party (https&#58;//<a href="http://www.ethereum.org/crowdsale" target="_blank" rel="noopener">www.ethereum.org/crowdsale</a>) 中也为我们提供了用来 crowdsale 做 ICO 募资的示例代码：</p>
+<p>pragma solidity ^0.4.18;/**</p>
+<ul>
+<li>interface 的概念和其他编程语言当中类似，在这里相当于我们可以通过传参引用之前发布的 token 合约</li>
+<li>我们只需要使用其中的转账 transfer 方法，所以就只声明 transfer<br><strong>/interface token &amp;#123    function transfer(address receiver, uint amount);<br>&amp;#125contract Crowdsale &amp;#123    // 这里是发布合约时需要传入的参数<br> address public beneficiary; // ICO 募资成功后的收款方<br> uint public fundingGoal; // 骗多少钱<br> uint public amountRaised; // 割到多少韭菜<br> uint public deadline; // 割到啥时候<br> /</strong><ul>
+<li>卖多贵，即你的 token 与以太坊的汇率，你可以自己设定</li>
+<li>注意到，ICO 当中 token 的价格是由合约发布方自行设定而不是市场决定的</li>
+<li>也就是说你项目值多少钱你可以自己编<br><strong>/<br>uint public price;<br>token public tokenReward; // 你要卖的 token<br>mapping(address =&gt; uint256) public balanceOf;<br>bool fundingGoalReached = false; // 是否达标<br>bool crowdsaleClosed = false; // 售卖是否结束<br>/</strong></li>
+<li>事件可以用来记录信息，每次调用事件方法时都能将相关信息存入区块链中</li>
+<li>可以用作凭证，也可以在你的 Dapp 中查询使用这些数据<br><strong>/<br>event GoalReached(address recipient, uint totalAmountRaised);<br>event FundTransfer(address backer, uint amount, bool isContribution);    /</strong><ul>
+<li>Constrctor function<br>*</li>
+<li>Setup the owner<br><em>/<br>function Crowdsale(<br>address ifSuccessfulSendTo,<br>uint fundingGoalInEthers,<br>uint durationInMinutes,<br>uint etherCostOfEachToken,<br>address addressOfTokenUsedAsReward<br>) &amp;#123<br>beneficiary = ifSuccessfulSendTo;<br>fundingGoal = fundingGoalInEthers </em> 1 ether;<br>deadline = now + durationInMinutes <em> 1 minutes;<br>price = etherCostOfEachToken </em> 1 ether;<br>tokenReward = token(addressOfTokenUsedAsReward); // 传入已发布的 token 合约的地址来创建实例<br>&amp;#125    /**</li>
+<li>Fallback function<br>*</li>
+<li>payable 用来指明向合约付款时调用的方法<br>*/<br>function () payable &amp;#123        require(!crowdsaleClosed);<br>uint amount = msg.value;<br>balanceOf&#91;msg.sender&#93; += amount;<br>amountRaised += amount;<br>tokenReward.transfer(msg.sender, amount / price);<br>FundTransfer(msg.sender, amount, true);<br>&amp;#125    /**</li>
+</ul>
+</li>
+<li>modifier 可以理解为其他语言中的装饰器或中间件</li>
+<li>当通过其中定义的一些逻辑判断通过之后才会继续执行该方法</li>
+<li>_ 表示继续执行之后的代码<br><strong>/<br>modifier afterDeadline() &amp;#123 if (now &gt;= deadline) _; &amp;#125    /</strong><ul>
+<li>Check if goal was reached<br>*</li>
+<li>Checks if the goal or time limit has been reached and ends the campaign<br>*/<br>function checkGoalReached() afterDeadline &amp;#123        if (amountRaised &gt;= fundingGoal)&amp;#123<pre><code>fundingGoalReached = true;
+GoalReached(beneficiary, amountRaised);
+</code></pre>&amp;#125<br>crowdsaleClosed = true;<br>&amp;#125    /**</li>
+<li>Withdraw the funds<br>*</li>
+<li>Checks to see if goal or time limit has been reached, and if so, and the funding goal was reached,</li>
+<li>sends the entire amount to the beneficiary. If goal was not reached, each contributor can withdraw</li>
+<li>the amount they contributed.<br>*/<br>function safeWithdrawal() afterDeadline &amp;#123        if (!fundingGoalReached) &amp;#123<pre><code>uint amount = balanceOf&amp;#91;msg.sender&amp;#93;;
+balanceOf&amp;#91;msg.sender&amp;#93; = 0;            if (amount &gt; 0) &amp;#123                if (msg.sender.send(amount)) &amp;#123
+        FundTransfer(msg.sender, amount, false);
+    &amp;#125 else &amp;#123
+        balanceOf&amp;#91;msg.sender&amp;#93; = amount;
+    &amp;#125
+&amp;#125
+</code></pre>&amp;#125        if (fundingGoalReached &amp;&amp; beneficiary == msg.sender) &amp;#123            if (beneficiary.send(amountRaised)) &amp;#123<pre><code>    FundTransfer(beneficiary, amountRaised, false);
+&amp;#125 else &amp;#123                //If we fail to send the funds to beneficiary, unlock funders balance
+    fundingGoalReached = false;
+&amp;#125
+</code></pre>&amp;#125<br>&amp;#125<br>&amp;#125</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>至此我们的 ICO 合约也开发完毕了，基本上一行代码都没有写，只是改了几个参数，一个键盘上只有三个按键的程序员都能够完成这类智能合约的开发，没有比这更友好的编程体验了。</p>
+<p>虽然 solidity 是一种非图灵完备的编程语言，但我们仍然能够用它编写许多逻辑。</p>
+<p>上述的 ICO 示例代码写得算比较客气的一种，在最后的提款方法中，如果筹资达标，ICO 发布方则可以取走所有筹款，而如果未达标，参与者则能够取回自己的投资，由合约来持有所有款项。</p>
+<p>但事实上，我们仍然可以随意修改其中的逻辑，看下面代码。</p>
+<p>function () payable &amp;#123  require(!crowdsaleClosed);<br> uint amount = msg.value;<br> balanceOf&#91;msg.sender&#93; += amount;<br> amountRaised += amount;<br> tokenReward.transfer(msg.sender, amount / price);  // 每次有人付款直接取走筹资<br> beneficiary.send(amountRaised);<br> amountRaised = 0;<br> FundTransfer(msg.sender, amount, true);<br>&amp;#125// 删除剩余代码</p>
+<h4 id="补充说明与权限控制"><a href="#补充说明与权限控制" class="headerlink" title="补充说明与权限控制"></a>补充说明与权限控制</h4><p>既然咱是铁了心来割韭菜的，如此简单的代码怎么能够满足咱的贪欲呢？一定要学比特币固定供给量吗？</p>
+<p>我是来卖 token 的呀，万一有一天卖完了怎么办，万一有人手里筹码比我自己都多了控盘怎么办，万一发的数量太多卖的不好怎么办？</p>
+<p>事实上解决这些问题的逻辑全部都可以写在智能合约里。</p>
+<p><strong>Ownable token</strong></p>
+<p>在我们的潜在观念里，区块链自有不可变属性。</p>
+<p>这种不可变属性在一些狂热信徒的演绎当中变成了平权属性，甚至带有了共产主义色彩，仿佛拥抱区块链技术就能够为未来的人类文明带来希望，把人民从集权的手中解救出来。</p>
+<p>然而事实上这种不可变性同样是两面的，它能够带来的也包括所有权的不可变性。</p>
+<p>ERC20 标准只规定了我们的合约中应该包含哪些方法，而没有限制合约中不能出现哪些方法，因此在之前的基础上，我们还可以继续编写一些特殊的方法，赋予合约发布者一些管理员特权。</p>
+<p>请看下面代码：</p>
+<p>contract Ownable &amp;#123<br>   address public owner;    function Ownable() public &amp;#123<br>       owner = msg.sender;<br>   &amp;#125    // 通过 onlyOwner 我们可以限定一些方法只有所有者才能够调用<br>   modifier onlyOwner &amp;#123        require(msg.sender == owner);<br>       _;<br>   &amp;#125    function transferOwnership(address newOwner) onlyOwner public &amp;#123<br>       owner = newOwner;<br>   &amp;#125<br>&amp;#125// 合约可以同时有多个继承contract GitToken is StandardToken, Ownable &amp;#123<br> …</p>
+<p><strong>MintableToken</strong></p>
+<p>接下来我们来解决 token 不够卖的问题，万一我的 initial offer 卖断货了怎么办，万一我卖完一次还想卖怎么办？</p>
+<p>这时我们就需要把 token 编写成为 MintableToken，在我们想增发的时候就能增发，代码如下：</p>
+<p>// 用 onlyOwner 限定只有 token 的所有者才能够进行增发操作function mint(address _to, uint256 <em>amount) onlyOwner public returns (bool) &amp;#123<br> totalSupply</em> = totalSupply_.add(_amount);<br> balances&#91;_to&#93; = balances&#91;_to&#93;.add(_amount);<br> Mint(_to, _amount);<br> Transfer(address(0), _to, _amount);  return true;<br>&amp;#125</p>
+<p><strong>BurnableToken</strong></p>
+<p>万一我们的 token 不小心发了太多，卖的时间久了贬值怎么办？</p>
+<p>当然是销毁了，可参照下面代码：</p>
+<p>/**</p>
+<ul>
+<li>Destroy tokens<br>*</li>
+<li>Remove <code>_value</code> tokens from the system irreversibly<br>*</li>
+<li>&#64;param _value the amount of money to burn<br>*/function burn(uint256 _value) public returns (bool success) &amp;#123  require(balanceOf&#91;msg.sender&#93; &gt;= _value);   // Check if the sender has enough<br>balanceOf&#91;msg.sender&#93; -= _value;            // Subtract from the sender<br>totalSupply -= _value;                      // Updates totalSupply<br>Burn(msg.sender, _value);  return true;<br>&amp;#125</li>
+</ul>
+<p>万一有人手里的筹码太多，或者 token 被竞争对手买走了怎么办？没关系，我们还可以指定销毁某一账户中的 token，请看下面代码：</p>
+<p>/**</p>
+<ul>
+<li>Destroy tokens from other account<br>*</li>
+<li>Remove <code>_value</code> tokens from the system irreversibly on behalf of <code>_from</code>.<br>*</li>
+<li>&#64;param _from the address of the sender</li>
+<li>&#64;param _value the amount of money to burn<br>*/function burnFrom(address _from, uint256 _value) public returns (bool success) &amp;#123  require(balanceOf&#91;_from&#93; &gt;= _value);                // Check if the targeted balance is enough<br>require(_value &lt;= allowance&#91;_from&#93;&#91;msg.sender&#93;);    // Check allowance<br>balanceOf&#91;_from&#93; -= _value;                         // Subtract from the targeted balance<br>allowance&#91;_from&#93;&#91;msg.sender&#93; -= _value;             // Subtract from the sender’s allowance<br>totalSupply -= _value;                              // Update totalSupply<br>Burn(_from, _value);  return true;<br>&amp;#125</li>
+</ul>
+<p>只要上述的方法全部都出现在合约里，我们发布的 token 就能够具备上述所有属性。</p>
+<p>这样一来，不够的时候我们可以发钱，发多了可以销毁，我们成功创建了属于自己的一所中央银行，甚至看某人不爽还能够指定销毁其账户存款，这哪里是平权，简直是超级集权。</p>
+<p>而事实上，在已发布的 ERC20 token 当中，例如排名第一的 EOS 的合约 (https&#58;//goo.gl/L2AmQP) 里也是存在类似方法的，如下所示。</p>
+<p>function mint(uint128 wad) auth stoppable note &amp;#123<br> _balances&#91;msg.sender&#93; = add(_balances&#91;msg.sender&#93;, wad);<br> _supply = add(_supply, wad);<br>&amp;#125function burn(uint128 wad) auth stoppable note &amp;#123<br> _balances&#91;msg.sender&#93; = sub(_balances&#91;msg.sender&#93;, wad);<br> _supply = sub(_supply, wad);<br>&amp;#125</p>
+<p>当然在其官方网站和白皮书中是标明了会发布多少 token，创始团队持有多少，投资人分配多少，公开发布多少，如何销毁等内容的。</p>
+<p>但白皮书又不具备法律效力，token 的所有权也不在你手里，万一人家哪天想要跑路或者中途变卦岂是咱能拦得住的。</p>
+<p>换个角度讲，假如你现在手里有一家可以印钱的公司，印多少就有多少，你印还是不印？</p>
+<p>通过这一部分内容的介绍，我只是想要证明，智能合约本身并不具备可无条件信任的特性，充其量就是一段没法改一直跑的程序而已。</p>
+<p>你也可以在逻辑中加入管理员权限，token 的发布方并不比央行可信多少，只要所有者愿意可以随时进行修改。以太坊官方宣传的所谓 “trustless” 这一概念根本不成立。</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc32rOO49iaIMAjoTJRGfBSg3hOKXWzOrOSMoUib2d9spriblfS2b5wTYUHg/640?wx_fmt=png"></p>
+<p>没有第三方担保，没有法律法规的维护，仅凭智能合约本身你的投资得不到任何保证。智能合约的不可变性反而给割韭菜的一方提供了巨大的便利。</p>
+<p>从前你看不惯某家公司还能够黑掉它的系统，获取管理员权限，如今所有程序都跑在区块链上，黑无可黑，集权永远都在合约发布者的手里。</p>
+<p>讲到这里，希望你能理解这次分享的良苦用心，不要轻信任何 ICO 项目。</p>
+<h4 id="合约的发布及调试"><a href="#合约的发布及调试" class="headerlink" title="合约的发布及调试"></a>合约的发布及调试</h4><p><strong>本地开发环境发布</strong></p>
+<p>合约开发完成之后，我们需要编译并发布合约至区块链网络中，只需要进行以下两步操作。</p>
+<p>首先在 <code>migrations</code> 文件夹下新建 <code>2-deploy-contract.js</code> 文件，配置部署脚本如下。</p>
+<p>// 引入我们编写的合约const GitCoin = artifacts.require(“./GitCoin.sol”)const GitCoinCrowdsale = artifacts.require(“./GitCoinCrowdsale.sol”)module.exports = function(deployer, network, accounts) &amp;#123  // 设定参数，此处的参数即使传入合约构造方法的参数，与你自己编写的合约保持一致<br> const ifSuccessfulSendTo = accounts&#91;0&#93; // 当前以太坊网络中的默认账户<br> const fundingGoalInEthers = 1000<br> const durationInMinutes = 36000000<br> const etherCostOfEachToken = 0.01<br> // 这里的 Promise 可以保证我们在发布完 token 合约之后再发布 ICO 合约，并将已发布 token 的地址作为参数传入<br> deployer.deploy(GitCoin).then(function() &amp;#123    return deployer.deploy(GitCoinCrowdsale, ifSuccessfulSendTo, fundingGoalInEthers, durationInMinutes, etherCostOfEachToken, GitCoin.address);<br> &amp;#125);<br>&#125;</p>
+<p>接着在 <code>truffle-config.js</code> 或 <code>truffle.js</code> 中设置发布网络，脚本如下。</p>
+<p>module.exports = &amp;#123<br> networks&#58; &amp;#123<br>   development&#58; &amp;#123<br>     host&#58; “127.0.0.1”,<br>     port&#58; 7545, // 与你本地的 ganache 设置保持一致<br>     network_id&#58; “*” // Match any network id<br>   &amp;#125<br> &amp;#125<br>&#125;</p>
+<p>现在只需要开启 Ganache：</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_jpg/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc32OQnCMCzlCj1nqZ7TTgDCG7q0ibOfBaPIxGTNoiapI0zXHwHwTb6avYQ/640?wx_fmt=jpeg"></p>
+<p>然后在命令行中输入：</p>
+<p>truffle compile<br>truffle migrate</p>
+<p>你的合约就会顺利发布至测试网络中了。然后你可以输入：</p>
+<p>truffle console</p>
+<p>这样就能够进入本地的命令行调试了：</p>
+<h1 id="所有的合约方法都是-Promise-对象truffle-development-gt-GitCoinCrowdsale-deployed-then-inst-gt-amp-123crowd-inst-amp-125"><a href="#所有的合约方法都是-Promise-对象truffle-development-gt-GitCoinCrowdsale-deployed-then-inst-gt-amp-123crowd-inst-amp-125" class="headerlink" title="所有的合约方法都是 Promise 对象truffle(development)&gt; GitCoinCrowdsale.deployed().then(inst=&gt;&amp;#123crowd=inst&amp;#125)"></a>所有的合约方法都是 Promise 对象truffle(development)&gt; GitCoinCrowdsale.deployed().then(inst=&gt;&amp;#123crowd=inst&amp;#125)</h1><p>truffle(development)&gt; GitCoin.deployed().then(inst=&gt;&amp;#123git=inst&amp;#125)<br>truffle(development)&gt; crowd.sendTransaction(&amp;#123from&#58;web3.eth.accounts&#91;0&#93;,value&#58;web3.toWei(1, “ether”)&amp;#125)<br>truffle(development)&gt; git.mint(web3.eth.accounts&#91;0&#93;,web3.toWei(100, “ether”))</p>
+<p><strong>线上测试网络发布</strong></p>
+<p>以太坊网络分为测试网和主网，在正式发布主网之前，我们可以先发送到测试网络进行调试。</p>
+<p>发布至以太坊网络也无需同步完整节点，我们可以使用 Infura 为我们提供的公共接口。</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3cciafOibQ9TVrIgPQjrZBCANfQ3jxb3nnp3Oqkg1Do79UxR4kv9GLhgw/640?wx_fmt=png"></p>
+<p>填写表单提交后，Infura 会为你提供专用的接口地址，然后我们只需要将网络地址填入到配置文件中，如下所示。</p>
+<p>var HDWalletProvider = require(“truffle-hdwallet-provider”); // 在这里我们需要通过 js 调用以太坊钱包，通过 npm install truffle-hdwallet-provider 安装这个库var infura_apikey = “ubQWERwasd”; // infura 为你提供的 apikey 请与你申请到的 key 保持一致，此处仅为示例var mnemonic = “apple banana carray dog egg fault great”; // 你以太坊钱包的 mnemonic ，可以从 Metamask 当中导出，mnemonic 可以获取你钱包的所有访问权限，请妥善保存，在开发中切勿提交到 gitmodule.exports = &amp;#123<br> networks&#58; &amp;#123<br>   development&#58; &amp;#123<br>     host&#58; “127.0.0.1”,<br>     port&#58; 7545,<br>     network_id&#58; “*”<br>   &amp;#125,<br>   ropsten&#58; &amp;#123<br>     provider&#58; function() &amp;#123        return new HDWalletProvider(mnemonic, “https&#58;//ropsten.infura.io/“+infura_apikey)<br>     &amp;#125,<br>     network_id&#58; 3,<br>     gas&#58; 3012388,<br>     gasPrice&#58; 30000000000<br>   &amp;#125,<br>   main&#58; &amp;#123<br>     provider&#58; function() &amp;#123        return new HDWalletProvider(mnemonic, “https&#58;//mainnet.infura.io/“+infura_apikey)<br>     &amp;#125,<br>     network_id&#58; 3,<br>     gas&#58; 3012388,<br>     gasPrice&#58; 1000000000<br>   &amp;#125<br> &amp;#125<br>&#125;</p>
+<p>在以太坊网络中发布合约需要使用 ETH 支付矿工的 gas 费用，你可以在 Ethereum Ropsten Faucet (http&#58;//faucet.ropsten.be&#58;3001) 免费获取到用于 Ropsten 测试网络的 ETH。</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3xolOJx7oDwhpQXbBibzxufs2UwgL48eR0spqQmVictmZVn0CVSLZBubQ/640?wx_fmt=png"></p>
+<p>由于网络环境的变化，不同的拥堵状况可能造成燃料费用和消耗的不同。</p>
+<p>如果发布不成功，可以调整 <code>gas/gasPrice</code> 的数值，你可以通过 <code>web3.getBlock(&#39;latest&#39;).gasLimit</code> 这一数值判断当前网络的消耗。</p>
+<p>在命令行输入如下命令：</p>
+<p>truffle migrate –network ropsten</p>
+<p>通过 <code>--network</code> 设置发布的目标网络。</p>
+<p><strong>主网络发布</strong></p>
+<p>同理，在发布至主网络时，只需要执行如下命令。</p>
+<p>truffle migrate –network main</p>
+<p>但由于当前的以太坊网络的现实状况，如果设置燃料费太低，可能要等待数天后合约才会被网络确认，注意到我们编写的发布脚本是需要合约地址回调的。</p>
+<p>介于这种状况，我们可以将 token 合约和 crowdsale 合约分开发布，只需要再新建 <code>3-deploy-crowdsale.js</code> 文件，脚本如下。</p>
+<p>const LeekCoinCrowdsale = artifacts.require(“./GitCoinCrowdsale.sol”)module.exports = function(deployer, network, accounts) &amp;#123  const ifSuccessfulSendTo = accounts&#91;0&#93;  const fundingGoalInEthers = 1000<br> const durationInMinutes = 36000<br> const etherCostOfEachToken = 0.01<br> const tokenAddress = ‘0x123456789ABCDFGHSDWDVC’ // 先单独发布 token 合约，上线成功后将其合约地址填在此处</p>
+<p> deployer.deploy(GitCoinCrowdsale, ifSuccessfulSendTo, fundingGoalInEthers, durationInMinutes, etherCostOfEachToken, tokenAddress);<br>&#125;</p>
+<p>在发布至主网络时，可以分开两次进行，确保你设置的账户里有真实的 ETH 余额，注意设置好合理的 gas 数值，根据确认时间的长短，可能需要 0.08~1 ETH 不等。</p>
+<h4 id="上线合约验证"><a href="#上线合约验证" class="headerlink" title="上线合约验证"></a>上线合约验证</h4><p>无论是发布至以太坊的测试网络还是主网络，在发布完成之后都需要在 Etherscan (https&#58;//etherscan.io) 进行线上验证。</p>
+<p>在 Etherscan 上打开你刚刚发布的合约地址，你可以看到如下内容：</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_jpg/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc39U9jlbpL83FEMpibLlnNv9RqLmadR02IkUutNibJ6uxhwpTREPzHicOzA/640?wx_fmt=jpeg"></p>
+<p>点击 <strong>Verify And Publish</strong> 链接就可以进入验证页面：</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3bzzibvNKJZqmVFNTCiaj74fAwXffIryiazR6djoy2fJSM4yMcOSkD1g2A/640?wx_fmt=png"></p>
+<p>在填写表单时有以下注意事项。</p>
+<ol>
+<li>Compiler 选择最新版本；1. Optimization 选择 No。<br>Optimization 选择 No。</li>
+</ol>
+<p>虽然 solidity 支持 import 语法，但 Etherscan 对使用 import 进行开发的合约支持很鸡肋，目前它要求你需要把库文件也当作合约发布至网络才能够在表单中填写进行验证。</p>
+<p>当然我们也可以选择手动把 import 库文件的内容手动复制粘贴到代码框里，注意要保留全部内容，包括 pragma 声明一行。</p>
+<p>当然你也可以选择使用官方的 Remix (https&#58;//remix.ethereum.org/) 预先 concrete 你的合约文件，也可以安装 solidity compiler (https&#58;//goo.gl/aKsXxH) 在本地编译好再发布。</p>
+<p>ICO 和 token 的合约如此简单，根本不需要这些玩意儿，所以此处不再赘述，感兴趣的同学可以自行研究。</p>
+<h3 id="Dapp-开发"><a href="#Dapp-开发" class="headerlink" title="Dapp 开发"></a>Dapp 开发</h3><p>智能合约相当于我们的后端逻辑，以太坊的 EVM 就是我们的云服务器，Infura 为我们提供 API 接口，接下来我们就只需要给韭菜开发一个可以花钱消费的前端界面了。</p>
+<p>ICO 项目的网站把握以下几个原则就好。</p>
+<ol>
+<li>文字不要太多，页面要大片留白，简洁明了有现代感；1. 配色一定要深，加上动态几何图形，设计要有未来感；1. 开发团队全配齐，不是常春藤，没有硅谷背景的不要，一定要国际化；1. 各种站台大佬，海量媒体报道，一线互联网公司合作全放上去。<br>配色一定要深，加上动态几何图形，设计要有未来感；</li>
+</ol>
+<p>各种站台大佬，海量媒体报道，一线互联网公司合作全放上去。</p>
+<p>言归正传，我们还是专注于技术。</p>
+<h4 id="web3-js-的使用"><a href="#web3-js-的使用" class="headerlink" title="web3.js 的使用"></a>web3.js 的使用</h4><p>web3.js (https&#58;//github.com/ethereum/web3.js) 为我们提供了一系列访问以太坊网络的 JavaScript 编程接口，完整的说明文档可以在 web3.js Doc (https&#58;//goo.gl/zp2yEQ) 中参阅。</p>
+<p>我们一般通过如下脚本来初始化 web3 对象。</p>
+<p>// 判断当前浏览器中有未注入 web3 对象if (typeof web3 !== ‘undefined’) &amp;#123<br> App.web3Provider = web3.currentProvider;<br> web3 = new Web3(web3.currentProvider);<br>&amp;#125 else &amp;#123  // 注意设置到你自己的 infura 地址<br> App.web3Provider = new Web3.providers.HttpProvider(‘https&#58;//ropsten.infura.io/ubQWERawsd’);<br> web3 = new Web3(App.web3Provider);<br>&amp;#125</p>
+<h4 id="Metamask-简介"><a href="#Metamask-简介" class="headerlink" title="Metamask 简介"></a>Metamask 简介</h4><p>Metamask (https&#58;//metamask.io) 是一个浏览器插件，通过 Metamask 我们可以在浏览器中使用以太坊钱包，在访问 Dapp 应用时，也可以为其注入 web3 对象。</p>
+<p>具体配合应用开发的文档可以在 MetaMask Compatibility Guide (https&#58;//goo.gl/7wKPtp) 查阅，一般我们通过如下脚本来监测 Metamask 状态获取以太坊账户。</p>
+<p>var account = web3.eth.accounts&#91;0&#93;;var accountInterval = setInterval(function() &amp;#123  if (web3.eth.accounts&#91;0&#93; !== account) &amp;#123<br>   account = web3.eth.accounts&#91;0&#93;;<br>   updateInterface();<br> &amp;#125<br>&amp;#125, 100);</p>
+<h4 id="truffle-contract-的使用"><a href="#truffle-contract-的使用" class="headerlink" title="truffle-contract 的使用"></a>truffle-contract 的使用</h4><p>web3.js 默认为我们提供的接口还是太底层，许多调用需要 hard code 设置参数，以太坊网络使用的 BigNumber 也需要我们手动转换。</p>
+<p>我们可以选择使用 truffle-contract (https&#58;//github.com/trufflesuite/truffle-contract) 来调用更高一层的封装对象，并且在之前使用 truffle 开发构建的智能合约文件也能派上用场。</p>
+<p>我们可以在 <code>build/contracts/</code> 下找到编译好的 <code>GitCoin.json</code> 和 <code>GitCoinCrowdsale.json</code> 文件，之后可以在我们的应用中通过如下脚本获取合约对象。</p>
+<script type="text/javascript" src="./dist/truffle-contract.min.js"></script><script>var GitCoin;
+$.getJSON('contracts/GitCoin.json', function(data) &#123  // 获取编译好的合约文件
+ var GitCoinArtifact = data;  // 通过 truffle-contract 获取合约对象
+ GitCoin = TruffleContract(GitCoinArtifact);  // 将合约绑定至当前 web3 对象
+ GitCoin.setProvider(App.web3Provider);
+&#125);</script>
+
+<p>之后我们就可以像在 <code>truffle console</code> 当中一样，对合约对象进行各种操作啦。</p>
+<h4 id="ICO-前端应用开发"><a href="#ICO-前端应用开发" class="headerlink" title="ICO 前端应用开发"></a>ICO 前端应用开发</h4><p>我们的 ICO 应用只需要解决一个核心需求，那就是买币；只需要两个核心功能，一个是选择买多少，另一个就是付款，所以我们的界面自然是相当简单，如下图所示。</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3f0hj9VokCqZBbImR0YkprhNDOZqKDyB12edThtiaL8BDcYNcEMO9fhQ/640?wx_fmt=png"></p>
+<p>然后再稍微美化一下，如下面两张图所示。</p>
+<p><img src="https&#58;//mmbiz.qpic.cn/mmbiz_png/0vU1ia3htaaNic0qibwlzIZSP8LeEbUEUc3j1GR3jvIUWY2TicicSD4DRETvzIJIk2PPG1Q2XBfbMYvBDSq4VibEfhAg/640?wx_fmt=png"></p>
+<p>一场成功的 ICO，自然需要精雕细琢，完整的代码示例可以在 Leek Ecological Chain (http&#58;//lec.yubolun.com/) 找到，同时此网站也是上述教程的一个完整示例，你可以切换到 Ropsten 网络在本网站上购买 LEC (https&#58;//goo.gl/4uNskB) 韭菜币。</p>
+<h3 id="Dapp-部署"><a href="#Dapp-部署" class="headerlink" title="Dapp 部署"></a>Dapp 部署</h3><p>既然我们开发的是 Dapp 去中心化应用，怎么能够部署在中心化的服务器上呢？这不是自掉身价吗？Dapp 自然有其部署的解决方案。</p>
+<h4 id="IPFS-简介"><a href="#IPFS-简介" class="headerlink" title="IPFS 简介"></a>IPFS 简介</h4><p>IPFS 提供去中心化的点对点的 Web 服务。</p>
+<p>说简单点，你可以把它理解成为一个 p2p 的网盘，你网站的静态文件可以发布到 IPFS 上面托管，而且只要 IPFS 的节点不挂，你的网站就永远都不会挂，而不像部署到单独服务器上。</p>
+<p>同时 IPFS 上的一个文件也就对应着一个 hash 地址，普通用户可以通过公共的 http gateway 访问到你的页面，不像云服务器还要备案，正好也方便你割完韭菜跑路。</p>
+<p>使用也非常简单，只需要在 Install Go IPFS (https&#58;//ipfs.io/docs/install) 下载安装。</p>
+<h4 id="发布应用"><a href="#发布应用" class="headerlink" title="发布应用"></a>发布应用</h4><p>只需要一行命令，把你 Dapp 的所有静态文件上传至 IPFS，命令如下。</p>
+<p>ipfs add -r your-ico/# 返回 hash 地址，此处仅为示例added QWERabcd1234qwerABCD your-ico/</p>
+<p>然后你就能够通过 https&#58;//goo.gl/5SyBwN 访问你的网站。当然这样的域名十分不友好，为 IPFS 站点设置解析需要一些不常用的操作。</p>
+<h4 id="域名解析"><a href="#域名解析" class="headerlink" title="域名解析"></a>域名解析</h4><p><strong>IPNS</strong></p>
+<p>你的站点必然包含多个文件，每个文件对应着独立的 hash 地址，而且你也不能保证你的网站只需要发布一次。</p>
+<p>因此在网站发布后，我们需要使用 ipns 来获取到对应的唯一地址，之后的 DNS 解析也会对应到这一地址，同样只需要一行命令，如下所示。</p>
+<h1 id="站点发布后的-hash-地址，此处仅为示例ipfs-name-publish-QWERabcd1234qwerABCD-返回-ipns-地址Published-to-ABCDqwer1234abcdQWER"><a href="#站点发布后的-hash-地址，此处仅为示例ipfs-name-publish-QWERabcd1234qwerABCD-返回-ipns-地址Published-to-ABCDqwer1234abcdQWER" class="headerlink" title="站点发布后的 hash 地址，此处仅为示例ipfs name publish QWERabcd1234qwerABCD# 返回 ipns 地址Published to ABCDqwer1234abcdQWER"></a>站点发布后的 hash 地址，此处仅为示例ipfs name publish QWERabcd1234qwerABCD# 返回 ipns 地址Published to ABCDqwer1234abcdQWER</h1><p>之后你就能够通过 https&#58;//goo.gl/8YMLBi 访问你的站点了。在设置域名解析时，我们需要添加一条 <strong>TXT</strong> 类型的解析记录，解析值为：</p>
+<p>dnslink=/ipns/ABCDqwer1234abcdQWER</p>
+<p>这样我们就能够通过 https&#58;//goo.gl/VjSm1K 访问你的 Dapp，这样是不是友好多了？</p>
+<p><strong>Nginx 反向代理</strong></p>
+<p>当然你也可能希望使用自己的独立域名，这时我们只需要使用 Nginx 设置反向代理即可。</p>
+<p>server &amp;#123<br> listen 80;<br> server_name yourico.com;</p>
+<p> location / &amp;#123<br>   proxy_pass https&#58;//ipfs.io/ipns/yourico.com/;<br> &amp;#125<br>&amp;#125</p>
+<h3 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h3><p>以太坊官网，第一篇教程教你发 token，第二篇就教你卖 token，居心何在我也不好评判。</p>
+<p>除了 ICO 还有 IMO/IFO ，IMO 你只用卖个路由器，IFO 只需要 fork 一份 Bitcoin 的代码，稍微调调参数，就不需要什么教程了。</p>
+<p>程序员总是妄图通过技术手段解决社会问题，然而人性是不变的。以太坊希望建立一个 trustless 的网络，可惜被无数人滥用，巧立空气项目，搞空壳公司，逃避监管搞非法集资。</p>
+<p>区块链和虚拟货币期望用点对点分布式的网络，脱离第三方，让世界上任何角落的两个人都能够低成本地进行交易，结果大量投机者涌入，导致网络堵塞，如今我们连一笔交易的矿工费都支付不起。</p>
+<p>当然我信奉技术本身是无罪，就好像这篇教你割韭菜的文章一样，你是选择擦亮双眼，看清 ICO 的本质，从此势不两立；还是选择投机倒把，滥用以太坊技术，坠身同流合污？</p>
+<p>您可以在访问 https&#58;//github.com/discountry/gitcoin 查看完整的智能合约示例。</p>
+<p>您可以访问 https&#58;//github.com/discountry/lec 查看完整的 Dapp 示例。</p>
+<p><strong>Read at your own risk.</strong></p>
+<p><strong>————— 推荐阅读 —————</strong></p>
+<p><strong>点击图片即可阅读</strong></p>
+<p>&#91;<img class="" data-copyright="0" data-ratio="0.5555555555555556" data-s="300,640" data-src="https&#58;//mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuia3Z3czun4BJGNCxNGa3hSVapxws7xh1yVNayQ9jCpoyA5cxm9NQ8kSic0yqrzIg6RHPEl14uXMN9A/640?wx_fmt=jpeg" data-type="jpeg" data-w="900">&#93;(http&#58;//mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650694375&amp;idx=1&amp;sn=3b4bb615c18838cd9d858dfb1d4b49b1&amp;chksm=bea6133489d19a225d3ec5e02191bb53003bad618fa11fb1066ec3a98f9408bf585bbd573fec&amp;scene=21#wechat_redirect)</p>
+<p>&#91;<img class="" data-copyright="0" data-ratio="0.5555555555555556" data-s="300,640" data-src="https&#58;//mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuia3Z3czun4BJGNCxNGa3hSVVvKbzxZvRNXCEem9ae21LZRrydzxCibwF1sJakiahqKOd4AqqELFX6Fw/640?wx_fmt=jpeg" data-type="jpeg" data-w="900">&#93;(http&#58;//mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650694364&amp;idx=1&amp;sn=f6c6a74903d10c2a57782f7bad157440&amp;chksm=bea6130f89d19a192aaac7397b14ccf6a07941ebada94780ea6183b60639578e12d9566cea94&amp;scene=21#wechat_redirect)</p>
+<p>&#91;<img class="" data-copyright="0" data-ratio="0.5555555555555556" data-s="300,640" data-src="https&#58;//mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuiaHIH4A4yh68TPJ264DfVa4wC4BJSYMOKh4ian7Sx9bEv4Fk0DRVp0IxUAIw1ibqk3iaqeqT8QIOgY2g/640?wx_fmt=jpeg" data-type="jpeg" data-w="900" width="auto">&#93;(http&#58;//mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650694362&amp;idx=1&amp;sn=c02759d5519c7ea7e4f47700a81cfea3&amp;chksm=bea6130989d19a1fcfa0628a16618497425688cbd897238e92bc8c7af543d645c9d04fdda0af&amp;scene=21#wechat_redirect)</p>
+<p><img src="http&#58;//mmbiz.qpic.cn/mmbiz_jpg/Pn4Sm0RsAuhjy3ca4Zqcv1iaBIiaicaJANGWW4rmAicwXDViap40ia2ZrXjjz82MZmC92E79qvoPoYymXB4TiboeCAnwg/640?wx_fmt=jpeg"></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://mp.weixin.qq.com/s?__biz=MjM5MjAwODM4MA==&amp;mid=2650694381&amp;idx=1&amp;sn=dfb80b56b4172ee5ac27d7c5c2c3919b&amp;chksm=bea6133e89d19a2848a4386d9739800c672d8cbd7f7f066566beb50a593e3e1c373368f4da68&amp;mpshare=1" target="_blank" rel="noopener">一夜身价暴涨千倍，程序员如何发布自己的 ICO？</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSDN/" rel="tag"># CSDN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/61075f30/" rel="next" title="【Python】IPFS的Python接口 - CSDN博客">
+                <i class="fa fa-chevron-left"></i> 【Python】IPFS的Python接口 - CSDN博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/27f84757/" rel="prev" title="区块链世界里的存储技术—IPFS - 简书">
+                区块链世界里的存储技术—IPFS - 简书 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#ERC20-Token-合约开发"><span class="nav-number">1.</span> <span class="nav-text">ERC20 Token 合约开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICO-Crowdsale-合约开发"><span class="nav-number">2.</span> <span class="nav-text">ICO Crowdsale 合约开发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#补充说明与权限控制"><span class="nav-number">3.</span> <span class="nav-text">补充说明与权限控制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#合约的发布及调试"><span class="nav-number">4.</span> <span class="nav-text">合约的发布及调试</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#所有的合约方法都是-Promise-对象truffle-development-gt-GitCoinCrowdsale-deployed-then-inst-gt-amp-123crowd-inst-amp-125"><span class="nav-number"></span> <span class="nav-text">所有的合约方法都是 Promise 对象truffle(development)&gt; GitCoinCrowdsale.deployed().then(inst=&gt;&amp;#123crowd=inst&amp;#125)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#上线合约验证"><span class="nav-number">1.</span> <span class="nav-text">上线合约验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dapp-开发"><span class="nav-number"></span> <span class="nav-text">Dapp 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#web3-js-的使用"><span class="nav-number">1.</span> <span class="nav-text">web3.js 的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Metamask-简介"><span class="nav-number">2.</span> <span class="nav-text">Metamask 简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#truffle-contract-的使用"><span class="nav-number">3.</span> <span class="nav-text">truffle-contract 的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ICO-前端应用开发"><span class="nav-number">4.</span> <span class="nav-text">ICO 前端应用开发</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dapp-部署"><span class="nav-number"></span> <span class="nav-text">Dapp 部署</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IPFS-简介"><span class="nav-number">1.</span> <span class="nav-text">IPFS 简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#发布应用"><span class="nav-number">2.</span> <span class="nav-text">发布应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域名解析"><span class="nav-number">3.</span> <span class="nav-text">域名解析</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#站点发布后的-hash-地址，此处仅为示例ipfs-name-publish-QWERabcd1234qwerABCD-返回-ipns-地址Published-to-ABCDqwer1234abcdQWER"><span class="nav-number"></span> <span class="nav-text">站点发布后的 hash 地址，此处仅为示例ipfs name publish QWERabcd1234qwerABCD# 返回 ipns 地址Published to ABCDqwer1234abcdQWER</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#写在后面"><span class="nav-number"></span> <span class="nav-text">写在后面</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

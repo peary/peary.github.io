@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="软件,社交网络游戏,幼儿园,小游戏,摄影," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。下文将围绕产品从0-1的每个阶段列举阐述其方法论，并加以具体的栗子说明，算是自己一年多的产品学习及实践总结，不足之处还望各位大佬们指正。   文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。  产品分析的“五要素法”是什么？需求采集的“Z字采集法”又">
+<meta name="keywords" content="软件,社交网络游戏,幼儿园,小游戏,摄影">
+<meta property="og:type" content="article">
+<meta property="og:title" content="结合产品从0到1，阐述各阶段的产品方法论">
+<meta property="og:url" content="http://blockshare.top/2018/5f9dc947/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。下文将围绕产品从0-1的每个阶段列举阐述其方法论，并加以具体的栗子说明，算是自己一年多的产品学习及实践总结，不足之处还望各位大佬们指正。   文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。  产品分析的“五要素法”是什么？需求采集的“Z字采集法”又">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p9.pstatp.com/large/71f10003e779b0513c66">
+<meta property="og:updated_time" content="2018-05-03T07:00:34.147Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="结合产品从0到1，阐述各阶段的产品方法论">
+<meta name="twitter:description" content="文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。下文将围绕产品从0-1的每个阶段列举阐述其方法论，并加以具体的栗子说明，算是自己一年多的产品学习及实践总结，不足之处还望各位大佬们指正。   文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。  产品分析的“五要素法”是什么？需求采集的“Z字采集法”又">
+<meta name="twitter:image" content="http://p9.pstatp.com/large/71f10003e779b0513c66">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/5f9dc947/"/>
+
+
+
+
+
+  <title>结合产品从0到1，阐述各阶段的产品方法论 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/5f9dc947/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">结合产品从0到1，阐述各阶段的产品方法论</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">人人都是产品经理</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-25T00:10:27+08:00">
+                2018-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/职场/" itemprop="url" rel="index">
+                    <span itemprop="name">职场</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/5f9dc947/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/5f9dc947/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p9.pstatp.com/large/71f10003e779b0513c66" rel="gallery_cjgf0wkki006kxmqdji1w759a"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p9.pstatp.com/large/71f10003e779b0513c66" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。下文将围绕产品从0-1的每个阶段列举阐述其方法论，并加以具体的栗子说明，算是自己一年多的产品学习及实践总结，不足之处还望各位大佬们指正。</p>
+</blockquote>
+<blockquote>
+<p>文章围绕产品从0-1的每个阶段，并结合作者自身实践总结了其中的方法论，希望能够给大家带来一些帮助。</p>
+</blockquote>
+<p>产品分析的“五要素法”是什么？需求采集的“Z字采集法”又是什么？如何用“KANO模型”对需求进行分类及优先排序？如何确定MVP？“Hooked模型”是如何让用户对产品上瘾的？</p>
+<p>如果你有上述一个或多个疑问，我猜你产品经验不足2年或者没有系统的提炼产品体系，那么请继续阅读下去，下文将围绕产品从0-1的每个阶段列举阐述其方法论，并加以具体的栗子说明，算是自己一年多的产品学习及实践总结，不足之处还望各位大佬们指正。</p>
+<h2 id="产品从0到1的阶段"><a href="#产品从0到1的阶段" class="headerlink" title="产品从0到1的阶段"></a>产品从0到1的阶段</h2><p>一个产品从无到有再到用户手上基本都可分为3个大阶段。</p>
+<p><strong>第一阶段</strong>：一定要想清楚产品做什么。给B端用户还是C端用户，做工具型的还是内容型的，做交易还是做平台。主要用户是谁，要解决Ta们什么痛点，这些痛点又是在什么样的场景下产生，用什么样的解决方案可行，跟现有的解决方案相比有何竞争力。</p>
+<blockquote>
+<p>Eg：之前有过一个诗词项目，一款拍照配诗工具，主要用户为有诗词情怀的人，帮他们在一些特定的想要分享表达的场景中筛选出应景的诗词，制作出有意蕴的图片。比起图片社交的“黄油相机”，保留图片文字处理、元素添加等功能，提供更丰富的诗词数据内容，比起诗词收录“西窗烛”，我们提供更细化的标签维度与筛选机制，将诗词与图片完美结合。</p>
+</blockquote>
+<p><strong>第二阶段</strong>：用最高效的方法、最舒服的协作将产品做出来。这期间包括原型评审、立项启动、敏捷开发等，解决方案务必得到整个项目组的一致认可，小版本迭代更新，所谓“天下武功，唯快不破”。</p>
+<p><strong>第三阶段</strong>：将产品推出去。这个无用多说，产品做到一定程度后都是为了盈利，只有上线后才能获取流量，才有机会将流量转化成有价值的用户，才能从用户身上获取收入实现盈利。</p>
+<p>下面是我近期一个社交游戏项目的文件，基本是按照规范流程执行的，仅做参考。当然并不是每个产品都必须经历每个阶段，不同的公司不同，不同的产品也不同，适合自己的才是最好的。</p>
+<h2 id="每个阶段及涉及的方法论"><a href="#每个阶段及涉及的方法论" class="headerlink" title="每个阶段及涉及的方法论"></a>每个阶段及涉及的方法论</h2><h3 id="1、概念提取与筛选"><a href="#1、概念提取与筛选" class="headerlink" title="1、概念提取与筛选"></a><strong>1、概念提取与筛选</strong></h3><p>产品的概念包括核心用户，刚性需求，典型场景及竞争优势。</p>
+<blockquote>
+<p><strong>产品概念来源：**</strong>1、自身或他人的需求<strong>随着越来越多的85后开始考虑小孩上幼儿园问题，如何筛选出最合适的学校。教育择校平台产品——有钱兔APP</strong>2、现有产品的启发**如现在的社交游戏应用。（以H5小游戏切入）同桌游戏、快手小游戏、开心斗</p>
+</blockquote>
+<p>体验竞品及分析的方法即可用到“五要素法”和“5W1H法”</p>
+<p><strong>1.1 五要素法_竞品体验及分析</strong></p>
+<p>产品体验五要素包括：表现层、框架层、结构层、范围层、战略层，正向可用来分析产品，逆向则可以用来创造产品。</p>
+<blockquote>
+<p>以“拼图酱”体验分析为例，拿到应用时，主色调以浅灰和橙、粉为主，给人一种活泼、浪漫、女性、健康的“氧气质感”，整体调性偏小清新文艺，当体验完它的页面操作时即可知它的主业务流程：选择模式→选择图片→根据选择的图片数量分别列出不同的版式→滤镜添加文字等图片编辑→保存，主要功能为多种布局选择、加多种滤镜多种外框等进行拼图，其它功能为拼接长图、海报模型、主题推荐。回头再理解这个产品时，她就是一款多张图片美化、设计、拼接、制作及分享的APP工具，帮助那些热爱生活喜欢分享的年轻人文艺的记录那段回忆。</p>
+</blockquote>
+<p><strong>1.2 5W1H分析法_竞品体验及分析</strong></p>
+<blockquote>
+<p>以“网易严选为例” - what_零售行业的电商产品，ODM模式（原始设计制造商）包含供应链。- why_通过ODM模式与大牌制造商直连，剔除品牌溢价和中间环节，提升性价比。- who_注重品质、看重性价比、了解ODM模式的用户。- where_看中品牌但又不能接收品牌货价格的时候。- when_注重商品性价比，多方比较包括产品的品质/颜值/描述/价格等再做出购买决策。- how_线上性价比高版的“无印良品”，从信任我的“甄选”，到信任我的“品牌”。</p>
+</blockquote>
+<p>当有一定的产品概念时，就需要结合内外实际情况对其进行筛选，看是否有价值做下去</p>
+<p><strong>1.3 产品概念筛选要素</strong></p>
+<blockquote>
+<p>如当时我们提出了一个做“幼儿园择校平台应用”的概念，可先满足家长对武汉市所有幼儿园信息的分类筛选与对比，但具体到幼儿园数据来源的时候，幼儿园简介、师生配套信息、费用、招生计划等信息需要幼儿园相关的很多人脉资源，最后这个概念也pass了。</p>
+</blockquote>
+<p>外部筛选可考虑政策支持、市场空间等，用到PEST分析法、波特五力模型、SWOT分析法</p>
+<p><strong>1.4 PEST分析法_宏观环境分析</strong></p>
+<blockquote>
+<p>对于大环境要顺势而为，如蚂蚁森林就是逐步开放的“碳汇交易”的一个载体，而“河长制”也将为水利信息化带来更多的业务方向。</p>
+</blockquote>
+<p><strong>1.5 波特五力模型_行业环境分析</strong></p>
+<blockquote>
+<p>以“社交游戏”为例 - 同行业内现有竞争者的能力，即现有市场成熟度和竞争激烈程度——强。现有“同桌游戏”和“快手小游戏”等，均以H5小游戏切入陌生人社交，做国内的市场稍艰难，可考虑海外市场。- 潜在竞争者进入的能力——强。微信小游戏“跳一跳”一出就有现象级霸屏，故小游戏未来很有可能进一步优化其在对话列表的能力，即直接可以在对话界面玩互动游戏。- 替代品的替代能力——弱。增加更多玩法的视频社交暂时不会取代。- 供应商的议价能力——中等。上游游戏内容提供商不太集中，但也有可能跨界到社交应用领域。- 购买者的议价能力——弱。下游客户并非一个，暂不存在客大欺店问题。综上所述此款“社交游戏”国内市场竞争激烈，可考虑做海外市场，快速出版本验证迭代。</p>
+</blockquote>
+<p><strong>1.6 SWOT分析_了解竞品，制定产品策略</strong></p>
+<blockquote>
+<p>以“武汉吃虾地图”为例（一款专门提供吃虾信息服务的工具，利用抓虾互动游戏将线下活动和线上服务结合） - S：长江垄上作为湖北本土的服务“三农”媒体和产业集团，自身有着精细化的水产信息相关资源及运营基础，吃虾地图本身的数据易收集，上下游的配套服务也支持功能扩展，借助已有的新媒体资源易展开推广运营。- W：休闲互动小游戏玩法单一，用户留存堪忧。- O：虾作为美食届的网红，也是电商届的新宠，吃虾已经成为了越来越多人的一种生活选择方式，以精美的吃虾地图切入生活信息服务细分市场，与抓虾休闲互动小游戏结合，另有完善的上下游服务体系做支撑，定给产品带来无数的可能。- T：口碑网和美团已有稳定的用户群，在内容方面已部分涉及虾板块，如何深度挖掘存量市场是一大挑战。SO战略：收集丰富的数据，制作精美的吃虾地图是基础。ST战略：相较于品类服务丰富的口碑和美团，吃虾地图将虾这一细分市场做细做精，再将模式复制到蟹、水产乃至其它。WO战略：做好休闲互动小游戏的用户体验（包括操作简单流畅、视觉效果佳），更重要的是争取福利更多的赢券等运营活动，通过游戏引导用户参与。WT战略：挖掘更多美团和口碑忽略的内容，如上游供应商的来源等。</p>
+</blockquote>
+<h3 id="2、需求收集与分析转化"><a href="#2、需求收集与分析转化" class="headerlink" title="2、需求收集与分析转化"></a>2、需求收集与分析转化</h3><p>当筛选完产品概念觉得它能产生用户价值和商业价值时，就该进一步收集更多的相关需求，收集的方法很多，包括产品规划前期确定产品方向是什么的“用户访谈”，项目早期产品功能优先级的“调查问卷”，项目实施过程中验证需求实现方案的“可用性测试”，以及产品上线后迭代优化依据的“数据分析”。此部分先说明用户访谈和调查问卷，可用性测试和数据分析后文再提及。</p>
+<p><strong>2.1 用户访谈 _需求采集</strong></p>
+<p>做任何一件事情都要清楚为什么要做这件事，如何做，做完之后能输出什么。故访谈前就要规划好访谈对象、访谈时间、访谈素材准备，若为产品规划阶段访谈对象可从周围朋友中选择“潜在用户”，若为了解某个现象背后的原因，可深度了解这些典型用户。条件允许可约几个或者十几个用户到公司聊一聊，一般持续几十分钟到几个小时，通过问答了解用户的目标和观点。</p>
+<blockquote>
+<p>以我们诗词图片社交工具为例，当时第一个内部小版本出来后成片效果不够精美，基于我们的核心优势在于筛选出应景的诗词，所以主流图片应用的滤镜、元素自定义等多种功能我们没有做，这时就找了几个朋友（图片工具的一般/重度用户，也可定义为我们的“潜在用户”）了解下他们的观点。具体我是以下面几个问题切入的： - 平时拍照、有时加些有趣的贴纸文字等一般使用哪些APP比较多，有没有不好用的地方。——（了解竞品， 看到潜在竞争对手的不足，优化自己产品 ）- 用过黄油相机或者IN没，怎么知道它们的，感觉怎么样？（了解对标产品的吸引点）- 如果现在有一款拍照配诗的APP，它有哪些功能你才会去用它？（希望用户提些建设性意见）现在看看这个问题问的最傻，我们不能给用户提太难的问题，而应该引导他们去回忆、描述一些故事来发掘他们的需求，所以这个问题可以优化如下：用黄油相机是如何挑到自己喜欢的模板的？（了解他们的行为习惯，对标搜索、推荐功能）如果有主题查询功能，会偏向于哪种风格的主题？（了解内容偏好）做完访谈后就该对结果进行梳理分析，需求进入需求池。<img src="http&#58;//p3.pstatp.com/large/71f30003abe543e0a984" img_width="1253" img_height="692" alt="结合产品从0到1，阐述各阶段的产品方法论" inline="0"></p>
+</blockquote>
+<p><strong>2.2 调查问卷_需求采集</strong></p>
+<p>调查问卷可用于项目早期功能优先级的参考，也可用于项目过程中的验证，在不影响用户体验的情况下可在WEB端或APP端以弹窗或者小功能入口的形式存在，针对人群根据目的设计内容。若内容较多，则开篇要简单，需要思考敏感的问题放中间，跟被访者相关的个人信息放最后。</p>
+<blockquote>
+<p>如天天P图的小调查<img src="http&#58;//p3.pstatp.com/large/6ecc000ddc76520effe7" img_width="348" img_height="640" alt="结合产品从0到1，阐述各阶段的产品方法论" inline="0"></p>
+</blockquote>
+<p><strong>2.3 马斯洛需求原理_需求分析</strong></p>
+<p>此时我们应该收集了无数个需求，无论是是一手需求还是二手需求，除了一些表面需求（用户的观点和行为），我们还需要对需求深度分析，了解需求背后的目的以及反映的人性。马斯洛需求层次理论就是对人性需求最常见的解读；</p>
+<blockquote>
+<p>以具体的用餐需求来说明这5个层次。首先食物本身满足消除饥饿的生理需求，其次相对健康的选材及独立隔音的小包间满足安全需求，用餐期间借酒助兴满足社交需求，用餐环境的优质与用餐服务的周到满足尊重需求，图片或视频分享来展示生活的仪式感和饮食文化满足自我需求。</p>
+</blockquote>
+<p><strong>2.4 七宗罪_人性解读</strong></p>
+<p>七宗罪揭露了人类原始本能欲望，在日常产品中都可找到印证。</p>
+<p><strong>2.5 需求转化及Y模型_需求转化</strong></p>
+<p>① → ② → ③ 拿到用户需求时，首先要思考why，即需求背后的真实目标及动机，再思考how，即用什么方法什么功能来解决用户的问题，尝试进一步挖掘到需求的本质即④，列出所有的解决方案，最后再根据优先级和性价比来确定功能组合。需求转化的原则为“用心听，但别照着做”。</p>
+<blockquote>
+<p>经典案例福特用户需求：“我需要一匹更快的马”真实目标：为了更快的到达某地最后转化的更靠谱的解决方案：汽车，而非研发新饲料或者改进训练方法让马跑得更快。</p>
+</blockquote>
+<h3 id="3、功能管理及MVP的确定"><a href="#3、功能管理及MVP的确定" class="headerlink" title="3、功能管理及MVP的确定"></a>3、功能管理及MVP的确定</h3><p><strong>3.1 KANO模型_功能分类</strong></p>
+<ul>
+<li>A、基础功能（不做很不满意，做了觉得理所应当）——必做- B、亮点功能（不做没感觉，做了赞不绝口） ——产品初创期实现个别低成本的- C、期望功能（也称线性需求，实现的越多用户越满意）——先做性价比高的- D、无差别功能（做不做用户对产品的感受无变化）——低成本验证后再做- E、反向功能（做的越多用户越讨厌，比如广告位）——需要权衡各方利益后再决定<blockquote>
+<p>探探作为社交产品的后来者，功能迭代并不多，但定位清晰、操作简单，适合简单的分析。若你作为探探的产品经理，如何将下列功能进行分类。 - 同城定位及推荐。用户信息卡片的展示，包括图像、年龄、距离、职业。- 筛选操作，右滑喜欢，左滑无感，相互喜欢即配对成功。- 聊天可发送文字、表情。- 聊天时的表情和文字全屏特效。- 滑动筛选时的反悔操作。- 用户最后活跃时间的显示。- 用户的个性签名、标签、兴趣爱好。- 匿名暗恋表白。- 筛选条件的设置。- 聊天时的辅助模块，真心话和私密话。- 超级喜欢功能。若对一个人操作了超级喜欢，则对方会收到此消息的推送。- 会员充值引导。- GIF表情斗图。- 朋友圈。- 被喜欢的总次数统计及炫耀分享。根据我个人理解：1、2、3、6、9为基础功能，这是探探最核心的功能“刷脸，相互喜欢才能聊天”，至于用户最后活跃时间我把它也列为基础功能，因为探探是同步聊天模式，粗暴的显示“刚刚活跃”或者“几分钟前活跃”可以让用户得知自己的“目标”是否在线，掌握对方信息，增强老用户粘性。4、11、15为亮点功能，这些功能都是为了提升用户体验，没有的话也不影响当前主操作。5、7、13、14为期望功能，可帮助用户多维度的了解与互动。 8、10为无差别功能，使用频次并不多，匿名暗恋表白主要是短信推广的一种方式，而真心话模块也是为了提升产品活跃所做的运营功能。12对于某些非RMB用户来说就是反向功能，而对于平台方来说则是盈利的关键。</p>
+</blockquote>
+</li>
+</ul>
+<p>对于一个功能需求如何判断属于哪种，则可利用KANO问卷，分别测量用户在面对存在或不存在某项功能时的反应。由正向和反向两个问题组成。数据统计完后占比最高的属性作为该功能的属性类别，参考分类对照表。例如“探探”的聊天系统是否增加“视频功能”。</p>
+<p><strong>3.2 波士顿矩阵_功能分类</strong></p>
+<blockquote>
+<p>若探探当前所面对的公司战略目标为“增加公司的盈利”。则“VIP功能”则为明星需求，既能赋予用户VIP特权提高用户体验，也与战略目标吻合。“启屏或其它广告”则为金牛需求，不利于用户体验但可盈利。“视频或互动小游戏”为问题需求，有助于加深用户聊天深度，但需要一定的开发成本。“拉黑或解除匹配”则某种程度上可理解为瘦狗需求，不利于用户体验也不能盈利。</p>
+</blockquote>
+<p><strong>3.3 MVP_功能优先级确定，版本规划</strong></p>
+<blockquote>
+<p>考虑探探核心流程的体验（个人资料设置→匹配→私信），MVP的功能可包含：登录、个人资料完善、用户信息卡片的展示、筛选匹配、基础聊天。从探探的版本记录可知，V1.X版本主要围绕匹配和私信功能展开（同城定位、匹配、个人信息展示、基础聊天系统）， V2.X版本围绕用户互动和联系，新增朋友圈、匿名暗恋表白、GIF表情斗图、VIP（超级喜欢、反悔操作、地理位置切换）等功能。</p>
+</blockquote>
+<p>MVP确定后就是具体的敏捷开发及项目管理了，下篇将继续说明可用性/AB测试、smart原则、Hooked模型，以及数据分析的AARRR模型、二八定律。</p>
+<p>本文由 &#64;放慢快乐64 原创发布于人人都是产品经理。未经许可，禁止转载。</p>
+<p>题图来自PEXELS，基于CC0协议</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiao11.com/group/6535377337507119623/?iid=29827425108&amp;app=news_article&amp;timestamp=1524586155&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">结合产品从0到1，阐述各阶段的产品方法论</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/软件/" rel="tag"># 软件</a>
+          
+            <a href="/tags/社交网络游戏/" rel="tag"># 社交网络游戏</a>
+          
+            <a href="/tags/幼儿园/" rel="tag"># 幼儿园</a>
+          
+            <a href="/tags/小游戏/" rel="tag"># 小游戏</a>
+          
+            <a href="/tags/摄影/" rel="tag"># 摄影</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/68b7830e/" rel="next" title="继《魔戒》之后，托尔金又一力作即将出世：《郭冬临之陷落》！">
+                <i class="fa fa-chevron-left"></i> 继《魔戒》之后，托尔金又一力作即将出世：《郭冬临之陷落》！
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/ce3f8661/" rel="prev" title="【深度】微视重启与腾讯错失的一年">
+                【深度】微视重启与腾讯错失的一年 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#产品从0到1的阶段"><span class="nav-number">1.</span> <span class="nav-text">产品从0到1的阶段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#每个阶段及涉及的方法论"><span class="nav-number">2.</span> <span class="nav-text">每个阶段及涉及的方法论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、概念提取与筛选"><span class="nav-number">2.1.</span> <span class="nav-text">1、概念提取与筛选</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、需求收集与分析转化"><span class="nav-number">2.2.</span> <span class="nav-text">2、需求收集与分析转化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、功能管理及MVP的确定"><span class="nav-number">2.3.</span> <span class="nav-text">3、功能管理及MVP的确定</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

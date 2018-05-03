@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程语言,GitHub,Python,机器学习,Git," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="作者：FAIZANSHAIKH翻译：和中华校对：白静本文共2200字，建议阅读10分钟。本文用浅显易懂的方式解释了什么是“看图说话”。   作者：FAIZAN SHAIKH 翻译：和中华 校对：白静 本文共2200**字，建议阅读10分钟**。 本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了">
+<meta name="keywords" content="编程语言,GitHub,Python,机器学习,Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="教你用PyTorch实现“看图说话”（附代码、学习资源）">
+<meta property="og:url" content="http://blockshare.top/2018/a36020f3/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="作者：FAIZANSHAIKH翻译：和中华校对：白静本文共2200字，建议阅读10分钟。本文用浅显易懂的方式解释了什么是“看图说话”。   作者：FAIZAN SHAIKH 翻译：和中华 校对：白静 本文共2200**字，建议阅读10分钟**。 本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/1524749684362be51f5e974">
+<meta property="og:updated_time" content="2018-05-03T07:00:36.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="教你用PyTorch实现“看图说话”（附代码、学习资源）">
+<meta name="twitter:description" content="作者：FAIZANSHAIKH翻译：和中华校对：白静本文共2200字，建议阅读10分钟。本文用浅显易懂的方式解释了什么是“看图说话”。   作者：FAIZAN SHAIKH 翻译：和中华 校对：白静 本文共2200**字，建议阅读10分钟**。 本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/1524749684362be51f5e974">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/a36020f3/"/>
+
+
+
+
+
+  <title>教你用PyTorch实现“看图说话”（附代码、学习资源） | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/a36020f3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">教你用PyTorch实现“看图说话”（附代码、学习资源）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">THU数据派</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T21:56:35+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/a36020f3/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/a36020f3/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/1524749684362be51f5e974" rel="gallery_cjggle4ka00000bqdbzme25jc"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/1524749684362be51f5e974" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>作者：FAIZANSHAIKH翻译：和中华校对：白静本文共2200字，建议阅读10分钟。本文用浅显易懂的方式解释了什么是“看图说话”。</p>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524749684362be51f5e974" img_width="640" img_height="86" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>作者：FAIZAN SHAIKH</p>
+<p>翻译：和中华</p>
+<p>校对：白静</p>
+<p>本文共<strong>2200**</strong>字，<strong>建议阅读</strong>10分钟<strong>**。</strong></p>
+<h1 id="本文用浅显易懂的方式解释了什么是“看图说话”-Image-Captioning-，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。"><a href="#本文用浅显易懂的方式解释了什么是“看图说话”-Image-Captioning-，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。" class="headerlink" title="本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。"></a>本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。</h1><p><strong>介绍</strong></p>
+<p>深度学习目前是一个非常活跃的领域—每天都会有许多应用出现。进一步学习Deep Learning最好的方法就是亲自动手。尽可能多的接触项目并且尝试自己去做。这将会帮助你更深刻地掌握各个主题，成为一名更好的Deep Learning实践者。</p>
+<p>这篇文章将和大家一起看一个有趣的多模态主题，我们将结合图像和文本处理技术来构建一个有用的深度学习应用，即看图说话(Image Captioning)。看图说话是指从一个图像中基于其中的对象和动作生成文本描述的过程。例如：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247496843733ce716dc1c" img_width="265" img_height="232" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>这种过程在现实生活中有很多潜在的应用场景。一个明显的应用比如保存图片的描述字幕，以便该图片随后可以根据这个描述轻松地被检索出来。</p>
+<p><strong>我们开始吧！</strong></p>
+<p>注意： 本文假定你了解深度学习的基础知识，以前曾使用CNN处理过图像问题。如果想复习这些概念，可以先阅读下面的文章：</p>
+<ul>
+<li>Fundamentals of Deep Learning – Starting with Artificial Neural Network- Architecture of Convolutional Neural Networks (CNNs) demystified- Tutorial&#58; Optimizing Neural Networks using Keras (with Image recognition case study)- Essentials of Deep Learning – Sequence to Sequence modelling with Attention (using python)<br>Architecture of Convolutional Neural Networks (CNNs) demystified</li>
+</ul>
+<p>Essentials of Deep Learning – Sequence to Sequence modelling with Attention (using python)</p>
+<p><strong>目录</strong></p>
+<ul>
+<li>什么是Image Captioning问题？- 解决任务的方法- 应用演练- 下一步工作<br>解决任务的方法</li>
+</ul>
+<p>下一步工作</p>
+<p><strong>什么是Image Captioning问题？</strong></p>
+<p>设想你看到了这张图：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524749684425cc7effa6ad" img_width="500" img_height="375" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>你首先想到的是什么？下面是一些人们可以想到的句子：</p>
+<blockquote>
+<p>A man and a girl sit on the ground and eat . （一个男人和一个女孩坐在地上吃东西）A man and a little girl are sitting on a sidewalk near a blue bag eating . （一个男人和一个小女孩坐在蓝色包旁边的人行道上吃东西）A man wearing a black shirt and a little girl wearing an orange dress share a treat .（一个穿黑色衬衣的男人和一个穿橘色连衣裙的小女孩分享美食）</p>
+</blockquote>
+<p>快速看一眼就足以让你理解和描述图片中发生的事情。从一个人造系统中自动生成这种文字描述就是Image Captioning的任务。</p>
+<p>该任务很明确，即产生的输出是用一句话来描述这幅图片中的内容—存在的对象，属性，正在发生的动作以及对象之间的互动等。但是与其他图像处理问题一样，在人造系统中再现这种行为也是一项艰巨的任务。因此需要使用像Deep Learning这样先进复杂的技术来解决该任务。</p>
+<p>在继续下文之前，我想特别感谢Andrej Kartpathy等学者，他们富有洞察力的课程CS231n帮助我理解了这个主题。</p>
+<p><strong>解决任务的方法</strong></p>
+<p>可以把image captioning任务在逻辑上分为两个模块——一个是基于图像的模型，从图像中提取特征和细微的差别， 另一个是基于语言的模型，将第一个模型给出的特征和对象翻译成自然的语句。</p>
+<p>对于基于图像的模型而言（即编码器）我们通常依靠CNN网络。对于基于语言的模型而言（即解码器），我们依赖RNN网络。下图总结了前面提到的方法：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524749684594ae37b07c6f" img_width="1080" img_height="580" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>通常，一个预先训练好的CNN网络从输入图像中提取特征。特征向量被线性转换成与RNN/LSTM网络的输入具有相同的维度。这个网络被训练作为我们特征向量的语言模型。</p>
+<p>为了训练LSTM模型，我们预先定义了标签和目标文本。比如，如果字幕是A man and a girl sit on the ground and eat .（一个男人和一个女孩坐在地上吃东西），则我们的标签和目标文本如下&#58;</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524749684405903ee46205" img_width="1080" img_height="87" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>这样做是为了让模型理解我们标记序列的开始和结束。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247496846613fcd1177f9" img_width="1080" img_height="612" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p><strong>具体实现案例</strong></p>
+<p>让我们看一个Pytorch中image captioning的简单实现。我们将以一幅图作为输入，然后使用深度学习模型来预测它的描述。</p>
+<p>例子的代码可以在GitHub上找到。代码的原始作者是Yunjey Choi 向他杰出的pytorch例子致敬。</p>
+<p>在本例中，一个预先训练好的ResNet-152被用作编码器，而解码器是一个LSTM网络。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524749684598503af62e03" img_width="1080" img_height="480" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p>要运行本例中的代码，你需要安装必备软件，确保有一个可以工作的python环境，最好使用anaconda。然后运行以下命令来安装其他所需要的库。</p>
+<blockquote>
+<p>git clone https&#58;//github.com/pdollar/coco.gitcd coco/PythonAPI/makepython setup.py buildpython setup.py installcd ../../git clone https&#58;//github.com/yunjey/pytorch-tutorial.gitcd pytorch-tutorial/tutorials/03-advanced/image_captioning/pip install -r requirements.txt</p>
+</blockquote>
+<p>设置完系统后，就该下载所需的数据集并且训练模型了。这里我们使用的是MS-COCO数据集。可以运行如下命令来自动下载数据集：</p>
+<blockquote>
+<p>chmod +x download.sh./download.sh</p>
+</blockquote>
+<p>现在可以继续并开始模型的构建过程了。首先，你需要处理输入：</p>
+<blockquote>
+<h1 id="Search-for-all-the-possible-words-in-the-dataset-and-build-a-vocabulary-listpython-build-vocab-py-resize-all-the-images-to-bring-them-to-shape-224x224python-resize-py"><a href="#Search-for-all-the-possible-words-in-the-dataset-and-build-a-vocabulary-listpython-build-vocab-py-resize-all-the-images-to-bring-them-to-shape-224x224python-resize-py" class="headerlink" title="Search for all the possible words in the dataset and# build a vocabulary listpython build_vocab.py # resize all the images to bring them to shape 224x224python resize.py"></a>Search for all the possible words in the dataset and# build a vocabulary listpython build_vocab.py # resize all the images to bring them to shape 224x224python resize.py</h1></blockquote>
+<p>现在，运行下面的命令来训练模型：</p>
+<blockquote>
+<p>python train.py –num_epochs 10 –learning_rate 0.01</p>
+</blockquote>
+<p>来看一下被封装好的代码中是如何定义模型的，可以在model.py文件中找到：</p>
+<blockquote>
+<p>import torchimport torch.nn as nnimport torchvision.models as modelsfrom torch.nn.utils.rnn import pack_padded_sequencefrom torch.autograd import Variable</p>
+</blockquote>
+<blockquote>
+<p>class EncoderCNN(nn.Module)&#58; def <strong>init</strong>(self, embed_size)&#58; “””Load the pretrained ResNet-152 and replace top fc layer.””” super(EncoderCNN, self).<strong>init</strong>() resnet = models.resnet152(pretrained=True) modules = list(resnet.children())&#91;&#58;-1&#93; # delete the last fc layer. self.resnet = nn.Sequential(*modules) self.linear = nn.Linear(resnet.fc.in_features, embed_size) self.bn = nn.BatchNorm1d(embed_size, momentum=0.01) self.init_weights() def init_weights(self)&#58; “””Initialize the weights.””” self.linear.weight.data.normal_(0.0, 0.02) self.linear.bias.data.fill_(0) def forward(self, images)&#58; “””Extract the image feature vectors.””” features = self.resnet(images) features = Variable(features.data) features = features.view(features.size(0), -1) features = self.bn(self.linear(features)) return featuresclass DecoderRNN(nn.Module)&#58; def <strong>init</strong>(self, embed_size, hidden_size, vocab_size, num_layers)&#58; “””Set the hyper-parameters and build the layers.””” super(DecoderRNN, self).<strong>init</strong>() self.embed = nn.Embedding(vocab_size, embed_size) self.lstm = nn.LSTM(embed_size, hidden_size, num_layers, batch_first=True) self.linear = nn.Linear(hidden_size, vocab_size) self.init_weights() def init_weights(self)&#58; “””Initialize weights.””” self.embed.weight.data.uniform_(-0.1, 0.1) self.linear.weight.data.uniform_(-0.1, 0.1) self.linear.bias.data.fill_(0) def forward(self, features, captions, lengths)&#58; “””Decode image feature vectors and generates captions.””” embeddings = self.embed(captions) embeddings = torch.cat((features.unsqueeze(1), embeddings), 1) packed = pack_padded_sequence(embeddings, lengths, batch_first=True) hiddens, _ = self.lstm(packed) outputs = self.linear(hiddens&#91;0&#93;) return outputs def sample(self, features, states=None)&#58; “””Samples captions for given image features (Greedy search).””” sampled_ids = &#91;&#93; inputs = features.unsqueeze(1) for i in range(20)&#58; # maximum sampling length hiddens, states = self.lstm(inputs, states) # (batch_size, 1, hidden_size), outputs = self.linear(hiddens.squeeze(1)) # (batch_size, vocab_size) predicted = outputs.max(1)&#91;1&#93; sampled_ids.append(predicted) inputs = self.embed(predicted) inputs = inputs.unsqueeze(1) # (batch_size, 1, embed_size) sampled_ids = torch.cat(sampled_ids, 1) # (batch_size, 20) return sampled_ids.squeeze()</p>
+</blockquote>
+<p>现在测试我们的模型：</p>
+<blockquote>
+<p>python sample.py –image=’png/example.png’</p>
+</blockquote>
+<p>对于样例图片，我们的模型给出了这样的输出：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15247496844623a3050d691" img_width="331" img_height="247" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<blockquote>
+<p><start> a group of giraffes standing in a grassy area . <end><start>一群长颈鹿站在草地上<end></end></start></end></start></p>
+</blockquote>
+<p>以上就是如何建立一个用于image captioning的深度学习模型。</p>
+<p><strong>下一步工作</strong></p>
+<p>以上模型只是冰山一角。关于这个主题已经有很多的研究。目前在image captioning领域最先进的模型是微软的CaptionBot。可以在他们的官网上看一个系统的demo.</p>
+<p>我列举一些可以用来构建更好的image captioning模型的想法：</p>
+<ul>
+<li><strong>加入更多数据</strong>当然这也是深度学习模型通常的趋势。提供的数据越多，模型效果越好。可以在这里找到其他的数据集： http&#58;//<a href="http://www.cs.toronto.edu/~fidler/slides/2017/CSC2539/Kaustav_slides.pdf-" target="_blank" rel="noopener">www.cs.toronto.edu/~fidler/slides/2017/CSC2539/Kaustav_slides.pdf-</a> <strong>使用Attention模型</strong>正如这篇文章所述(Essentials of Deep Learning – Sequence to Sequence modelling with Attention),使用attention模型有助于微调模型的性能- <strong>转向更大更好的技术</strong>研究人员一直在研究一些技术，比如使用强化学习来构建端到端的深度学习系统，或者使用新颖的attention模型用于“视觉哨兵（visual sentinel）”。<br><strong>使用Attention模型</strong>正如这篇文章所述(Essentials of Deep Learning – Sequence to Sequence modelling with Attention),使用attention模型有助于微调模型的性能</li>
+</ul>
+<p><strong>结语</strong></p>
+<p>这篇文章中，我介绍了image captioning,这是一个多模态任务，它由解密图片和用自然语句描述图片两部分组成。然后我解释了解决该任务用到的方法并给出了一个应用演练。 对于好奇心强的读者，我还列举了几条可以改进模型性能的方法。</p>
+<p>希望这篇文章可以激励你去发现更多可以用深度学习解决的任务，从而在工业中出现越来越多的突破和创新。如果有任何建议/反馈，欢迎在下面的评论中留言！</p>
+<p>原文标题：Automatic Image Captioning using Deep Learning (CNN and LSTM) in PyTorch</p>
+<p>原文链接：https&#58;//<a href="http://www.analyticsvidhya.com/blog/2018/04/solving-an-image-captioning-task-using-deep-learning/" target="_blank" rel="noopener">www.analyticsvidhya.com/blog/2018/04/solving-an-image-captioning-task-using-deep-learning/</a></p>
+<p><strong>译者简介</strong></p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524749684604d0adc1ed31" img_width="640" img_height="480" alt="教你用PyTorch实现“看图说话”（附代码、学习资源）" inline="0"></p>
+<p><strong>和中华，</strong>留德软件工程硕士。由于对机器学习感兴趣，硕士论文选择了利用遗传算法思想改进传统kmeans。目前在杭州进行大数据相关实践。加入数据派THU希望为IT同行们尽自己一份绵薄之力，也希望结交许多志趣相投的小伙伴。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiao11.com/group/6548750247575683592/?iid=29827425108&amp;app=news_article&amp;timestamp=1524750968&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">教你用PyTorch实现“看图说话”（附代码、学习资源）</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+            <a href="/tags/GitHub/" rel="tag"># GitHub</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Git/" rel="tag"># Git</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/cf711999/" rel="next" title="小程序：BAT的下一个新战场">
+                <i class="fa fa-chevron-left"></i> 小程序：BAT的下一个新战场
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/2ab007b1/" rel="prev" title="作业盒子完成C轮1亿美元融资 自适应学习受资本青睐">
+                作业盒子完成C轮1亿美元融资 自适应学习受资本青睐 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#本文用浅显易懂的方式解释了什么是“看图说话”-Image-Captioning-，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。"><span class="nav-number">1.</span> <span class="nav-text">本文用浅显易懂的方式解释了什么是“看图说话”(Image Captioning)，借助github上的PyTorch代码带领大家自己做一个模型，并附带了很多相关的学习资源。</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Search-for-all-the-possible-words-in-the-dataset-and-build-a-vocabulary-listpython-build-vocab-py-resize-all-the-images-to-bring-them-to-shape-224x224python-resize-py"><span class="nav-number">2.</span> <span class="nav-text">Search for all the possible words in the dataset and# build a vocabulary listpython build_vocab.py # resize all the images to bring them to shape 224x224python resize.py</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

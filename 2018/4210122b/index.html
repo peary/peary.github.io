@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="通过各方资料了解学习之后，决定自己开始搭建基于以太坊go-ethereum的私有链环境。由于本人的电脑系统为win8，为避免window环境出现过多莫名其妙的问题，特意通过vm搭建了一台ubuntu16.04版本的虚拟系统。以下内容均基于ubuntu16.04系统。 go-ethereum客户端下载地址&amp;amp;参考手册首先，可以查看一下go-ethereum项目在git上的地址： &amp;#91;ht">
+<meta name="keywords" content="纸飞机,稍后阅读,微信分享,微信收藏,收藏夹,云收藏,博客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="区块链开发（一）搭建基于以太坊go-ethereum的私有链环境 - CSDN博客">
+<meta property="og:url" content="http://blockshare.top/2018/4210122b/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="通过各方资料了解学习之后，决定自己开始搭建基于以太坊go-ethereum的私有链环境。由于本人的电脑系统为win8，为避免window环境出现过多莫名其妙的问题，特意通过vm搭建了一台ubuntu16.04版本的虚拟系统。以下内容均基于ubuntu16.04系统。 go-ethereum客户端下载地址&amp;amp;参考手册首先，可以查看一下go-ethereum项目在git上的地址： &amp;#91;ht">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://img-blog.csdn.net/20161107113451230">
+<meta property="og:image" content="http://img.blog.csdn.net/20170824075952429?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd281NDEwNzU3NTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="区块链开发（一）搭建基于以太坊go-ethereum的私有链环境 - CSDN博客">
+<meta name="twitter:description" content="通过各方资料了解学习之后，决定自己开始搭建基于以太坊go-ethereum的私有链环境。由于本人的电脑系统为win8，为避免window环境出现过多莫名其妙的问题，特意通过vm搭建了一台ubuntu16.04版本的虚拟系统。以下内容均基于ubuntu16.04系统。 go-ethereum客户端下载地址&amp;amp;参考手册首先，可以查看一下go-ethereum项目在git上的地址： &amp;#91;ht">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20161107113451230">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/4210122b/"/>
+
+
+
+
+
+  <title>区块链开发（一）搭建基于以太坊go-ethereum的私有链环境 - CSDN博客 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/4210122b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">区块链开发（一）搭建基于以太坊go-ethereum的私有链环境 - CSDN博客</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text"></span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-04T23:35:59+08:00">
+                2018-02-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/4210122b/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/4210122b/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>通过各方资料了解学习之后，决定自己开始搭建基于以太坊go-ethereum的私有链环境。由于本人的电脑系统为win8，为避免window环境出现过多莫名其妙的问题，特意通过vm搭建了一台ubuntu16.04版本的虚拟系统。以下内容均基于ubuntu16.04系统。</p>
+<h1 id="go-ethereum客户端"><a href="#go-ethereum客户端" class="headerlink" title="go-ethereum客户端"></a>go-ethereum客户端</h1><h2 id="下载地址-amp-参考手册"><a href="#下载地址-amp-参考手册" class="headerlink" title="下载地址&amp;参考手册"></a>下载地址&amp;参考手册</h2><p>首先，可以查看一下go-ethereum项目在git上的地址： <br><br>&#91;https&#58;//github.com/ethereum/Go-ethereum&#93;(https&#58;//github.com/ethereum/Go-ethereum)</p>
+<p>可以在点击项目上的wiki标签，也可以通过一下地址访问wiki： <br><br>&#91;https&#58;//github.com/ethereum/Go-ethereum/wiki/Building-Ethereum&#93;(https&#58;//github.com/ethereum/Go-ethereum/wiki/Building-Ethereum)</p>
+<p>在wiki页面选择ubuntu系统的安装说明，也可以直接访问下面链接： <br><br>&#91;https&#58;//github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu&#93;(https&#58;//github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu)</p>
+<h2 id="ubuntu下安装命令"><a href="#ubuntu下安装命令" class="headerlink" title="ubuntu下安装命令"></a>ubuntu下安装命令</h2><p>打开命令行窗口，或通过快捷键CTL+ALT+T，依次输入以下命令，即可安装成功：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install software-properties-common</span><br><span class="line">sudo add-apt-repository -y ppa&amp;#58;ethereum/ethereum</span><br><span class="line">sudo add-apt-repository -y ppa&amp;#58;ethereum/ethereum-dev</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install ethereum</span><br></pre></td></tr></table></figure>
+<p>PS：如果安装过程中需要依赖其他组件，则先安装其他组件。另外，在ubuntu16.04版本，sudo apt-get install命令可精简为sudo apt install。</p>
+<h2 id="安装测试"><a href="#安装测试" class="headerlink" title="安装测试"></a>安装测试</h2><p>安装完成之后在命令行输入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --help</span><br></pre></td></tr></table></figure>
+<p>如果现实出命令行各种参数提示信息，则说明安装成功。</p>
+<h2 id="创世块"><a href="#创世块" class="headerlink" title="创世块"></a>创世块</h2><p>在以上安装成功之后，直接启动，即可连接公有链。现在通过配置创世块来创建私有链。同一个网络中，创世块必须是一样的，否则无法联通。</p>
+<p>创建一个eth的根目录，在根目录下新建创世块json文件piccgenesis.json。内容如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&amp;#123</span><br><span class="line"> &quot;nonce&quot;&amp;#58;&quot;0x0000000000000042&quot;,</span><br><span class="line"> &quot;mixhash&quot;&amp;#58;&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,</span><br><span class="line"> &quot;difficulty&quot;&amp;#58; &quot;0x4000&quot;,</span><br><span class="line"> &quot;alloc&quot;&amp;#58; &amp;#123&amp;#125,</span><br><span class="line"> &quot;coinbase&quot;&amp;#58;&quot;0x0000000000000000000000000000000000000000&quot;,</span><br><span class="line"> &quot;timestamp&quot;&amp;#58; &quot;0x00&quot;,</span><br><span class="line"> &quot;parentHash&quot;&amp;#58;&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,</span><br><span class="line"> &quot;extraData&quot;&amp;#58; &quot;SecBroBlock&quot;,</span><br><span class="line"> &quot;gasLimit&quot;&amp;#58;&quot;0x0000ffff&quot;</span><br><span class="line">&amp;#125</span><br></pre></td></tr></table></figure>
+<p>参数解释：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称  </th><th align="center">参数描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mixhash  </td><td align="center">与nonce配合用于挖矿，由上一个区块的一部分生成的hash。注意他和nonce的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。</td>
+</tr>
+<tr>
+<td>nonce  </td><td align="center">nonce就是一个64位随机数，用于挖矿，注意他和mixhash的设置需要满足以太坊的Yellow paper, 4.3.4. Block Header Validity, (44)章节所描述的条件。</td>
+</tr>
+<tr>
+<td>difficulty  </td><td align="center">设置当前区块的难度，如果难度过大，cpu挖矿就很难，这里设置较小难度</td>
+</tr>
+<tr>
+<td>alloc  </td><td align="center">用来预置账号以及账号的以太币数量，因为私有链挖矿比较容易，所以我们不需要预置有币的账号，需要的时候自己创建即可以。</td>
+</tr>
+<tr>
+<td>coinbase  </td><td align="center">矿工的账号，随便填</td>
+</tr>
+<tr>
+<td>timestamp  </td><td align="center">设置创世块的时间戳</td>
+</tr>
+<tr>
+<td>parentHash  </td><td align="center">上一个区块的hash值，因为是创世块，所以这个值是0</td>
+</tr>
+<tr>
+<td>extraData  </td><td align="center">附加信息，随便填，可以填你的个性信息</td>
+</tr>
+<tr>
+<td>gasLimit  </td><td align="center">该值设置对GAS的消耗总量限制，用来限制区块能包含的交易信息总和，因为我们是私有链，所以填最大。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="启动私有链节点"><a href="#启动私有链节点" class="headerlink" title="启动私有链节点"></a>启动私有链节点</h1><h2 id="启动私有节点所需参数"><a href="#启动私有节点所需参数" class="headerlink" title="启动私有节点所需参数"></a>启动私有节点所需参数</h2><table>
+<thead>
+<tr>
+<th>参数名称  </th><th align="center">参数描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>identity  </td><td align="center">区块链的标示，随便填写，用于标示目前网络的名字</td>
+</tr>
+<tr>
+<td>init  </td><td align="center">指定创世块文件的位置，并创建初始块</td>
+</tr>
+<tr>
+<td>datadir  </td><td align="center">设置当前区块链网络数据存放的位置</td>
+</tr>
+<tr>
+<td>port  </td><td align="center">网络监听端口</td>
+</tr>
+<tr>
+<td>rpc  </td><td align="center">启动rpc通信，可以进行智能合约的部署和调试</td>
+</tr>
+<tr>
+<td>rpcapi  </td><td align="center">设置允许连接的rpc的客户端，一般为db,eth,net,web3</td>
+</tr>
+<tr>
+<td>networkid  </td><td align="center">设置当前区块链的网络ID，用于区分不同的网络，是一个数字</td>
+</tr>
+<tr>
+<td>console  </td><td align="center">启动命令行模式，可以在Geth中执行命令</td>
+</tr>
+</tbody>
+</table>
+<h2 id="初始化-amp-启动"><a href="#初始化-amp-启动" class="headerlink" title="初始化&amp;启动"></a>初始化&amp;启动</h2><p>本人启动eth所在目录为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/zhuzs/eth</span><br></pre></td></tr></table></figure>
+<p>此目录下放置刚才配置好的创世块json文件：piccgenesis.json</p>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><p>初始化创世块有两种方法： <br><br>方法一：执行命令先进行初始化（注意需要在你准备防止eth的根目录下执行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth init /path/to/genesis.json</span><br></pre></td></tr></table></figure>
+<p>方法二：在执行启动命令的参数中添加以下参数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--genesis /path/to/genesis.json</span><br></pre></td></tr></table></figure>
+<p>以上两种方案注意path路径进行对应的替换；</p>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>因此直接执行如下命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --identity &quot;secbro etherum&quot; --rpc --rpccorsdomain &quot;*&quot; --datadir &quot;/home/zhuzs/eth/chain&quot; --port &quot;30303&quot; --rpcapi &quot;db,eth,net,web3&quot; -- networkid 95518 console --dev</span><br></pre></td></tr></table></figure>
+<p>PS：根据自己的环境进行对应的替换。注意，最后添加了–dev，以开发模式启动。</p>
+<p>看到一下输出说明启动成功，并且是使用的私有链： <br><br><img src="https&#58;//img-blog.csdn.net/20161107113451230" alt="这里写图片描述" title=""></p>
+<p>随后就是相关的命令操作，在下一篇博客中进一步说明。</p>
+<pre><code>                        &lt;li class=&quot;prev_article&quot;&gt;
+    上一篇
+    &amp;#91;Linux下 $(cd `dirname $0`;pwd)&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/53033712)
+&lt;/li&gt;
+
+                        &lt;li class=&quot;next_article&quot;&gt;
+    下一篇
+    &amp;#91;区块链开发（二）以太坊客户端基本操作命令&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/53073799)
+&lt;/li&gt;
+</code></pre><h2 id="go-ethereum-部署私有链"><a href="#go-ethereum-部署私有链" class="headerlink" title="go-ethereum 部署私有链"></a>go-ethereum 部署私有链</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/7/2/A/3_a191030148.jpg&quot; alt=&quot;a191030148&quot; title=&quot;a191030148&quot;&gt;
+- a191030148
+- 2017-10-25 16&amp;#58;27&amp;#58;21
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;2355
+</code></pre><h2 id="以太坊客户端Ethereum-Wallet与Geth区别简介"><a href="#以太坊客户端Ethereum-Wallet与Geth区别简介" class="headerlink" title="以太坊客户端Ethereum Wallet与Geth区别简介"></a>以太坊客户端Ethereum Wallet与Geth区别简介</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/2/7/F/3_wo541075754.jpg&quot; alt=&quot;wo541075754&quot; title=&quot;wo541075754&quot;&gt;
+- wo541075754
+- 2017-08-27 12&amp;#58;01&amp;#58;31
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;14818
+</code></pre><h2 id="以太坊官网go-ethereum"><a href="#以太坊官网go-ethereum" class="headerlink" title="以太坊官网go-ethereum"></a>以太坊官网go-ethereum</h2><pre><code>- 2017年02月09日 13&amp;#58;22
+- 50MB
+- 下载
+</code></pre><h2 id="树莓派raspberry-pi安装archlinux，并且在上面搭建以太坊（ethereum）环境"><a href="#树莓派raspberry-pi安装archlinux，并且在上面搭建以太坊（ethereum）环境" class="headerlink" title="树莓派raspberry pi安装archlinux，并且在上面搭建以太坊（ethereum）环境"></a>树莓派raspberry pi安装archlinux，并且在上面搭建以太坊（ethereum）环境</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/0/D/B/3_zhang_yu_joseph.jpg&quot; alt=&quot;Zhang_Yu_Joseph&quot; title=&quot;Zhang_Yu_Joseph&quot;&gt;
+- Zhang_Yu_Joseph
+- 2015-10-01 09&amp;#58;45&amp;#58;02
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;2534
+</code></pre><h2 id="以太坊go-ethereum客户端JSON-RPC-API调用（一）"><a href="#以太坊go-ethereum客户端JSON-RPC-API调用（一）" class="headerlink" title="以太坊go-ethereum客户端JSON-RPC API调用（一）"></a>以太坊go-ethereum客户端JSON-RPC API调用（一）</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/2/7/F/3_wo541075754.jpg&quot; alt=&quot;wo541075754&quot; title=&quot;wo541075754&quot;&gt;
+- wo541075754
+- 2016-12-31 09&amp;#58;13&amp;#58;02
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;16911
+</code></pre><h2 id="Ethereum钱包区块同步问题"><a href="#Ethereum钱包区块同步问题" class="headerlink" title="Ethereum钱包区块同步问题"></a>Ethereum钱包区块同步问题</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/9/E/E/3_fengmm521.jpg&quot; alt=&quot;fengmm521&quot; title=&quot;fengmm521&quot;&gt;
+- fengmm521
+- 2017-11-04 22&amp;#58;01&amp;#58;33
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;6988
+</code></pre><h2 id="Ethereum-JSON-Api-的使用"><a href="#Ethereum-JSON-Api-的使用" class="headerlink" title="Ethereum JSON-Api 的使用"></a>Ethereum JSON-Api 的使用</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/D/3/D/3_guokaikevin.jpg&quot; alt=&quot;guokaikevin&quot; title=&quot;guokaikevin&quot;&gt;
+- guokaikevin
+- 2017-11-19 21&amp;#58;01&amp;#58;11
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;2949
+</code></pre><h2 id="以太坊客户端Geth命令用法-参数详解"><a href="#以太坊客户端Geth命令用法-参数详解" class="headerlink" title="以太坊客户端Geth命令用法-参数详解"></a>以太坊客户端Geth命令用法-参数详解</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/2/7/F/3_wo541075754.jpg&quot; alt=&quot;wo541075754&quot; title=&quot;wo541075754&quot;&gt;
+- wo541075754
+- 2018-03-18 11&amp;#58;32&amp;#58;30
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;516
+</code></pre><h2 id="安装geth客户端并转账"><a href="#安装geth客户端并转账" class="headerlink" title="安装geth客户端并转账"></a>安装geth客户端并转账</h2><pre><code>- &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/7/B/7/3_ddffr.jpg&quot; alt=&quot;DDFFR&quot; title=&quot;DDFFR&quot;&gt;
+- DDFFR
+- 2017-07-04 14&amp;#58;41&amp;#58;24
+- &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;5962
+</code></pre><h2 id="区块链开发（二）以太坊客户端基本操作命令"><a href="#区块链开发（二）以太坊客户端基本操作命令" class="headerlink" title="区块链开发（二）以太坊客户端基本操作命令"></a>区块链开发（二）以太坊客户端基本操作命令</h2><pre><code>                        - &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/2/7/F/3_wo541075754.jpg&quot; alt=&quot;wo541075754&quot; title=&quot;wo541075754&quot;&gt;
+                        - wo541075754
+                        - 2016-11-07 22&amp;#58;41&amp;#58;09
+                        - &lt;i class=&quot;icon iconfont icon-read&quot;&gt;&lt;/i&gt;14094
+                    个人资料
+
+&lt;dl class=&quot;inf_bar clearfix&quot;&gt;
+    &lt;dt class=&quot;csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_381&quot;&gt;
+            &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754&quot; target=&quot;_blank&quot;&gt;
+                &lt;img src=&quot;https&amp;#58;//avatar.csdn.net/2/7/F/3_wo541075754.jpg&quot; class=&quot;avatar_pic&quot;&gt;
+    &lt;/a&gt;
+  &lt;/dt&gt;&lt;dd&gt;
+        &lt;h3 class=&quot;csdn-tracking-statistics tracking-click&quot;  data-mod=&quot;popu_380&quot;&gt;&amp;#91;wo541075754&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754)&lt;/h3&gt;
+
+                    &lt;svg class=&quot;icon&quot; aria-hidden=&quot;true&quot;&gt;
+            &lt;use xlink&amp;#58;href=&quot;#icon-bokezhuanjia&quot;&gt;&lt;/use&gt;
+        &lt;/svg&gt;
+        博客专家
+
+                &lt;/dd&gt;
+&lt;/dl&gt;
+
+    &lt;dl title=&quot;234&quot;&gt;
+        &lt;dt&gt;原创&lt;/dt&gt;
+        &lt;dd&gt;234&lt;/dd&gt;
+    &lt;/dl&gt;
+    &lt;dl title=&quot;694&quot;&gt;
+        &lt;dt&gt;粉丝&lt;/dt&gt;
+        &lt;dd id=&apos;fan&apos;&gt;694&lt;/dd&gt;
+    &lt;/dl&gt;
+    &lt;dl title=&quot;517&quot;&gt;
+        &lt;dt&gt;喜欢&lt;/dt&gt;
+        &lt;dd&gt;517&lt;/dd&gt;
+    &lt;/dl&gt;
+    &lt;dl title=&quot;373&quot;&gt;
+      &lt;dt&gt;评论&lt;/dt&gt;
+      &lt;dd&gt;373&lt;/dd&gt;
+    &lt;/dl&gt;
+
+
+
+
+                    &lt;img src=&apos;https&amp;#58;//csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png&apos; alt=&apos;专栏达人&apos;&gt;
+                                &lt;img src=&apos;https&amp;#58;//csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png&apos; alt=&apos;持之以恒&apos;&gt;
+
+
+
+  等级：
+
+    &lt;a href=&quot;https&amp;#58;//blog.csdn.net/home/help.html#level&quot; title=&quot;7级,点击查看等级说明&quot; target=&quot;_blank&quot;&gt;
+      &lt;img class=&quot;grade-img&quot; src=&quot;https&amp;#58;//csdnimg.cn/jifen/images/xunzhang/jianzhang/blog7.png&quot; alt=&quot;7级,点击查看等级说明&quot;&gt;
+    &lt;/a&gt;
+
+
+
+    访问量：
+    127万+
+
+
+
+  积分：
+  1万+
+
+
+    排名：
+    1283
+</code></pre><p><script type="text/javascript"><br>  // 判断并设置用户名位置，没有博客专家与关注按钮时，用户名居中<br>  $medals_children = $(‘.medals’).children().length;<br>  $span_add_follow = $(‘#span_add_follow’).length;<br>  if($medals_children === 0 &amp;&amp; $span_add_follow === 0)&amp;#123<br>    $(‘.inf_bar dd’).css(‘vertical-align’,’10px’)<br>  &amp;#125<br></script>    以太坊研发技术交流群<br>        <img src="http&#58;//img.blog.csdn.net/20170824075952429?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvd281NDEwNzU3NTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" title="">    文章搜索<br>        <form id="frmSearch" class="form_search csdn-tracking-statistics" data-pid="blog" target="_blank" data-mod="popu_306"><br>            <input id="inputSearch" type="text" class="blogsearch" title="请输入关键字"><br>            <input id="btnSubmit" type="button" value="搜索" title="search in blog"><br>        </form></p>
+<pre><code>博客专栏
+
+        &lt;table cellpadding=&quot;0&quot; cellspacing=&quot;0&quot;&gt;
+                &lt;tr&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;
+            &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/13651.html&quot; target=&quot;_blank&quot;&gt;
+                &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20161122200728461&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;
+            &amp;#91;区块链实践&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/13651.html)
+            文章：67篇
+            阅读：338731
+        &lt;/td&gt;
+    &lt;/tr&gt;
+                &lt;tr&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;
+            &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/14599.html&quot; target=&quot;_blank&quot;&gt;
+                &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20170227104644223&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;
+            &amp;#91;Zookeeper从入门到专家&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/14599.html)
+            文章：20篇
+            阅读：68736
+        &lt;/td&gt;
+    &lt;/tr&gt;
+                &lt;tr&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;
+            &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/15277.html&quot; target=&quot;_blank&quot;&gt;
+                &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20170415200234279&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;
+            &amp;#91;Intellij IDEA日常使用&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/15277.html)
+            文章：29篇
+            阅读：348843
+        &lt;/td&gt;
+    &lt;/tr&gt;
+                &lt;tr&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;
+            &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/16183.html&quot; target=&quot;_blank&quot;&gt;
+                &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20170630105130174&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;
+            &lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;
+            &amp;#91;Drools规则引擎&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/16183.html)
+            文章：47篇
+            阅读：115919
+        &lt;/td&gt;
+    &lt;/tr&gt;
+            &lt;/table&gt;
+                    &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;                    &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/14599.html&quot; target=&quot;_blank&quot;&gt;                        &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20170227104644223&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;                    &lt;/a&gt;                &lt;/td&gt;                &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;                    &amp;#91;Zookeeper从入门到专家&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/14599.html)                    文章：20篇                    阅读：68736                &lt;/td&gt;            
+        &lt;td style=&quot;padding&amp;#58;10px 10px 0 0;&quot;&gt;                    &lt;a href=&quot;https&amp;#58;//blog.csdn.net/column/details/16183.html&quot; target=&quot;_blank&quot;&gt;                        &lt;img src=&quot;https&amp;#58;//img-blog.csdn.net/20170630105130174&quot; style=&quot;width&amp;#58;75px;height&amp;#58;75px;&quot; /&gt;                    &lt;/a&gt;                &lt;/td&gt;                &lt;td style=&quot;padding&amp;#58;10px 0; vertical-align&amp;#58;top;&quot;&gt;                    &amp;#91;Drools规则引擎&amp;#93;(https&amp;#58;//blog.csdn.net/column/details/16183.html)                    文章：47篇                    阅读：115919                &lt;/td&gt;            
+</code></pre><p>文章分类<br>                        <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6502432" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                区块链            </a><br>            (68)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/3200979" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Intellij IDEA            </a><br>            (29)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6739570" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Zookeeper            </a><br>            (20)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5783995" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Java基础            </a><br>            (18)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6397798" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Drools            </a><br>            (47)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6096667" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                程序杂谈            </a><br>            (19)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6274876" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                SpringBoot            </a><br>            (13)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/3262137" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Bootstrap            </a><br>            (6)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6152792" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Linux            </a><br>            (11)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/3201463" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                JDBC            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/3225887" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                单元测试            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/3257729" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Dbvisualizer            </a><br>            (3)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5577847" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                SVN            </a><br>            (4)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5584725" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Quartz            </a><br>            (2)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5618963" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Spring            </a><br>            (4)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5679195" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                日志            </a><br>            (2)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5747433" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                ZK            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/5793209" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Oracle            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6100184" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                前端            </a><br>            (5)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6103092" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                MySQL            </a><br>            (4)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6112691" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Nginx            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6114331" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Maven            </a><br>            (6)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6128187" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                dubbo            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6128188" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                mybatis            </a><br>            (4)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6139682" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                SecureCRT            </a><br>            (2)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6139683" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                自动化            </a><br>            (3)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6349510" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                github            </a><br>            (2)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6378700" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                mq            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6467637" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                xstream            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6526352" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                Solidity            </a><br>            (5)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6695491" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                加密算法            </a><br>            (2)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/6891256" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                分布式            </a><br>            (4)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/7408412" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                ssh重启            </a><br>            (1)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/7492585" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                go语言            </a><br>            (3)<br>        </li><br>                <li><br>            <a href="https&#58;//blog.csdn.net/wo541075754/article/category/7547335" onclick="_gaq.push(&#91;'_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei'&#93;); "><br>                其他            </a><br>            (1)<br>        </li><br>                    文章存档</p>
+<pre><code>                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2018年4月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2018/04)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2018年3月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2018/03)
+           (15)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2018年2月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2018/02)
+           (3)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2018年1月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2018/01)
+           (9)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年12月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/12)
+           (10)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年11月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/11)
+           (5)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年10月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/10)
+           (3)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年9月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/09)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年8月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/08)
+           (21)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年7月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/07)
+           (25)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年6月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/06)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年5月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/05)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年4月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/04)
+           (10)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年3月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/03)
+           (17)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年2月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/02)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2017年1月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2017/01)
+           (10)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年12月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/12)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年11月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/11)
+           (21)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年10月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/10)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年9月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/09)
+           (15)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年8月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/08)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年6月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/06)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年5月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/05)
+           (6)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年4月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/04)
+           (5)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年3月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/03)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2016年2月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2016/02)
+           (8)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年11月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/11)
+           (1)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年9月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/09)
+           (3)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年8月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/08)
+           (4)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年7月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/07)
+           (2)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年6月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/06)
+           (6)
+        &lt;/li&gt;
+                    &lt;!--归档统计--&gt;
+        &lt;li&gt;
+           &amp;#91;2015年5月&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/month/2015/05)
+           (10)
+        &lt;/li&gt;
+
+阅读排行
+                    &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/51150035&quot; title=&quot;IntelliJ IDEA 控制台中文乱码解决方案&quot;&gt;
+            IntelliJ IDEA 控制台中文乱码解决方案            &lt;/a&gt;
+        (40713)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/54743138&quot; title=&quot;图解区块链：14张图看懂什么是“区块链技术”？&quot;&gt;
+            图解区块链：14张图看懂什么是“区块链技术”？            &lt;/a&gt;
+        (37020)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/47829233&quot; title=&quot;IntelliJ IDEA 使用Subversion时忽略文件夹&quot;&gt;
+            IntelliJ IDEA 使用Subversion时忽略文件夹            &lt;/a&gt;
+        (32785)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/50717842&quot; title=&quot;Mysql事物锁等待超时 Lock wait timeout exceeded; try restarting transaction&quot;&gt;
+            Mysql事物锁等待超时 Lock wait timeout exceeded; try restarting transaction            &lt;/a&gt;
+        (31522)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/54632929&quot; title=&quot;Merkle Tree（默克尔树）算法解析&quot;&gt;
+            Merkle Tree（默克尔树）算法解析            &lt;/a&gt;
+        (31321)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/46047051&quot; title=&quot;Intellij IDEA 配置Subversion插件&quot;&gt;
+            Intellij IDEA 配置Subversion插件            &lt;/a&gt;
+        (31254)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/50956860&quot; title=&quot;Intellij Idea 使用SVN更新到指定版本&quot;&gt;
+            Intellij Idea 使用SVN更新到指定版本            &lt;/a&gt;
+        (27302)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/51159518&quot; title=&quot;Intellij IDEA 默认打开上次项目设置&quot;&gt;
+            Intellij IDEA 默认打开上次项目设置            &lt;/a&gt;
+        (24458)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/49659597&quot; title=&quot;Intellij 解除（去除）SVN关联&quot;&gt;
+            Intellij 解除（去除）SVN关联            &lt;/a&gt;
+        (21501)
+    &lt;/li&gt;
+            &lt;li&gt;
+        &lt;a href=&quot;https&amp;#58;//blog.csdn.net/wo541075754/article/details/53064877&quot; title=&quot;区块链开发（一）搭建基于以太坊go-ethereum的私有链环境&quot;&gt;
+            区块链开发（一）搭建基于以太坊go-ethereum的私有链环境            &lt;/a&gt;
+        (21328)
+    &lt;/li&gt;
+                最新评论
+            &lt;li&gt;
+        &amp;#91;以太坊技术学习及交流相关事宜&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/79761870#comments)
+        &lt;p style=&quot;margin&amp;#58;0px;&quot;&gt;&amp;#91;defineconst&amp;#93;(https&amp;#58;//my.csdn.net/defineconst)&amp;#58;
+            能够微信转账支付不？            &lt;/p&gt;
+    &lt;/li&gt;
+            &lt;li&gt;
+        &amp;#91;Spring boot xstre...&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/52841287#comments)
+        &lt;p style=&quot;margin&amp;#58;0px;&quot;&gt;&amp;#91;qq_33749431&amp;#93;(https&amp;#58;//my.csdn.net/qq_33749431)&amp;#58;
+            我曹，老哥牛逼，这样都被你发现了，必须给个赞，想得我脑壳疼，原来是springboot这b崽子            &lt;/p&gt;
+    &lt;/li&gt;
+            &lt;li&gt;
+        &amp;#91;《Drools7.0.0.Fina...&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/74456890#comments)
+        &lt;p style=&quot;margin&amp;#58;0px;&quot;&gt;&amp;#91;weixin_38761382&amp;#93;(https&amp;#58;//my.csdn.net/weixin_38761382)&amp;#58;
+            博主大神，我刚接触drools，ecplise配置好drools6.5后，新建项目编译报错是什么原...            &lt;/p&gt;
+    &lt;/li&gt;
+            &lt;li&gt;
+        &amp;#91;以太坊交易池(txpool)的分析&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/79812535#comments)
+        &lt;p style=&quot;margin&amp;#58;0px;&quot;&gt;&amp;#91;Platinum0&amp;#93;(https&amp;#58;//my.csdn.net/Platinum0)&amp;#58;
+            666            &lt;/p&gt;
+    &lt;/li&gt;
+            &lt;li&gt;
+        &amp;#91;以太坊go-ethereum客户端...&amp;#93;(https&amp;#58;//blog.csdn.net/wo541075754/article/details/53953933#comments)
+        &lt;p style=&quot;margin&amp;#58;0px;&quot;&gt;&amp;#91;qq_26733783&amp;#93;(https&amp;#58;//my.csdn.net/qq_26733783)&amp;#58;
+            &amp;#91;reply&amp;#93;d15269395665&amp;#91;/reply&amp;#93;
+</code></pre><p>请问你现在调好了吗？我遇到跟你一样的情况了。            </p><br>        <br>                <li><br>            &#91;以太坊go-ethereum客户端…&#93;(https&#58;//blog.csdn.net/wo541075754/article/details/53953933#comments)<br>            <p style="margin&#58;0px;">&#91;qq_26733783&#93;(https&#58;//my.csdn.net/qq_26733783)&#58;<br>                &#91;reply&#93;wo541075754&#91;/reply&#93;<br>参数类型错误？能说具体一点吗？我还是没调出来            </p><br>        </li><br>                <li><br>            &#91;以太坊如何搭建私有连联盟链&#93;(https&#58;//blog.csdn.net/wo541075754/article/details/78926177#comments)<br>            <p style="margin&#58;0px;">&#91;u012862638&#93;(https&#58;//my.csdn.net/u012862638)&#58;<br>                博主您好，现在我这里已经在本地搭建起来一个3个节点的联盟链，我这有个疑问：<br>我在 node2 中 …            </p><br>        </li><br>                <li><br>            &#91;Intellij IDEA 201…&#93;(https&#58;//blog.csdn.net/wo541075754/article/details/77504461#comments)<br>            <p style="margin&#58;0px;">&#91;UncleTian&#93;(https&#58;//my.csdn.net/UncleTian)&#58;<br>                好文章！~            </p><br>        </li><br>                <li><br>            &#91;以太坊源码分析-同步之Syncin…&#93;(https&#58;//blog.csdn.net/wo541075754/article/details/79649208#comments)<br>            <p style="margin&#58;0px;">&#91;wo541075754&#93;(https&#58;//my.csdn.net/wo541075754)&#58;<br>                &#91;reply&#93;zhugeaming2018&#91;/reply&#93;感谢支持            </p><br>        </li><br>                <li><br>            &#91;以太坊手续费不足异常（insuff…&#93;(https&#58;//blog.csdn.net/wo541075754/article/details/79537043#comments)<br>            <p style="margin&#58;0px;">&#91;zhizouxiao&#93;(https&#58;//my.csdn.net/zhizouxiao)&#58;<br>                初始化私有链的时候，chainId不为0，否则出现insufficient funds for g…            </p><br>        </li><p></p>
+<p>&#91;qq_33749431&#93;(https&#58;//my.csdn.net/qq_33749431)&#58;<br>                我曹，老哥牛逼，这样都被你发现了，必须给个赞，想得我脑壳疼，原来是springboot这b崽子            </p>
+<p>&#91;Platinum0&#93;(https&#58;//my.csdn.net/Platinum0)&#58;<br>                666            </p>
+<p>&#91;qq_26733783&#93;(https&#58;//my.csdn.net/qq_26733783)&#58;<br>                &#91;reply&#93;wo541075754&#91;/reply&#93;<br>参数类型错误？能说具体一点吗？我还是没调出来            </p>
+<p>&#91;UncleTian&#93;(https&#58;//my.csdn.net/UncleTian)&#58;<br>                好文章！~            </p>
+<p>&#91;zhizouxiao&#93;(https&#58;//my.csdn.net/zhizouxiao)&#58;<br>                初始化私有链的时候，chainId不为0，否则出现insufficient funds for g…            </p>
+<pre><code>&lt;li&gt;
+    &lt;button class=&quot;left-fixed-btn btn-like csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_373&quot; target=&quot;_self&quot; title=&quot;点赞&quot;&gt;
+        &amp;#91;&lt;i class=&quot;icon iconfont icon-dianzan&quot;&gt;&lt;/i&gt;&amp;#93;(javascript&amp;#58;void(0);)
+        &amp;#91;1&amp;#93;(javascript&amp;#58;void(0);)
+    &lt;/button&gt;
+&lt;/li&gt;
+&lt;li&gt;
+    &lt;button class=&quot;left-fixed-btn csdn-tracking-statistics tracking-click btn-collect&quot; data-mod=&quot;popu_374&quot;  target=&quot;_self&quot; title=&quot;收藏&quot;&gt;
+        &amp;#91;&lt;i class=&quot;icon iconfont icon-shoucang&quot;&gt;&lt;/i&gt;&amp;#93;(javascript&amp;#58;void(0);)
+    &lt;/button&gt;
+&lt;/li&gt;
+&lt;li&gt;
+    &lt;button class=&quot;left-fixed-btn btn-pinglun csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_544&quot; title=&quot;评论&quot;&gt;
+    &amp;#91;&lt;i class=&quot;icon iconfont icon-pinglun&quot;&gt;&lt;/i&gt;&amp;#93;(javascript&amp;#58;void(0);)
+    &lt;/button&gt;
+&lt;/li&gt;
+&lt;li class=&quot;bdsharebuttonbox csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_172&quot;&gt;
+    &lt;a class=&quot;bds_tsina outside left-fixed-btn&quot; data-cmd=&quot;tsina&quot; title=&quot;分享到新浪微博&quot;&gt;&lt;/a&gt;
+    &lt;i class=&quot;icon iconfont icon-xinlang&quot;&gt;&lt;/i&gt;
+&lt;/li&gt;
+&lt;li class=&quot;bdsharebuttonbox csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_172&quot;&gt;
+    &lt;a class=&quot;bds_weixin outside left-fixed-btn&quot; data-cmd=&quot;weixin&quot; title=&quot;分享到微信&quot;&gt;&lt;/a&gt;
+    &lt;i class=&quot;icon iconfont icon-weixin&quot;&gt;&lt;/i&gt;
+&lt;/li&gt;
+&lt;li class=&quot;bdsharebuttonbox csdn-tracking-statistics tracking-click&quot; data-mod=&quot;popu_172&quot;&gt;
+    &lt;a class=&quot;bds_qzone outside left-fixed-btn&quot; data-cmd=&quot;qzone&quot; title=&quot;分享到QQ空间&quot;&gt;&lt;/a&gt;
+    &lt;i class=&quot;icon iconfont icon-QQ&quot;&gt;&lt;/i&gt;
+&lt;/li&gt;
+</code></pre><blockquote>
+<p><strong>转载来源</strong>：<a href="http://blog.csdn.net/wo541075754/article/details/53064877" target="_blank" rel="noopener">区块链开发（一）搭建基于以太坊go-ethereum的私有链环境 - CSDN博客</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/37c7029b/" rel="next" title="安装hyperledger fabric V1.0.1 - 猫不急 - 博客园">
+                <i class="fa fa-chevron-left"></i> 安装hyperledger fabric V1.0.1 - 猫不急 - 博客园
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/f9fbed76/" rel="prev" title="「IPFS + 区块链 系列」入门篇-IPFS+IPNS+个人博客搭建">
+                「IPFS + 区块链 系列」入门篇-IPFS+IPNS+个人博客搭建 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#go-ethereum客户端"><span class="nav-number">1.</span> <span class="nav-text">go-ethereum客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#下载地址-amp-参考手册"><span class="nav-number">1.1.</span> <span class="nav-text">下载地址&amp;参考手册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ubuntu下安装命令"><span class="nav-number">1.2.</span> <span class="nav-text">ubuntu下安装命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装测试"><span class="nav-number">1.3.</span> <span class="nav-text">安装测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创世块"><span class="nav-number">1.4.</span> <span class="nav-text">创世块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#启动私有链节点"><span class="nav-number">2.</span> <span class="nav-text">启动私有链节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动私有节点所需参数"><span class="nav-number">2.1.</span> <span class="nav-text">启动私有节点所需参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#初始化-amp-启动"><span class="nav-number">2.2.</span> <span class="nav-text">初始化&amp;启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化"><span class="nav-number">2.2.1.</span> <span class="nav-text">初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动"><span class="nav-number">2.2.2.</span> <span class="nav-text">启动</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#go-ethereum-部署私有链"><span class="nav-number">2.3.</span> <span class="nav-text">go-ethereum 部署私有链</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊客户端Ethereum-Wallet与Geth区别简介"><span class="nav-number">2.4.</span> <span class="nav-text">以太坊客户端Ethereum Wallet与Geth区别简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊官网go-ethereum"><span class="nav-number">2.5.</span> <span class="nav-text">以太坊官网go-ethereum</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#树莓派raspberry-pi安装archlinux，并且在上面搭建以太坊（ethereum）环境"><span class="nav-number">2.6.</span> <span class="nav-text">树莓派raspberry pi安装archlinux，并且在上面搭建以太坊（ethereum）环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊go-ethereum客户端JSON-RPC-API调用（一）"><span class="nav-number">2.7.</span> <span class="nav-text">以太坊go-ethereum客户端JSON-RPC API调用（一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ethereum钱包区块同步问题"><span class="nav-number">2.8.</span> <span class="nav-text">Ethereum钱包区块同步问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ethereum-JSON-Api-的使用"><span class="nav-number">2.9.</span> <span class="nav-text">Ethereum JSON-Api 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#以太坊客户端Geth命令用法-参数详解"><span class="nav-number">2.10.</span> <span class="nav-text">以太坊客户端Geth命令用法-参数详解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装geth客户端并转账"><span class="nav-number">2.11.</span> <span class="nav-text">安装geth客户端并转账</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区块链开发（二）以太坊客户端基本操作命令"><span class="nav-number">2.12.</span> <span class="nav-text">区块链开发（二）以太坊客户端基本操作命令</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

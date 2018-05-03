@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程语言,深度学习,Python,机器学习,GPU," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="在这篇文章中，我们将展示如何建立一个深度神经网络，能做到以 90% 的精度来对图像进行分类，而在深度神经网络，特别是卷积神经网络兴起之前，这还是一个非常困难的问题。  深度学习是目前人工智能领域里最让人兴奋的话题之一了，它基于生物学领域的概念发展而来，现如今是一系列算法的集合。 事实已经证明深度学习在计算机视觉、自然语言处理、语音识别等很多的领域里都可以起到非常好的效果。 在过去的 6 年里，深度">
+<meta name="keywords" content="编程语言,深度学习,Python,机器学习,GPU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="我用Python实现了12500张猫狗图像的精准分类">
+<meta property="og:url" content="http://blockshare.top/2018/b95bd127/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="在这篇文章中，我们将展示如何建立一个深度神经网络，能做到以 90% 的精度来对图像进行分类，而在深度神经网络，特别是卷积神经网络兴起之前，这还是一个非常困难的问题。  深度学习是目前人工智能领域里最让人兴奋的话题之一了，它基于生物学领域的概念发展而来，现如今是一系列算法的集合。 事实已经证明深度学习在计算机视觉、自然语言处理、语音识别等很多的领域里都可以起到非常好的效果。 在过去的 6 年里，深度">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/593a00031a95e8512934">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.771Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="我用Python实现了12500张猫狗图像的精准分类">
+<meta name="twitter:description" content="在这篇文章中，我们将展示如何建立一个深度神经网络，能做到以 90% 的精度来对图像进行分类，而在深度神经网络，特别是卷积神经网络兴起之前，这还是一个非常困难的问题。  深度学习是目前人工智能领域里最让人兴奋的话题之一了，它基于生物学领域的概念发展而来，现如今是一系列算法的集合。 事实已经证明深度学习在计算机视觉、自然语言处理、语音识别等很多的领域里都可以起到非常好的效果。 在过去的 6 年里，深度">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/593a00031a95e8512934">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/b95bd127/"/>
+
+
+
+
+
+  <title>我用Python实现了12500张猫狗图像的精准分类 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/b95bd127/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">我用Python实现了12500张猫狗图像的精准分类</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">51CTO传媒</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-16T11:35:30+08:00">
+                2018-01-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/b95bd127/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/b95bd127/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/593a00031a95e8512934" rel="gallery_cjgf0wkqb00bmxmqdwze03fn6"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/593a00031a95e8512934" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>在这篇文章中，我们将展示如何建立一个深度神经网络，能做到以 90% 的精度来对图像进行分类，而在深度神经网络，特别是卷积神经网络兴起之前，这还是一个非常困难的问题。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/593a00031a95e8512934" img_width="601" img_height="338" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>深度学习是目前人工智能领域里最让人兴奋的话题之一了，它基于生物学领域的概念发展而来，现如今是一系列算法的集合。</p>
+<p>事实已经证明深度学习在计算机视觉、自然语言处理、语音识别等很多的领域里都可以起到非常好的效果。</p>
+<p>在过去的 6 年里，深度学习已经应用到非常广泛的领域，很多最近的技术突破，都和深度学习相关。</p>
+<p><strong>这里仅举几个例子：</strong>特斯拉的自动驾驶汽车、Facebook 的照片标注系统、像 Siri 或 Cortana 这样的虚拟助手、聊天机器人、能进行物体识别的相机，这些技术突破都要归功于深度学习。</p>
+<p>在这么多的领域里，深度学习在语言理解、图像分析这种认知任务上的表现已经达到了我们人类的水平。</p>
+<p><strong>如何构建一个在图像分类任务上能达到 90% 精度的深度神经网络？</strong></p>
+<p>这个问题看似非常简单，但在深度神经网络特别是卷积神经网络（CNN）兴起之前，这是一个被计算机科学家们研究了很多年的棘手问题。</p>
+<p>本文分为以下三个部分进行讲解：</p>
+<ul>
+<li><strong>展示数据集和用例，</strong>并且解释这个图像分类任务的复杂度。- <strong>搭建一个深度学习专用环境，</strong>这个环境搭建在 AWS 的基于 GPU 的 EC2 服务上。- <strong>训练两个深度学习模型：</strong>第一个模型是使用 Keras 和 TensorFlow 从头开始端到端的流程，另一个模型使用是已经在大型数据集上预训练好的神经网络。<br><strong>搭建一个深度学习专用环境，</strong>这个环境搭建在 AWS 的基于 GPU 的 EC2 服务上。</li>
+</ul>
+<p>一个有趣的实例：给猫和狗的图像分类</p>
+<p>有很多的图像数据集是专门用来给深度学习模型进行基准测试的，我在这篇文章中用到的数据集来自 Cat vs Dogs Kaggle competition，这份数据集包含了大量狗和猫的带有标签的图片。</p>
+<p>和每一个 Kaggle 比赛一样，这份数据集也包含两个文件夹：</p>
+<ul>
+<li><strong>训练文件夹：</strong>它包含了 25000 张猫和狗的图片，每张图片都含有标签，这个标签是作为文件名的一部分。我们将用这个文件夹来训练和评估我们的模型。- <strong>测试文件夹：</strong>它包含了 12500 张图片，每张图片都以数字来命名。对于这份数据集中的每幅图片来说，我们的模型都要预测这张图片上是狗还是猫（1= 狗，0= 猫）。事实上，这些数据也被 Kaggle 用来对模型进行打分，然后在排行榜上排名。<br><strong>测试文件夹：</strong>它包含了 12500 张图片，每张图片都以数字来命名。对于这份数据集中的每幅图片来说，我们的模型都要预测这张图片上是狗还是猫（1= 狗，0= 猫）。事实上，这些数据也被 Kaggle 用来对模型进行打分，然后在排行榜上排名。</li>
+</ul>
+<p><img src="http&#58;//p1.pstatp.com/large/593900030e0ee2d32d23" img_width="558" img_height="287" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>我们观察一下这些图片的特点，这些图片各种各样，分辨率也各不相同。图片中的猫和狗形状、所处位置、体表颜色各不一样。</p>
+<p>它们的姿态不同，有的在坐着而有的则不是，它们的情绪可能是开心的也可能是伤心的，猫可能在睡觉，而狗可能在汪汪地叫着。照片可能以任一焦距从任意角度拍下。</p>
+<p>这些图片有着无限种可能，对于我们人类来说在一系列不同种类的照片中识别出一个场景中的宠物自然是毫不费力的事情，然而这对于一台机器来说可不是一件小事。</p>
+<p>实际上，如果要机器实现自动分类，那么我们需要知道如何强有力地描绘出猫和狗的特征，也就是说为什么我们认为这张图片中的是猫，而那张图片中的却是狗。这个需要描绘每个动物的内在特征。</p>
+<p>深度神经网络在图像分类任务上效果很好的原因是，它们有着能够自动学习多重抽象层的能力，这些抽象层在给定一个分类任务后又可以对每个类别给出更简单的特征表示。</p>
+<p>深度神经网络可以识别极端变化的模式，在扭曲的图像和经过简单的几何变换的图像上也有着很好的鲁棒性。<strong>让我们来看看深度神经网络如何来处理这个问题的。</strong></p>
+<p>配置深度学习环境</p>
+<p>深度学习的计算量非常大，当你在自己的电脑上跑一个深度学习模型时，你就能深刻地体会到这一点。</p>
+<p>但是如果你使用 GPUs，训练速度将会大幅加快，因为 GPUs 在处理像矩阵乘法这样的并行计算任务时非常高效，而神经网络又几乎充斥着矩阵乘法运算，所以计算性能会得到令人难以置信的提升。</p>
+<p>我自己的电脑上并没有一个强劲的 GPU，因此我选择使用一个亚马逊云服务 (AWS) 上的虚拟机，这个虚拟机名为 p2.xlarge，它是亚马逊 EC2 的一部分。</p>
+<p>这个虚拟机的配置包含一个 12GB 显存的英伟达GPU、一个 61GB 的 RAM、4 个 vCPU 和 2496 个 CUDA 核。</p>
+<p>可以看到这是一台性能巨兽，让人高兴的是，我们每小时仅需花费 0.9 美元就可以使用它。当然，你还可以选择其他配置更好的虚拟机，但对于我们现在将要处理的任务来说，一台 p2.xlarge 虚拟机已经绰绰有余了。</p>
+<p>我的虚拟机工作在 Deep Learning AMI CUDA 8 Ubuntu Version 系统上，现在让我们对这个系统有一个更清楚的了解吧。</p>
+<p>这个系统基于一个 Ubuntu 16.04 服务器，已经包装好了所有的我们需要的深度学习框架（TensorFlow，Theano，Caffe，Keras），并且安装好了 GPU 驱动（听说自己安装驱动是噩梦般的体验）。</p>
+<p>如果你对 AWS 不熟悉的话，你可以参考下面的两篇文章：</p>
+<ul>
+<li>https&#58;//blog.keras.io/running-jupyter-notebooks-on-gpu-on-aws-a-starter-guide.html- https&#58;//hackernoon.com/keras-with-gpu-on-amazon-ec2-a-step-by-step-instruction-4f90364e49ac<br>https&#58;//hackernoon.com/keras-with-gpu-on-amazon-ec2-a-step-by-step-instruction-4f90364e49ac</li>
+</ul>
+<p>这两篇文章可以让你知道两点：</p>
+<ul>
+<li>建立并连接到一个 EC2 虚拟机。- 配置网络以便远程访问 jupyter notebook。<br>配置网络以便远程访问 jupyter notebook。</li>
+</ul>
+<p>用 TensorFlow 和 Keras 建立一个猫/狗图片分类器</p>
+<p>环境配置好后，我们开始着手建立一个可以将猫狗图片分类的卷积神经网络，并使用到深度学习框架 TensorFlow 和 Keras。</p>
+<p>先介绍下 Keras：Keras 是一个高层神经网络 API，它由纯 Python 编写而成并基于Tensorflow、Theano 以及 CNTK 后端，Keras 为支持快速实验而生，能够把你的 idea 迅速转换为结果。</p>
+<p><strong>从头开始搭建一个卷积神经网络</strong></p>
+<p>首先，我们设置一个端到端的 pipeline 训练 CNN，<strong>将经历如下几步：数据准备和增强、架构设计、训练和评估。</strong></p>
+<p>我们将绘制训练集和测试集上的损失和准确度指标图表，这将使我们能够更直观地评估模型在训练中的改进变化。</p>
+<p><strong>数据准备</strong></p>
+<p>在开始之前要做的第一件事是从 Kaggle 上下载并解压训练数据集。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593a00030c69db94cc6c" img_width="660" img_height="235" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>我们必须重新组织数据以便让 Keras 更容易地处理它们。我们创建一个 data 文件夹，并在其中创建两个子文件夹：</p>
+<ul>
+<li><strong>train</strong>- <strong>validation</strong><br><strong>validation</strong></li>
+</ul>
+<p>在上面的两个文件夹之下，每个文件夹依然包含两个子文件夹：</p>
+<ul>
+<li><strong>cats</strong>- <strong>dogs</strong><br><strong>dogs</strong></li>
+</ul>
+<p>最后我们得到下面的文件结构：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/59370003b5a0ad2c3df5" img_width="629" img_height="523" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>这个文件结构让我们的模型知道从哪个文件夹中获取到图像和训练或测试用的标签。这里提供了一个函数允许你来重新构建这个文件树，<strong>它有 2 个参数：图像的总数目、测试集 r 的比重。</strong></p>
+<p><img src="http&#58;//p3.pstatp.com/large/5938000372654952009d" img_width="684" img_height="481" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p1.pstatp.com/large/59370003b462b8910a4e" img_width="649" img_height="228" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>我使用了： </p>
+<ul>
+<li><strong>n：25000（整个数据集的大小） </strong>- <strong>r：0.2</strong>- <strong>ratio = 0.2</strong>- <strong>n = 25000</strong>- <strong>organize_datasets(path_to_data=’./train/‘,n=n, ratio=ratio)</strong><br><strong>r：0.2</strong></li>
+</ul>
+<p><strong>n = 25000</strong></p>
+<p>现在让我们装载 Keras 和它的依赖包吧：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593800037260719046fc" img_width="642" img_height="301" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><strong>图像生成器和数据增强</strong></p>
+<p>在训练模型时，我们不会将整个数据集装载进内存，因为这种做法并不高效，特别是你使用的还是你自己本地的机器。</p>
+<p>我们将用到 ImageDataGenerator 类，这个类可以无限制地从训练集和测试集中批量地引入图像流。在ImageDataGenerator 类中，我们将在每个批次引入随机修改。</p>
+<p>这个过程我们称之为数据增强（dataaugmentation)。它可以生成更多的图片使得我们的模型不会看见两张完全相同的图片。这种方法可以防止过拟合，也有助于模型保持更好的泛化性。</p>
+<p>我们要创建两个 ImageDataGenerator 对象。train_datagen 对应训练集，val_datagen 对应测试集，两者都会对图像进行缩放，train_datagen 还将做一些其他的修改。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593d0000c1e3e1924832" img_width="645" img_height="194" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>基于前面的两个对象，我们接着创建两个文件生成器：</p>
+<ul>
+<li><strong>train_generator</strong>- <strong>validation_generator</strong><br><strong>validation_generator</strong></li>
+</ul>
+<p>每个生成器在实时数据增强的作用下，在目录处可以生成批量的图像数据。这样，数据将会无限制地循环生成。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/59370003b4676fac6323" img_width="614" img_height="326" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><strong>模型结构</strong></p>
+<p>我将使用拥有 3 个卷积/池化层和 2 个全连接层的 CNN。3 个卷积层将分别使用 32，32，64 的 3 * 3的滤波器（fiter）。在两个全连接层，我使用了 dropout 来避免过拟合。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/593d0000ccecd3f84701" img_width="708" img_height="525" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>我使用随机梯度下降法进行优化，参数 learning rate 为 0.01，momentum 为 0.9。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/593a0003162e617d7c3f" img_width="654" img_height="125" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>Keras 提供了一个非常方便的方法来展示模型的全貌。对每一层，我们可以看到输出的形状和可训练参数的个数。在开始拟合模型前，检查一下是个明智的选择。</p>
+<p>model.summary()</p>
+<p><img src="http&#58;//p1.pstatp.com/large/5939000317dbe48b5f69" img_width="508" img_height="459" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>下面让我们看一下网络的结构。</p>
+<p><strong>结构可视化</strong></p>
+<p><img src="http&#58;//p9.pstatp.com/large/59360003c4584840bc36" img_width="293" img_height="607" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>在训练模型前，我定义了两个将在训练时调用的回调函数 (callback function)：</p>
+<ul>
+<li>一个用于在损失函数无法改进在测试数据的效果时，提前停止训练。- 一个用于存储每个时期的损失和精确度指标：这可以用来绘制训练错误图表。<br>一个用于存储每个时期的损失和精确度指标：这可以用来绘制训练错误图表。</li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/59360003c385dd246a3c" img_width="666" img_height="384" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>我还使用了 keras-tqdm，这是一个和 keras 完美整合的非常棒的进度条。它可以让我们非常容易地监视模型的训练过程。</p>
+<p>要想使用它，你仅需要从 keras_tqdm 中加载 TQDMNotebookCallback 类，然后将它作为第三个回调函数传递进去。</p>
+<p>下面的图在一个简单的样例上展示了 keras-tqdm 的效果。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/593a00031419ec2610e9" img_width="859" img_height="197" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>关于训练过程，还有几点要说的：</p>
+<ul>
+<li><strong>我们使用 fit_generator 方法，它是一个将生成器作为输入的变体（标准拟合方法）。</strong>- <strong>我们训练模型的时间超过 50 个 epoch。</strong><br><strong>我们训练模型的时间超过 50 个 epoch。</strong></li>
+</ul>
+<p><img src="http&#58;//p3.pstatp.com/large/59370003bbdebad541cd" img_width="733" img_height="199" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>这个模型运行时的计算量非常大：</p>
+<ul>
+<li>如果你在自己的电脑上跑，每个 epoch 会花费 15 分钟的时间。- 如果你和我一样在 EC2 上的 p2.xlarge 虚拟机上跑，每个 epoch 需要花费 2 分钟的时间。<br>如果你和我一样在 EC2 上的 p2.xlarge 虚拟机上跑，每个 epoch 需要花费 2 分钟的时间。</li>
+</ul>
+<p><strong>分类结果</strong></p>
+<p>我们在模型运行 34 个 epoch 后达到了 89.4% 的准确率（下文展示训练/测试错误和准确率），考虑到我没有花费很多时间来设计网络结构，这已经是一个很好的结果了。现在我们可以将模型保存，以备以后使用。</p>
+<p>model.save(`./models/model4.h5)</p>
+<p>下面我们在同一张图上绘制训练和测试中的损失指标值：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593900030e12b2202a94" img_width="585" img_height="223" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p1.pstatp.com/large/593a00030c6cf14bf8e4" img_width="736" img_height="290" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>当在两个连续的 epoch 中，测试损失值没有改善时，我们就中止训练过程。</p>
+<p>下面绘制训练集和测试集上的准确度。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/593b000133e934fab541" img_width="642" img_height="209" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p9.pstatp.com/large/59360003ba5f31204beb" img_width="728" img_height="282" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>这两个指标一直是增长的，直到模型即将开始过拟合的平稳期。</p>
+<p><strong>装载预训练的模型</strong></p>
+<p>我们在自己设计的 CNN 上取得了不错的结果，但还有一种方法能让我们取得更高的分数：直接载入一个在大型数据集上预训练过的卷积神经网络的权重，这个大型数据集包含 1000 个种类的猫和狗的图片。</p>
+<p>这样的网络会学习到与我们分类任务相关的特征。</p>
+<p>我将加载 VGG16 网络的权重，具体来说，我要将网络权重加载到所有的卷积层。这个网络部分将作为一个特征检测器来检测我们将要添加到全连接层的特征。</p>
+<p>与 LeNet5 相比，VGG16 是一个非常大的网络，它有 16 个可以训练权重的层和 1.4 亿个参数。要了解有关 VGG16 的信息，请参阅此篇 pdf 链接&#58;https&#58;//arxiv.org/pdf/1409.1556.pdf</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593a00031275e1fd3ce9" img_width="686" img_height="108" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>现在我们将图像传进网络来得到特征表示，这些特征表示将会作为神经网络分类器的输入。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/5938000377c071b08ac1" img_width="733" img_height="474" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>图像在传递到网络中时是有序传递的，所以我们可以很容易地为每张图片关联上标签。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/59380003776c8dd8ceff" img_width="704" img_height="124" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>现在我们设计了一个小型的全连接神经网络，附加上从 VGG16 中抽取到的特征，<strong>我们将它作为 CNN 的分类部分。</strong></p>
+<p><img src="http&#58;//p3.pstatp.com/large/593d0000c4dc27afba5c" img_width="690" img_height="391" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>在 15 个 epoch 后，模型就达到了 90.7% 的准确度。这个结果已经很好了，注意现在每个 epoch 在我自己的电脑上跑也仅需 1 分钟。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/593b0001383890140214" img_width="634" img_height="191" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p3.pstatp.com/large/593900030e18af598ecd" img_width="737" img_height="290" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p1.pstatp.com/large/593d0000c1e62cba315d" img_width="647" img_height="195" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p><img src="http&#58;//p1.pstatp.com/large/593b000133ebd4bb02b5" img_width="725" img_height="292" alt="我用Python实现了12500张猫狗图像的精准分类" inline="0"></p>
+<p>许多深度学习领域的大牛人物都鼓励大家在做分类任务时使用预训练网络，实际上，预训练网络通常使用的是在一个非常大的数据集上生成的非常大的网络。</p>
+<p>而 Keras 可以让我们很轻易地下载像 VGG16、GoogleNet、ResNet 这样的预训练网络。想要了解更多关于这方面的信息，请参考这里：https&#58;//keras.io/applications/</p>
+<p><strong>有一句很棒的格言是：不要成为英雄！不要重复发明轮子！使用预训练网络吧！</strong></p>
+<p>接下来还可以做什么？</p>
+<p>如果你对改进一个传统 CNN 感兴趣的话，你可以：</p>
+<ul>
+<li>在数据集层面上，引入更多增强数据。- 研究一下网络超参数（network hyperparameter)：卷积层的个数、滤波器的个数和大小，在每种组合后要测试一下效果。- 改变优化方法。- 尝试不同的损失函数。- 使用更多的全连接层。- 引入更多的 aggressive dropout。<br>研究一下网络超参数（network hyperparameter)：卷积层的个数、滤波器的个数和大小，在每种组合后要测试一下效果。</li>
+</ul>
+<p>尝试不同的损失函数。</p>
+<p>引入更多的 aggressive dropout。</p>
+<p>如果你对使用预训练网络获得更好的分类结果感兴趣的话，你可以尝试：</p>
+<ul>
+<li>使用不同的网络结构。- 使用更多包含更多隐藏单元的全连接层。<br>使用更多包含更多隐藏单元的全连接层。</li>
+</ul>
+<p>如果你想知道 CNN 这个深度学习模型到底学习到了什么东西，你可以：</p>
+<ul>
+<li>将 feature maps 可视化。- 可以参考：https&#58;//arxiv.org/pdf/1311.2901.pdf<br>可以参考：https&#58;//arxiv.org/pdf/1311.2901.pdf</li>
+</ul>
+<p>如果你想使用训练过的模型：</p>
+<ul>
+<li>可以将模型放到 Web APP 上，使用新的猫和狗的图像来进行测试。这也是一个很好地测试模型泛化性的好方法。<br>总结</li>
+</ul>
+<p>这是一篇手把手教你在 AWS 上搭建深度学习环境的教程，并且教你怎样从头开始建立一个端到端的模型，另外本文也教了你怎样基于一个预训练的网络来搭建一个 CNN 模型。</p>
+<p>用 Python 来做深度学习是让人愉悦的事情，而 Keras 让数据的预处理和网络层的搭建变得更加简单。</p>
+<p>如果有一天你需要按自己的想法来搭建一个神经网络，你可能需要用到其他的深度学习框架。</p>
+<p>现在在自然语言处理领域，也有很多人开始使用卷积神经网络了，下面是一些基于此的工作：</p>
+<ul>
+<li><strong>使用了 CNN 的文本分类：</strong>https&#58;//chara.cs.illinois.edu/sites/sp16-cs591txt/files/0226-presentation.pdf- <strong>自动为图像生成标题：</strong>https&#58;//cs.stanford.edu/people/karpathy/sfmltalk.pdf- <strong>字级别的文本分类：</strong>https&#58;//papers.nips.cc/pa<br>https&#58;//chara.cs.illinois.edu/sites/sp16-cs591txt/files/0226-presentation.pdf</li>
+</ul>
+<p>https&#58;//cs.stanford.edu/people/karpathy/sfmltalk.pdf</p>
+<p>https&#58;//papers.nips.cc/pa</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://www.toutiao.com/a6511457815180083720/" target="_blank" rel="noopener">我用Python实现了12500张猫狗图像的精准分类</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/5d0352db/" rel="next" title="以太坊是什么 - 以太坊开发入门指南 - Tiny熊 - 博客园">
+                <i class="fa fa-chevron-left"></i> 以太坊是什么 - 以太坊开发入门指南 - Tiny熊 - 博客园
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/d0594453/" rel="prev" title="阿里提出新神经网络算法，压缩掉最后一个比特">
+                阿里提出新神经网络算法，压缩掉最后一个比特 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

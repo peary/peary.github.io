@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,机器学习,微软,科技," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="选自Kdnuggets 作者：Thuy T. Pham 机器之心编译 参与：邵明、黄小天  机器学习和深度学习的研究进展正深刻变革着人类的技术，本文列出了自 2014 年以来这两个领域发表的最重要（被引用次数最多）的 20 篇科学论文，以飨读者。   机器学习，尤其是其子领域深度学习，在近些年来取得了许多惊人的进展。重要的研究论文可能带来使全球数十亿人受益的技术突破。这一领域的研究目前发展非常快，">
+<meta name="keywords" content="深度学习,机器学习,微软,科技">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习和深度学习引用量最高的20篇论文：2014-2017">
+<meta property="og:url" content="http://blockshare.top/2017/491d612b/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="选自Kdnuggets 作者：Thuy T. Pham 机器之心编译 参与：邵明、黄小天  机器学习和深度学习的研究进展正深刻变革着人类的技术，本文列出了自 2014 年以来这两个领域发表的最重要（被引用次数最多）的 20 篇科学论文，以飨读者。   机器学习，尤其是其子领域深度学习，在近些年来取得了许多惊人的进展。重要的研究论文可能带来使全球数十亿人受益的技术突破。这一领域的研究目前发展非常快，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/1b760004fe0455c5e0e0">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.764Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习和深度学习引用量最高的20篇论文：2014-2017">
+<meta name="twitter:description" content="选自Kdnuggets 作者：Thuy T. Pham 机器之心编译 参与：邵明、黄小天  机器学习和深度学习的研究进展正深刻变革着人类的技术，本文列出了自 2014 年以来这两个领域发表的最重要（被引用次数最多）的 20 篇科学论文，以飨读者。   机器学习，尤其是其子领域深度学习，在近些年来取得了许多惊人的进展。重要的研究论文可能带来使全球数十亿人受益的技术突破。这一领域的研究目前发展非常快，">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/1b760004fe0455c5e0e0">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/491d612b/"/>
+
+
+
+
+
+  <title>机器学习和深度学习引用量最高的20篇论文：2014-2017 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/491d612b/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习和深度学习引用量最高的20篇论文：2014-2017</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">机器之心</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-09T15:04:08+08:00">
+                2017-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/491d612b/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/491d612b/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/1b760004fe0455c5e0e0" rel="gallery_cjgf0wkip0052xmqdl4llsbtv"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/1b760004fe0455c5e0e0" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>选自Kdnuggets</p>
+<p><strong>作者：Thuy T. Pham</strong></p>
+<p><strong>机器之心编译</strong></p>
+<p><strong>参与：邵明、黄小天</strong></p>
+<blockquote>
+<p>机器学习和深度学习的研究进展正深刻变革着人类的技术，本文列出了自 2014 年以来这两个领域发表的最重要（被引用次数最多）的 20 篇科学论文，以飨读者。</p>
+</blockquote>
+<p><img src="http&#58;//p1.pstatp.com/large/1b760004fe0455c5e0e0" img_width="640" img_height="643" alt="机器学习和深度学习引用量最高的20篇论文：2014-2017" inline="0"></p>
+<p>机器学习，尤其是其子领域深度学习，在近些年来取得了许多惊人的进展。重要的研究论文可能带来使全球数十亿人受益的技术突破。这一领域的研究目前发展非常快，为了帮助你了解进展状况，我们列出了自 2014 年以来最重要的 20 篇科学论文。</p>
+<p>我们筛选论文的标准是来自三大学术搜索引擎谷歌学术（scholar.google.com）、微软学术（academic.microsoft.com）和 semanticscholar.org 的引用量。由于不同搜索引擎的引用量数据各不相同，所以我们在这里仅列出了微软学术的数据，其数据比其它两家稍低一点。</p>
+<p>我们还给出了每篇论文的发表时间、高度有影响力的引用数量（HIC）和引用速度（CV），以上数据由 semanticscholar.org 提供。HIC 表示了以此为基础的论文情况和与其它论文的关系，代表了有意义的引用。CV 是最近 3 年每年引用数量的加权平均。有些引用的 CV 是 0，那是因为 semanticscholar.org 上没有给出数据。这 20 篇论文中大多数（包括前 8 篇）都是关于深度学习的，但同时也很多样性，仅有一位作者（Yoshua Bengio）有 2 篇论文，而且这些论文发表在很多不同的地方：CoRR (3)、ECCV (3)、IEEE CVPR (3)、NIPS (2)、ACM Comp Surveys、ICML、IEEE PAMI、IEEE TKDE、Information Fusion、Int. J. on Computers &amp; EE、JMLR、KDD 和 Neural Networks。前 2 篇论文的引用量目前远远高于其它论文。注意第 2 篇论文去年才发表！要了解机器学习和深度学习的最新进展，这些论文一定不能错过。</p>
+<p><strong>1. 论文：Dropout：一种防止神经网络过拟合的简单方法（Dropout&#58; a simple way to prevent neural networks from overfitting）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3o6l4B- 作者：Hinton, G.E., Krizhevsky, A., Srivastava, N., Sutskever, I., &amp; Salakhutdinov, R. (2014). Journal of Machine Learning Research, 15, 1929-1958.- 数据：引用：2084、HIC：142、CV：536- 摘要：其关键思想是在神经网络的训练过程中随机丢弃单元（连同它们的连接点）。这能防止单元适应过度，显著减少过拟合，并相对于其它正则化方法有重大改进。<br>作者：Hinton, G.E., Krizhevsky, A., Srivastava, N., Sutskever, I., &amp; Salakhutdinov, R. (2014). Journal of Machine Learning Research, 15, 1929-1958.</li>
+</ul>
+<p>摘要：其关键思想是在神经网络的训练过程中随机丢弃单元（连同它们的连接点）。这能防止单元适应过度，显著减少过拟合，并相对于其它正则化方法有重大改进。</p>
+<p><strong>2. 论文：用于图像识别的深度残差学习（Deep Residual Learning for Image Recognition）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/1JrYXX- 作者：He, K., Ren, S., Sun, J., &amp; Zhang, X. (2016). CoRR- 数据：引用：1436、HIC：137、CV：582- 摘要：目前的深度学习网络层数越来越多，越来越难以训练，因此我们提出了一种减缓训练压力的残差学习框架。我们明确地将这些层重新定义为与输入层有关的学习残差函数，而不是学习未被引用的函数。与此同时，我们提供了全面的经验证据以表明残差网络更容易优化，并可通过增加其层数来提升精确度。<br>作者：He, K., Ren, S., Sun, J., &amp; Zhang, X. (2016). CoRR</li>
+</ul>
+<p>摘要：目前的深度学习网络层数越来越多，越来越难以训练，因此我们提出了一种减缓训练压力的残差学习框架。我们明确地将这些层重新定义为与输入层有关的学习残差函数，而不是学习未被引用的函数。与此同时，我们提供了全面的经验证据以表明残差网络更容易优化，并可通过增加其层数来提升精确度。</p>
+<p><strong>3. 论文：批标准化：通过减少内部协移加速深度神经网络训练（Batch Normalization&#58; Accelerating Deep Network Training by Reducing Internal Covariate Shift）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3sJtk1- 作者：Sergey Ioffe, Christian Szegedy (2015) ICML.- 数据：引用：946、HIC：56、CV：0- 摘要：训练深度神经网络的过程很复杂，原因在于每层的输入分布随着训练过程中引起的前面层的参数变化而变化。我们把这种现象称为内部协变量转移（internal covariate shift），并可利用归一化层输入来解决此问题。通过将此方法应用到最先进的图像分类模型，批标准化在训练次数减少了 14 倍的条件下达到了与原始模型相同的精度，这表明批标准化具有明显的优势。<br>作者：Sergey Ioffe, Christian Szegedy (2015) ICML.</li>
+</ul>
+<p>摘要：训练深度神经网络的过程很复杂，原因在于每层的输入分布随着训练过程中引起的前面层的参数变化而变化。我们把这种现象称为内部协变量转移（internal covariate shift），并可利用归一化层输入来解决此问题。通过将此方法应用到最先进的图像分类模型，批标准化在训练次数减少了 14 倍的条件下达到了与原始模型相同的精度，这表明批标准化具有明显的优势。</p>
+<p><strong>4. 论文：利用卷积神经网络进行大规模视频分类（Large-Scale Video Classification with Convolutional Neural Networks）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/25lfXF- 作者：Fei-Fei, L., Karpathy, A., Leung, T., Shetty, S., Sukthankar, R., &amp; Toderici, G. (2014). IEEE Conference on Computer Vision and Pattern Recognition- 数据：引用：865、HIC：24、CV：239- 摘要：针对图像识别问题，卷积神经网络（CNN）被认为是一类强大的模型。受到这些结果的激励，我们使用了一个包含 487 个类别、100 万 YouTube 视频的大型数据集，对利用 CNN 进行大规模视频分类作了一次广泛的实证评估。<br>作者：Fei-Fei, L., Karpathy, A., Leung, T., Shetty, S., Sukthankar, R., &amp; Toderici, G. (2014). IEEE Conference on Computer Vision and Pattern Recognition</li>
+</ul>
+<p>摘要：针对图像识别问题，卷积神经网络（CNN）被认为是一类强大的模型。受到这些结果的激励，我们使用了一个包含 487 个类别、100 万 YouTube 视频的大型数据集，对利用 CNN 进行大规模视频分类作了一次广泛的实证评估。</p>
+<p><strong>5. 论文：Microsoft COCO：语境中的通用对象（Microsoft COCO&#58; Common Objects in Context）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/DAXwA- 作者：Belongie, S.J., Dollár, P., Hays, J., Lin, T., Maire, M., Perona, P., Ramanan, D., &amp; Zitnick, C.L. (2014). ECCV.- 数据：引用：830、HIC：78、CV：279- 摘要：我们展示了一个新的数据集，通过将对象识别问题放入更广泛的场景理解问题的语境中，以推进当前对象识别领域中最先进的技术。我们的数据集包含了 91 种对象类型的照片，这些图片对于一个 4 岁大的孩子而言，很容易识别。最后，我们利用可变形部件模型（DPM）为边界框和分割检测结果提供了一个基线性能分析。<br>作者：Belongie, S.J., Dollár, P., Hays, J., Lin, T., Maire, M., Perona, P., Ramanan, D., &amp; Zitnick, C.L. (2014). ECCV.</li>
+</ul>
+<p>摘要：我们展示了一个新的数据集，通过将对象识别问题放入更广泛的场景理解问题的语境中，以推进当前对象识别领域中最先进的技术。我们的数据集包含了 91 种对象类型的照片，这些图片对于一个 4 岁大的孩子而言，很容易识别。最后，我们利用可变形部件模型（DPM）为边界框和分割检测结果提供了一个基线性能分析。</p>
+<p><strong>6. 论文：使用场景数据库学习场景识别中的深层特征（Learning deep features for scene recognition using places database）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/2EOBTa- 作者：Lapedriza, À., Oliva, A., Torralba, A., Xiao, J., &amp; Zhou, B. (2014). NIPS.- 数据：引用：644、HIC：65、CV：0- 摘要：我们引入了一个以场景为中心的新数据库，这个数据库称为「Places」，里面包含了超过 700 万个标注好了的场景。我们提议使用新方法去比较图像数据集的密度和多样性，以表明 Places 与其它场景数据库一样密集并更具多样性。<br>作者：Lapedriza, À., Oliva, A., Torralba, A., Xiao, J., &amp; Zhou, B. (2014). NIPS.</li>
+</ul>
+<p>摘要：我们引入了一个以场景为中心的新数据库，这个数据库称为「Places」，里面包含了超过 700 万个标注好了的场景。我们提议使用新方法去比较图像数据集的密度和多样性，以表明 Places 与其它场景数据库一样密集并更具多样性。</p>
+<p><strong>7. 论文：生成对抗网络（Generative adversarial nets）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3YS5F6- 作者：Bengio, Y., Courville, A.C., Goodfellow, I.J., Mirza, M., Ozair, S., Pouget-Abadie, J., Warde-Farley, D., &amp; Xu, B. (2014) NIPS.- 数据：引用：463、HIC：55、CV：0- 摘要：通过对抗过程，我们提出了一个评估生成模型的新框架。在此框架中，我们同时训练两个模型：生成模型 G 捕获数据分布；判别模型 D 评估样本示来自训练数据集（而不是来自 G 中）的概率。<br>作者：Bengio, Y., Courville, A.C., Goodfellow, I.J., Mirza, M., Ozair, S., Pouget-Abadie, J., Warde-Farley, D., &amp; Xu, B. (2014) NIPS.</li>
+</ul>
+<p>摘要：通过对抗过程，我们提出了一个评估生成模型的新框架。在此框架中，我们同时训练两个模型：生成模型 G 捕获数据分布；判别模型 D 评估样本示来自训练数据集（而不是来自 G 中）的概率。</p>
+<p><strong>8. 论文：通过内核相关滤波器实现高速跟踪（High-Speed Tracking with Kernelized Correlation Filters）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/2BBOea- 作者：Batista, J., Caseiro, R., Henriques, J.F., &amp; Martins, P. (2015). CoRR- 数据：引用：439、HIC：43、CV：0- 摘要：大多数的现代追踪器，为应对自然图像中的变化，典型的方法是采用翻译和缩放样本补丁训练分类器。我们针对包含成千上万个翻译补丁数据集提出了一个分析模型。结果表明结果数据矩阵是循环的，我们可以利用离散傅立叶变换对角化已有的循环矩阵，将存储和计算量降低了几个数量级。<br>作者：Batista, J., Caseiro, R., Henriques, J.F., &amp; Martins, P. (2015). CoRR</li>
+</ul>
+<p>摘要：大多数的现代追踪器，为应对自然图像中的变化，典型的方法是采用翻译和缩放样本补丁训练分类器。我们针对包含成千上万个翻译补丁数据集提出了一个分析模型。结果表明结果数据矩阵是循环的，我们可以利用离散傅立叶变换对角化已有的循环矩阵，将存储和计算量降低了几个数量级。</p>
+<p><strong>9. 论文：多标签学习算法综述（A Review on Multi-Label Learning Algorithms）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3LgpGf- 作者：Zhang, M., &amp; Zhou, Z. (2014). IEEE TKDE- 数据：引用：436、HIC：7、CV：91- 摘要：本论文的主要目的是对多标签学习问题进行及时回顾。在多标签学习问题中，一个实例代表一个样本，同时，一个样本与一组标签相关联。<br>作者：Zhang, M., &amp; Zhou, Z. (2014). IEEE TKDE</li>
+</ul>
+<p>摘要：本论文的主要目的是对多标签学习问题进行及时回顾。在多标签学习问题中，一个实例代表一个样本，同时，一个样本与一组标签相关联。</p>
+<p><strong>10. 论文：深层神经网络特征的可传递性（How transferable are features in deep neural networks）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/aDLgu- 作者：Bengio, Y., Clune, J., Lipson, H., &amp; Yosinski, J. (2014) CoRR- 数据：引用：402、HIC：14、CV：0- 摘要：我们用实验量化了深层卷积神经网络中每层神经元的一般性与特异性，并报告了一些令人惊讶的结果。可传递性受到两个不同问题的不利影响：（1）以牺牲目标任务的性能为代价，实现更高层神经元对原始人物的专业化，这是预料之中的；（2）与分裂共同适应神经元（co-adapted neuron）之间的网络有关的优化困难，这是预料之外的。<br>作者：Bengio, Y., Clune, J., Lipson, H., &amp; Yosinski, J. (2014) CoRR</li>
+</ul>
+<p>摘要：我们用实验量化了深层卷积神经网络中每层神经元的一般性与特异性，并报告了一些令人惊讶的结果。可传递性受到两个不同问题的不利影响：（1）以牺牲目标任务的性能为代价，实现更高层神经元对原始人物的专业化，这是预料之中的；（2）与分裂共同适应神经元（co-adapted neuron）之间的网络有关的优化困难，这是预料之外的。</p>
+<p><strong>11. 论文：我们需要数百种分类器来解决真实世界的分类问题吗？（Do we need hundreds of classifiers to solve real world classification problems）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/2w14RK- 作者：Amorim, D.G., Barro, S., Cernadas, E., &amp; Delgado, M.F. (2014). Journal of Machine Learning Research- 数据：引用：387、HIC：3、CV：0- 摘要：我们评估了来自 17 个「家族」（判别分析、贝叶斯、神经网络、支持向量机、决策树、基于规则的分类器、提升、装袋、堆叠、随机森林、集成方法、广义线性模型、最近邻、部分最小二乘和主成分回归、逻辑和多项回归、多元自适应回归样条法等）的 179 个分类器。我们使用了来自 UCI 数据库中的 121 个数据集来研究分类器行为，这些行为不依赖于所选取的数据集。最终胜出的是使用 R 语言实现的随机森林方法和 C 中使用 LibSVM 实现的带有高斯内核的 SVM。<br>作者：Amorim, D.G., Barro, S., Cernadas, E., &amp; Delgado, M.F. (2014). Journal of Machine Learning Research</li>
+</ul>
+<p>摘要：我们评估了来自 17 个「家族」（判别分析、贝叶斯、神经网络、支持向量机、决策树、基于规则的分类器、提升、装袋、堆叠、随机森林、集成方法、广义线性模型、最近邻、部分最小二乘和主成分回归、逻辑和多项回归、多元自适应回归样条法等）的 179 个分类器。我们使用了来自 UCI 数据库中的 121 个数据集来研究分类器行为，这些行为不依赖于所选取的数据集。最终胜出的是使用 R 语言实现的随机森林方法和 C 中使用 LibSVM 实现的带有高斯内核的 SVM。</p>
+<p><strong>12. 论文：知识库：一种概率知识融合的网络规模方法（Knowledge vault&#58; a web-scale approach to probabilistic knowledge fusion）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3qCSs6- 作者：Dong, X., Gabrilovich, E., Heitz, G., Horn, W., Lao, N., Murphy, K., … &amp; Zhang, W.(2014, August). In Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining ACM- 数据：引用：334、HIC：7、CV：107- 摘要：我们引入了一个网络规模的概率知识库，它将网页内容提取（通过文本分析、表格数据、页面结构和人工注释获得）与来自现存知识库中的先验知识相结合，以构建新知识库。我们部署监督学习方法去融合不同的信息源。该知识库比先前发布的任何结构化知识库大得多，并且具有概率推理系统，该概率推理系统能计算事实准确性的校准概率。<br>作者：Dong, X., Gabrilovich, E., Heitz, G., Horn, W., Lao, N., Murphy, K., … &amp; Zhang, W.(2014, August). In Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining ACM</li>
+</ul>
+<p>摘要：我们引入了一个网络规模的概率知识库，它将网页内容提取（通过文本分析、表格数据、页面结构和人工注释获得）与来自现存知识库中的先验知识相结合，以构建新知识库。我们部署监督学习方法去融合不同的信息源。该知识库比先前发布的任何结构化知识库大得多，并且具有概率推理系统，该概率推理系统能计算事实准确性的校准概率。</p>
+<p><strong>13. 论文：用于高维数据的可扩展最近邻算法（Scalable Nearest Neighbor Algorithms for High Dimensional Data）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/hjTa4- 作者：Lowe, D.G., &amp; Muja, M. (2014). IEEE Trans. Pattern Anal. Mach. Intell.- 数据：引用：324、HIC：11、CV：69- 摘要：我们提出了用于近似最近邻匹配的新算法，并将其与以前的算法进行比较。为了将其扩展到大型数据集（不适合单机的存储处理）上，我们提出了一种分布式最近邻匹配框架，该框架可以与论文中描述的任何算法一起使用。<br>作者：Lowe, D.G., &amp; Muja, M. (2014). IEEE Trans. Pattern Anal. Mach. Intell.</li>
+</ul>
+<p>摘要：我们提出了用于近似最近邻匹配的新算法，并将其与以前的算法进行比较。为了将其扩展到大型数据集（不适合单机的存储处理）上，我们提出了一种分布式最近邻匹配框架，该框架可以与论文中描述的任何算法一起使用。</p>
+<p><strong>14. 论文：回顾超限学习机的发展趋势（Trends in extreme learning machines&#58; a review）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3WSEQi- 作者：Huang, G., Huang, G., Song, S., &amp; You, K. (2015). Neural Networks- 数据：引用：323、HIC：0、CV：0- 摘要：我们的目标是报告超限学习机（ELM）的理论研究和实践进展所处的现状。除了分类和回归，ELM 最近已经被扩展到集群、特征选择、代表性学习和许多其他学习任务。由于其惊人的高效性、简单性和令人印象深刻的泛化能力，ELM 已经被广泛用于各种领域，如生物医学工程、计算机视觉、系统识别、控制和机器人。<br>作者：Huang, G., Huang, G., Song, S., &amp; You, K. (2015). Neural Networks</li>
+</ul>
+<p>摘要：我们的目标是报告超限学习机（ELM）的理论研究和实践进展所处的现状。除了分类和回归，ELM 最近已经被扩展到集群、特征选择、代表性学习和许多其他学习任务。由于其惊人的高效性、简单性和令人印象深刻的泛化能力，ELM 已经被广泛用于各种领域，如生物医学工程、计算机视觉、系统识别、控制和机器人。</p>
+<p><strong>15. 论文：一份关于概念漂移适应的调查（A survey on concept drift adaptation）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3bQkiz- 作者：Bifet, A., Bouchachia, A., Gama, J., Pechenizkiy, M., &amp; Zliobaite, I. ACM Comput. Surv., 2014- 数据：引用：314、HIC：4、CV：23- 摘要：该文全面介绍了概念漂移适应。它指的是当输入数据与目标变量之间的关系随时间变化之时的在线监督学习场景。<br>作者：Bifet, A., Bouchachia, A., Gama, J., Pechenizkiy, M., &amp; Zliobaite, I. ACM Comput. Surv., 2014</li>
+</ul>
+<p>摘要：该文全面介绍了概念漂移适应。它指的是当输入数据与目标变量之间的关系随时间变化之时的在线监督学习场景。</p>
+<p><strong>16. 论文：深度卷积激活特征的多尺度无序池化（Multi-scale Orderless Pooling of Deep Convolutional Activation Features）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3gNw8e- 作者：Gong, Y., Guo, R., Lazebnik, S., &amp; Wang, L. (2014). ECCV- 数据：引用：293、HIC：23、CV：95- 摘要：为了在不降低其辨别力的同时改善卷积神经网络激活特征的不变性，本文提出了一种简单但有效的方案：多尺度无序池化（MOP-CNN）。<br>作者：Gong, Y., Guo, R., Lazebnik, S., &amp; Wang, L. (2014). ECCV</li>
+</ul>
+<p>摘要：为了在不降低其辨别力的同时改善卷积神经网络激活特征的不变性，本文提出了一种简单但有效的方案：多尺度无序池化（MOP-CNN）。</p>
+<p><strong>17. 论文：同时检测和分割（Simultaneous Detection and Segmentation）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/4b0ye0- 作者：Arbeláez, P.A., Girshick, R.B., Hariharan, B., &amp; Malik, J. (2014) ECCV- 数据：引用：286、HIC：23、CV：94- 摘要：本文的目标是检测图像中一个类别的所有实例，并为每个实例标记属于它的像素。我们称将此任务称为同时检测和分割（SDS）。<br>作者：Arbeláez, P.A., Girshick, R.B., Hariharan, B., &amp; Malik, J. (2014) ECCV</li>
+</ul>
+<p>摘要：本文的目标是检测图像中一个类别的所有实例，并为每个实例标记属于它的像素。我们称将此任务称为同时检测和分割（SDS）。</p>
+<p><strong>18. 论文：一份关于特征选择方法的调查（A survey on feature selection methods）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/4BDdKA- 作者：Chandrashekar, G., &amp; Sahin, F. Int. J. on Computers &amp; Electrical Engineering- 数据：引用：279、HIC：1、CV：58- 摘要：在文献中，有许多特征选择方法可用，由于某些数据集具有数百个可用的特征，这会导致数据具有非常高的维度。<br>作者：Chandrashekar, G., &amp; Sahin, F. Int. J. on Computers &amp; Electrical Engineering</li>
+</ul>
+<p>摘要：在文献中，有许多特征选择方法可用，由于某些数据集具有数百个可用的特征，这会导致数据具有非常高的维度。</p>
+<p><strong>19. 论文：用回归树集成方法在一毫秒内实现人脸校准（One Millisecond Face Alignment with an Ensemble of Regression Trees）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/1iFyub- 作者：Kazemi, Vahid, and Josephine Sullivan, Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition 2014- 数据：引用：277、HIC：15、CV：0- 摘要：本文解决了单个图像的人脸校准问题。我们展示了怎样使用回归树集成来直接从像素强度的稀疏子集估计面部的地标位置，并通过高质量的预测实现了超实时性能。<br>作者：Kazemi, Vahid, and Josephine Sullivan, Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition 2014</li>
+</ul>
+<p>摘要：本文解决了单个图像的人脸校准问题。我们展示了怎样使用回归树集成来直接从像素强度的稀疏子集估计面部的地标位置，并通过高质量的预测实现了超实时性能。</p>
+<p><strong>20. 论文：关于作为混合系统的多分类器系统的调查（A survey of multiple classifier systems as hybrid systems）</strong></p>
+<ul>
+<li>链接：http&#58;//suo.im/3c9EFD- 作者：Corchado, E., Graña, M., &amp; Wozniak, M. (2014). Information Fusion, 16, 3-17.- 数据：引用：269、HIC：1、CV：22<br>- 摘要：模式分类领域目前关注的焦点是几种分类器系统的组合，构建这些分类器系统可以使用相同或者不同的模型和／或数据集构建。<br>作者：Corchado, E., Graña, M., &amp; Wozniak, M. (2014). Information Fusion, 16, 3-17.</li>
+</ul>
+<p>摘要：模式分类领域目前关注的焦点是几种分类器系统的组合，构建这些分类器系统可以使用相同或者不同的模型和／或数据集构建。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1b790000bd6b9f8b30dc" img_width="73" img_height="24" alt="机器学习和深度学习引用量最高的20篇论文：2014-2017" inline="0"></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6406848982152691970/?iid=9020924802&amp;app=news_article&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">机器学习和深度学习引用量最高的20篇论文：2014-2017</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/微软/" rel="tag"># 微软</a>
+          
+            <a href="/tags/科技/" rel="tag"># 科技</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/162236a5/" rel="next" title="3000多年的欧洲历史，BBC用10部纪录片讲完了">
+                <i class="fa fa-chevron-left"></i> 3000多年的欧洲历史，BBC用10部纪录片讲完了
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/84a01932/" rel="prev" title="零基础写python爬虫之使用Scrapy框架编写爬虫 - 新客网">
+                零基础写python爬虫之使用Scrapy框架编写爬虫 - 新客网 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,机器学习,人工智能,GPU,Facebook," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑战。训练监督学习模型需要向它展示各种例子，并告诉它正确答案。   【AI科技大本营导读】今天是 GMIC Beijing 2018 大会第一天，首个演讲者是 Facebook 首席 AI 科学家 Yann LeCun。他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑">
+<meta name="keywords" content="深度学习,机器学习,人工智能,GPU,Facebook">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Yann LeCun：距离“真正的” AI，我们还缺什么？">
+<meta property="og:url" content="http://blockshare.top/2018/a693f421/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑战。训练监督学习模型需要向它展示各种例子，并告诉它正确答案。   【AI科技大本营导读】今天是 GMIC Beijing 2018 大会第一天，首个演讲者是 Facebook 首席 AI 科学家 Yann LeCun。他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/152474135901334fdf329e5">
+<meta property="og:updated_time" content="2018-05-03T07:00:36.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Yann LeCun：距离“真正的” AI，我们还缺什么？">
+<meta name="twitter:description" content="他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑战。训练监督学习模型需要向它展示各种例子，并告诉它正确答案。   【AI科技大本营导读】今天是 GMIC Beijing 2018 大会第一天，首个演讲者是 Facebook 首席 AI 科学家 Yann LeCun。他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/152474135901334fdf329e5">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/a693f421/"/>
+
+
+
+
+
+  <title>Yann LeCun：距离“真正的” AI，我们还缺什么？ | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/a693f421/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Yann LeCun：距离“真正的” AI，我们还缺什么？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">AI科技大本营</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-26T20:17:56+08:00">
+                2018-04-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/其它/" itemprop="url" rel="index">
+                    <span itemprop="name">其它</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/a693f421/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/a693f421/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/152474135901334fdf329e5" rel="gallery_cjgghut970000xtqdxt5491ok"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/152474135901334fdf329e5" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑战。训练监督学习模型需要向它展示各种例子，并告诉它正确答案。</p>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152474135901334fdf329e5" img_width="1080" img_height="526" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>【AI科技大本营导读】今天是 GMIC Beijing 2018 大会第一天，首个演讲者是 Facebook 首席 AI 科学家 Yann LeCun。他讲述了关于深度学习的最新研究成果，同时也描述了深度学习的未来，以及机器智能所要面临的的挑战。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15247413592360a1570776a" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p># </p>
+<p><strong>▌监督学习无可替代</strong></p>
+<p>如今的 AI 系统都是使用的监督学习，所有的 AI 应用，不管是图像识别、声音识别还是人脸识别，或者机器翻译等等，这些都是监督学习的应用。训练监督学习模型需要向它展示各种例子，并告诉它正确答案，如果你想让机器学会将汽车和飞机区分开来，比如你给它展示一辆车的图像，它说这不是一辆车，然后你可以对参数进行调整，下次再向机器展示同一张图像的话，你就会得到接近正确的答案。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524741359142b20b44f597" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我们可以对机器进行端到端的训练，来完成特定的任务，feeding 原始的 inputs，就会自动给出 outputs。机器学习这个任务的过程是端到端的学习过程。通过这种方式机器，计算机能更好地了解这个世界。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152474135914279f199bcc1" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>比如卷积网络，实际上这个想法是可以回溯到上个世纪八十年代。它可识别图像，同时也有很多其他的应用，比如说可以用于语言处理、语言识别和其他很多的应用。我们知道对于神经网络是非常大的，只有在非常强大的计算机上才可以运用，需要有 GPU 加以辅助。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741359128977c551545" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>在深度学习变得比较普遍之前，我们首先要确保这样的一些系统可以用于这些情况，比如一个例子是我们在 2009 年、2010 年在纽约大学合作的一个实验，可以看到它可以识别马路上的建筑、天空以及路上的车和人等等，这个在当时并没有被称为最好的系统。再过几年之后，越来越多人相信深度学习是可以奏效的，可以发挥作用的。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741359321539b6473bb" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>在这里大家可以看到在网络当中使用的几个层，比如说有 100 层或者 180 层的一些人工神经网络，在 Facebook 当中我们就会广泛使用。这上面大家可以看到错误率是在不断下降的，有的时候表现的甚至要比人还要好。它的性能非常好，已经成为了一种标杆。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152474135988211778aa8f2" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>这是 Facebook 人工智能部门所做的研究，叫做 Mask R-CNN，可以看到它的结果，它可以标记这样的图像，就像我刚才给大家展示的例子，展示出非常好的性能。它不仅仅可以识别出每个人，同时它会为每个人加一个标记，所以可以很容易区分出是一个人还是一只狗。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741360201c575fa75c1" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>在这里大家可以看到这个系统可以识别电脑、酒杯、人、桌子，也可以数出来到底有多少，而且也可以识别出道路、汽车。如果五年之前问系统这些问题的话，我们当时可能认为需要 10-20 年时间才能达到今天呈现的效果。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741359999a3c194ef66" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>这也是 Facebook 所做的一些研究，叫做 Detectron。大家可以下载上面的代码，它可以探测 200 多种不同的类别，这也是 Facebook 在 AI 方面的一些研究，我们不仅仅发布了一些论文，同时连代码也都发布出来了，这样的话世界各地都可以更好的熟知这种技术。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741360019950baf0793" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>当然还包括其他很多项目，在 Facebook 我们利用 DensePose 这样的技术，预测人类的行为。我们现在有一个系统能够实时的运行，在一个单一的 GPU 上运行。它可以跟踪很多人的行为，生成视频，非常的准确，可以实时地生成一些相应的数据和信息，并且相应的代码也是可以用的，这些都是一些最新的应用。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524741360126723ff99600" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>当然利用的这样的技术不仅仅可以进行识别图像，面部识别，也可以识别人的行动，也可以用来翻译，这是 Facebook 在加州所做的研究（FairSeq）。我们可以用这个系统进来行翻译的工作。</p>
+<p>我觉得对于行业说进行这样的开发研究将是会是一个非常有用的过程，同时我们也希望自己所开发的技术能够引导整个社区，解决我们所感兴趣的问题。我们认为 AI 不仅仅会帮助我们解决问题，同时还会帮助我们解决很多人类自己无法解决的挑战，所以我们会与科学团队一起朝这方面努力。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524741360160d42e220e20" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>这里是在过去的几年里，FAIR 所发布的一些开源项目，包括像深度学习网络，还有深度学习框架等等。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741360848db470af9b2" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我刚才讲到每天都会有一些新的应用发布，而深度学习的广泛应用也进一步推动科学方面的研究。在接下来几年里深度学习会发生更大的革命。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152474136078934bf971146" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>接下来为大家举一个例子，这段视频表现出来的是一种加速过程，它可以训练车去进行驾驶，而且可以调整车轮的方向。这样可以让车自己去进行驾驶，而不需要有人去进行校正。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/152474136089037d3b58d1e" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p># </p>
+<p><strong>▌可微分编程</strong></p>
+<p>接下来我们再来看一下可微分编程，这个编程可以用人工神经网络解释。</p>
+<blockquote>
+<p>编者注：程序员不写代码，或者仅写出少量 high-level 的代码，但是提供大量输入数据 X 与对应运算结果 Y 的例子。神经网络根据提供的数据集，自动学出从输入数据X到最终运算结果 Y 的映射（既整个程序）；或者结合程序员提供的 high-level 的代码，用神经网络作为中间函数，补全得到整个程序。来源：知乎&#64;殷鹏程（https&#58;//<a href="http://www.zhihu.com/question/265173352/answer/291994649）" target="_blank" rel="noopener">www.zhihu.com/question/265173352/answer/291994649）</a></p>
+</blockquote>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/152474136095735acc49461" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我们通过研究可以实现这样的一种编程，可以利用这样的系统或者培训系统，来完成某一个具体的任务。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152474136119294347897b3" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>这是几年前所开展的工作，是由 Facebook 和纽约大学一起合作做的项目。这个项目是训练模型，让它能够回答相关的问题。在自然语言处理过程中，也可以看到人工神经网络是动态的，在不断变化的。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524741361109c17d2f5975" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>这是另外一个例子，如果你要建立一个能够回答复杂问题的系统，比如说关于图像的复杂问题等。为了回答这个图片是不是有更多的立体形状，之后我们就会让系统来进行计算。比如说这里有多少是方形体，或者有多少颜色，最后告诉你具体的答案是什么。通过这么做我们可以建立起一个端到端的解答的途径，而且也允许你提出更多新的问题。根据你输入的数据不同，它会有所变化。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524741361551aad52df55e" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>大家看到这里是我们最近开发所得到的一些深度学习最新的成就，之后我们来看一下关于 AI 有没有我们触及到的。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247413616327a6c6ff44f" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p><strong>▌机器学习需要常识</strong></p>
+<p>对于新技术，我觉得可以进入到更多的领域，比如进行更多的影像分析。在一定程度上，我们觉得机器可能确实拥有一定的人工智能，但具体细节上，我们还需要进行更多探讨。</p>
+<p>比如在机器学习方面，我们怎么做呢？在这儿可以看到有一些具体的图像，我们有些新的方法。在实际的生活当中其实这种方式不太成功，因为关于深度学习方面我们要进行深入的挖掘，因为对于机器本身它会有不同的解决方案，比如在实际生活中是不能够去实施的。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524741361721580bb22b6d" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>有时候让机器学习很长时间才能玩游戏。所以在核心功能方面，现在确实还没有触及到。但这些机器是能做到的，只是我们还没有挖掘出来。我们也可以对机器本身进行更深入的训练，比如我们要让系统进行成千上万次的训练之后，它们才能够进行学习。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247413617670ed0a7eaf3" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>有些学习它是与力学相关的，但是在实际的生活当中不可能实时进行，所以我们只能够进行模拟，但它也需要我们进行很多的尝试才能够让机器学到。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152474136196376c421c444" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>婴儿们是怎么学习的呢？比如就像右下角这幅图向他们所展示的，六个月以下的婴儿可能不太了解物理运动，可当他们满了八个月之后，他们已经知道自由落体这个动作了。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247413620981d19129bee" img_width="1080" img_height="810" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>所以像右下角的这个小女孩非常了不起，我的一位朋友她给我们展示了婴儿怎么学会一些概念，而且他们也能够了解一些最基本的物理原理，这是他们在生活中最初学到的一些概念，这是凭借人们常识获得的，婴儿们所学会的是就是一些常识。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524742090231d9f6766d9f" img_width="653" img_height="488" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>另外我们向动物展示这样的情景，比如大家看一下这个大猩猩，它们在幼年的时候由培训员给它们进行展示一些东西，所以大猩猩面对这样的魔术会笑出来，而人们会把这当做世界最初的原型。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524742105753610c40ec76" img_width="654" img_height="487" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>但我们希望机器能够建立一些样本，使得系统运行，最终机器就能进行一些预测，像人一样有效运行。我们有这样的监督或者学习就能够使得机器得到训练和规划，这是我们所需要建立的一个系统。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15247421158436bb2d77470" img_width="655" img_height="495" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>不管下次的变革出现在哪里，我觉得它们应该是自我监督或者无监督学习，而且在这样的变革当中也会出现一些常识性的学习。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152474212426837aa90dc8a" img_width="656" img_height="491" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我总结一下，这是我们最近做的一些非常有意义的事情，这是一些预测性的模型，来由机器进行规划，根据它们的尝试进行预测。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1524742132203fff9138d49" img_width="652" img_height="488" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我们进行了对抗性训练，比如说我们可以训练机器来了解哪个分项是更可能的，或者在实际生活中会产生什么样的结果。对于发生的可能性它也会来做出预测，可能有的时候有的结果是虚假的，不是真实的。通过这么做我们就能够得到不同机器产生的结果，之后得到了很多的影像和图片。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1524742142911cbdabf9ae8" img_width="651" img_height="491" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>我们的系统在进行训练之后，生成了一系列的人脸，大家看看这些名人的面孔，里面有一些是假的图像，是由机器生成的，但看起来是真实的。</p>
+<p>我们将在下周会议上向大家展示最新的结果，得到的成果非常好。总之，我们希望把这个工具之后能够融入到我们的机器学习当中。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/152474218533787e26f18f0" img_width="658" img_height="492" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>最后，我想做一下总结，我觉得监督学习是不能够被替代的，不管是无监督学习还是其他的学习方式都不能够替代它，这点已经引起了很多人的兴趣，我们也要进行更多尝试。还有一点我需要强调的是，我们要让机器能够推理，来看深深度学习能带给我们什么样的推理能力，同时也要了解在AI时代，机器的推理能力有多高，逻辑性有多强。</p>
+<p>接下来我们也要来朝着可微分编程的智能学习的方向持续发展，这就需要进行做更多对抗性训练的研究。当然，还会出现更多的有关深度学习的变革，比如一些多渠道发展或者是复杂的架构，在这个领域也会出现更多的理论。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152474219221049f59d235c" img_width="655" img_height="493" alt="Yann LeCun：距离“真正的” AI，我们还缺什么？" inline="0"></p>
+<p>关于技术监督的趋势很显然是不断的弱化，甚至监督会消失，这就会导致出现一些新理论的产生，比如新语言，或者是一些新的并行文本，我相信之后应该有多维度的可能性。可能会出现一些新框架，包括了一些动态影像。我们会和微软，和亚马逊会进行更多合作，我们也会不断进行开源。</p>
+<p>当然，现在我们的工作量很大，但是关于我们的移动工具和其他工具越来越流行了，Facebook 的用户他们每天能够推出大概 20 亿张不同的影像，所以我们希望能充分发挥这方面的能力，它可能是一种很强的驱动力。另外，我们也要不断强化硬件，以使用户需求能够得到专业化的处理。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.cn/group/6548717935546860035/?iid=29827425108&amp;app=news_article&amp;timestamp=1524745064&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">Yann LeCun：距离“真正的” AI，我们还缺什么？</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+            <a href="/tags/Facebook/" rel="tag"># Facebook</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/5185426b/" rel="next" title="俄罗斯的新战略：三分欧亚大陆">
+                <i class="fa fa-chevron-left"></i> 俄罗斯的新战略：三分欧亚大陆
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/cf711999/" rel="prev" title="小程序：BAT的下一个新战场">
+                小程序：BAT的下一个新战场 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

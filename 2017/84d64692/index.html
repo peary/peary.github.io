@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,肺癌,癌症,Kaggle,肺气肿," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="王小新 编译自GitHub 量子位 出品 | 公众号 QbitAI 今年，Kaggle网站举办了一场用肺部CT图像进行肺癌检测的比赛Data Science Bowl 2017，提供百万美元奖金池。美国国家癌症研究所为比赛提供了高分辨率的肺部CT图像，在比赛中，参赛者根据给定的一组病人肺部CT三维图像，预测癌症风险。 Julian de Wit和Daniel Hammack合作完成的解决方案获得">
+<meta name="keywords" content="机器学习,肺癌,癌症,Kaggle,肺气肿">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌">
+<meta property="og:url" content="http://blockshare.top/2017/84d64692/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="王小新 编译自GitHub 量子位 出品 | 公众号 QbitAI 今年，Kaggle网站举办了一场用肺部CT图像进行肺癌检测的比赛Data Science Bowl 2017，提供百万美元奖金池。美国国家癌症研究所为比赛提供了高分辨率的肺部CT图像，在比赛中，参赛者根据给定的一组病人肺部CT三维图像，预测癌症风险。 Julian de Wit和Daniel Hammack合作完成的解决方案获得">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/1f7f000200065ef6be91">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.767Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌">
+<meta name="twitter:description" content="王小新 编译自GitHub 量子位 出品 | 公众号 QbitAI 今年，Kaggle网站举办了一场用肺部CT图像进行肺癌检测的比赛Data Science Bowl 2017，提供百万美元奖金池。美国国家癌症研究所为比赛提供了高分辨率的肺部CT图像，在比赛中，参赛者根据给定的一组病人肺部CT三维图像，预测癌症风险。 Julian de Wit和Daniel Hammack合作完成的解决方案获得">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/1f7f000200065ef6be91">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/84d64692/"/>
+
+
+
+
+
+  <title>Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/84d64692/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">量子位</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T22:48:04+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/84d64692/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/84d64692/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/1f7f000200065ef6be91" rel="gallery_cjgf0wkn0008jxmqdk43aewks"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/1f7f000200065ef6be91" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p><img src="http&#58;//p1.pstatp.com/large/1f7f000200065ef6be91" img_width="426" img_height="200" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>王小新 编译自GitHub</p>
+<p>量子位 出品 | 公众号 QbitAI</p>
+<p>今年，Kaggle网站举办了一场用肺部CT图像进行肺癌检测的比赛Data Science Bowl 2017，提供百万美元奖金池。美国国家癌症研究所为比赛提供了高分辨率的肺部CT图像，在比赛中，参赛者根据给定的一组病人肺部CT三维图像，预测癌症风险。</p>
+<p>Julian de Wit和Daniel Hammack合作完成的解决方案获得了比赛的第二名。Wit最近写了一篇博客来介绍他们的方案。他们通过3D卷积神经网络，来构建结节探测器，预测患癌可能性。Wit在64位的Windows10系统下，结合TensorFlow 0.12.0和Keras库实现该网络模型。</p>
+<p>BTW，第2名的奖金是20万美元。</p>
+<p>以下内容编译自Wit的文章：</p>
+<h1 id="初步了解和制定计划"><a href="#初步了解和制定计划" class="headerlink" title="初步了解和制定计划"></a>初步了解和制定计划</h1><p>在决定参赛之前，我观看了一个Bram van Ginneken关于肺部CT图像的介绍视频，有了基本的了解。我试图直接观察一些CT扫描样本，发现这是一个很难的问题，难度与大海捞针相当。视频中提到，图像的信噪比大约为1&#58;1000。论坛中的一些讨论也提到，神经网络不能直接从这些原始图像中学习到有用信息。目前只有1300个训练样本及对应的癌症标签，这与网络提取出的图像实际特征相差甚远。</p>
+<p>我们希望获得更高信噪比的训练集，或是找到标签和图像特征之间更直接的关系，来训练神经网络。幸运的是，比赛组织者指出，可以借鉴一个先前举办的比赛LUNA16。在LUNA16数据集中，医生为800多个病人CT图像中精心标记了1000多个肺结节。当然，LUNA16比赛也提供没有标记结节的数据集。</p>
+<p>因此，你可以从整体CT图像中的标记周围裁剪出小型3D图像块，最终可以用更小的3D图像块与结节标记直接对应。结节大小是癌症的一个影响因素，数据集也说明了结节的大小，所以我认为这是一个有用的信息。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/1f8000020140fedbb7a5" img_width="640" img_height="271" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>图1：方法网络示意图</p>
+<p>我还注意到LUNA16数据集是由另一个公开数据集LIDC-IDRI转化过来的。在原始数据集中，医生不仅要检测结节，而且还评估了结节的恶性程度和其他指标。我们发现，恶性程度是评估患癌风险的最佳指标，也是神经网络可以学习的。</p>
+<p>最终的计划方案是训练一个神经网络来检测结节，并评估结节的恶性程度。在预测时，网络通过滑动窗口来遍历整体CT图像，分别判断每个滑动窗口的区域包含恶性信息的可能性。最后基于这种信息和其他特征，估计该患者发展成癌症的可能性。</p>
+<h1 id="数据预处理和创建训练集"><a href="#数据预处理和创建训练集" class="headerlink" title="数据预处理和创建训练集"></a>数据预处理和创建训练集</h1><p>在预处理中，要使扫描图像的尺度尽可能一致。我首先重新缩放了CT图像，使每个像素点只表示1x1x1毫米的体积。我们也尝试了一些其他尺度的实验，最终确定了采用1毫米的尺度，这能很好地平衡计算精度和计算负荷。对于CT图像，像素强度可以用Hounsfield来表示，一般叫做亨氏单位。论坛里提到，要尽量降低像素强度，即最大化hounsfield值，然后归一化处理。同时还要确保所有CT扫描都具有相同的方向，因为CT图像旋转超过45度，意味着在图像采集过程中出现错误。</p>
+<p>极大部分关于结节检测的文献都是先从CT扫描图像中分离出肺组织。然而目前没有合适的分割方法，能够很好地处理隐藏在肺组织边缘周围的结节和肿块。在CT图像中，这些区域会直接被删除，更不用说使用结节探测器进行类型判定。我想要训练一个U-net网络，来更好地分割肺部。与传统的分割方法相比，U-net网络能够更有效地解决实际的图像分割问题，在同为Kaggle举办的卫星图像分割比赛中被广泛地使用。当我观察这些CT图像时，我认为可以通过肺组织的边缘，构建框架来找到肺结节。这么做可能是有用的，最后我决定对原始图像进行训练和预测。在调整训练数据后，该网络效果不错，似乎没有负面影响。</p>
+<p>在这个竞赛中，给定了训练数据，可能没有很大的发挥空间。然而处理训练集是必须的，但不是最重要的那部分工作。我使用样本中的标签，自动生成训练集的标签，也采用主动学习方法，添加部分人工标记。以下是带有标记的不同数据集。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1f7c0004d2d50f867aad" img_width="640" img_height="179" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>表1：标记后的训练集</p>
+<p>LIDC数据集中被正面标记的数量是LUNA16数据集样本数的五倍。因为这些标记是4名医生的综合注释，所以一个结节可能被标记了4次。但LUNA16也忽略了不到3名医生标注的结节。我决定在训练集中保留这些被忽视的结节，因为他们也提供了宝贵的结节恶性信息。</p>
+<p>LUNA16 v2数据集的标签是直接从LUNA16传来，一般是多个结节检测系统错误标出的假阳性结节。要注意的是，部分结节是上面提到的不到3名医生标记的结节。我保留了这些结节标记，是为了平衡那些可疑的假阳性结节。</p>
+<p>为了得到肺部轮廓，我需要得到非肺组织的底片。我使用了论坛中提到的简单肺分割算法，在分割掩码边缘周围进行采样标注，从而分割得到肺部组织。</p>
+<p>在进行第一轮训练之后，我在LUNA16数据集上进行结节预测，得到了所有假阳性结节，也并入LUNA16 v2数据集中。</p>
+<p>随着比赛的进行，我想建立第二个模型。对于这个模型，我做了放射科医生的工作，在NDSB数据集上训练网络。我手动地从癌症样本中选择明显的阳性结节，并从非癌症样本中选择假阳性结节，用这些数据训练了第二个模型。我希望效果不错，但我是一个不合格的放射科医生，实际上第二个模型比无手动标注的模型要糟糕得多。但是结合这两个模型，这个得到的融合模型比单独的模型效果更好，所以我保留了第二个模型。</p>
+<p>我简单地建立了一个结节观察器，来调试所有的标记。在观察时，我注意到医生忽略了一些大于3cm的大结节。在LIDC数据集的说明文档中，我发现医生被要求忽略掉大于3cm的结节。我担心这些被忽视的结节区域会迷惑分类器，故删除了相重叠的底片。下面是肺部CT图像的一些截图。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1f7d0004d0c694eee0dc" img_width="640" img_height="413" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>图2：图像中的标记。</p>
+<p>左上：LUNA16 v2数据，右上：非肺组织的边缘，</p>
+<p>左下：假阳性的区域，右下：被移除的无标注区域。</p>
+<h1 id="3D卷积神经网络的训练方法和网络结构"><a href="#3D卷积神经网络的训练方法和网络结构" class="headerlink" title="3D卷积神经网络的训练方法和网络结构"></a>3D卷积神经网络的训练方法和网络结构</h1><p>在一个高质量的训练集下，我们仍需要多次调整来有效地训练神经网络。数据集的两类样本量严重不平衡，正反两类样本量的比为5000：500000，且正面例子的大小和形状有很大差异。我曾考虑使用U-net网络，但2D U-net不能完全利用结节本身的三维结构信息，3D U-net网络的训练过程非常缓慢而且不灵活。我不使用U-net的主要原因是不需要建立细粒度的概率图，而只是一个粗略的检测器。在CT图像的滑动窗口中，建立小型的3D Convnet，这更加轻便和灵活。</p>
+<p>我的第一个目标是训练一个可作为基础的结节检测器。我先要对正面例子进行过采样，将正反两类的样本比上调到1&#58;20。为了提高模型的泛化能力，我尝试了一些图像增强操作，但是只有一些无损的操作是有用的。最后我用了大量的转化操作和所有3D翻转操作。</p>
+<p>设计好分类器后，我想训练一个用于估计恶化程度的回归模型。将肿瘤恶化程度分为从1（很可能不是恶性）到5（很可能是恶性的）。为了强调肿瘤的恶性程度，我将标签平方，范围扩大为从1到25。最开始，我考虑了分阶段的一种方法，用第一个网络来分类节点，然后训练另一个网络估计结节的恶化程度。为了缩短计算时间，我尝试只用一个网络，以多任务学习的方法，同时进行训练这两个任务。当编程实现后，我发现这个方法简单快速，网络的效果也很好。</p>
+<p>通常，神经网络的结构是比赛和案例研究中最重要的成果之一。对于这场比赛，我在神经网络的结构上花费的时间相对较少，因为已经有很多优秀网络可供参考。刚开始我使用了一些简单的VGG网络和Resnet网络的相似结构，但是它们的性能大致相同。然后我尝试用一个预训练好的C3D网络，原有的网络权重根本没有帮助，但直接初始化权重后，这种网络结构的效果很好。基于C3D网络进行若干次调整后，我得到最终的分类评估网络。</p>
+<p>我首先调整了输入大小，设置为32x32x32 mm。这看起来可能太小，但是在后续的网络层中加入一些技巧，发现这种维度的实际效果很好。这个想法是保持一切轻量化，并在比赛结束后再建立一个更大输入维度的网络。但是由于Daniel的网络输入是64x64x64 mm，我决定保持目前的输入大小，使网络的输出互补。接下来我立即对z轴进行平均池化操作，使得每个体素表示2mm的区域。这进一步减少了网络的参数量，并没有影响到精度，因为在大多数扫描中，z轴会比x轴和y轴更粗糙。最后，我在网络顶部引入了64个节点的全连接层。这里，我们不是直接预测恶性肿瘤，而是通过训练图片的中级特征，输出结节的恶化程度。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/1f7d0004d0c5d4d0b0aa" img_width="640" img_height="244" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>表2：3D Convnet的网络结构示意图</p>
+<h1 id="有趣的插曲：“奇怪组织”检测器"><a href="#有趣的插曲：“奇怪组织”检测器" class="headerlink" title="有趣的插曲：“奇怪组织”检测器"></a>有趣的插曲：“奇怪组织”检测器</h1><p>看着论坛的帖子，我发现所有的团队都在做类似的工作，我也在寻找一个能直接上手的方法。在观察CT扫描图像时，我发现了一些其他的事情。与LUNA16数据集一样，大部分的工作集中在识别肺结节上。然而，当癌症发展时，它们转变成肺肿块或更复杂的组织。并且我注意到，当扫描图像中有很多“奇怪组织”时，它发展为癌症的概率更大。此外，在很多CT图像中，我的结节探测器没有发现任何结节，这造成了一些很不好的假阴性现象。</p>
+<p>在训练集中有10例存在上述现象，其中的5例为癌症病例。为了解决这些严重的假阴性，在扫描时，需要检测获得奇怪组织的数量。很幸运，在LUNA16数据集上包含了很多这样的样本，所以我很快对数据集进行标记并训练了一个U-net网络。加入奇怪组织检测器后，效果不错，我因此提高了本地CV值和LB上的排名。因为它对于不同的模型提升不同，很难评定实际效果，但我认为它大约提升了0.002-0.005。说实话，我认为这种改进是一个创新性的补充。以下是一些包含有奇怪组织的样本。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/1f7c0004d2d6df97555b" img_width="640" img_height="211" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>图3：带有奇怪组织的CT图像样本。</p>
+<p>肺气肿基本上是由吸烟导致的，我也试图建立一个肺气肿检测器。论坛上的医生都说，当肺气肿存在时，患有癌症的概率升高。有一些简单的算法公布了如何评估CT扫描中肺气肿区域的数量，设置hounsfield单位为950，来扫描CT图像。然而，我应用这种方法后，发现效果并不好。然后我标记了一些例子来训练一个U-net，发现效果不错，但是我的本地CV值没有丝毫提升。我的猜测是，因为肺部出现问题，进行扫描得到数据集中的许多病例，因此很多肺气肿样本没有看做是肺结节和癌症病例。我不能确定这个想法的正确性。</p>
+<h1 id="最后一步：癌症预测"><a href="#最后一步：癌症预测" class="headerlink" title="最后一步：癌症预测"></a>最后一步：癌症预测</h1><p>训练好网络后，下一步是让神经网络检测结节并估计其恶化程度。我建立的CT结节观察器很容易查看网络结果。我觉得神经网络的效果很好：它检测到了许多我完全忽视的结节，而我只看到很少量的假阳性结节。但是还存在一个严重的问题：由于它错过了一些非常大的明显结节，所以影响了对于假阴性的得分，有时使LogLoss升高了3.00。作为尝试，我试图对CT图像进行了两次降采样，看看检测器是否会检测大结节。值得注意的是，它的效果非常好。因此，我调整了网络结构，让网络预测3个尺度，分别为1，1.5和2.0。我觉得值得花这么多的时候来改善这方面的性能。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/1f7e000201785029f1e4" img_width="640" img_height="226" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>图4：在缩放1x的左图中，没有很好地检测到大结节；但是在2x放大的右图时，效果较好。矩形的大小表示坚持到的恶性肿瘤。</p>
+<p>鉴于这些数据和一些其他特征，我想训练一个以梯度推进的分类器来预测一年内癌症的发病率，这是比较容易实现的。但是问题在于，排行榜的得分是基于给定的200名患者，这里面意外地包含了大量异常患者。经过一些调整后，我通过交叉验证得到了本地的平均值为0.39-0.40，而排行榜得分在0.44和0.47之间变化。此时很难将排行榜得分与本地CV值相关联。提高了本地CV值可能导致LB评分的降低，反之亦然。</p>
+<p>我花了很多时间来研究本地CV值和LB评分的关系。我没有成功，所以我只使用能同时改进CV值和LB排名的技巧和特征。这是一场两阶段的比赛，而且与实际的训练集相比，第二阶段的数据存在与LB数据集更相似的可能。在这个地方，很多队伍也只能碰运气，结果显示排行榜上的很多队伍模型处于过拟合状态。最后我只使用7个特征来训练梯度推进器，分别是3个尺度下的最大恶性结节及其Z轴的位置和样本中奇怪组织的数量。</p>
+<p>我也融合了两个模型来提高效果。第一个模型是在完整的LUNA16数据集上训练的。第二次，我试图从NDSB训练集中选择明显的阳性样本和假阳性样本，应用主动学习来训练。由于我不是放射科医师，所以我为了保险起见，只选择癌症病例的阳性例子和非癌症病例的阴性例子。我做错了，因为第二个模型比没有额外标注的LUNA16模型更糟糕。通过平均两个模型的输出，对LB排名有了很好的推动作用，并且显著提高了本地CV值。</p>
+<h1 id="与Daniel合作"><a href="#与Daniel合作" class="headerlink" title="与Daniel合作"></a>与Daniel合作</h1><p>在进行机器学习比赛时，将不同角度的解决方案组合在一起往往是个好主意。我和Daniel在以前的医疗比赛中一起合作过，知道他是一个非常聪明的人，且他的参赛思路一般和我不同。他是从研究的角度来看问题，而我一般以工程的角度来看问题。当我们合作时，我们确信结合两者互补的方法，能有一个很棒的解决方案。</p>
+<p>我们这次组队，一开始就发现两个人对LIDC数据集中的恶性信息有完全相同的观察角度，解决方案也很相似，感到有点失望。不过幸运的是，剩余部分的设计方法完全不同，结合后显著改进了LB排名和本地CV值。下面列举出一些主要的区别。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/1f7e00020179743982b0" img_width="640" img_height="208" alt="Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌" inline="0"></p>
+<p>表3：Julian和Daniel之间设计方法的差异</p>
+<p>强强联合是一个很好的选择。虽然我因为LB得分感到担忧，但Daniel觉得应该主要关注本地CV值。所以最终我减少研究本地CV值和LB的匹配关系，并着重于改进本地CV值。在最后的排行榜上，证明这是一个很好的决定，因为在最后，第二阶段的排行榜与本地CV值相当匹配，我们获得了比赛的第二名。尽管有许多队伍，在第一阶段取得了很好的排行榜得分，后来被证明模型过拟合。</p>
+<h1 id="总结与感想"><a href="#总结与感想" class="headerlink" title="总结与感想"></a>总结与感想</h1><p>我们在观察网络对CT图像的结节检测时，模型效果很好。第一阶段，logloss为0.43，公开排行榜的ROC准确率为0.85，第二阶段，logloss为0.40，私人数据集的ROC准确率更高。这让我很兴奋，因为在这个数据集上，我们的模型已经是一位训练有素的放射科医生了。</p>
+<p>对于放射科医师来说，这个自动结节检测的模型可能很有帮助，因为在实际判断中，部分结节容易被忽视。模型对肿瘤恶化程度的评估效果也很好，但训练样本量只有1000个，所以应该有很大的改进空间。</p>
+<p>在Daniel和我合作的解决方案中，应用了相当多的工程办法，许多步骤和决定是基于经验和直觉来确定的。我们没有足够的时间来准确地验证所有方法的效果。下面提出进一步研究的一些建议。</p>
+<p><strong>1.</strong> 建立放射科医师基准线。根据一个放射学家在这个数据集上的具体表现，建立一个具有参考意义的基准。</p>
+<p><strong>2.</strong> 对NDSB数据集的恶性肿瘤标注。在这场比赛中，训练样本只有约1000个结节。输入更多精确标记的例子，肯定进一步提升算法准确度。</p>
+<p><strong>3.</strong> 尝试更多不同的神经网络结构。我花了很少时间来选择效果最佳的网络结构，可能会错过一些效果更好的结构。</p>
+<h1 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h1><p>这次比赛的Kaggle地址（含说明、数据集等）：https&#58;//<a href="http://www.kaggle.com/c/data-science-bowl-2017/" target="_blank" rel="noopener">www.kaggle.com/c/data-science-bowl-2017/</a></p>
+<p>文中提到的另一个比赛LUNA16：https&#58;//luna16.grand-challenge.org/</p>
+<p>该项目的完整程序请查看GitHub链接：https&#58;//github.com/juliandewit/kaggle_ndsb2017</p>
+<p>Dan Hammack也公布了他的代码：https&#58;//github.com/dhammack/DSB2017/</p>
+<p>（完）</p>
+<p>招聘</p>
+<p>量子位正在招募编辑记者、运营、产品等岗位，工作地点在北京中关村。相关细节，请在公众号对话界面，回复：“招聘”。</p>
+<p>One More Thing…</p>
+<p>今天AI界还有哪些事值得关注？在量子位（QbitAI）公众号会话界面回复“今天”，看我们全网搜罗的AI行业和研究动态。笔芯~</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiao.com/group/6417242787222274305/?iid=10644901101&amp;app=news_article&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">Kaggle百万美元大赛优胜者：用CNN识别CT图像检测肺癌</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/肺癌/" rel="tag"># 肺癌</a>
+          
+            <a href="/tags/癌症/" rel="tag"># 癌症</a>
+          
+            <a href="/tags/Kaggle/" rel="tag"># Kaggle</a>
+          
+            <a href="/tags/肺气肿/" rel="tag"># 肺气肿</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/5ebd8403/" rel="next" title="和女当事人复原中金黄洁事件始末">
+                <i class="fa fa-chevron-left"></i> 和女当事人复原中金黄洁事件始末
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/8c838c11/" rel="prev" title="市售主流 55 寸电视横评，教你如何选电视 | 消费者报告">
+                市售主流 55 寸电视横评，教你如何选电视 | 消费者报告 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初步了解和制定计划"><span class="nav-number">1.</span> <span class="nav-text">初步了解和制定计划</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数据预处理和创建训练集"><span class="nav-number">2.</span> <span class="nav-text">数据预处理和创建训练集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3D卷积神经网络的训练方法和网络结构"><span class="nav-number">3.</span> <span class="nav-text">3D卷积神经网络的训练方法和网络结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有趣的插曲：“奇怪组织”检测器"><span class="nav-number">4.</span> <span class="nav-text">有趣的插曲：“奇怪组织”检测器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最后一步：癌症预测"><span class="nav-number">5.</span> <span class="nav-text">最后一步：癌症预测</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#与Daniel合作"><span class="nav-number">6.</span> <span class="nav-text">与Daniel合作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结与感想"><span class="nav-number">7.</span> <span class="nav-text">总结与感想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#相关资源"><span class="nav-number">8.</span> <span class="nav-text">相关资源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

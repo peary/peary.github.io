@@ -1,0 +1,1367 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="投资,经济,设计师,创业,威力," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="2018年将是区块链的认知元年。过去一个多月，我自己对区块链与Token模式的认知发生了几次升级，不敢说认知有多深，但是想明白了之后我已经准备All in了。  这篇文章谈一谈我对Token模式的1.0思考。  Token是什么区块链最重要的应用就是价值在互联网上直接流通。通过实体或虚拟资产的Token化，将资产上链，实现资产的液化，能直接通过网络来跨国界、短时差、低成本进行资产交易与转移。 很多">
+<meta name="keywords" content="投资,经济,设计师,创业,威力">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何设计区块链项目的通证（token）模型">
+<meta property="og:url" content="http://blockshare.top/2018/06001821/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="2018年将是区块链的认知元年。过去一个多月，我自己对区块链与Token模式的认知发生了几次升级，不敢说认知有多深，但是想明白了之后我已经准备All in了。  这篇文章谈一谈我对Token模式的1.0思考。  Token是什么区块链最重要的应用就是价值在互联网上直接流通。通过实体或虚拟资产的Token化，将资产上链，实现资产的液化，能直接通过网络来跨国界、短时差、低成本进行资产交易与转移。 很多">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/66ae000205779a262465">
+<meta property="og:updated_time" content="2018-04-23T20:46:37.759Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何设计区块链项目的通证（token）模型">
+<meta name="twitter:description" content="2018年将是区块链的认知元年。过去一个多月，我自己对区块链与Token模式的认知发生了几次升级，不敢说认知有多深，但是想明白了之后我已经准备All in了。  这篇文章谈一谈我对Token模式的1.0思考。  Token是什么区块链最重要的应用就是价值在互联网上直接流通。通过实体或虚拟资产的Token化，将资产上链，实现资产的液化，能直接通过网络来跨国界、短时差、低成本进行资产交易与转移。 很多">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/66ae000205779a262465">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/06001821/"/>
+
+
+
+
+
+  <title>如何设计区块链项目的通证（token）模型 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/06001821/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何设计区块链项目的通证（token）模型</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">区块链链长</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-26T20:54:14+08:00">
+                2018-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/设计/" itemprop="url" rel="index">
+                    <span itemprop="name">设计</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/06001821/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/06001821/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/66ae000205779a262465" rel="gallery_cjgf0wkcb000axmqdllycks18"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/66ae000205779a262465" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <p>2018年将是区块链的认知元年。过去一个多月，我自己对区块链与Token模式的认知发生了几次升级，不敢说认知有多深，但是想明白了之后我已经准备All in了。 </p>
+<p>这篇文章谈一谈我对Token模式的1.0思考。</p>
+<h1 id="Token是什么"><a href="#Token是什么" class="headerlink" title=" Token是什么"></a><strong> Token是什么</strong></h1><p>区块链最重要的应用就是价值在互联网上直接流通。通过实体或虚拟资产的Token化，将资产上链，实现资产的液化，能直接通过网络来跨国界、短时差、低成本进行资产交易与转移。</p>
+<p>很多人把Token译为“代币”，我更认同元道先生翻译的版本——“通证”。我特别不愿意用代币这个词，因为不是所有Token都具有货币的属性，当然具有货币属性的Token也不见得仅仅只有货币一种属性。Token是一种可流通的加密数字权益证明。这意味着什么？意味着现实世界的各种权益证明（股权、债券、积分、票据等）都可以Token化，放到数字世界里去流通，这件事的想象空间太大了。</p>
+<p>虽然已经有一大批先驱们都已经通过Token发行赚的盆满钵满了，但是Token经济的普及依然阻力重重，很多人并没有理解Token的真正价值。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/66ae000205779a262465" img_width="1280" img_height="807" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<h1 id="ICO市场Token众生相"><a href="#ICO市场Token众生相" class="headerlink" title=" ICO市场Token众生相"></a><strong> ICO市场Token众生相</strong></h1><p>ICO市场，就是一个江湖。门派林立，各揣心思，牛鬼蛇神，乱象丛生。翻阅了近百份白皮书，体验过若干Token交易之后，我有一个初步的总结。Token项目的三个段位、九种类型（请原谅我还是称为“币”了）。</p>
+<p><strong> 段位一：垃圾Token</strong></p>
+<p> 1、空气币</p>
+<p>这类Token，完全没有映射到真实资产，存在故意欺诈的行为，其发行Token然后ICO的动机，完全就是来骗钱的，根本没有考虑生态的健康成长。在韭菜成堆、没有监管的市场，简直是这些骗子套利的天堂，各种CX币层出不穷。不过，这个注定不会持久。这是监管首先要打击的对象。</p>
+<p> 2、鸡肋币</p>
+<p>这类Token，虽然映射了资产，但是却是毫无意义的资产，这些资产要么没有升值空间，要么没有流通能力，也注定了生态不可能生长起来。发行这种Token去ICO的组织，可能无意欺诈，但是跟欺诈也没什么区别。</p>
+<p> 3、侏儒币</p>
+<p>这类Token，多是因为生态经济模型设计不科学或者团队能力不支撑，导致生态模式难以为继。即使成功ICO了，也不代表有未来，生态没有未来，Token怎会有长远的价值？比如，激励机制不合理、比如应用场景缺乏，都会使得生态成长乏力。</p>
+<p>处在这个段位的Token，是没有投资价值的。但是当前市场上90%的项目都在这个阵营里。希望各路参与者能够擦亮眼睛。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/66aa00044ddc970abd4e" img_width="1280" img_height="852" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p><strong> 段位二：普通Token</strong></p>
+<p> 4、积分币</p>
+<p>这种Token，本质上就是企业内部发行的积分，你说有价值么？对于使用者而言，有一点价值，至少可以积分换购。对于投资者而言呢？能升值么？升值的逻辑在哪？很多Token发行者根本来不及思考这些问题，却发现这样居然也能被疯抢？就会产生“ICO融资简直太爽了”这种错觉，这只是短暂的趋势红利而已。你的积分，换成Token，如果不去与其他资产打通来置换流动性，真的没什么投资价值，只是新瓶装旧酒而已。</p>
+<p> 5、会员币</p>
+<p>这种Token，类似会员卡。我们大多数人去理发店都会办一张卡，新开的理发店店员会跟你说，现在办卡充值1000抵1200，你一盘算，还挺划算，反正你每个月要理一次，而且这个店开在你们楼下估计也不会轻易跑路，你就办了个理发卡。很多Token，指向的其实都是系统的使用权，只不过我提前预售这个使用权，所以才会有折扣（这个折扣再低也不会低于成本价）。那么，你觉得这种Token的投资价值如何？大多数的产品或者服务的使用权是没有稀缺性的，这种Token的上涨空间是不是很容易计算？你愿意接受吗？</p>
+<p>当然，这里面也有极端一点的例子。比如茅台，茅台酒如果发行产品Token（总量与动态产能挂钩），我相信很多人还是非常愿意持有的。这种Token就有一定的投资价值。</p>
+<p>这种Token，对多数消费者而言，是有吸引力的。但是对于投资者而言，就不见得是最佳选择了。</p>
+<p> 6、分红币</p>
+<p>这种Token，除了给到生态使用者类似会员卡优惠的福利之外，还会拿出一部分利润给生态参与者来分享，参与者购买Token，置换的是“使用权+分红权”。某中心化交易所就是这种设计逻辑。坦白来说，这种设计逻辑，我认为不是最理想的机制。</p>
+<p>使用权Token的升值逻辑前面已经讲过。给到使用者以更优惠的使用权（比如预充值给折扣），这一点也无可厚非。</p>
+<p>我们说一下利润回购这个逻辑。承诺利润回购或者分红的，估计是希望给到发行的Token以升值预期，但是，消费者真的相信股东会和董事会控制之下中心化机构的“利润回购”？很多不透明的因素在里面，很难让人信服。</p>
+<p>而且，即使就是“分红权”，那也不应该是阳光普照，一定要奖励生态的关键建设者。华为的虚拟受限股也并没有奖励到每个人，以奋斗者为本嘛。</p>
+<p>处在这个段位的Token，你觉得值得投吗？我觉得大部分的长期投资价值都不大（投资价值不大不意味着其Token没有使用价值，这是两码事），极个别除外（使用权具有稀缺性）。当前市场上9%的Token是在这个阵营。</p>
+<p> <strong>段位三：价值Token</strong></p>
+<p>到了这个段位的Token，才是真正具有投资价值的。这也是区块链与Token经济学与生产关系真正融合的部分。什么叫生产关系？百科上是这么说的：生产关系，人们在物质资料的生产过程中形成的社会关系。生产资料所有制的形式是最基本的，起决定作用的生产关系。生产资料所有制是指人们在生产资料所有、占有、支配和使用等方面所结成的经济关系。</p>
+<p>所以，真正有威力的Token，一定触及到深层次的生产关系。生产关系的关键就是“生产资料所有制”，必然会涉及到股权，只是这个东西又不是传统概念里股份公司制度之下的股权。</p>
+<p>就像当年股份制公司诞生一样，人们也很难用当时的词语来准确描述它。Token也一样。人们现在很难用一个合适的词语来描述Token到底代表什么。很多人说这些Token非债非股，确实Token不是传统意义上的债权和股权，但是其通过Token形式把债权和股权投射进来了。不然，为什么会升值？那些没有将这些权益投射进来的Token，长期看也是没有升值空间的。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/66ae00020400326e603e" img_width="200" img_height="200" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p><strong>有投资价值的Token，至少是三权合一</strong></p>
+<p>第一，物权属性，代表了使用权，可交付产品或服务</p>
+<p>第二，货币属性，可流通，至少在生态系统内是硬通货</p>
+<p>第三，股权属性，可增值，长期收益可期，升值空间较大</p>
+<p>如果非要排序的话，股权属性第一，物权属性第二，货币属性第三。</p>
+<p>以太坊，就是典型的例子。以太坊可以被视作区块链世界类似于Windows和Android的底层操作系统。以太坊之上，会搭建各种各样的应用，这些应用在执行任务、提供服务时，需要调用以太坊底层的计算资源——这些都不是免费的。调用资源应用的用户需要支付的 “货币”就是代币“以太币”（Ether）。</p>
+<p>你拥有了“以太币”，意味着你拥有这个系统的使用权；同时因为这个生态物种足够多样，你需要通过“以太币”这个交易媒介跟别人进行交换生产资料，这时“以太币”就有了货币属性，同时，“以太币”本身总量不是无穷无尽的，总量是相对有限的，那么在以太坊上搭建的应用越多，那应用所调用的资源也就越多，从而需要支付的以太币需求也就越大，这会使得在市场上流通的以太币价格越来越高。</p>
+<p>Token的价值，长期一定取决其生态成长能力。</p>
+<p>随着监管趋严，垃圾Token越没有市场了。良币终会驱逐劣币。没有价值依托的Token，很快就会被淘汰。而Token的价值，长期取决于其生态的成长潜力。</p>
+<p>Token模式的组织，是天然的生态型组织（这个我多少有点发言权，也不枉几年对平台生态型商业模式的探索）。区块链时代的生态组织，大致可以分成这几种类型。一种是底层的技术生态，一种是中间层的商业生态，还有一种是应用层的社群生态。这三个领域都有诞生生态型组织的潜力，也意味着这三类组织发行的Token将具有较强的成长性。</p>
+<p>（以下排名不分先后）</p>
+<p> 7、底层技术生态Token</p>
+<p>诸多公有链，都在做这个领域的事。这也是最迫切需要被突破的，有了成熟的技术基础设施，区块链应用才得以广泛普及。</p>
+<p>这类的Token也不少了，除了以太坊，还有EOS、NEO、Qtum、IOTA等等。现在处于军阀混战时期，远未到一统江山的时候。</p>
+<p><strong>虽然这种Token值得投，但是哪个值得投？或者值得长期持有？这还真是一个问题。</strong></p>
+<p>有人说交易所也是一个不错的阶段性机会，的确，但是交易所的Token有多大价值，取决于其将多少权益投射到这个Token里。不是每个交易所的Token都有投资价值的。</p>
+<p> 8、中层商业生态Token</p>
+<p>这一类Token，探索的人有不少，但是真正搞明白的不多。大家都还是拘泥于传统互联网时代的商业模式，做一个媒体，或者一个工具，思维没有跳出来。思考一下，如果做一个区块链时代的阿里巴巴，应该怎么做？沿着旧地图，肯定找不到新大陆。本人要启动的创业项目就在这个领域，后面找时间专门分析一下这个领域的机会。</p>
+<p> 9、社群垂直生态Token</p>
+<p>这一类Token，也有一定的投资价值。Token是非常好的社群商业连接器和润滑剂，传统的社群没能运转的很大因素是机制问题，Token恰好完美解决这个问题。</p>
+<p>处在这个段位的Token，是具有长期投资价值的（对于价值投资者）。但到底哪个Token是你的菜，就看你的洞察能力了。当前市场上只有1%的Token处于这个阵营。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/66aa00044d76f25f9fbf" img_width="1280" img_height="960" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<h1 id="价值型Token该怎样判断？"><a href="#价值型Token该怎样判断？" class="headerlink" title=" 价值型Token该怎样判断？"></a><strong> 价值型Token该怎样判断？</strong></h1><h1 id="只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？"><a href="#只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？" class="headerlink" title="只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？"></a>只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？</h1><p><strong> 第一，如何判断其生态的远期成长能力？</strong></p>
+<p><strong>1、你这个新生态在解决什么问题？</strong></p>
+<p>能否清晰定义原来存在的问题？关键的痛点？引入新生态之后能够带来什么改观？</p>
+<p>这个与创业要思考用户和痛点的逻辑是一样的。如果你没有在解决问题，区块链再神也救不了你。</p>
+<p>只有一个提醒，思考生态的视角不要局限于商业，还要着眼于社会问题。因为Token生态的本质是一个社群经济体。</p>
+<p><strong>2、生态可能长成的规模有多大？</strong></p>
+<p>再直白一点说，就是你这个生态未来会有多少人使用？使用的频次如何？</p>
+<p>区块链估值体系将从追求利润变成追求用户规模与互动频次。所以你的生态潜在规模不够的话，也会反过来影响到你Token的价值。</p>
+<p><strong>3、生态模型设计是否合理？</strong></p>
+<p>Token经济设计的核心理念，是把原来体系中耗散的交易成本集约起来，用技术手段把收益分散到体系内每一个参与者，使系统整体摩擦力不断下降，从而Token内在价值不断上升。如果Token机制设置不合理，是很难调动参与者的积极性的，参与者没有被调动起来，生态也不可能成长起来。</p>
+<p>这里面重点提一句，关于Token的发行比例。很多Token发行方会一次性地把50%甚至更多的Token给到“黄牛型”的投资者，这势必会抬高生态真正使用者的参与成本，进而会影响到生态的建设。如果你是为了生态建设的话，着急融那么多钱干嘛呢？你的生态建设在这个阶段真的需要那么多钱吗？</p>
+<p><strong>4、团队是否匹配？</strong></p>
+<p>一是看团队的能力构成：有没有优秀的生态设计师？有没有优秀的技术开发团队？有没有优秀的运营团队？我自己的团队就是按照这个逻辑架构的。我算是生态设计师，但同时也需要区块链的技术人才，如果有靠谱的技术大牛欢迎看过来，我准备了好多橄榄树抛给你。</p>
+<p>二是看团队的All in程度：我个人认为，Token模式下的创始团队的所有收益都应该与生态未来的预期成长有关，只能唯一体现在Token的升值上（因为已经给到你10%或者20%的一次性奖励了），如果不是这样，大家并没有构建成一个真正的利益共同体。</p>
+<p><strong> 第二，如何衡量生态Token当下的价值空间？</strong></p>
+<p>前两天一位和君老同学可月提了一个衡量Token价值的公式，我觉得很好，这里借用一下。</p>
+<p>在Token模式当中，影响力决定组织/工具价值。交易场景下影响力直观的衡量方式，是流通价值，可以通过交易规模和流通频次计算当前价值=当前交易规模/1单位Token在当前的交易频次。</p>
+<p>比如当前基于此Token的交易规模为￥100万；交易了1万次，每次1单位Token，那1单位Token在当前的交易频次就是1万次，当前价值就是￥100万/1万次=￥100。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/66ac000336845136099e" img_width="563" img_height="52" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p>极值价值=最大运用情况下的交易规模/1单位Token在此情况的交易频次。比如Token最大运用情况下交易规模为￥1亿；交易了100万次，每次0.01Token，那1单位Token在当前的交易频次就是1万次，当前价值就是￥1亿/1万次=￥1万。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/66ae000203ffc9786908" img_width="573" img_height="61" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p>当前预期价值是极值价值回溯到现在的价值，假设从当前到极限需要n年，每年经济增长率为r，那么，当前预期价值=极值价值/r的n次方。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/66ad0002170d8d733919" img_width="317" img_height="61" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p>价格应该是围绕当前预期价值上下波动的：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/66ac000336d9adf60135" img_width="665" img_height="350" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<p>Token的投资和股权投资都应当遵循价值导向的原则，只不过衡量价值的标准不一样了。一个是基于利润体现赚钱能力，一个是基于交易价值体现影响力。</p>
+<p>不要小看这一变化，这种模型，让零和博弈变成了合作共赢！所有人的收益都与未来绑定，这才是真正的利益共同体。Token经济的核心，就是共赢！</p>
+<p> ICO的监管重拳来袭，对于那些真正想借助区块链做事情的人，其实并没有什么影响，反而是好事！技术也好，模式也好，只是一种工具，用来做什么，还是背后的人。到最后，都是价值观的较量。</p>
+<p>以上为一些不成熟思考，仅供交流。欢迎价值认同的各路伙伴与我联系，一起来探索区块链与Token经济，一起去推动更理想的社会图景！</p>
+<h1 id="如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），"><a href="#如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），" class="headerlink" title="如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），"></a>如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），</h1><p>私信步骤：点击“区块链链长”头像，在其右边有一“私信”按钮，点击私信即可，如下图：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/59320001582e7ce8e4b5" img_width="629" img_height="554" alt="如何设计区块链项目的通证（token）模型" inline="0"></p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiao.com/group/6525608622141997575/" target="_blank" rel="noopener">如何设计区块链项目的通证（token）模型</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/投资/" rel="tag"># 投资</a>
+          
+            <a href="/tags/经济/" rel="tag"># 经济</a>
+          
+            <a href="/tags/设计师/" rel="tag"># 设计师</a>
+          
+            <a href="/tags/创业/" rel="tag"># 创业</a>
+          
+            <a href="/tags/威力/" rel="tag"># 威力</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/e5349c69/" rel="next" title="来来来！教你自己发行空气币">
+                <i class="fa fa-chevron-left"></i> 来来来！教你自己发行空气币
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/1e605a41/" rel="prev" title="爱奇艺正式递交IPO申请：小米持股8.4%股权 为第二大股东">
+                爱奇艺正式递交IPO申请：小米持股8.4%股权 为第二大股东 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">289</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">319</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Token是什么"><span class="nav-number">1.</span> <span class="nav-text"> Token是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ICO市场Token众生相"><span class="nav-number">2.</span> <span class="nav-text"> ICO市场Token众生相</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#价值型Token该怎样判断？"><span class="nav-number">3.</span> <span class="nav-text"> 价值型Token该怎样判断？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？"><span class="nav-number">4.</span> <span class="nav-text">只有价值型Token才具备长期投资价值。那么该如何拥抱价值型Token呢？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），"><span class="nav-number">5.</span> <span class="nav-text">如需更多帮助，可私信小编（5年股龄，3年期龄，半年币龄），</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
