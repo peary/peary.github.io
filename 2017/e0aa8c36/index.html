@@ -1,0 +1,1392 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程语言,深度学习,Python,机器学习,编译器," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="摘要： 本文对胶囊网络进行了非技术性的简要概括，分析了其两个重要属性，之后针对MNIST手写体数据集上验证多层感知机、卷积神经网络以及胶囊网络的性能。  神经网络于上世纪50年代提出，直到最近十年里才得以发展迅速，正改变着我们世界的方方面面。从图像分类到自然语言处理，研究人员正在对不同领域建立深层神经网络模型并取得相关的突破性成果。但是随着深度学习的进一步发展，又面临着新的瓶颈——只对成熟网络模">
+<meta name="keywords" content="编程语言,深度学习,Python,机器学习,编译器">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习精要之CapsuleNets理论与实践（附Python代码）">
+<meta property="og:url" content="http://blockshare.top/2017/e0aa8c36/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="摘要： 本文对胶囊网络进行了非技术性的简要概括，分析了其两个重要属性，之后针对MNIST手写体数据集上验证多层感知机、卷积神经网络以及胶囊网络的性能。  神经网络于上世纪50年代提出，直到最近十年里才得以发展迅速，正改变着我们世界的方方面面。从图像分类到自然语言处理，研究人员正在对不同领域建立深层神经网络模型并取得相关的突破性成果。但是随着深度学习的进一步发展，又面临着新的瓶颈——只对成熟网络模">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/1523936615181e5ad38cde4">
+<meta property="og:updated_time" content="2018-05-03T14:17:36.281Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习精要之CapsuleNets理论与实践（附Python代码）">
+<meta name="twitter:description" content="摘要： 本文对胶囊网络进行了非技术性的简要概括，分析了其两个重要属性，之后针对MNIST手写体数据集上验证多层感知机、卷积神经网络以及胶囊网络的性能。  神经网络于上世纪50年代提出，直到最近十年里才得以发展迅速，正改变着我们世界的方方面面。从图像分类到自然语言处理，研究人员正在对不同领域建立深层神经网络模型并取得相关的突破性成果。但是随着深度学习的进一步发展，又面临着新的瓶颈——只对成熟网络模">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/1523936615181e5ad38cde4">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2017/e0aa8c36/"/>
+
+
+
+
+
+  <title>深度学习精要之CapsuleNets理论与实践（附Python代码） | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2017/e0aa8c36/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习精要之CapsuleNets理论与实践（附Python代码）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">云栖社区</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-21T00:00:00+08:00">
+                2017-12-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2017/e0aa8c36/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/e0aa8c36/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/1523936615181e5ad38cde4" rel="gallery_cjgqm80yo00hwetqd7lk0gu5t"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/1523936615181e5ad38cde4" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>摘要： 本文对胶囊网络进行了非技术性的简要概括，分析了其两个重要属性，之后针对MNIST手写体数据集上验证多层感知机、卷积神经网络以及胶囊网络的性能。</p>
+</blockquote>
+<p>神经网络于上世纪50年代提出，直到最近十年里才得以发展迅速，正改变着我们世界的方方面面。从图像分类到自然语言处理，研究人员正在对不同领域建立深层神经网络模型并取得相关的突破性成果。但是随着深度学习的进一步发展，又面临着新的瓶颈——只对成熟网络模型进行加深加宽操作。直到最近，Hinton老爷子提出了新的概念——胶囊网络（Capsule Networks），它提高了传统方法的有效性和可理解性。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936615181e5ad38cde4" img_width="768" img_height="512" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>本文将讲解胶囊网络受欢迎的原因以及通过实际代码来加强和巩固对该概念的理解。</p>
+<h1 id="为什么胶囊网络受到这么多的关注？"><a href="#为什么胶囊网络受到这么多的关注？" class="headerlink" title="为什么胶囊网络受到这么多的关注？"></a>为什么胶囊网络受到这么多的关注？</h1><p>对于每种网络结构而言，一般用MINST手写体数据集验证其性能。对于识别数字手写体问题，即给定一个简单的灰度图，用户需要预测它所显示的数字。这是一个非结构化的数字图像识别问题，使用深度学习算法能够获得最佳性能。本文将以这个数据集测试三个深度学习模型，即：多层感知机（MLP）、卷积神经网络（CNN）以及胶囊网络（Capsule Networks）。</p>
+<p><strong>多层感知机（MLP）</strong></p>
+<p>使用Keras建立多层感知机模型，代码如下：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936671869db200e9987" img_width="687" img_height="339" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15239366154543f03c5ed41" img_width="895" img_height="197" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>在经过15次迭代训练后，结果如下：</p>
+<p>可以看到，该模型实在是简单！</p>
+<p><strong>卷积神经网络（CNN）</strong></p>
+<p>卷积神经网络在深度学习领域应用十分广泛，表现优异。下面构建卷积神经网络模型，代码如下：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936729166f76041d277" img_width="668" img_height="540" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>打印模型参数概要：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615419bd1208b687" img_width="892" img_height="408" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>从上图可以发现，CNN比MLP模型更加复杂，下面看看其性能：</p>
+<p>可以发现，CNN训练耗费的时间比较长，但其性能优异。</p>
+<p><strong>胶囊网络（Capsule Network）</strong></p>
+<p>胶囊网络的结构比CNN网络更加复杂，下面构建胶囊网络模型，代码如下：</p>
+<p>打印模型参数概要：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/152393661547849dfd8034c" img_width="888" img_height="409" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>该模型耗费时间比较长，训练一段时间后，得到如下结果：</p>
+<p>可以发现，该网络比之前传统的网络模型效果更好，下图总结了三个实验结果：</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/1523936615483105cdf1922" img_width="605" img_height="482" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>这个实验也证明了胶囊网络值得我们深入的研究和讨论。</p>
+<h1 id="胶囊网络背后的概念"><a href="#胶囊网络背后的概念" class="headerlink" title="胶囊网络背后的概念"></a>胶囊网络背后的概念</h1><p>为了理解胶囊网络的概念，本文将以猫的图片为例来说明胶囊网络的潜力，首先从一个问题开始——下图中的动物是什么？</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15239366154624af63a8d9c" img_width="300" img_height="199" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>它是一只猫，你肯定猜对了吧！但是你是如何知道它是一只猫的呢？现在将这张图片进行分解：</p>
+<p><strong>情况1——简单图像</strong></p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936615431614bbebc24" img_width="300" img_height="207" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>你是如何知道它是一只猫的呢？可能的方法是将其分解为单独的特征，如眼睛、鼻子、耳朵等。如下图所示：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615640178076df2f" img_width="673" img_height="477" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>因此，本质上是把高层次的特征分解为低层次的特征。比如定义为：</p>
+<p>P(脸) = P(鼻子) &amp; ( 2 x P(胡须) ) &amp; P(嘴巴) &amp; ( 2 x P(眼睛) ) &amp; ( 2 x P(耳朵) )</p>
+<p>其中，P(脸) 定义为图像中猫脸的存在。通过迭代，可以定义更多的低级别特性，如形状和边缘，以简化过程。</p>
+<p><strong>情况2——旋转图像</strong></p>
+<p>将图像旋转30度，如下图所示：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615668b9b3db3a08" img_width="300" img_height="209" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>如果还是按照之前定义的相同特征，那么将无法识别出它是猫。这是因为底层特征的方向发生了改变，导致先前定义的特征也将发生变化。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936615631d3edb50663" img_width="678" img_height="514" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>综上，猫识别器可能看起来像这样：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/152393661565743c27dc396" img_width="658" img_height="489" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>更具体一点，表示为：</p>
+<p>P(脸) = ( P(鼻子) &amp; ( 2 x P(胡须) ) &amp; P(嘴巴) &amp; ( 2 x P(眼睛) ) &amp; ( 2 x P(耳朵) ) ) OR</p>
+<p>( P(rotated_鼻子) &amp; ( 2 x P(rotated_胡须) ) &amp; P(rotated_嘴巴) &amp; ( 2 x P(rotated_眼睛) ) &amp; ( 2 x P(rotated_耳朵) ) )</p>
+<p><strong>情况3——翻转图像</strong></p>
+<p>为了增加复杂性，下面是一个完全翻转的图像：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936615697a03870079e" img_width="300" img_height="215" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>可能想到的方法是靠蛮力搜索低级别特征所有可能的旋转，但这种方法耗时耗力。因此，研究人员提出，包含低级别特征本身的附加属性，比如旋转角度。这样不仅可以检测特征是否存在，还可以检测其旋转是否存在，如下图所示：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15239366157144924a02872" img_width="666" img_height="516" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>更具体一点，表示为：</p>
+<p>P(脸) = [ P(鼻子), R(鼻子) ] &amp; [ P(胡须_1), R(胡须_1) ] &amp; [ P(胡须_2), R(胡须_2) ] &amp; [ P(嘴巴), R(嘴巴) ] &amp; …</p>
+<p>其中，旋转特征用R()表示，这一特性也被称作旋转等价性。</p>
+<p>从上述情况中可以看到，扩大想法之后能够捕捉更多低层次的特征，如尺度、厚度等，这将有助于我们更清楚地理解一个物体的形象。这就是胶囊网络在设计时设想的工作方式。</p>
+<p>胶囊网络另外一个特点是动态路由，下面以猫狗分类问题讲解这个特点。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936615775244e0406d4" img_width="300" img_height="196" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>上面两只动物看起来非常相似，但存在一些差异。你可以从中发现哪只是狗吗？</p>
+<p>正如之前所做的那样，将定义图像中的特征以找出其中的差异。</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615894a934d0564d" img_width="682" img_height="448" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>如图所示，定义非常低级的面部特征，比如眼睛、耳朵等，并将其结合以找到一个脸。之后，将面部和身体特征结合来完成相应的任务——判断它是一只猫或狗。</p>
+<p>现在假设有一个新的图像，以及提取的低层特征，需要根据以上信息判断出其类别。我们从中随机选取一个特征，比如眼睛，可以只根据它来判断其类别吗？</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/15239366158603162373ce7" img_width="671" img_height="455" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>答案是否定的，因为眼睛并不是一个区分因素。下一步是分析更多的特征，比如随机挑选的下一个特征是鼻子。</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/152393661593930cdc2444b" img_width="411" img_height="317" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>只有眼睛和鼻子特征并不能够完成分类任务，下一步获取所有特征，并将其结合以判断所属类别。如下图所示，通过组合眼睛、鼻子、耳朵和胡须这四个特征就能够判断其所属类别。基于以上过程，将在每个特征级别迭代地执行这一步骤，就可以将正确的信息路由到需要分类信息的特征检测器。</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615895e1078b8f7f" img_width="415" img_height="319" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>在胶囊构件中，当更高级的胶囊同意较低级的胶囊输入时，较低级的胶囊将其输入到更高级胶囊中，这就是动态路由算法的精髓。</p>
+<p>胶囊网络相对于传统深度学习架构而言，在对数据方向和角度方面更鲁棒，甚至可以在相对较少的数据点上进行训练。胶囊网络存在的缺点是需要更多的训练时间和资源。</p>
+<h1 id="胶囊网络在MNIST数据集上的代码详解"><a href="#胶囊网络在MNIST数据集上的代码详解" class="headerlink" title="胶囊网络在MNIST数据集上的代码详解"></a>胶囊网络在MNIST数据集上的代码详解</h1><p>首先从识别数字手写体项目下载数据集，数字手写体识别问题主要是将给定的28x28大小的图片识别出其显示的数字。在开始运行代码之前，确保安装好Keras。</p>
+<p>下面打开Jupyter Notebook软件，输入以下代码。首先导入所需的模块：</p>
+<p>然后进行随机初始化：</p>
+<p>下一步设置目录路径：</p>
+<p>下面加载数据集，数据集是“.CSV”格式。</p>
+<p>展示数据表示的数字：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15239366159642460c1b5c7" img_width="353" img_height="351" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>现在将所有图像保存为Numpy数组：</p>
+<p>这是一个典型的机器学习问题，将数据集分成7:3。其中70%作为训练集，30%作为验证集。</p>
+<p>下面将分析三个不同深度学习模型对该数据的性能，分别是多层感知机、卷积神经网络以及胶囊网络。</p>
+<p><strong>1.多层感知机</strong></p>
+<p>定义一个三层神经网络，一个输入层、一个隐藏层以及一个输出层。输入和输出神经元的数目是固定的，输入为28x28图像，输出是代表类的10x1向量，隐层设置为50个神经元，并使用梯度下降算法训练。</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/1523936966891b721e57ea2" img_width="674" img_height="410" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>打印模型参数概要：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/15239366154543f03c5ed41" img_width="895" img_height="197" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>在迭代15次之后，结果如下：</p>
+<blockquote>
+<p>Epoch 14/1534300/34300 [==============================] - 1s 41us/step - loss: 0.0597 - acc: 0.9834 - val_loss: 0.1227 - val_acc: 0.9635Epoch 15/1534300/34300 [==============================] - 1s 41us/step - loss: 0.0553 - acc: 0.9842 - val_loss: 0.1245 - val_acc: 0.9637</p>
+</blockquote>
+<p>结果不错，但可以继续改进。</p>
+<p><strong>2.卷积神经网络</strong></p>
+<p>把图像转换成灰度图（2D），然后将其输入到CNN模型中：</p>
+<p>下面定义CNN模型：</p>
+<p>打印模型参数概要：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936615419bd1208b687" img_width="892" img_height="408" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>通过增加数据来调整进程：</p>
+<p>CNN模型的结果：</p>
+<p><strong>3.胶囊网络</strong></p>
+<p>建立胶囊网络模型，结构如图所示：</p>
+<p><img src="http://p1.pstatp.com/large/pgc-image/1523936616091ac49c29a67" img_width="1000" img_height="296" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>下面建立该模型，代码如下：</p>
+<p>打印模型参数概要：</p>
+<p><img src="http://p3.pstatp.com/large/pgc-image/152393661547849dfd8034c" img_width="888" img_height="409" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>胶囊模型的结果：</p>
+<p>为了便于总结分析，将以上三个实验的结构绘制出测试精度图：</p>
+<p><img src="http://p9.pstatp.com/large/pgc-image/1523936615483105cdf1922" img_width="605" img_height="482" alt="深度学习精要之CapsuleNets理论与实践（附Python代码）" inline="0"></p>
+<p>从结果中可以看出，胶囊网络的精度优于CNN和MLP。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>本文对胶囊网络进行了非技术性的简要概括，分析了其两个重要属性，之后针对MNIST手写体数据集上验证多层感知机、卷积神经网络以及胶囊网络的性能。</p>
+<p>作者信息</p>
+<p>Faizan Shaikh，数据科学，深度学习初学者。</p>
+<p>本文由阿里云云栖社区组织翻译，文章原标题《Essentials of Deep Learning: Getting to know CapsuleNets (with Python codes)》，作者：Faizan Shaikh，译者：海棠，审阅：Uncle_LLD。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://www.toutiao.com/a6545260313481052680/?tt_from=weixin&amp;utm_campaign=client_share&amp;timestamp=1524368740&amp;app=news_article&amp;utm_source=weixin&amp;iid=29827425108&amp;utm_medium=toutiao_android&amp;wxshare_count=1" target="_blank" rel="noopener">深度学习精要之CapsuleNets理论与实践（附Python代码）</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/编译器/" rel="tag"># 编译器</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/e10cc535/" rel="next" title="利用Python进行深度学习的完整入门指南(附资源)">
+                <i class="fa fa-chevron-left"></i> 利用Python进行深度学习的完整入门指南(附资源)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/dcf1147a/" rel="prev" title="腾讯入局在线文档领域，初创公司还有机会逆袭吗？">
+                腾讯入局在线文档领域，初创公司还有机会逆袭吗？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">283</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">316</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么胶囊网络受到这么多的关注？"><span class="nav-number">1.</span> <span class="nav-text">为什么胶囊网络受到这么多的关注？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#胶囊网络背后的概念"><span class="nav-number">2.</span> <span class="nav-text">胶囊网络背后的概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#胶囊网络在MNIST数据集上的代码详解"><span class="nav-number">3.</span> <span class="nav-text">胶囊网络在MNIST数据集上的代码详解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
