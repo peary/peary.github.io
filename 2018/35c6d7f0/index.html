@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,机器学习,Google,GPU,智能手机," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。   运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。本文介绍了如何在移动设备的各种指标之间取得平衡，在避免大幅度降低准确性的前提下构造更加轻便的神经网络，使得在移动设备上快速、准确地运行神经网络成为可能。">
+<meta name="keywords" content="深度学习,机器学习,Google,GPU,智能手机">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门｜极致的优化：智能手机是如何处理大型神经网络的">
+<meta property="og:url" content="http://blockshare.top/2018/35c6d7f0/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。   运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。本文介绍了如何在移动设备的各种指标之间取得平衡，在避免大幅度降低准确性的前提下构造更加轻便的神经网络，使得在移动设备上快速、准确地运行神经网络成为可能。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/152549100829650fd9fa7e8">
+<meta property="og:updated_time" content="2018-05-05T03:50:45.303Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="入门｜极致的优化：智能手机是如何处理大型神经网络的">
+<meta name="twitter:description" content="运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。   运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。本文介绍了如何在移动设备的各种指标之间取得平衡，在避免大幅度降低准确性的前提下构造更加轻便的神经网络，使得在移动设备上快速、准确地运行神经网络成为可能。">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/152549100829650fd9fa7e8">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/35c6d7f0/"/>
+
+
+
+
+
+  <title>入门｜极致的优化：智能手机是如何处理大型神经网络的 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/35c6d7f0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">入门｜极致的优化：智能手机是如何处理大型神经网络的</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">机器之心</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-05T11:50:44+08:00">
+                2018-05-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/35c6d7f0/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/35c6d7f0/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/152549100829650fd9fa7e8" rel="gallery_cjgsuum0w0000w8qdmdfba449"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/152549100829650fd9fa7e8" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。</p>
+</blockquote>
+<blockquote>
+<p>运行深度神经网络对计算能力、能耗及磁盘空间要求甚高，智能手机的计算资源十分有限，需要多种优化才能高效运行深度学习应用。本文介绍了如何在移动设备的各种指标之间取得平衡，在避免大幅度降低准确性的前提下构造更加轻便的神经网络，使得在移动设备上快速、准确地运行神经网络成为可能。</p>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152549100829650fd9fa7e8" img_width="1080" img_height="575" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>电脑拥有大容量硬盘和强大的 CPU 与 GPU，但智能手机没有。为了弥补这些硬件上的不足，智能手机需要一些特殊手段才能高效地运行深度学习应用。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152549100824090b3a8a899" img_width="800" img_height="311" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>智能手机有办法与这些强大的服务器集群竞争吗？还是完全没有希望？</p>
+<p><strong>引言</strong></p>
+<p>深度学习是一种功能十分多样和强大的技术，但是运行神经网络对计算能力、能耗及磁盘空间要求甚高。这对于在具有大型硬盘和多个 GPU 的服务器上运行的云应用来说一般不是问题。</p>
+<p>不幸的是，在移动设备上运行神经网络并非易事。事实上，尽管智能手机的功能越来越强大，它们的计算能力、电池寿命及可用的磁盘空间依然十分有限，特别是那些非常依赖轻便性的应用。把应用做得轻便可以加快下载速度，减少更新，并且延长电池寿命，而这些都是用户迫切需要的。</p>
+<p>为了执行图像分类、人像模式摄影、文本预测以及其他几十项任务，智能手机需要使用特殊方法来快速、准确地运行神经网络，且不占用过多内存空间。</p>
+<p>在这篇文章中，我们将会了解一些最有效的、能让神经网络在手机上实时运行的技术。</p>
+<p><strong>能使神经网络更小更快的技术</strong></p>
+<p>基本上来讲，我们只对三个指标感兴趣：模型的准确率、速度、在手机中占用的内存。天下没有免费的午餐，因此我们不得不在这些指标之间作出一些权衡。</p>
+<p>对于大部分技术来说，我们一边要关注指标，一边还要寻找一个叫做「饱和点」（saturation point）的东西。达到这个点之后，利用其他指标的损失实现某个指标的增益将不再可行。在到达饱和点前保持优化值，可以在两个指标上取得最佳结果。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525491008222752276053d" img_width="800" img_height="288" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>在这个例子中，我们可以在不增加误差的情况下显著减少代价昂贵的运算。但是，在超过饱和点之后，误差的严重程度高到不可接受。</p>
+<p>记住这个方法，让我们开始吧！</p>
+<p><strong>1. 避免全连接层</strong></p>
+<p>全连接层是神经网络中最常见的部分，它们通常能发挥很大作用。然而，由于每一个神经元都和前一层的所有神经元相连接，因此它们需要存储和更新大量参数，这对速度和磁盘空间都很不利。</p>
+<p>卷积层是利用输入（通常是图像）中局部一致性的层。每一个神经元不再与前一层的所有神经元相连。这有助于网络在保持高度准确性的同时减少连接/权重的数量。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15254910082074a59ad44e1" img_width="800" img_height="286" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>全连接层的连接/权重数量要远远多于卷积层。</p>
+<p>使用少连接或非全连接的层能缩小模型的体积，同时保持其高准确性。这种方法可以提高速度，同时减少磁盘使用量。</p>
+<p>在上面提到的构造中，一个拥有 1024 个输入、 512 个输出的全连接层大约有 500k 个参数。而一个拥有相同特征以及 32 个特征图的卷积层只需要大约 50k 个参数。这是一个 10 倍的提升。</p>
+<p><strong>2. 减少通道数量与卷积核大小</strong></p>
+<p>这一步展现了在模型复杂度与速度之间作出的一个非常直接的权衡。拥有大量通道的卷积层能使网络提取相关信息，但也要付出相应的代价。剔除一些特征图是一个节约空间、加速模型的简单方法。</p>
+<p>我们可以运用卷积运算的感受野来做同样的事情。通过缩小卷积核大小，卷积对局部模式的感知减少，但涉及的参数也减少了。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1525491008204245e1d7ae1" img_width="800" img_height="198" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>缩小感受野/卷积核大小可以降低计算成本，但是传递的信息会变少。</p>
+<p>在这两种情况下，我们通过找到饱和点来选择特征图的数量/卷积核大小，以保证准确性不会下降太多。</p>
+<p><strong>3. 优化降采样</strong></p>
+<p>对于固定数量的层和固定数量的池化操作，神经网络可能会表现得天差地别。这是由于数据的表征以及计算量大小取决于这些池化操作于何处完成。</p>
+<ul>
+<li>如果池化操作较早完成，数据的维数会减少。维数越少，网络的处理速度越快，但信息量会减少，准确性也会降低。- 如果网络中的池化操作完成较晚，那么大部分信息会被保留下来，因此准确度高。然而这也意味着计算是在多维对象上完成的，这会导致计算成本的增加。- 于神经网络中均匀布置降采样是一种行之有效的结构（https&#58;//arxiv.org/pdf/1710.02759.pdf），而且能在准确性与速度之间保持良好的平衡。这也是一种饱和点。<br>如果网络中的池化操作完成较晚，那么大部分信息会被保留下来，因此准确度高。然而这也意味着计算是在多维对象上完成的，这会导致计算成本的增加。</li>
+</ul>
+<p>较早的池化速度快，延后的池化精确性高，均匀布置池化能兼具二者的一些优点。</p>
+<p><strong>4. 权重修剪</strong></p>
+<p>在一个经过训练的神经网络中，有些权重对于某个神经元单元的激活值至关重要，而其他的权重基本不影响结果。尽管如此，我们仍要对这些不那么重要的权重做一些计算。</p>
+<p>修剪（pruning）是一个完全删除最小强度连接的过程，这样我们就可以跳过这些计算。这会降低准确性但是能让网络更快更精简。我们需要找出饱和点，然后在尽量不影响准确性的情况下删去尽可能多的连接。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/1525491008183101b13881d" img_width="800" img_height="184" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>删去最弱的连接来节省计算时间与空间。</p>
+<p><strong>5. 离散化权重</strong></p>
+<p>为了在磁盘中保存神经网络，我们需要记录网络中每一个权重的值。这意味着我们需要为每一个参数保存一个浮点数，同时也意味着大量磁盘空间的消耗。举例说明，在 C 中一个浮点数占据 4 个字节，即 32 位。一个有着上亿参数的网络（如 Google-Net 或 VGG-16）会轻易占据上百兆字节的空间，而这样的消耗在移动设备中是不可接受的。</p>
+<p>为了尽量减小网络存储的量，一种方法是通过离散化权重来降低权重的精度。在这个过程当中，我们更改数字的表示使其不再表示具体值，而是限制其为数值的子集。这样我们只需要存储一次经过离散化的值，然后将它们映射到网络的权重上。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152549100856592be9ba9c7" img_width="800" img_height="301" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>离散化权重存储索引而非浮点值。</p>
+<p>我们再次需要通过找到饱和点来决定到底使用多少个值。使用更多数值意味着准确性的提高，但也意味着更大的表征空间。举个例子：如果使用 256 个经过离散化的值，每一个权重只需要使用 1 个字节（即 8 位）就能表示。相比之前（32 位），我们将其大小缩减了四倍！</p>
+<p><strong>6. 模型表征的编码</strong></p>
+<p>我们已经对权重作了许多处理，但是还能进一步改进网络！这个特殊技巧源于权重分布不均的事实。一旦权重被离散化，我们就会失去相同数量的对应每一个离散化值的权重。这意味着在我们的模型表征中，某些索引的出现频率相对更高，我们可以利用这一点！</p>
+<p>哈夫曼编码（Huffman coding）能完美地解决这个问题。它通过给最常用的值分配最小索引以及给最不常用的值分配最大索引来解决这些问题。这有助于减小设备上模型的体积，最关键的是不会降低准确性。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525491008613ab9af1c3f0" img_width="800" img_height="474" alt="入门｜极致的优化：智能手机是如何处理大型神经网络的" inline="0"></p>
+<p>访问次数最多的符号只使用 1 位的空间，而访问次数最少的符号使用 3 位的空间。这是因为后者在数据表示中出现的次数很少，并由此可以达到一种空间上的平衡。</p>
+<p>这个简单的技巧使我们能够进一步缩小神经网络占用的空间，通常能减少 30％ 左右。</p>
+<p>注意：每一层的离散化和编码可以是不同的，从而提供更大的灵活性。</p>
+<p><strong>修正准确率损失</strong></p>
+<p>通过我们使用的方法，神经网络已经十分精简了。我们删去了弱连接（修剪），甚至改变了一些权重（离散化）。在网络变得十分轻巧快速的同时，其准确率也不如以前了。</p>
+<p>为了修正这一点，我们需要迭代地重新训练网络的每一步。这代表我们需要在修剪和离散化操作之后，再次训练网络使其可以拟合相应的变化，然后重复这一过程直到权重不再大幅变化为止。</p>
+<p><strong>结论</strong></p>
+<p>尽管智能手机没有优秀的台式机那样的磁盘空间、计算能力或者电池寿命，它们仍是深度学习应用程序的优秀实验对象。通过一系列方法，我们现在可以在这些多功能手持设备上运行强大的神经网络，准确性只是略有下降。这为数千个优秀的应用打开了大门。</p>
+<p>如果有兴趣，你也可以了解一些面向移动设备的优秀神经网络，如 SqueezeNet（https&#58;//arxiv.org/abs/1602.07360）或 MobileNets（https&#58;//arxiv.org/abs/1704.04861）。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.net/group/6551934040121803277/?iid=31816615545&amp;app=news_article&amp;timestamp=1525492218&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">入门｜极致的优化：智能手机是如何处理大型神经网络的</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Google/" rel="tag"># Google</a>
+          
+            <a href="/tags/GPU/" rel="tag"># GPU</a>
+          
+            <a href="/tags/智能手机/" rel="tag"># 智能手机</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/0587e28d/" rel="next" title="业界 | 谷歌、百度等联合发布机器学习新基准MLPerf，旨在促进AI发展和公众参与">
+                <i class="fa fa-chevron-left"></i> 业界 | 谷歌、百度等联合发布机器学习新基准MLPerf，旨在促进AI发展和公众参与
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/021e52a7/" rel="prev" title="图解巴菲特“帝国”：伯克希尔哈撒韦是这样赚钱的">
+                图解巴菲特“帝国”：伯克希尔哈撒韦是这样赚钱的 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

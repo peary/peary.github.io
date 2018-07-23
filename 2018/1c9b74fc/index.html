@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="人工智能,盗梦空间,可视化,艺术,科普," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="谷歌大脑的IanGoodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”。将自注意力机制引入到卷积GAN中，作为卷积的补充，在ImageNet多类别图像合成任务中取得了最优的结果。   新智元编译  来源：arxiv.org 翻译：肖琴 【新智元导读】图像合成是计算机视觉中的一个重要问题。谷歌大脑的Ian Goodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”（SA">
+<meta name="keywords" content="人工智能,盗梦空间,可视化,艺术,科普">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ian Goodfellow等提出自注意力GAN，ImageNet图像合成获最优结果">
+<meta property="og:url" content="http://blockshare.top/2018/1c9b74fc/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="谷歌大脑的IanGoodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”。将自注意力机制引入到卷积GAN中，作为卷积的补充，在ImageNet多类别图像合成任务中取得了最优的结果。   新智元编译  来源：arxiv.org 翻译：肖琴 【新智元导读】图像合成是计算机视觉中的一个重要问题。谷歌大脑的Ian Goodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”（SA">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/pgc-image/1527141276907e69bcd1bf9">
+<meta property="og:updated_time" content="2018-05-24T06:32:50.712Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ian Goodfellow等提出自注意力GAN，ImageNet图像合成获最优结果">
+<meta name="twitter:description" content="谷歌大脑的IanGoodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”。将自注意力机制引入到卷积GAN中，作为卷积的补充，在ImageNet多类别图像合成任务中取得了最优的结果。   新智元编译  来源：arxiv.org 翻译：肖琴 【新智元导读】图像合成是计算机视觉中的一个重要问题。谷歌大脑的Ian Goodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”（SA">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/pgc-image/1527141276907e69bcd1bf9">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/1c9b74fc/"/>
+
+
+
+
+
+  <title>Ian Goodfellow等提出自注意力GAN，ImageNet图像合成获最优结果 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/1c9b74fc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ian Goodfellow等提出自注意力GAN，ImageNet图像合成获最优结果</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">新智元</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-24T14:32:49+08:00">
+                2018-05-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/1c9b74fc/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/1c9b74fc/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/pgc-image/1527141276907e69bcd1bf9" rel="gallery_cjhk5xkh80000efqdzaa0m4j8"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/pgc-image/1527141276907e69bcd1bf9" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>谷歌大脑的IanGoodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”。将自注意力机制引入到卷积GAN中，作为卷积的补充，在ImageNet多类别图像合成任务中取得了最优的结果。</p>
+</blockquote>
+<p><strong> 新智元编译 </strong></p>
+<p>来源：arxiv.org</p>
+<p>翻译：肖琴</p>
+<p><strong>【新智元导读】</strong>图像合成是计算机视觉中的一个重要问题。谷歌大脑的Ian Goodfellow等人在他们的最新研究中提出“自注意力生成对抗网络”（SAGAN），将自注意力机制引入到卷积GAN中，作为卷积的补充，在ImageNet多类别图像合成任务中取得了最优的结果。</p>
+<p>论文地址：https&#58;//arxiv.org/pdf/1805.08318.pdf</p>
+<p><strong>图像合成</strong>（Image synthesis）是计算机视觉中的一个重要问题。随着生成对抗网络（GAN）的出现，这个方向取得了显著进展。基于深度卷积网络的GAN尤其成功。但是，通过仔细检查这些模型生成的样本，可以观察到，在ImageNet这类的有许多图像类别的数据集上训练时，卷积GAN合成的图像不尽如人意。</p>
+<p>针对这个问题，谷歌大脑的Ian Goodfellow和Augustus Odena，以及罗格斯大学的Han Zhang和Dimitris Metaxas等人在他们的最新研究中提出<strong>“自注意力生成对抗网络”（SAGAN）</strong>，将自注意力机制（self-attention mechanism）引入到卷积GAN中，作为卷积的补充，取得了最优的结果。</p>
+<p><strong>摘要</strong></p>
+<p>在这篇论文中，我们提出自注意力生成对抗网络（ Self-Attention Generative Adversarial Network ，SAGAN）。SAGAN允许对图像生成任务进行注意力驱动、长相关性的建模。传统的卷积GAN生成的高分辨率细节仅作为在低分辨率特征图上的空间局部点的函数。在SAGAN中，可以使用来自所有特征位置的线索来生成细节。此外，鉴别器可以检查图像的远端部分的高度详细的特征彼此一致。此外，最近的研究表明，生成器条件会影响GAN的性能。利用这些发现，我们将谱归一化到GAN生成器中，并发现这改进了训练动态。我们提出的SAGAN达到了state-of-the-art的结果，将Inception score从当前最高的36.8提高到52.52，并且在具有挑战性的ImageNet数据集上将Frechet Inception distance从27.62降低到18.65。注意力层的可视化表明，生成器利用与对象形状相对应的邻域，而不是固定形状的局部区域。</p>
+<p><strong>SAGAN：将自注意力机制引入GAN</strong></p>
+<p>尽管最先进的ImageNet GAN模型 &#91;17&#93; 擅长合成几乎<strong>没有结构性限制</strong>的图像类别（例如，海洋、天空和景观类，它们的区别更多在于<strong>纹理</strong>而不是几何结构），但它无法捕获在某些类别中经常出现的<strong>几何模式或结构模式</strong>（例如，狗通常有逼真的皮毛纹理，但没有明确区分的脚）。</p>
+<p>一种可能的解释是，以前的模型<strong>严重依赖于卷积</strong>来建模不同图像区域之间的依赖关系。由于卷积运算符具有一个局部感受域，所以在经过几个卷积层之后，只能处理长距离的相关性。</p>
+<p>由于各种原因，这可能会阻止学习<strong>长相关性（long-term dependencies）</strong>：小的模型可能无法表示它们，优化算法可能无法发现参数值，这些参数值仔细协调多个层，以捕获这些相关性，并且这些参数化在统计学上可能相当脆弱，当应用于以前未见过的输入时容易失败。增加卷积核的大小可以提高网络的表征能力，但这样做也会失去利用局部卷积结构获得的计算和统计效率。</p>
+<p>另一方面，<strong>自注意力（Self-attention）可以更好地平衡模型的长相关性和计算与统计效率</strong>。self-attention模块以所有位置的特征加权和来计算响应，其中权重（或attention vectors）只以很小的计算成本来计算。</p>
+<p>图 1：我们提出的SAGAN通过利用图像远端部分的互补特征来生成图像，而不是固定形状的局部区域，从而可以生成一致的对象/场景。图中每一行的第一个图像显示了带颜色编码点的五个代表性查询位置。其他五个图像是针对这些查询位置的 attention maps，其中对应的颜色编码的箭头概括了最受关注的区域。</p>
+<p>在这项工作中，<strong>我们提出了自注意力生成对抗网络（SAGAN），它将自注意力机制（self-attention mechanism）引入到卷积GAN中</strong>。自注意力模块（self-attention module）是对卷积的补充，有助于模拟跨越图像区域的长距离、多层的依赖关系。通过self-attention，生成器可以绘制图像，所绘制图像中每个位置的精细细节都与图像远端的精细细节充分协调。此外，鉴别器还可以更准确地对全局图像结构执行复杂的几何约束。</p>
+<p>图2：所提出的self-attention机制。⊗表示矩阵乘法，在每一行上执行softmax操作</p>
+<p>除了self-attention之外，我们还将最近关于<strong>网络调节</strong>（network conditioning）的见解与GAN的性能结合起来。A. Odena等人的研究&#91;18&#93;表明，调节良好的生成器往往表现更好。我们建议使用以前仅应用于鉴别器的<strong>谱归一化技术</strong>（spectral normalization）来加强GAN生成器器的调节。</p>
+<p>我们在ImageNet数据集上进行了大量的实验，以验证所提出的self-attention机制和稳定技术的有效性。SAGAN在图像合成方面的表现远远超过了state-of-the-art的表现，<strong>将此前报告的最高Inception score从36.8提高到52.52，将Fréchet初始距离（Fréchet Inception distance，FID）从27.62降低到18.65</strong>。attention层的可视化显示，生成器利用与对象形状相对应的区域，而不是固定形状的局部区域。</p>
+<h1 id="ImageNet上的图像合成实验"><a href="#ImageNet上的图像合成实验" class="headerlink" title="ImageNet上的图像合成实验"></a><strong>ImageNet上的图像合成实验</strong></h1><p>为了评价所提出的方法，我们在LSVRC 2012 （ImageNet）上数据集进行了大量的实验。首先，我们对评估所提出的<strong>两种稳定GAN训练的技术</strong>进行有效性实验。其次，对所提出的self-attention mechanism进行了研究。最后，将SAGAN与其他state-of-the-art的图像生成方法进行了比较。</p>
+<p><strong>评估指标</strong></p>
+<p>我们<strong>使用Inception score（IS）和Fréchet初始距离（FID）进行定量评估</strong>。Inception score越高，表示图像质量越好。 FID是一个更加基于规则和综合性的指标，并且在评估生成的样本的真实性和变异性方面已被证明与人类的评估更加一致。越低的FID值意味着合成数据分布与真实数据分布之间的距离更近。</p>
+<p>图3：基线模型与我们的模型的训练曲线，利用了我们提出的稳定技术</p>
+<p>表1：GAN的Self-Attention与Residual块的比较。这些块被添加到网络的不同层。所有模型都经过100万次迭代的训练，并报告最佳的Inception score（IS）和Fréchet初始距离（FID）。</p>
+<p>图4：基线模型和我们的模型随机生成的128×128图像样本</p>
+<p>图5：attention maps的可视化。这些图像都由SAGAN生成</p>
+<p><strong>与state-of-the-art模型的比较</strong></p>
+<p>在ImageNet上，SAGAN与最先进的GAN模型&#91;19,17&#93;进行了比较。如表2所示，我们提出的SAGAN得到了Inception score和FID。Inception score方面，SAGAN将此前0最高的36.8提高到52.52；FID（18.65）也表明，SAGAN可以通过使用self-attention模块对图像区域之间的全局依赖关系进行建模，从而更好地模拟原始图像的分布。图6展示了由SAGAN生成的一些示例图像。</p>
+<p>表2&#58; 将所提出的SAGAN与最先进GAN模型进行比较，任务是ImageNet上的类别条件图像生成</p>
+<p>图6：SAGAN 生成的不同类别的128×128分辨率示例图像。每行展示一个类别的示例</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h1><p>在本研究中，我们提出自注意力生成对抗网络（SAGAN），它将self-attention机制引入到GAN的框架。 self-attention 模块在建模长相关性（ long-range dependencies）方面很有效。另外，我们证明了应用于生成器的谱归一化可以稳定GAN的训练，并且TTUR加速了正则化鉴别器的训练。SAGAN在ImageNet的分类条件图像生成任务上达到最先进的性能。</p>
+<p><strong>【加入社群】</strong></p>
+<p>新智元 AI 技术 + 产业社群招募中，欢迎对 AI 技术 + 产业落地感兴趣的同学，加小助手微信号&#58; <strong>aiera2015_3</strong> 入群；通过审核后我们将邀请进群，加入社群后务必修改群备注（姓名 - 公司 - 职位；专业群审核较严，敬请谅解）。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.cn/group/6559024442628899332/?iid=32854223354&amp;app=news_article&amp;timestamp=1527143540&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">Ian Goodfellow等提出自注意力GAN，ImageNet图像合成获最优结果</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/盗梦空间/" rel="tag"># 盗梦空间</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+            <a href="/tags/艺术/" rel="tag"># 艺术</a>
+          
+            <a href="/tags/科普/" rel="tag"># 科普</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/b2b8c876/" rel="next" title="清华大学刘知远：知识表示学习及其应用（PPT下载）">
+                <i class="fa fa-chevron-left"></i> 清华大学刘知远：知识表示学习及其应用（PPT下载）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/e41484f4/" rel="prev" title="送你一张24季私享家礼券，一起买买买">
+                送你一张24季私享家礼券，一起买买买 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ImageNet上的图像合成实验"><span class="nav-number">1.</span> <span class="nav-text">ImageNet上的图像合成实验</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

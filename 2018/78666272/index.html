@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="编程语言,Python,机器学习,人工智能,睡眠," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="大数据文摘作品编译：Niki、张南星、Shan LIU、Aileen这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。   大数据文摘作品 编译：Niki、张南星、Shan LIU、Aileen 这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。 在过去几个月里，我在数据科学的世界里反复遇到一个词：马尔可夫链蒙特卡洛（M">
+<meta name="keywords" content="编程语言,Python,机器学习,人工智能,睡眠">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码） - 今日头条">
+<meta property="og:url" content="http://blockshare.top/2018/78666272/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="大数据文摘作品编译：Niki、张南星、Shan LIU、Aileen这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。   大数据文摘作品 编译：Niki、张南星、Shan LIU、Aileen 这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。 在过去几个月里，我在数据科学的世界里反复遇到一个词：马尔可夫链蒙特卡洛（M">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/pgc-image/15214429478833e599ece9b">
+<meta property="og:updated_time" content="2018-06-04T05:50:08.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码） - 今日头条">
+<meta name="twitter:description" content="大数据文摘作品编译：Niki、张南星、Shan LIU、Aileen这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。   大数据文摘作品 编译：Niki、张南星、Shan LIU、Aileen 这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。 在过去几个月里，我在数据科学的世界里反复遇到一个词：马尔可夫链蒙特卡洛（M">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/pgc-image/15214429478833e599ece9b">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/78666272/"/>
+
+
+
+
+
+  <title>用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码） - 今日头条 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/78666272/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码） - 今日头条</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">大数据文摘</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-04T13:50:06+08:00">
+                2018-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/技术/" itemprop="url" rel="index">
+                    <span itemprop="name">技术</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/78666272/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/78666272/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/pgc-image/15214429478833e599ece9b" rel="gallery_cjhzuchg700009sqd0i3jd5vx"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/pgc-image/15214429478833e599ece9b" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>大数据文摘作品编译：Niki、张南星、Shan LIU、Aileen这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。</p>
+</blockquote>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15214429478833e599ece9b" img_width="940" img_height="627" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p><strong>大数据文摘作品</strong></p>
+<p><strong>编译：Niki、张南星、Shan LIU、Aileen</strong></p>
+<p>这篇文章让小白也能读懂什么是人们常说的Markov Chain Monte Carlo。</p>
+<p>在过去几个月里，我在数据科学的世界里反复遇到一个词：马尔可夫链蒙特卡洛（Markov Chain Monte Carlo , MCMC）。在我的研究室、podcast和文章里，每每遇到这个词我都会“不明觉厉”地点点头，觉得这个算法听起来很酷，但每次听人提起也只是有个模模糊糊的概念。</p>
+<p>我屡次尝试学习MCMC和贝叶斯推论，而一拿起书，又很快就放弃了。无奈之下，我选择了学习任何新东西最佳的方法：应用到一个实际问题中。</p>
+<p>通过使用一些我曾试图分析的睡眠数据和一本实操类的、基于应用教学的书（《写给开发者的贝叶斯方法》，我最终通过一个实际项目搞明白了MCMC。</p>
+<p>《写给开发者的贝叶斯方法》</p>
+<p>https&#58;//github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers</p>
+<p><strong>和学习其他东西一样，当我把这些技术性的概念应用于一个实际问题中而不是单纯地通过看书去了解这些抽象概念，我更容易理解这些知识，并且更享受学习的过程。</strong></p>
+<p>这篇文章介绍了马尔可夫链蒙特卡洛在Python中入门级的应用操作，这个实际应用最终也使我学会使用这个强大的建模分析工具。</p>
+<p>此项目全部的代码和数据：</p>
+<p>https&#58;//github.com/WillKoehrsen/ai-projects/blob/master/bayesian/bayesian_inference.ipynb</p>
+<p>这篇文章侧重于应用和结果，因此很多知识点只会粗浅的介绍，但对于那些想了解更多知识的读者，在文章也尝试提供了一些学习链接。</p>
+<blockquote>
+<p><strong>案例简介</strong></p>
+</blockquote>
+<p>我的智能手环在我入睡和起床时会根据心率和运动进行记录。它不是100%准确的，但现实世界中的数据永远不可能是完美的，不过我们依然可以运用正确的模型从这些噪声数据提取出有价值的信息。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152144294783916730241f0" img_width="318" img_height="300" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>典型睡眠数据</p>
+<p><strong>这个项目的目的在于运用睡眠数据建立一个能够确立睡眠相对于时间的后验分布模型。</strong>由于时间是个连续变量，我们无法知道后验分布的具体表达式，因此我们转向能够近似后验分布的算法，比如马尔可夫链蒙特卡洛（MCMC）。</p>
+<p>选择一个概率分布</p>
+<p>在我们开始MCMC之前，我们需要为睡眠的后验分布模型选择一个合适的函数。一种简单的做法是观察数据所呈现的图像。下图呈现了当我入睡时时间函数的数据分布。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1521442947716d3a76cf533" img_width="800" img_height="328" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>睡眠数据</p>
+<p>每个数据点用一个点来表示，点的密度展现了在固定时刻的观测个数。我的智能手表只记录我入睡的那个时刻，因此为了扩展数据，我在每分钟的两端添加了数据点。如果我的手表记录我在晚上10：05入睡，那么所有在此之前的时间点被记为0（醒着），所有在此之后的时间点记为1（睡着）。这样一来，原本大约60夜的观察量被扩展成11340个数据点。</p>
+<p>可以看到我趋向于在10：00后几分钟入睡，但我们希望建立一个把从醒到入睡的转变用概率进行表达的模型。我们可以用一个简单的阶梯函数作为模型，在一个精确时间点从醒着（0）变到入睡（1），但这不能代表数据中的不确定性。</p>
+<p>我不会每天在同一时间入睡，因此我们需要一个能够模拟出这个个渐变过程的函数来展现变化当中的差异性。在现有数据下最好的选择是logistic函数，在0到1之前平滑地移动。下面这个公式是睡眠状态相对时间的概率分布，也是一个logistic公式。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1521442947857e07cf293e1" img_width="363" img_height="80" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>在这里，β (beta) 和 α (alpha) 是模型的参数，我们只能通过MCMC去模拟它们的值。下面展示了一个参数变化的logistic函数。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15214429478784e732a18f3" img_width="800" img_height="343" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>一个logistic函数能够很好的拟合数据，因为在logistic函数中入睡的概率在逐渐改变，捕捉了我睡眠模式的变化性。我们希望能够带入一个具体的时间t到函数中，从而得到一个在0到1之间的睡眠状态的概率分布。我们并不会直接得到我是否在10：00睡着了的准确答案，而是一个概率。创建这个模型，我们通过数据和马尔可夫链蒙特卡洛去寻找最优的alpha和beta系数估计。</p>
+<blockquote>
+<p><strong>马尔可夫链蒙特卡洛</strong></p>
+</blockquote>
+<p>马尔可夫链蒙特卡罗是一组从概率分布中抽样，从而建立最近似原分布的函数的方法。因为我们不能直接去计算logistic分布，所以我们为系数(alpha 和 beta)生成成千上万的数值-被称为样本-去建立分布的一个模拟。MCMC背后的基本思想就是当我们生成越多的样本，我们的模拟就更近似于真实的分布。</p>
+<p>马尔可夫链蒙特卡洛由两部分组成。蒙特卡洛代表运用重复随机的样本来获取一个准确答案的一种模拟方法。蒙特卡洛可以被看做大量重复性的实验，每次更改变量的值并观察结果。通过选择随机的数值，我们可以在系数的范围空间，也就是变量可取值的范围，更大比例地探索。下图展示了在我们的问题中，一个使用高斯分布作为先验的系数空间。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/15214429478827d354322a7" img_width="800" img_height="389" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>能够清楚地看到我们不能在这些图中一一找出单个的点，但通过在更高概率的区域（红色）进行随机抽样，我们就能够建立最近似的模型。</p>
+<p>马尔可夫链（Markov Chain）</p>
+<p><strong>马尔可夫链是一个“下个状态值只取决于当前状态”的过程。</strong>（在这里，一个状态指代当前时间系数的数值分配）。一个马尔可夫链是“健忘”的，因为如何到达当前状态并不要紧，只有当前的状态值是关键。如果这有些难以理解的话，让我们来设想一个每天都会经历的情景–天气。</p>
+<p>如果我们希望预测明天的天气，那么仅仅使用今天的天气状况我们就能够得到一个较为合理的预测。如果今天下雪，我们可以观测有关下雪后第二天天气的历史数据去预测明天各种天气状况的可能性。马尔可夫链的定义就是我们不需要知道一个过程中的全部历史状态去预测下一节点的状态，这种近似在许多现实问题中都很有用。</p>
+<p><strong>把马尔可夫链（Markov Chain）和蒙特卡洛（Monte Carlo），两者放到一起，就有了MCMC。</strong>MCMC是一种基于当前值，重复为概率分布系数抽取随机数值的方法。每个样本都是随机的，但是数值的选择也受当前值和系数先验分布的影响。MCMC可以被看做是一个最终趋于真实分布的随机游走。</p>
+<p>为了能够抽取alpha 和 beta的随机值，我们需要为每个系数假设一个先验分布。因为我们没有对于这两个系数的任何假设，我们可以使用正太分布作为先验。正太分布，也称高斯分布，是由均值（展示数据分布），和方差（展示离散性）来定义的。下图展示了多个不同均值和离散型的正态分布。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1521442947844d29b5be21b" img_width="800" img_height="341" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>具体的MCMC算法被称作Metropolis Hastings。为了连接我们的观察数据到模型中，每次一组随机值被抽取，算法将把它们与数据进行比较。一旦它们与数据不吻合（在这里我简化了一部分内容），这些值就会被舍弃，模型将停留在当前的状态值。</p>
+<p>如果这些随机值与数据吻合，那么这些值就被接纳为各个系数新的值，成为当前的状态值。这个过程会有一个提前设置好的迭代次数，次数越多，模型的精确度也就越高。</p>
+<p>把上面介绍的整合到一起，就能得到在我们的问题中所需进行的最基本的MCMC步骤：</p>
+<ul>
+<li>为logistic函数的系数alpha 和beta选择初始值。- 基于当前状态值随机分配给alpha 和beta新的值。- 检查新的随机值是否与观察数据吻合。如果不是，舍弃掉这个值，并回到上一状态值。如果吻合，接受这个新的值作为当前状态值。- 重复步骤2和3（重复次数提前设置好）。- 这个算法会给出所有它所生成的alpha 和beta值。我们可以用这些值的平均数作为alpha 和beta在logistic函数中可能性最大的终值。MCMC不会返回“真实”的数值，而是函数分布的近似值。睡眠状态概率分布的最终模型将会是以alph和beta均值作为系数的logistic函数。<br>基于当前状态值随机分配给alpha 和beta新的值。</li>
+</ul>
+<p>重复步骤2和3（重复次数提前设置好）。</p>
+<blockquote>
+<p><strong>Python实施</strong></p>
+</blockquote>
+<p>我再三思考模拟上面提到的细节，最终我开始用Python将它们变成现实。观察一手的结果会比阅读别人的经验贴有帮助得多。<strong>想要在Python中实施MCMC，我们需要用到PyMC3贝叶斯**</strong>库，**它省略了很多细节，方便我们创建模型，避免迷失在理论之中。</p>
+<p>通过下面的这些代码可以创建完整的模型，其中包含了参数alpha 、beta、概率p以及观测值observed，step变量是指特定的算法，sleep_trace包含了模型创建的所有参数值。</p>
+<p>为了更直观地展现代码运行的效果，我们可以看一下模型运行时alpha和beta生成的值。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152144294770878de7432dc" img_width="800" img_height="396" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>这些图叫做轨迹图，可以看到每个状态都与其历史状态相关，即马尔可夫链；同时每个值剧烈波动，即蒙特卡洛抽样。</p>
+<p>使用MCMC时，常常需要放弃轨迹图中90%的值。这个算法并不能立即展现真实的分布情况，最初生成的值往往是不准确的。随着算法的运行，后产生的参数值才是我们真正需要用来建模的值。我使用了一万个样本，放弃了前50%的值，但真正在行业中应用时，样本量可达成千上万个、甚至上百万个。</p>
+<p>通过足够多的迭代，MCMC逐渐趋近于真实的值，但是估算收敛性并不容易。这篇文章中并不会涉及到具体的估算方法（方法之一就是计算轨迹的自我相关性），但是这是得到最准确结果的必要条件。PyMC3的函数能够评估模型的质量，包括对轨迹、自相关图的评估。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1521442947696725da0b212" img_width="600" img_height="196" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>轨迹图（左）和自相关性图（右）</p>
+<blockquote>
+<p><strong>睡眠模型</strong></p>
+</blockquote>
+<p>建模、模型运行完成后，该最终结果上场了。我们将使用最终的5000个alpha和beta值作为参数的可能值，最终创建了一个单曲线来展现事后睡眠概率：</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1521442947820f9f14f1aed" img_width="800" img_height="330" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>基于5000个样本的睡眠概率分布</p>
+<p>这个模型能够很好的代表样本数据，并且展现了我睡眠模式的内在变异性。<strong>这个模型给出的答案并不是简单的“是”或“否”</strong>，而是给我们一个概率。举个例子，我们可以通过这个模型找出我在特定时间点睡觉的概率，或是找出我睡觉概率超过50%的时间点：</p>
+<p>虽然我希望在晚上10点入睡，但很明显大多时候并不是这样。我们可以看到，平均来看，我的就寝时刻是在晚上10&#58;14。</p>
+<p>这些值是基于样本数据的最有可能值，但这些概率值都有一定的不确定性，因为模型本身就是近似的。为了展现这种不确定性，我们可以使用所有的alpha、beta值来估计某个时间点的睡觉概率，而不是使用平均值，并且把这些概率值展现在图中。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15214429478201ba810ac31" img_width="600" img_height="313" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>晚上10&#58;00睡觉的概率分布</p>
+<p><strong>这些结果能够更好地展现MCMC模型真正在做的事情，即它并不是在寻找单一的答案，而是一系列可能值。</strong>贝叶斯推论在现实世界中非常有用，因为它是对概率进行了预测。我们可以说存在一个最可能的答案，但其实更准确的回复应当是：每个预测都有一系列的可能值。</p>
+<p>起床模型</p>
+<p>同样我可以用我的起床数据创建类似的模型。我希望能够在闹钟的帮助下总能在早上6&#58;00起床，但实际上并不如此。下面这张图展现了基于观测值我起床的最终模型：</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152144294782811a304a59c" img_width="800" img_height="325" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>基于5000个样本的起床事后概率</p>
+<p>可以通过模型得出我在某个特定时间起床的概率，以及我最有可能起床的时间：</p>
+<p>看来我需要一个更生猛的闹钟了….</p>
+<blockquote>
+<p><strong>睡眠的时间</strong></p>
+</blockquote>
+<p>出于好奇以及实践需求，最后我想创建的模型是我的睡眠时间模型。首先，我们需要寻找到一个描述数据分布的函数。事先，<strong>我认为应该是正态函数，但无论如何我们需要用数据来证明。</strong></p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152144294774222e77cbfc4" img_width="629" img_height="503" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>睡眠时间长短分布</p>
+<p>正态分布的确能够解释大部分数据，但是图中右侧的异常值却无法得到解释（当我睡懒觉的时候）。<strong>我们可以用两个单独的正态分布来代表两种模式，但我要用偏态分布。</strong>偏态分布有三个参数：平均值、偏离值，以及alpha倾斜值。这三个参数的值都需要从MCMC算法中得到。下面的代码创建了模型，并且使用了Metropolis Hastings抽样。</p>
+<p>现在，我们可以使用三个参数的平均值来建立最有可能的分布模型了。下图为基于数据的最终偏态分布模型。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15214429478367a1340b800" img_width="632" img_height="503" alt="用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码）" inline="0"></p>
+<p>时长模型</p>
+<p>模型看上去很完美！<strong>通过模型可以找出我至少睡多长时长的可能性，以及我最经常的睡觉时长：</strong></p>
+<blockquote>
+<p><strong>结论</strong></p>
+</blockquote>
+<p>我想再次强调，完成这个项目让我体会到解决问题的重要性，尤其是有现实应用意义的项目！在我尝试使用马尔可夫链蒙特卡洛来端到端建立贝叶斯推论的时候，我重新熟悉了许多基础知识，并且非常享受这个过程。</p>
+<p>我不仅了解到自身需要改进的习惯，而且当别人在谈论MCMC和贝叶斯推论时，我终于真的明白他们在谈论什么了！数据科学正是关于持续不断地在你自己的知识库中输入新的工具，而这最有效的办法就是发现一个问题，然后应用你所学的去解决问题！</p>
+<p>原文链接：</p>
+<p>https&#58;//towardsdatascience.com/markov-chain-monte-carlo-in-python-44f7e609be98</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.cn/group/6534548014936097293/?iid=34137106508&amp;app=news_article&amp;timestamp=1528091385&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">用Python入门不明觉厉的马尔可夫链蒙特卡罗（附案例代码） - 今日头条</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+            <a href="/tags/Python/" rel="tag"># Python</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/睡眠/" rel="tag"># 睡眠</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/fe7b6758/" rel="next" title="一文读懂CNN如何用于NLP - 为程序员服务">
+                <i class="fa fa-chevron-left"></i> 一文读懂CNN如何用于NLP - 为程序员服务
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/ee828ce9/" rel="prev" title="史上最全vue组件库！极速围观 - 今日头条">
+                史上最全vue组件库！极速围观 - 今日头条 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

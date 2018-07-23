@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="机器学习,人工智能,IBM,可视化,哈佛大学," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。   语言翻译中出现的细微错误对于人类而言常常是很明显的，并会导致差异很大的结果。例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。深度学习模型的不可解释性更是普遍存在的问题。为此，IBM 研究院、Watson AI Lab、哈佛 NLP 团队和哈">
+<meta name="keywords" content="机器学习,人工智能,IBM,可视化,哈佛大学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具">
+<meta property="og:url" content="http://blockshare.top/2018/0d418878/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。   语言翻译中出现的细微错误对于人类而言常常是很明显的，并会导致差异很大的结果。例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。深度学习模型的不可解释性更是普遍存在的问题。为此，IBM 研究院、Watson AI Lab、哈佛 NLP 团队和哈">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/15257687219462a73a00097">
+<meta property="og:updated_time" content="2018-05-08T09:30:47.947Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具">
+<meta name="twitter:description" content="例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。   语言翻译中出现的细微错误对于人类而言常常是很明显的，并会导致差异很大的结果。例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。深度学习模型的不可解释性更是普遍存在的问题。为此，IBM 研究院、Watson AI Lab、哈佛 NLP 团队和哈">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/15257687219462a73a00097">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/0d418878/"/>
+
+
+
+
+
+  <title>IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/0d418878/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">机器之心</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T17:30:46+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/其它/" itemprop="url" rel="index">
+                    <span itemprop="name">其它</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/0d418878/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/0d418878/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/15257687219462a73a00097" rel="gallery_cjgxhbeok0000tyqdp826hqwk"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/15257687219462a73a00097" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。</p>
+</blockquote>
+<blockquote>
+<p>语言翻译中出现的细微错误对于人类而言常常是很明显的，并会导致差异很大的结果。例如，之前由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致错误的逮捕事故。深度学习模型的不可解释性更是普遍存在的问题。为此，IBM 研究院、Watson AI Lab、哈佛 NLP 团队和哈佛视觉计算团队联合研发了一款针对 seq2seq 模型的可视化调试工具 Seq2Seq-Vis，使用户可以可视化模型执行过程中的注意力、单词预测、搜索树、状态轨迹和近邻词列表等，从而更高效地进行分析和调试。</p>
+<ul>
+<li>项目演示地址：http&#58;//seq2seq-vis.io/- GitHub 地址：https&#58;//github.com/HendrikStrobelt/Seq2Seq-Vis<br>GitHub 地址：https&#58;//github.com/HendrikStrobelt/Seq2Seq-Vis</li>
+</ul>
+</blockquote>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15257687219462a73a00097" img_width="971" img_height="315" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 1：（左图）Seq2Seq-Vis 中翻译视图（Translation View）示例：输入语句为「our tool helps to find errors in seq2seq models using visual analysis methods」，目标是将其翻译为德语。编码器和解码器之间对单词「seq2seq」的关注（attention）是正确的（红色高亮线条），但目标语言的语言词典 (language dictonary) 中并没有对应单词。观察「seq2seq」的编码器近邻词（右图）可以发现，另一个未知单词「hunki」与其距离很近。各种按钮能够支持用户完成更深层分析的交互需求。</p>
+<p><strong>介绍</strong></p>
+<p>基于神经网络的深度学习方法在诸多人工智能任务中都表现出了惊人的提升效果，但复杂的结构也令人们很难解释其预测结果。基于注意力的 sequence-to-sequence models (seq2seq) &#91;3, 49&#93;，通常也称为编码器-解码器（encoder-decoder）模型，就是这一趋势的范例。在很多诸如机器翻译、自然语言生成、图像描述以及总结的应用场景中，seq2Seq 模型都表现出了当前最优的效果。最新研究表明，这些模型能够在特定的重要场景下，实现人类级别的机器翻译效果。</p>
+<p>seq2seq 模型的强大性来自于其为对序列的处理和预测提供了一个高效的监督方法，而无需对源序列和目标序列间的关系予以人工指明。在同一个模型中，系统能够学会对源序列句进行重排、转换、压缩或扩展，进而输出目标序列。上述变换是通过一个巨大的内在状态表征实现对源序列的编码及之后的解码工作的。只要数据量充足，seq2seq 模型就能为预测序列的学习提供一个通用的实现机制。</p>
+<p>虽然 seq2seq 模型的影响已经很明确了，但深度学习模型导致的复杂程度和不确定性的增加也带来了问题。通常，在给出预测时，这些模型的表现都像是一个黑箱，使得追踪错误源头也变得困难。而内部的潜在表征也使人们难以分析这些模型，因为它们将数据转化成了和原始序列相差甚远的结果。虽然这些性质是很多深度学习技术所共有的，但对于人类读者而言，语言中的错误会非常明显。例如，由于 seq2seq 翻译系统将「早上好」错误的翻译为了「攻击他们」，导致了一次错误的逮捕，最终成为一起广为人知的事故 &#91;12&#93;。除此之外，seq2seq 模型中更常见却也值得担忧的失败包括：机器翻译系统完全曲解了一句话，图像描述系统生成了错误的描述，或语音识别系统给出了错误的文本。</p>
+<p>在理想情况下，模型开发者希望部署能够完全理解、相信其产生结果是正确的系统。但目前对于深度学习模型而言，这个目标依然难以实现。同时研究者相信，在「以一种通用的、可复现的方式实现表象化、可视化 seq2seq 系统中的错误」这一重大挑战面前，可视化分析社区能够有所帮助。</p>
+<p>研究者开发了 SEQ2SEQ-VIS：一个能够通过实现以下三个目标，进而满足上述要求的可视化分析工具。</p>
+<ul>
+<li>检查模型决策：SEQ2SEQ-VIS 允许用户理解、描述并具体化 seq2seq 模型的错误，覆盖模型全部的五个阶段：编码器、解码器、注意力、预测、束搜索。- 连接样本和决策：SEQ2SEQ-VIS 展示了 seq2seq 模型基于潜在状态及其相关近邻，从训练数据中学到了什么。- 测试可选决策：SEQ2SEQ-VIS 提供了灵敏的交互方法，可以实现对模型内部进行操作。<br>连接样本和决策：SEQ2SEQ-VIS 展示了 seq2seq 模型基于潜在状态及其相关近邻，从训练数据中学到了什么。</li>
+</ul>
+<p>图 1（或更完整的图 7）展示了 SEQ2SEQ-VIS 的全貌。它整合了模型组件的可视化（图 1 左）、特定样本的内在表征（图 1 中），和在一个由预先计算好样本组成的巨大离线语料库上实现的最近邻搜索（nearest-neighbor lookup）。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525768721750bdc15b382a" img_width="389" img_height="578" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 2：seq2seq 模型通过五个阶段，将源序列翻译为目标序列：（S1）将源序列编码为潜在向量，（S2）将其解码为目标序列，（S3）编码器和解码器之间实现注意，（S4）在每个时间步骤中，预测单词概率，（S5）（通过束搜索）搜索最佳翻译。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/152576872188042b9b1233f" img_width="769" img_height="519" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 7：Seq2Seq-Vis 概述。两个重要视图：（a）翻译视图（Translation View）和（b）近邻视图（Neighborhood View）分别推动了不同的分析模式。翻译视图提供了（c）注意力的可视化，（d）每个时间步骤中 top-k 个单词预测，以及（e）束搜索树。近邻视图通过（f，g）状态轨迹的投影以及（h）针对一个特定模型状态的最近邻列表，更进一步展示模型学到了什么。</p>
+<p><strong>使用案例</strong></p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152576872182531ced136d5" img_width="512" img_height="481" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 10：一个日期转换模型翻译效果的比较。输入序列「March 21, 2000」和「May 21, 2000」仅有几个字符不同。（顶部）用于预测正确月份「3」和「5」的注意力集中在了其差异「y」和「rc」上。（左下）轨迹视图展示了编码器状态变化中的这一差异。（右下）近邻列表显示，在输入 M 后，模型依然未作出决策。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152576872190621688bb424" img_width="538" img_height="499" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 11：抽象总结的使用案例。输入句子「Russian defense minister Ivanov called Sunday for the creation of a joint front for combating global terrorism（俄罗斯国防部长 Ivanov 于周日呼吁联合抵抗全球性的恐怖主义）」可以有不同的总结形式。图中黄色方格展示了不同的前缀解码（prefix decode）设置下的抽象结果。顶部：无约束抽象；中间：将预测从「for」改成「on」后，为保证语法正确，导致模型自动加上了「world leaders」；底部：将第一个单词从「Russian」改为「Moscow」或「Russia」，句子进一步压缩后，依然保留了句意。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1525768721866ab7399bbc5" img_width="514" img_height="512" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 12：利用 WMT』14 数据完成语言翻译的使用案例。（顶部）注意力图展示了目标单词「he」的注意力并非仅集中在解码器「er」部分，而是同时注意力了后面的单词，甚至注意了距离很远的动词「gesprochen（说）」。解码器的状态轨迹（左下）显示「he」和「spoke」的距离非常接近。近邻列表表明，模型设置了一个阶段，其中预测「spoke」为下一个单词。</p>
+<p><img src="http&#58;//p9.pstatp.com/large/pgc-image/15257687221241d4e551db3" img_width="1054" img_height="148" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>图 13：一个欠训练的英语-德语模型。在欠训练或欠参数化模型中，重复是一个很常见的现象。轨迹象形图显示，在「in Stuttgart」的重复中，解码器状态在同一个区域内在「in」和「Stuttgart」交替变化，直到将它们分离出来。</p>
+<p><strong>论文：SEQ2SEQ-VIS &#58; A Visual Debugging Tool for Sequence-to-Sequence Models</strong></p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/152576872227866827e61db" img_width="1031" img_height="167" alt="IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具" inline="0"></p>
+<p>论文地址：https&#58;//arxiv.org/abs/1804.09299</p>
+<p>神经 Sequence-to-Sequence 模型已经通过许多序列预测任务证明了其具有准确、稳健的性质，也已经成为文本自动翻译的标准方法。Sequence-to-Sequence 模型的运行包含五个黑箱阶段，包括将源序列编码到一个向量空间中，再将其解码为新的目标序列。如今这是标准过程，但和许多深度学习方法一样，理解或调试 Sequence-to-Sequence 模型是很困难的。在本文中，研究者实现了一个可视化分析工具，使用户可以通过训练过程中的每个阶段，与训练好的 Sequence-to-Sequence 模型进行交互。其目标包含识别已被学到的模式，并发现模型中的错误。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.net/group/6553126836686029315/?iid=31816615545&amp;app=news_article&amp;timestamp=1525771805&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">IBM、哈佛联合提出Seq2Seq-Vis：机器翻译模型的可视化调试工具</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/IBM/" rel="tag"># IBM</a>
+          
+            <a href="/tags/可视化/" rel="tag"># 可视化</a>
+          
+            <a href="/tags/哈佛大学/" rel="tag"># 哈佛大学</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/93dedd01/" rel="next" title="利用 FileManager 搭建个人网盘">
+                <i class="fa fa-chevron-left"></i> 利用 FileManager 搭建个人网盘
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/7fa8dd6d/" rel="prev" title="在线教育公司该有哪些标配">
+                在线教育公司该有哪些标配 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

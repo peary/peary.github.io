@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,MariaDB,Uber,固态硬盘," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="现在是时候回顾一下这两大开源关系型数据库是如何彼此竞争的。在这些版本之前，人们普遍认为，Postgres在功能集表现更出色，也因其“学院派”风格而备受称赞。  参与翻译 (5人) &amp;#58; 雪落无痕xdj, 无若, LinuxTech, Tocy, kevinlinkai 英文原文：Showdown&amp;#58; MySQL 8 vs PostgreSQL 10 既然 MySQL 8 和 Post">
+<meta name="keywords" content="MySQL,MariaDB,Uber,固态硬盘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="外文翻译丨“王者对战”之 MySQL 8 vs PostgreSQL 10（深度） - 今日头条">
+<meta property="og:url" content="http://blockshare.top/2018/d12061f0/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="现在是时候回顾一下这两大开源关系型数据库是如何彼此竞争的。在这些版本之前，人们普遍认为，Postgres在功能集表现更出色，也因其“学院派”风格而备受称赞。  参与翻译 (5人) &amp;#58; 雪落无痕xdj, 无若, LinuxTech, Tocy, kevinlinkai 英文原文：Showdown&amp;#58; MySQL 8 vs PostgreSQL 10 既然 MySQL 8 和 Post">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p3.pstatp.com/large/pgc-image/1528195307148e2d54892e3">
+<meta property="og:updated_time" content="2018-06-09T08:17:02.925Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="外文翻译丨“王者对战”之 MySQL 8 vs PostgreSQL 10（深度） - 今日头条">
+<meta name="twitter:description" content="现在是时候回顾一下这两大开源关系型数据库是如何彼此竞争的。在这些版本之前，人们普遍认为，Postgres在功能集表现更出色，也因其“学院派”风格而备受称赞。  参与翻译 (5人) &amp;#58; 雪落无痕xdj, 无若, LinuxTech, Tocy, kevinlinkai 英文原文：Showdown&amp;#58; MySQL 8 vs PostgreSQL 10 既然 MySQL 8 和 Post">
+<meta name="twitter:image" content="http://p3.pstatp.com/large/pgc-image/1528195307148e2d54892e3">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/d12061f0/"/>
+
+
+
+
+
+  <title>外文翻译丨“王者对战”之 MySQL 8 vs PostgreSQL 10（深度） - 今日头条 | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/d12061f0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">外文翻译丨“王者对战”之 MySQL 8 vs PostgreSQL 10（深度） - 今日头条</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">OSC开源社区</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-09T16:17:01+08:00">
+                2018-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/其它/" itemprop="url" rel="index">
+                    <span itemprop="name">其它</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/d12061f0/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/d12061f0/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p3.pstatp.com/large/pgc-image/1528195307148e2d54892e3" rel="gallery_cji74q7zg000007qdv27qamko"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p3.pstatp.com/large/pgc-image/1528195307148e2d54892e3" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>现在是时候回顾一下这两大开源关系型数据库是如何彼此竞争的。在这些版本之前，人们普遍认为，Postgres在功能集表现更出色，也因其“学院派”风格而备受称赞。</p>
+</blockquote>
+<p>参与翻译 (5人) &#58; 雪落无痕xdj, 无若, LinuxTech, Tocy, kevinlinkai</p>
+<p>英文原文：Showdown&#58; MySQL 8 vs PostgreSQL 10</p>
+<p>既然 MySQL 8 和 PostgreSQL 10 已经发布了，现在是时候回顾一下这两大开源关系型数据库是如何彼此竞争的。</p>
+<p>在这些版本之前，人们普遍认为，Postgres 在功能集表现更出色，也因其“学院派”风格而备受称赞，MySQL 则更善长大规模并发读/写。</p>
+<p>但是随着它们最新版本的发布，两者之间的差距明显变小了。</p>
+<p><strong>1、特性比较</strong></p>
+<p>让我们来看看我们都喜欢谈论的“时髦”功能。</p>
+<p>过去经常会说 MySQL 最适合在线事务，PostgreSQL 最适合分析流程。但现在不是了。</p>
+<p>公共表表达式(CTEs) 和窗口函数是选择 PostgreSQL 的主要原因。但是现在，通过引用同一个表中的 boss_id 来递归地遍历一张雇员表，或者在一个排序的结果中找到一个中值（或 50%），这在 MySQL 上不再是问题。</p>
+<p>在 PostgreSQL 中进行复制缺乏配置灵活性，这就是 Uber 转向 MySQL 的原因。但是现在，有了逻辑复制特性，就可以通过创建一个新版本的 Postgres 并切换到它来实现零停机升级。在一个巨大的时间序列事件表中截断一个陈旧的分区也要容易得多。</p>
+<p>就特性而言，这两个数据库现在都是一致的。</p>
+<p><strong>2、有哪些不同之处呢？</strong></p>
+<p>现在，我们只剩下一个问题 —— 那么，选择一个而不选另一个的原因是什么呢？</p>
+<p><strong>生态系统</strong>是其中一个因素。MySQL 有一个充满活力的生态系统，包括 MariaDB、Percona、Galera 等等，以及除 InnoDB 以外的存储引擎，但这也可能是和令人困惑的。Postgres 的高端选择有限，但随着最新版本引入的新功能，这会有所改变。</p>
+<p><strong>治理</strong>是另一个因素。当 Oracle（或最初的 SUN）收购 MySQL时，每个人都担心他们会毁掉这个产品，但在过去的十年里，这并不是事实。事实上，在收购之后，发展反倒加速了。而 Postgres 在工作管理和协作社区方面有着丰富的经验。</p>
+<p><strong>基础架构</strong>不会经常改变，虽然近来没有对这方面的详细讨论，这也是值得再次考虑的。</p>
+<p>来复习下：</p>
+<p><strong>3、进程vs线程</strong></p>
+<p>当 Postgres 派生出一个子进程来建立连接时，每个连接最多可以占用 10MB。与 MySQL 的线程连接模型相比，它的内存压力更大，在 64 位平台上，线程的默认堆栈大小为 256KB。（当然，线程本地排序缓冲区等使这种开销变得不那么重要，即使在不可以忽略的情况下，仍然如此。）</p>
+<p>尽管“写时复制”保存了一些与父进程共享的、不可变的内存状态，但是当您有 1000 多个并发连接时，基于流程的架构的基本开销是很繁重的，而且它可能是容量规划的最重要的因素之一。</p>
+<p>也就是说，如果你在 30 台服务器上运行一个 Rails 应用，每个服务器都有 16 个 CPU 核心 32 线程，那么你有 960 个连接。可能只有不到 0.1% 的应用会超出这个范围，但这是需要记住的。</p>
+<p><strong>4、聚簇索引 vs 堆表</strong></p>
+<p>聚簇索引是一种表结构，其中的行直接嵌入其主键的 b 树结构中。一个（非聚集）堆是一个常规的表结构，它与索引分别填充数据行。</p>
+<p>有了聚簇索引，当您通过主键查找记录时，单次 I/O 就可以检索到整行，而非集群则总是需要查找引用，至少需要两次 I/O。由于外键引用和 JOIN 将触发主键查找，所以影响可能非常大，这将导致大量查询。</p>
+<p>聚簇索引的一个理论上的缺点是，当您使用二级索引进行查询时，它需要遍历两倍的树节点，第一次扫描二级索引，然后遍历聚集索引，这也是一棵树。</p>
+<p>但是，如果按照现代表设计的约定，将一个自动增量整数作为主键&#91;1&#93;——它被称为代理键——那么拥有一个聚集索引几乎总是可取的。更重要的是，如果您做了大量的 ORDER BY id 来检索最近的（或最老的）N 个记录的操作，我认为这是很适用的。</p>
+<p>Postgres 不支持聚集索引，而 MySQL(InnoDB)不支持堆。但不管怎样，如果你有大量的内存，差别应该是很小的。</p>
+<p><strong>5、页结构和压缩</strong></p>
+<p>Postgres 和 MySQL 都有基于页面的物理存储。(8KB vs 16KB)</p>
+<p>PostgreSQL 物理存储的介绍</p>
+<p>页结构看起来就像右边的图。它包含一些我们不打算在这里讨论的条目，但是它们包含关于页的元数据。条目后面的项是一个数组标识符，由指向元组或数据行的（偏移、长度）对组成。在 Postgres 中，相同记录的多个版本可以以这种方式存储在同一页面中。</p>
+<p>MySQL 的表空间结构与 Oracle 相似，它有多个层次，包括层、区段、页面和行层。</p>
+<p>此外，它还有一个用于撤销的单独段，称为“回滚段”。与 Postgres 不同的是，MySQL 将在一个单独的区域中保存同一记录的多个版本。</p>
+<p>如果存在一行必须适合两个数据库的单个页面，，这意味着一行必须小于 8KB。（至少有 2 行必须适合 MySQL 的页面，恰巧是 16KB/2 = 8KB）</p>
+<p>那么当你在一个列中有一个大型 JSON 对象时会发生什么呢？</p>
+<p>Postgres 使用 TOAST，这是一个专用的影子表(shadow table)存储。当行和列被选中时，大型对象就会被拉出。换句话说，大量的黑盒不会污染你宝贵的缓存。它还支持对 TOAST 对象的压缩。</p>
+<p>MySQL 有一个更复杂的特性，叫做透明页压缩，这要归功于高端 SSD 存储供应商 Fusio-io 的贡献。它设计目的是为了更好地使用 SSD，在 SSD 中，写入量与设备的寿命直接相关。</p>
+<p>对 MySQL 的压缩不仅适用于页面外的大型对象，而且适用于所有页面。它通过在稀疏文件中使用打孔来实现这一点，这是被 ext4 或 btrfs 等现代文件系统支持的。</p>
+<p>有关更多细节，请参见：在 FusionIO 上使用新 MariaDB 页压缩获得显著的性能提升。</p>
+<p><strong>6、更新的开销</strong></p>
+<p>另一个经常被忽略的特性，但是对性能有很大的影响，并且可能是最具争议的话题，是更新。</p>
+<p>这也是Uber放弃Postgres的另一个原因，这激起了许多Postgres的支持者来反驳它。</p>
+<ul>
+<li>MySQL 对Uber可能是合适的, 但是未必对你合适- 一篇PostgreSQL对Uber的回应 (PDF)<br>两者都是MVCC数据库，它们可以隔离多个版本的数据。</li>
+</ul>
+<p>为了做到这一点，Postgres将旧数据保存在堆中，直到被清空，而MySQL将旧数据移动到一个名为回滚段的单独区域。</p>
+<p>在Postgres中，当您尝试更新时，整个行必须被复制，以及指向它的索引条目也被复制。这在一定程度上是因为Postgres不支持聚集索引，所以从索引中引用的一行的物理位置不是由逻辑键抽象出来的。</p>
+<p>为了解决这个问题，Postgres使用了堆上元组（HOT），在可能的情况下不更新索引。但是，如果更新足够频繁（或者如果一个元组比较大），元组的历史可以很容易地超过8 KB的页面大小，跨越多个页面并限制该特性的有效性。修剪和/或碎片整理的时间取决于启发式解决方案。另外，设置不超过100的填充参数会降低空间效率——这是一种很难在创建表时考虑的折衷方案。</p>
+<p>这种限制更深入; 因为索引元组没有关于事务的任何信息，所以直到9.2之前一直不能支持仅索引扫描。 它是所有主要数据库（包括MySQL，Oracle，IBM DB2和Microsoft SQL Server）支持的最古老，最重要的优化方法之一。 但即使使用最新版本，当有许多UPDATE在可见性映射中设置脏位时，Postgres也不能完全支持仅索引扫描，并且在我们不需要时经常选择Seq扫描。</p>
+<p>在MySQL上，更新发生在原地，旧的行数据被封存在一个称为回滚段的独立区域中。 结果是你不需要VACUUM，并且提交非常快，而回滚相对较慢，这对于大多数用例来说是一个可取的折衷。</p>
+<p>它也足够聪明，尽快清除历史。 如果事务的隔离级别设置为<strong>READ-COMMITTED</strong>或更低，则在语句完成时清除历史记录。</p>
+<p>事务记录的大小不会影响主页面。 碎片化是一个伪命题。 因此，在MySQL上能更好，更可预测整体性能。</p>
+<p><strong>7、Garbage Collection 垃圾回收</strong></p>
+<p>在Postgres中VACUUM上开销很高，因为它在主要工作在堆区，造成了直接的资源竞争。它感觉就像是编程语言中的垃圾回收 - 它会挡在路上，并随时让你停下来。</p>
+<p>为具有数十亿记录的表配置autovacuum仍然是一项挑战。</p>
+<p>在MySQL上清除（Purge）也可能相当繁重，但由于它是在单独的回滚段中使用专用线程运行的，因此它不会以任何方式影响读取的并发性。即使使用默认配置，变膨胀的回滚段使你执行速度减慢的可能性也是很低的。</p>
+<p>拥有数十亿记录的繁忙表不会导致MySQL上的历史数据膨胀，诸如存储上的文件大小和查询性能等事情上几乎是可以预测的并且很稳定。</p>
+<p><strong>开源中国翻译频道</strong>：对于技术达人来说，广纳知识点是进步的源泉。通过阅读技术文章我们可以学到很多东西，既可以学到业务技能，又可以了解行业动态，最不济，也锻炼了阅读和学习的能力。开源中国翻译频道旨在每天为用户推荐并翻译优质的外网文章。再也不用怕因为英语不过关，被挡在许多技术文章的门外。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="https://m.toutiaocdn.cn/group/6563864257178370567/?iid=34828483677&amp;app=news_article&amp;timestamp=1528532107&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">外文翻译丨“王者对战”之 MySQL 8 vs PostgreSQL 10（深度） - 今日头条</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+            <a href="/tags/MariaDB/" rel="tag"># MariaDB</a>
+          
+            <a href="/tags/Uber/" rel="tag"># Uber</a>
+          
+            <a href="/tags/固态硬盘/" rel="tag"># 固态硬盘</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/84be87fc/" rel="next" title="机器学习 —— 浅谈贝叶斯和MCMC">
+                <i class="fa fa-chevron-left"></i> 机器学习 —— 浅谈贝叶斯和MCMC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

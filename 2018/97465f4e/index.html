@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon-large.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/favicon.png?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="深度学习,机器学习,Google,人工智能,Keynote," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="纸飞机" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。在今日刚刚结束的 Keynote 中，机器学习依旧是整个大会的主旋律：谷歌发布了 TPU 3.0、Google Duplex，以及基于 AI 核心的新一代安卓操作系统 Android P，也介绍   2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。2016 年谷歌从移动优先">
+<meta name="keywords" content="深度学习,机器学习,Google,人工智能,Keynote">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谷歌I&#x2F;O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P">
+<meta property="og:url" content="http://blockshare.top/2018/97465f4e/index.html">
+<meta property="og:site_name" content="纸飞机">
+<meta property="og:description" content="2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。在今日刚刚结束的 Keynote 中，机器学习依旧是整个大会的主旋律：谷歌发布了 TPU 3.0、Google Duplex，以及基于 AI 核心的新一代安卓操作系统 Android P，也介绍   2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。2016 年谷歌从移动优先">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p1.pstatp.com/large/pgc-image/1525837644422dcafec2967">
+<meta property="og:updated_time" content="2018-05-09T06:18:59.076Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谷歌I&#x2F;O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P">
+<meta name="twitter:description" content="2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。在今日刚刚结束的 Keynote 中，机器学习依旧是整个大会的主旋律：谷歌发布了 TPU 3.0、Google Duplex，以及基于 AI 核心的新一代安卓操作系统 Android P，也介绍   2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。2016 年谷歌从移动优先">
+<meta name="twitter:image" content="http://p1.pstatp.com/large/pgc-image/1525837644422dcafec2967">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blockshare.top/2018/97465f4e/"/>
+
+
+
+
+
+  <title>谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P | 纸飞机</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?11e1fcf8c087695ab66673652234e853";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">纸飞机</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">您的云收藏知识库！</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blockshare.top/2018/97465f4e/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="zhifeiji">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="纸飞机">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+                <span class="post-meta-item-text">机器之心</span>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+          </span>
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T14:18:57+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/科技/" itemprop="url" rel="index">
+                    <span itemprop="name">科技</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/97465f4e/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/97465f4e/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i></span>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="http://p1.pstatp.com/large/pgc-image/1525837644422dcafec2967" rel="gallery_cjgypshdo0000kbqdqusn2xtn"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="http://p1.pstatp.com/large/pgc-image/1525837644422dcafec2967" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <blockquote>
+<p>2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。在今日刚刚结束的 Keynote 中，机器学习依旧是整个大会的主旋律：谷歌发布了 TPU 3.0、Google Duplex，以及基于 AI 核心的新一代安卓操作系统 Android P，也介绍</p>
+</blockquote>
+<blockquote>
+<p>2018 年 5 月 8 日，一年一度的谷歌 I/O 开发者大会在美国加州山景城开幕。2016 年谷歌从移动优先到人工智能优先（AI-first），两年来我们从谷歌 I/O 看到了谷歌如何践行这一战略。在今日刚刚结束的 Keynote 中，机器学习依旧是整个大会的主旋律：谷歌发布了 TPU 3.0、Google Duplex，以及基于 AI 核心的新一代安卓操作系统 Android P，也介绍了自己在 News、Map、Lens 等众多产品中对 AI 与机器学习模型的应用。本文带你一览谷歌 I/O 2018 首日 keynote 的核心亮点。</p>
+</blockquote>
+<p>在今天的 Keynote 中，谷歌 CEO 桑德尔·皮查伊等人介绍了谷歌一年来的多方面 AI 研究成果，例如深度学习医疗、TPU3.0、Google Duplex 等，也展示了 AI 如何全方位地融入了谷歌每一条产品线，从安卓到 Google Lens 和 Waymo。在本文中，机器之心对 Keynote 的核心内容进行了整理。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/1525837644422dcafec2967" img_width="821" img_height="441" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p><strong>深度学习医疗</strong></p>
+<p>大会刚开始，昨天谷歌所有的 AI 研究合并出的 Google AI 发布了一篇博客，介绍谷歌在医疗领域的研究：</p>
+<p>联合斯坦福医学院、加州大学旧金山分校 、芝加哥大学医学中心，谷歌今天在 Nature Partner Journals&#58; Digital Medicine 上发布了一篇论文《Scalable and Accurate Deep Learning with Electronic Health Records》。</p>
+<p>在此研究中，谷歌使用深度学习模型根据去识别的电子病历做出大量与病人相关的预测。重要的是，谷歌能够使用原始数据，不需要人工提取、清洁、转换病历中的相关变量。</p>
+<p>在预测之前，深度学习模型读取早期到现在所有的数据点，然后学习对预测输出有帮助的数据。由于数据点数量巨大，谷歌基于循环神经网络与前馈网络开发出了一种新型的深度学习建模方法。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525837586523ff3dd1a070" img_width="640" img_height="340" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>病人病历中的数据以时间线的形式展示</p>
+<p>至于预测准确率（标准：1.00 为完美得分），如果病人就医时间较长，论文提出的模型预测得分为 0.86，而传统的 logistic 回归模型得分为 0.76。这一预测准确率已经相当惊人。</p>
+<p><strong>Looking to Listen：音频-视觉语音分离模型</strong></p>
+<p>而后，皮查伊介绍了谷歌博客不久前介绍的新型音频-视觉语音分离模型。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525837586541afc0e0ae38" img_width="496" img_height="398" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>在论文《Looking to Listen at the Cocktail Party》中，谷歌提出了一种深度学习音频-视觉模型，用于将单个语音信号与背景噪声、其他人声等混合声音分离开来。这种方法用途广泛，从视频中的语音增强和识别、视频会议，到改进助听器，不一而足，尤其适用于有多个说话人的情景。</p>
+<p>据介绍，这项技术的独特之处是结合了输入视频的听觉和视觉信号来分离语音。直观地讲，人的嘴的运动应当与该人说话时产生的声音相关联，这反过来又可以帮助识别音频的哪些部分对应于该人。视觉信号不仅在混合语音的情况下显著提高了语音分离质量（与仅仅使用音频的语音分离相比），它还将分离的干净语音轨道与视频中的可见说话者相关联。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/1525837586534752372a546" img_width="640" img_height="145" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>在谷歌提出的方法中，输入是具有一个或多个说话人的视频，其中我们需要的语音受到其他说话人和/或背景噪声的干扰。输出是将输入音频轨道分解成的干净语音轨道，其中每个语音轨道来自视频中检测到的每一个人。</p>
+<p>皮查伊还介绍了谷歌其他 NLP 应用，例如通过谷歌的键盘输入摩斯电码让语言障碍者重新获得表达能力、GMail 中利用语言模型与语境信息预测输入。</p>
+<p>之后，皮查伊介绍了谷歌在计算机领域的一些研究成果与应用，包括医疗影像方面的研究，移动设备中应用的照片理解、抠图、自动上色和文档处理等。</p>
+<p><strong>TPU 3.0</strong></p>
+<p>去年，谷歌 I/0 公布了 TPU 2.0，且开放给了谷歌云客户。今天，皮查伊正式宣布 TPU 3.0 版本。</p>
+<p><img src="http&#58;//p1.pstatp.com/large/pgc-image/15258375866743f30b2dc28" img_width="845" img_height="472" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>皮查伊介绍，TPU 3.0 版本功能强大，采用液冷系统，计算性能是 TPU 2.0 的 8 倍，可解决更多问题，让用户开发更大、更好、更准确的模型。更多有关 TPU 3.0 的信息也许会在之后放出。</p>
+<p><strong>Google Assitant 与 Google Duplex</strong></p>
+<p>集成谷歌人机交互研究的 Google Assistant 在今日的 keynote 中必然会亮相。Google Assitant 负责工程的副总裁 Scott Huffman 介绍了 Google Assitant 过去一年的成果，谷歌产品管理总监 Lilian Rincon 介绍了带有视觉体验的 Google Assistant 产品，且有数款产品将在今年 7 月份发布。</p>
+<p>而后谷歌 CEO 桑德尔·皮查伊在 Keynote 中展示了语言交互的重要性，并正式介绍了一种进行自然语言对话的新技术 Google Duplex。这种技术旨在完成预约等特定任务，并使系统尽可能自然流畅地实现对话，使用户能像与人对话那样便捷。</p>
+<p>这种自然的对话非常难以处理，因为用户可能会使用更加不正式或较长的句子，且语速和语调也会相应地增加。此外，在交互式对话中，同样的自然语句可能会根据语境有不同的意思，因为人类之间的自然对话总是根据语境尽可能省略一些语言。</p>
+<p>为了解决这些问题，Duplex 基于循环神经网络和 TensorFlow Extended（TFX）在匿名电话会话数据集上进行训练。这种循环网络使用谷歌自动语音识别（ASR）技术的输出作为输入，包括语音的特征、会话历史和其它会话参数。谷歌会为每一个任务独立地训练一个理解模型，但所有任务都能利用共享的语料库。此外，谷歌还会使用 TFX 中的超参数优化方法优化模型的性能。</p>
+<p>如下所示，输入语音将输入到 ASR 系统并获得输出，在结合 ASR 的输出与语境信息后可作为循环神经网络的输入。这一深度 RNN 最终将基于输入信息输出对应的响应文本，最后响应文本可传入文本转语音（TTS）系统完成对话。RNN 的输出与 TTS 系统对于生成流畅自然的语音非常重要，这也是 Duplex 系统关注的核心问题。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/152583758659002cae9763e" img_width="1080" img_height="403" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>在 Duplex 系统的语音生成部分，谷歌结合了拼接式的 TTS 系统和合成式的 TTS 系统来控制语音语调，即结合了 Tacotron 和 WaveNet。</p>
+<p>由于这样的系统引入了「嗯、额」等停顿语，系统生成的语音会显得更加的自然。当结合拼接式 TTS 引擎中大量不同的语音单元或添加合成式停顿时，这些引入的停顿语允许系统以自然的方式表示它还需要一些处理时间。</p>
+<p>总的来说，Google Duplex 的这些结构与方法对生成更自然的对话与语音有非常大的帮助。目前虽然主要是针对特定领域中的语言交互，但确实提升了语音会话中的用户体验。</p>
+<p><strong>安卓以及闪现的 DeepMind</strong></p>
+<p>即将在今年 9 月迎来自己 10 岁生日的安卓也在 I/O 上宣布了新一代操作系统。继承 Android Oreo 工作的新版安卓系统被命名为 Android P。</p>
+<p>「本次发布有三个主题，分别是智能（Intelligence）、简洁（Simplicity）与数字健康（Digital Wellbeing）。Android P 是我们『AI 位于操作系统核心』愿景的第一步，而 AI 也是『智能』主题的奠基石。」谷歌工程副总裁 Dave Burke 如是展开了他的演讲。</p>
+<p>智能部分里首先介绍了两个功能，Adaptive Battery 自适应电池管理系统和 Adaptive Brightness 自适应亮度调节系统。</p>
+<p>其中，Adaptive Battery 通过卷积神经网络来预测用户接下来会使用的应用程序，通过适应用户的使用模式将电池仅用于你接下来可能需要的应用程序中，这减少了 30% 的后台 CPU 唤醒。而 Adaptive Brightness 则不再单纯根据照明情况调节亮度，而是加上了用户喜好和所处环境因素。超过一半的测试用户减少了他们手动调节亮度条的频率。</p>
+<p>事实上，这两个功能均来自之前一度被美媒质疑「烧钱还傲娇不干实事」的 DeepMind。DeepMind 本次并没有直接在 I/O 露出，只是在博客上发表了一篇文章（https&#58;//deepmind.com/blog/deepmind-meet-android/），说明了 Android 的这两个新功能来自 DeepMind for Google 团队。</p>
+<p>除此之外，Android P 也将去年发布的、准确率达到 60% 的「用户接下来可能使用哪个 App」预测更进一步，转而预测「用户接下来可能用什么 App 进行什么操作」，并直接在上滑菜单顶部呈现给用户。</p>
+<p>Dave Burke 在介绍上述每一个功能时都着重强调了所有的预测均由在端上运行的机器学习模型完成，以确保用户隐私得到最大程度的保护。</p>
+<p>除了将 AI 融入操作系统的优化之外，Android 还试图降低非机器学习背景的开发者使用相关技能的门槛：包括图片标注、文字识别、智能回复等一系列 AI 相关的 API 将以 ML Kit 的形式开放给开发者。</p>
+<p>「你可以将 ML Kit 视作基于 TensorFlow Lite 提供的、为移动设备优化过的、随拿随用机器学习模型。」Dave Kurve 介绍说。而且，谷歌非常大方地同时对 iOS 系统开放了这一 API 集。</p>
+<p><img src="http&#58;//p3.pstatp.com/large/pgc-image/15258375866410d90fa959c" img_width="1080" img_height="675" alt="谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P" inline="0"></p>
+<p>开发者今天就能在 Pixel 上实验 Android P Beta 的效果了。值得一提的是，除了 Pixel 之外，Android P Beta 还对其他 7 家手机生产厂商的旗舰机开放，其中有 4 家都来自中国，它们分别是小米、vivo、oppo 和一加。</p>
+<p><strong>无人驾驶</strong></p>
+<p>昨日，起源于斯坦福人工智能实验室的自动驾驶汽车初创公司 Drive.ai 于 7 日宣布，将与德克萨斯州的弗里斯科政府以及 Hall 集团进行合作，在德州落地首个无人出租车服务。而在今天的 Keynote 中，Waymo CEO John Krafcik 通过视频展示了居住在凤凰城的一些人参与其 EarlyRider 项目（即体验 Waymo 的自动驾驶技术）的场景。Krafcik 称 Waymo 将在今年于凤凰城开始 passenger-pickup 项目，凤凰城是第一站。</p>
+<p><strong>结语</strong></p>
+<p>一年一度的谷歌 I/O 开发者大会首日 Keynote 中的核心内容如上，相比于偏重机器学习技术的 2016 年与 2017 年，今年的内容更多关于 AI 的应用与产品。两年来，我们看到了谷歌如何践行 AI First 战略。接下来几天，机器之心将会继续报道谷歌 I/O 2018 的更多精彩内容。</p>
+<blockquote>
+<p><strong>转载来源</strong>：<a href="http://m.toutiaocdn.cn/group/6553422811648492036/?iid=31816615545&amp;app=news_article&amp;timestamp=1525846719&amp;wxshare_count=1&amp;tt_from=weixin&amp;utm_source=weixin&amp;utm_medium=toutiao_android&amp;utm_campaign=client_share" target="_blank" rel="noopener">谷歌I/O 2018的AI亮点：从TPU3.0到DeepMind支持的Android P</a></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>让纸飞机飞得更快更高：</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>点赞</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechatpay.png" alt="zhifeiji 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay.jpg" alt="zhifeiji 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/Google/" rel="tag"># Google</a>
+          
+            <a href="/tags/人工智能/" rel="tag"># 人工智能</a>
+          
+            <a href="/tags/Keynote/" rel="tag"># Keynote</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/d843b286/" rel="next" title="为我助力，你也可获得1次数钱机会，最高1万元奖励哦~">
+                <i class="fa fa-chevron-left"></i> 为我助力，你也可获得1次数钱机会，最高1万元奖励哦~
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08b71eaa/" rel="prev" title="各大网站都在用的“轮播图”，其实转化率很低">
+                各大网站都在用的“轮播图”，其实转化率很低 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar1.jpg"
+                alt="zhifeiji" />
+            
+              <p class="site-author-name" itemprop="name">zhifeiji</p>
+              <p class="site-description motion-element" itemprop="description">纸飞机，您可以随时随地分享链接、图片、文字、视频等，轻轻一掷，我们会帮您做整理、归类，创建属于您的个人空间。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">342</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">380</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:zymlpear@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">纸飞机</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+    <script type="text/javascript">
+    (function(){
+      var appid = 'cytz1Qb4z';
+      var conf = '058029b4a38c8366d2fd43c54318cba0';
+      var width = window.innerWidth || document.documentElement.clientWidth;
+      if (width < 960) {
+      window.document.write('<script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id=' + appid + '&conf=' + conf + '"><\/script>'); } else { var loadJs=function(d,a){var c=document.getElementsByTagName("head")[0]||document.head||document.documentElement;var b=document.createElement("script");b.setAttribute("type","text/javascript");b.setAttribute("charset","UTF-8");b.setAttribute("src",d);if(typeof a==="function"){if(window.attachEvent){b.onreadystatechange=function(){var e=b.readyState;if(e==="loaded"||e==="complete"){b.onreadystatechange=null;a()}}}else{b.onload=a}}c.appendChild(b)};loadJs("https://changyan.sohu.com/upload/changyan.js",function(){
+        window.changyan.api.config({appid:appid,conf:conf})});
+      }
+    })();
+    </script>
+    <script type="text/javascript" src="https://assets.changyan.sohu.com/upload/plugins/plugins.count.js"></script>
+  
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
