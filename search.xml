@@ -44,8 +44,8 @@
       </categories>
       <tags>
         <tag>投资</tag>
-        <tag>基金</tag>
         <tag>美股</tag>
+        <tag>基金</tag>
         <tag>蓝筹股</tag>
         <tag>芝麻信用</tag>
       </tags>
@@ -172,8 +172,8 @@
       </categories>
       <tags>
         <tag>人工智能</tag>
-        <tag>盗梦空间</tag>
         <tag>可视化</tag>
+        <tag>盗梦空间</tag>
         <tag>艺术</tag>
         <tag>科普</tag>
       </tags>
@@ -228,8 +228,8 @@
       <tags>
         <tag>机器学习</tag>
         <tag>人工智能</tag>
-        <tag>大学</tag>
         <tag>基金</tag>
+        <tag>大学</tag>
         <tag>阿兰·图灵</tag>
       </tags>
   </entry>
@@ -243,9 +243,9 @@
       <tags>
         <tag>软件</tag>
         <tag>Google</tag>
-        <tag>英特尔</tag>
         <tag>KPI</tag>
         <tag>指南针</tag>
+        <tag>英特尔</tag>
       </tags>
   </entry>
   <entry>
@@ -270,8 +270,8 @@
       </categories>
       <tags>
         <tag>糖尿病</tag>
-        <tag>高血压</tag>
         <tag>心血管病</tag>
+        <tag>高血压</tag>
         <tag>心肌梗死</tag>
         <tag>中风</tag>
       </tags>
@@ -352,9 +352,9 @@
         <category>科技</category>
       </categories>
       <tags>
+        <tag>市场营销</tag>
         <tag>电子商务</tag>
         <tag>移动互联网</tag>
-        <tag>市场营销</tag>
         <tag>京东</tag>
         <tag>大众汽车</tag>
       </tags>
@@ -377,9 +377,9 @@
       <tags>
         <tag>电子商务</tag>
         <tag>移动互联网</tag>
-        <tag>O2O</tag>
-        <tag>苏宁易购</tag>
         <tag>京东</tag>
+        <tag>苏宁易购</tag>
+        <tag>O2O</tag>
       </tags>
   </entry>
   <entry>
@@ -390,8 +390,8 @@
         <category>科技</category>
       </categories>
       <tags>
-        <tag>自媒体</tag>
         <tag>产品运营</tag>
+        <tag>自媒体</tag>
         <tag>百度统计</tag>
         <tag>视觉中国</tag>
         <tag>西红柿</tag>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>软件</tag>
-        <tag>电子商务</tag>
         <tag>市场营销</tag>
+        <tag>电子商务</tag>
         <tag>Adobe</tag>
         <tag>爬行动物</tag>
       </tags>
@@ -515,9 +515,9 @@
       <tags>
         <tag>电子商务</tag>
         <tag>在线教育</tag>
-        <tag>网易有道</tag>
         <tag>MOOC</tag>
         <tag>有道词典</tag>
+        <tag>网易有道</tag>
       </tags>
   </entry>
   <entry>
@@ -530,9 +530,9 @@
       <tags>
         <tag>电子商务</tag>
         <tag>在线教育</tag>
-        <tag>网易有道</tag>
         <tag>MOOC</tag>
         <tag>有道词典</tag>
+        <tag>网易有道</tag>
       </tags>
   </entry>
   <entry>
@@ -545,9 +545,9 @@
       <tags>
         <tag>机器学习</tag>
         <tag>人工智能</tag>
-        <tag>IBM</tag>
         <tag>可视化</tag>
         <tag>哈佛大学</tag>
+        <tag>IBM</tag>
       </tags>
   </entry>
   <entry>
@@ -560,9 +560,9 @@
       <tags>
         <tag>路由器</tag>
         <tag>文本编辑器</tag>
-        <tag>Windows</tag>
         <tag>Go语言</tag>
         <tag>Vim</tag>
+        <tag>Windows</tag>
       </tags>
   </entry>
   <entry>
@@ -622,9 +622,9 @@
         <category>财经</category>
       </categories>
       <tags>
-        <tag>投资</tag>
         <tag>巴菲特</tag>
         <tag>巴郡公司</tag>
+        <tag>投资</tag>
         <tag>拉里·埃里森</tag>
         <tag>亨氏食品</tag>
       </tags>
@@ -692,8 +692,8 @@
         <category>科技</category>
       </categories>
       <tags>
-        <tag>电子商务</tag>
         <tag>市场营销</tag>
+        <tag>电子商务</tag>
         <tag>产品运营</tag>
         <tag>周杰</tag>
         <tag>蚂蚁</tag>
@@ -753,8 +753,8 @@
       </categories>
       <tags>
         <tag>软件</tag>
-        <tag>移动互联网</tag>
         <tag>市场营销</tag>
+        <tag>移动互联网</tag>
         <tag>黑客</tag>
       </tags>
   </entry>
@@ -769,8 +769,8 @@
         <tag>深度学习</tag>
         <tag>机器学习</tag>
         <tag>人工智能</tag>
-        <tag>围棋</tag>
         <tag>Facebook</tag>
+        <tag>围棋</tag>
       </tags>
   </entry>
   <entry>
@@ -797,8 +797,8 @@
         <tag>IPO</tag>
         <tag>小米科技</tag>
         <tag>移动互联网</tag>
-        <tag>智能硬件</tag>
         <tag>智能手机</tag>
+        <tag>智能硬件</tag>
       </tags>
   </entry>
   <entry>
@@ -812,8 +812,8 @@
         <tag>深度学习</tag>
         <tag>机器学习</tag>
         <tag>人工智能</tag>
-        <tag>围棋</tag>
         <tag>Facebook</tag>
+        <tag>围棋</tag>
       </tags>
   </entry>
   <entry>
@@ -880,10 +880,10 @@
       </categories>
       <tags>
         <tag>投资</tag>
-        <tag>风投</tag>
         <tag>电子商务</tag>
-        <tag>移动互联网</tag>
+        <tag>风投</tag>
         <tag>基金</tag>
+        <tag>移动互联网</tag>
       </tags>
   </entry>
   <entry>
@@ -976,9 +976,9 @@
         <category>财经</category>
       </categories>
       <tags>
+        <tag>电子商务</tag>
         <tag>风投</tag>
         <tag>IPO</tag>
-        <tag>电子商务</tag>
         <tag>平安保险</tag>
         <tag>马明哲</tag>
       </tags>
@@ -992,9 +992,9 @@
       </categories>
       <tags>
         <tag>音乐</tag>
+        <tag>可视化</tag>
         <tag>技术</tag>
         <tag>欧几里得</tag>
-        <tag>可视化</tag>
         <tag>推荐技术</tag>
       </tags>
   </entry>
@@ -1055,10 +1055,10 @@
         <category>教育</category>
       </categories>
       <tags>
+        <tag>市场营销</tag>
         <tag>在线教育</tag>
         <tag>移动互联网</tag>
         <tag>朋友圈</tag>
-        <tag>市场营销</tag>
         <tag>薄荷</tag>
       </tags>
   </entry>
@@ -1103,9 +1103,9 @@
         <category>科技</category>
       </categories>
       <tags>
+        <tag>市场营销</tag>
         <tag>在线教育</tag>
         <tag>移动互联网</tag>
-        <tag>市场营销</tag>
         <tag>O2O</tag>
         <tag>美团网</tag>
       </tags>
@@ -1328,9 +1328,9 @@
       <tags>
         <tag>软件</tag>
         <tag>人工智能</tag>
+        <tag>Adobe</tag>
         <tag>英伟达</tag>
         <tag>Photoshop</tag>
-        <tag>Adobe</tag>
       </tags>
   </entry>
   <entry>
@@ -1438,8 +1438,8 @@
       </categories>
       <tags>
         <tag>软件</tag>
-        <tag>有道云笔记</tag>
         <tag>网易有道</tag>
+        <tag>有道云笔记</tag>
       </tags>
   </entry>
   <entry>
@@ -1564,10 +1564,10 @@
       </categories>
       <tags>
         <tag>药品</tag>
+        <tag>高血压</tag>
         <tag>低血压</tag>
         <tag>黄疸</tag>
         <tag>痛经</tag>
-        <tag>高血压</tag>
       </tags>
   </entry>
   <entry>
@@ -1593,10 +1593,10 @@
         <category>科技</category>
       </categories>
       <tags>
-        <tag>移动互联网</tag>
-        <tag>自媒体</tag>
-        <tag>朋友圈</tag>
         <tag>市场营销</tag>
+        <tag>自媒体</tag>
+        <tag>移动互联网</tag>
+        <tag>朋友圈</tag>
         <tag>漫画</tag>
       </tags>
   </entry>
@@ -1689,9 +1689,9 @@
       <tags>
         <tag>软件</tag>
         <tag>编程语言</tag>
+        <tag>IBM</tag>
         <tag>英特尔</tag>
         <tag>ARM</tag>
-        <tag>IBM</tag>
       </tags>
   </entry>
   <entry>
@@ -2098,11 +2098,11 @@
         <category>科技</category>
       </categories>
       <tags>
+        <tag>巴菲特</tag>
         <tag>成功的秘密</tag>
         <tag>比尔·盖茨</tag>
         <tag>伊隆·马斯克</tag>
         <tag>乔布斯</tag>
-        <tag>巴菲特</tag>
       </tags>
   </entry>
   <entry>
@@ -2250,10 +2250,10 @@
       </categories>
       <tags>
         <tag>软件</tag>
+        <tag>产品运营</tag>
         <tag>移动互联网</tag>
         <tag>今日头条</tag>
         <tag>智能手机</tag>
-        <tag>产品运营</tag>
       </tags>
   </entry>
   <entry>
@@ -2657,10 +2657,10 @@
       </categories>
       <tags>
         <tag>软件</tag>
+        <tag>KPI</tag>
         <tag>移动互联网</tag>
         <tag>运营商</tag>
         <tag>中国移动</tag>
-        <tag>KPI</tag>
       </tags>
   </entry>
   <entry>
@@ -3253,8 +3253,8 @@
       <tags>
         <tag>机器学习</tag>
         <tag>英语</tag>
-        <tag>机器人</tag>
         <tag>脚本语言</tag>
+        <tag>机器人</tag>
         <tag>WPS</tag>
       </tags>
   </entry>
@@ -3267,8 +3267,8 @@
       </categories>
       <tags>
         <tag>人工智能</tag>
-        <tag>Facebook</tag>
         <tag>艺术</tag>
+        <tag>Facebook</tag>
         <tag>蒙娜丽莎的微笑</tag>
         <tag>蒙德里安</tag>
       </tags>
